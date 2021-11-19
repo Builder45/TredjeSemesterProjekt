@@ -1,16 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BeboerWeb.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BeboerWeb.Persistence.DbMapping
 {
-    public class AfdelingEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Models.Afdeling>
+    public class AfdelingEntityTypeConfiguration : IEntityTypeConfiguration<Afdeling>
     {
-        public void Configure(EntityTypeBuilder<Domain.Models.Afdeling> builder)
+        public void Configure(EntityTypeBuilder<Afdeling> builder)
         {
+            builder.Property(a => a.Id).HasDefaultValueSql("NEWID()");
             builder
-                .HasOne(a => a.)
-                .WithMany(e => e.);
-                
+                .HasMany(a => a.Boligadministratorer)
+                .WithMany(e => e.Afdelinger);
         }
     }
 }

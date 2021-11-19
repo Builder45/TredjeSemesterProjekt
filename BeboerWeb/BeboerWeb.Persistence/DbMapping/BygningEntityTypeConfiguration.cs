@@ -1,16 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BeboerWeb.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BeboerWeb.Persistence.DbMapping
 {
-    public class BygningEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Models.Bygning>
+    public class BygningEntityTypeConfiguration : IEntityTypeConfiguration<Bygning>
     {
-        public void Configure(EntityTypeBuilder<Domain.Models.Bygning> builder)
+        public void Configure(EntityTypeBuilder<Bygning> builder)
         {
+            builder.Property(bn => bn.Id).HasDefaultValueSql("NEWID()");
             builder
-                .HasOne(b => b.Ejendom)
-                .WithMany(e => e.Bygninger);
-            
+                .HasOne(bn => bn.Ejendom)
+                .WithMany(e => e.Bygninger);          
         }
     }
 }
