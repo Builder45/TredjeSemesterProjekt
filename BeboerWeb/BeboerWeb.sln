@@ -5,13 +5,19 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.MVC", "BeboerWeb.MVC\BeboerWeb.MVC.csproj", "{7F35CDE5-9107-45C2-8A41-37CB2B000375}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeboerWeb.API", "BeboerWeb.API\BeboerWeb.API.csproj", "{6F2F173A-682A-4C2F-82F1-47090C9BCFB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.API", "BeboerWeb.API\BeboerWeb.API.csproj", "{6F2F173A-682A-4C2F-82F1-47090C9BCFB9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{619C7C0F-59B8-4986-B2E1-8557EA62CB96} = {619C7C0F-59B8-4986-B2E1-8557EA62CB96}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeboerWeb.Domain", "BeboerWeb.Domain\BeboerWeb.Domain.csproj", "{F62A0890-ABD1-40FD-929E-66355E527D3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.Domain", "BeboerWeb.Domain\BeboerWeb.Domain.csproj", "{F62A0890-ABD1-40FD-929E-66355E527D3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeboerWeb.Application", "BeboerWeb.Application\BeboerWeb.Application.csproj", "{1A7E567C-EFEB-45E9-9A3F-AA9C6873DFD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.Application", "BeboerWeb.Application\BeboerWeb.Application.csproj", "{1A7E567C-EFEB-45E9-9A3F-AA9C6873DFD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeboerWeb.Persistence", "BeboerWeb.Persistence\BeboerWeb.Persistence.csproj", "{619C7C0F-59B8-4986-B2E1-8557EA62CB96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.Persistence", "BeboerWeb.Persistence\BeboerWeb.Persistence.csproj", "{619C7C0F-59B8-4986-B2E1-8557EA62CB96}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F62A0890-ABD1-40FD-929E-66355E527D3E} = {F62A0890-ABD1-40FD-929E-66355E527D3E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

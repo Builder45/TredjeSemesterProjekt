@@ -10,7 +10,8 @@ namespace BeboerWeb.Domain.Models
         public double Areal { get; set; }
         public bool Koekken { get; set; }
         public bool Badevaerelse { get; set; }
-        public Bygning Bygning { get; set; }
 
+        public Bygning Bygning { get; set; }
+        public Lejer Lejer { get; set; }
     }
 }
