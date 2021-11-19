@@ -4,5 +4,9 @@ namespace BeboerWeb.Domain.Models
 {
     public class Vicevaert
     {
+        public Guid Id { get; set; }
+
+        public List<Ejendom> Ejendomme { get; set; }
+        public Person Person { get; set; }
     }
 }
