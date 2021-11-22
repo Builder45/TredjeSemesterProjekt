@@ -1,4 +1,6 @@
+using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Data;
+using BeboerWeb.MVC.Services.PersonService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +33,15 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 1;
 });
+
+// Tillader brug af IHttpClientFactory i services
+builder.Services.AddHttpClient();
+
+builder.Services.Configure<ApiConfig>(
+    builder.Configuration.GetSection("ApiConfig"));
+
+builder.Services.AddScoped<IPersonService, PersonService>();
+
 
 var app = builder.Build();
 

@@ -12,5 +12,13 @@ namespace BeboerWeb.Application.Requests
         public string Efternavn { get; set; }
         public int Telefonnr { get; set; }
         public Guid BrugerId { get; set; }
+
+        public PersonRequest(string fornavn, string efternavn, int telefonnr, Guid brugerId)
+        {
+            Fornavn = fornavn;
+            Efternavn = efternavn;
+            Telefonnr = telefonnr;
+            BrugerId = brugerId;
+        }
     }
 }

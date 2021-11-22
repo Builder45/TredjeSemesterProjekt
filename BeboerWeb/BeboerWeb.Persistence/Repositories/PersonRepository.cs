@@ -17,9 +17,10 @@ namespace BeboerWeb.Persistence.Repositories
             _db = db;
         }
         
-        void CreatePerson(Person person)
+        public void CreatePerson(Person person)
         {
             _db.Add(person);
+            _db.SaveChanges();
         }
 
      

@@ -1,4 +1,6 @@
-﻿using BeboerWeb.Application.Implementation.Person;
+﻿using BeboerWeb.API.Contract.DTO;
+using BeboerWeb.Application.Implementation.Person;
+using BeboerWeb.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,6 +12,11 @@ namespace BeboerWeb.API.Controllers
     public class PersonController : ControllerBase
     {
         private readonly ICreatePersonUseCase _createPersonUseCase;
+
+        public PersonController(ICreatePersonUseCase createPersonUseCase)
+        {
+            _createPersonUseCase = createPersonUseCase;
+        }
 
         // GET: api/<PersonController>
         [HttpGet]
@@ -27,8 +34,9 @@ namespace BeboerWeb.API.Controllers
 
         // POST api/<PersonController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] PersonDTO dto)
         {
+            _createPersonUseCase.CreatePerson(new PersonRequest(dto.Fornavn, dto.Efternavn, dto.Telefonnr, dto.BrugerId));
         }
 
         // PUT api/<PersonController>/5
