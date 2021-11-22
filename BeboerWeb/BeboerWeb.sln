@@ -16,8 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.Application", "Be
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.Persistence", "BeboerWeb.Persistence\BeboerWeb.Persistence.csproj", "{619C7C0F-59B8-4986-B2E1-8557EA62CB96}"
 	ProjectSection(ProjectDependencies) = postProject
+		{1A7E567C-EFEB-45E9-9A3F-AA9C6873DFD5} = {1A7E567C-EFEB-45E9-9A3F-AA9C6873DFD5}
 		{F62A0890-ABD1-40FD-929E-66355E527D3E} = {F62A0890-ABD1-40FD-929E-66355E527D3E}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeboerWeb.API.Contract", "BeboerWeb.API.Contract\BeboerWeb.API.Contract.csproj", "{8FCD17B1-5017-4CBE-9234-C2B66835624F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +48,10 @@ Global
 		{619C7C0F-59B8-4986-B2E1-8557EA62CB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{619C7C0F-59B8-4986-B2E1-8557EA62CB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{619C7C0F-59B8-4986-B2E1-8557EA62CB96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FCD17B1-5017-4CBE-9234-C2B66835624F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FCD17B1-5017-4CBE-9234-C2B66835624F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FCD17B1-5017-4CBE-9234-C2B66835624F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCD17B1-5017-4CBE-9234-C2B66835624F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

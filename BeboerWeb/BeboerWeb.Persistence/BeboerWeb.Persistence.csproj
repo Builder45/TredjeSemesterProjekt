@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BeboerWeb.Application\BeboerWeb.Application.csproj" />
     <ProjectReference Include="..\BeboerWeb.Domain\BeboerWeb.Domain.csproj" />
   </ItemGroup>
 

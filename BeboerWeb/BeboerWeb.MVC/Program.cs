@@ -20,6 +20,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("IsAdmin", "Yes"));
 });
 
+// Temp password options
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.

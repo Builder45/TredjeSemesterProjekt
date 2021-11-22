@@ -77,19 +77,21 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
             /// 
 
 
-            [Required]
+            [Required(ErrorMessage = "Tilføj fornavn.")]
             [Display(Name = "Fornavn")]
             public string Fornavn { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Tilføj efternavn.")]
             [Display(Name = "Efternavn")]
             public string Efternavn { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Tilføj telefonnr.")]
             [Display(Name = "Telefonnr.")]
+            [DataType(DataType.PhoneNumber)]
+            [RegularExpression(@"^([0-9]{8})$", ErrorMessage = "Ikke et gyldigt telefonnr.")]
             public int Telefonnr { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Tilføj email.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -98,7 +100,7 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Tilføj password.")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -110,7 +112,7 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "De to passwords er ikke identiske.")]
             public string ConfirmPassword { get; set; }
         }
 
