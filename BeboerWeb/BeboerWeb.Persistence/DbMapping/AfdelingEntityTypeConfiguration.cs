@@ -11,7 +11,8 @@ namespace BeboerWeb.Persistence.DbMapping
             builder.Property(a => a.Id).HasDefaultValueSql("NEWID()");
             builder
                 .HasMany(a => a.Boligadministratorer)
-                .WithMany(e => e.Afdelinger);
+                .WithMany(ba => ba.Afdelinger)
+                .UsingEntity(join => join.ToTable("AdminOversigt"));
         }
     }
 }

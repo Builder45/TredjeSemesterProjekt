@@ -14,7 +14,8 @@ namespace BeboerWeb.Persistence.DbMapping
                 .WithMany(a => a.Ejendomme);
             builder
                 .HasMany(e => e.Vicevaerter)
-                .WithMany(v => v.Ejendomme);
+                .WithMany(v => v.Ejendomme)
+                .UsingEntity(join => join.ToTable("ServiceOversigt"));
         }
     }
 }

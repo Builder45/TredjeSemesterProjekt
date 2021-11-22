@@ -9,15 +9,17 @@ namespace BeboerWeb.Persistence.DbMapping
         public void Configure(EntityTypeBuilder<Lejer> builder)
         {
             builder.Property(le => le.Id).HasDefaultValueSql("NEWID()");
+            builder.Property<Guid>("LejemaalId");
 
             builder
                 .HasMany(le => le.Personer)
-                .WithMany(p => p.Lejere);
+                .WithMany(p => p.Lejere)
+                .UsingEntity(join => join.ToTable("LejerOversigt"));
 
             builder
                 .HasOne(le => le.Lejemaal)
                 .WithOne(lm => lm.Lejer)
-                .HasForeignKey<Lejer>(le => le.Id);
+                .HasForeignKey<Lejer>("LejemaalId");
         }
     }
 }

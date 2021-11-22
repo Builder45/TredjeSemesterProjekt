@@ -4,6 +4,7 @@ using BeboerWeb.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeboerWeb.Persistence.Migrations
 {
     [DbContext(typeof(BeboerWebContext))]
-    partial class BeboerWebContextModelSnapshot : ModelSnapshot
+    [Migration("20211122074357_OneToOneFix")]
+    partial class OneToOneFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace BeboerWeb.Persistence.Migrations
 
                     b.HasIndex("BoligadministratorerId");
 
-                    b.ToTable("AdminOversigt", (string)null);
+                    b.ToTable("AfdelingBoligadministrator");
                 });
 
             modelBuilder.Entity("BeboerWeb.Domain.Models.Afdeling", b =>
@@ -287,7 +289,7 @@ namespace BeboerWeb.Persistence.Migrations
 
                     b.HasIndex("VicevaerterId");
 
-                    b.ToTable("ServiceOversigt", (string)null);
+                    b.ToTable("EjendomVicevaert");
                 });
 
             modelBuilder.Entity("LejerPerson", b =>
@@ -302,7 +304,7 @@ namespace BeboerWeb.Persistence.Migrations
 
                     b.HasIndex("PersonerId");
 
-                    b.ToTable("LejerOversigt", (string)null);
+                    b.ToTable("LejerPerson");
                 });
 
             modelBuilder.Entity("AfdelingBoligadministrator", b =>
