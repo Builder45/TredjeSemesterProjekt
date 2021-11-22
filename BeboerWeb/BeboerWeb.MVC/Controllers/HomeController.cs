@@ -1,4 +1,5 @@
 ﻿using BeboerWeb.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -18,6 +19,7 @@ namespace BeboerWeb.MVC.Controllers
             return View();
         }
 
+        [Authorize(Policy = "IsAdmin")]
         public IActionResult Privacy()
         {
             return View();
