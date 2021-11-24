@@ -116,7 +116,7 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToAction("Index", "Bruger");
+                    return RedirectToAction("Index", "Dashboard");
                     //return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
