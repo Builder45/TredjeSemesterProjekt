@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BeboerWeb.Application.Requests
 {
-    public class PersonRequest
+    public class CreatePersonRequest
     {
         public string Fornavn { get; set; }
         public string Efternavn { get; set; }
         public int Telefonnr { get; set; }
         public Guid BrugerId { get; set; }
 
-        public PersonRequest(string fornavn, string efternavn, int telefonnr, Guid brugerId)
+        public CreatePersonRequest(string fornavn, string efternavn, int telefonnr, Guid brugerId)
         {
             Fornavn = fornavn;
             Efternavn = efternavn;

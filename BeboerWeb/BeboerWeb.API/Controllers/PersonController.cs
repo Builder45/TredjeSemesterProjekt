@@ -36,7 +36,7 @@ namespace BeboerWeb.API.Controllers
         [HttpPost]
         public void Post([FromBody] PersonDTO dto)
         {
-            _createPersonUseCase.CreatePerson(new PersonRequest(dto.Fornavn, dto.Efternavn, dto.Telefonnr, dto.BrugerId));
+            _createPersonUseCase.CreatePerson(new OpretPersonRequest(dto.Fornavn, dto.Efternavn, dto.Telefonnr, dto.BrugerId));
         }
 
         // PUT api/<PersonController>/5
