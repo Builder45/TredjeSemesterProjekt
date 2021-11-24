@@ -1,5 +1,5 @@
 ﻿using BeboerWeb.API.Contract.DTO;
-using BeboerWeb.Application.Implementation.Person;
+using BeboerWeb.Application.Implementation.PersonUC;
 using BeboerWeb.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +36,7 @@ namespace BeboerWeb.API.Controllers
         [HttpPost]
         public void Post([FromBody] PersonDTO dto)
         {
-            _createPersonUseCase.CreatePerson(new OpretPersonRequest(dto.Fornavn, dto.Efternavn, dto.Telefonnr, dto.BrugerId));
+            _createPersonUseCase.CreatePerson(new CreatePersonRequest(dto.Fornavn, dto.Efternavn, dto.Telefonnr, dto.BrugerId));
         }
 
         // PUT api/<PersonController>/5
