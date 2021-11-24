@@ -8,7 +8,7 @@ namespace BeboerWeb.Application.Requests
 {
     public class GetEjendomRequest
     {
-        public Guid Id { get; set; }
+        public Guid EjendomId { get; set; }
 
 
     }

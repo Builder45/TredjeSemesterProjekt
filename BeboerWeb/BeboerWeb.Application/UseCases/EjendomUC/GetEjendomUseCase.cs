@@ -20,7 +20,7 @@ namespace BeboerWeb.Application.UseCases.EjendomUC
 
         public Ejendom GetEjendom(GetEjendomRequest command)
         {
-            return _ejendomRepository.GetEjendom(command.Id);
+            return _ejendomRepository.GetEjendom(command.EjendomId);
         }
 
         public List<Ejendom> GetEjendomme()
