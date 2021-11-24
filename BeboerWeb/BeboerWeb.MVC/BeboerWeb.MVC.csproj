@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\NewFolder\" />
     <Folder Include="Views\Dashboard\Lejer\" />
     <Folder Include="Views\Dashboard\VV\" />
   </ItemGroup>
