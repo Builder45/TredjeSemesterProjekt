@@ -1,5 +1,6 @@
 using BeboerWeb.Application.Implementation.Person;
 using BeboerWeb.Application.Persistence;
+using BeboerWeb.Application.UseCases.EjendomUC;
 using BeboerWeb.Persistence;
 using BeboerWeb.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +13,11 @@ builder.Services.AddDbContext<BeboerWebContext>(options =>
 
 
 
-builder.Services.AddScoped<ICreatePersonUseCase, CreatePersonUseCase>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IEjendomRepository, EjendomRepository>();
+
+builder.Services.AddScoped<ICreatePersonUseCase, CreatePersonUseCase>();
+builder.Services.AddScoped<IGetEjendomUseCase, GetEjendomUseCase>();
 
 // Add services to the container
 builder.Services.AddControllers();
