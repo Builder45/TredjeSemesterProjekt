@@ -23,4 +23,11 @@
     <ProjectReference Include="..\BeboerWeb.API.Contract\BeboerWeb.API.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\BA\" />
+    <Folder Include="Controllers\Lejer\" />
+    <Folder Include="Controllers\Vicevært\" />
+    <Folder Include="Controllers\Person\" />
+  </ItemGroup>
+
 </Project>
