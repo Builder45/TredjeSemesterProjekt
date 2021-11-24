@@ -14,7 +14,6 @@ namespace BeboerWeb.MVC.Services.PersonService
 
         public PersonService(IOptions<ApiConfig> options, IHttpClientFactory httpClientFactory) {
             _personServiceConfig = options.Value.PersonServiceConfig;
-
             _httpClientFactory = httpClientFactory;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             _httpClient = httpClientFactory.CreateClient();
