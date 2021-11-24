@@ -19,7 +19,7 @@ namespace BeboerWeb.MVC.Controllers
             return View();
         }
 
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "BA")]
         public IActionResult Privacy()
         {
             return View();

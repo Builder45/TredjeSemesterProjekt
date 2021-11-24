@@ -19,12 +19,20 @@ namespace BeboerWeb.MVC.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            if (User.HasClaim("IsAdmin", "Yes"))
+            if (User.HasClaim("IsBA", "Yes"))
             {
-                return View("/BA/Index");
+                return View("BA/Index");
+            }
+            if (User.HasClaim("IsVV", "Yes"))
+            {
+                return View("VV/Index");
+            }
+            if (User.HasClaim("IsLejer", "Yes"))
+            {
+                return View("Lejer/Index");
             }
 
-            return View("/Bruger/Index");
+            return View("Bruger/Index");
         }
 
         // GET: BrugerController/Details/5
