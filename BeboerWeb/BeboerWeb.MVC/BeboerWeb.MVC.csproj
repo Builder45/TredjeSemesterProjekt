@@ -28,8 +28,6 @@
     <Folder Include="Controllers\Lejer\" />
     <Folder Include="Controllers\Person\" />
     <Folder Include="Controllers\VV\" />
-    <Folder Include="Views\Dashboard\Lejer\" />
-    <Folder Include="Views\Dashboard\VV\" />
   </ItemGroup>
 
 </Project>
