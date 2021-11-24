@@ -5,27 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers
 {
-    public class BrugerController : Controller
+    public class DashboardController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public BrugerController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public DashboardController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        // GET: BrugerController
         [Authorize]
         public ActionResult Index()
         {
             if (User.HasClaim("IsAdmin", "Yes"))
             {
-                return View("BAIndex");
+                return View("/BA/Index");
             }
 
-            return View("AlmIndex");
+            return View("/Bruger/Index");
         }
 
         // GET: BrugerController/Details/5
