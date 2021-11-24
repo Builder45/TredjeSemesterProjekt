@@ -20,6 +20,12 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", policy =>
         policy.RequireClaim("IsAdmin", "Yes"));
+    options.AddPolicy("BA", policy =>
+        policy.RequireClaim("IsBA", "Yes"));
+    options.AddPolicy("VV", policy =>
+        policy.RequireClaim("IsVV", "Yes"));
+    options.AddPolicy("Lejer", policy =>
+        policy.RequireClaim("IsLejer", "Yes"));
 });
 
 // Temp password options
