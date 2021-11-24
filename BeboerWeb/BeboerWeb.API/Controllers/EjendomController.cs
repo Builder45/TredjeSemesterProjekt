@@ -32,9 +32,9 @@ namespace BeboerWeb.API.Controllers
 
         // GET api/<EjendomController>/5
         [HttpGet("{id}")]
-        public EjendomDTO Get(Guid ejendomId)
-        {
-            var model = _getEjendomUseCase.GetEjendom(new GetEjendomRequest { Id = ejendomId });
+        public EjendomDTO Get(Guid id)
+        {      
+            var model = _getEjendomUseCase.GetEjendom(new GetEjendomRequest { EjendomId = id });
             var dto = new EjendomDTO { Id = model.Id, Adresse = model.Adresse, Postnr = model.Postnr, By = model.By };
 
             return dto;
