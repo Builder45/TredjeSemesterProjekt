@@ -26,7 +26,7 @@
   <ItemGroup>
     <Folder Include="Controllers\BA\" />
     <Folder Include="Controllers\Lejer\" />
-    <Folder Include="Controllers\Vicevært\" />
+    <Folder Include="Controllers\VV\" />
     <Folder Include="Controllers\Person\" />
   </ItemGroup>
 
