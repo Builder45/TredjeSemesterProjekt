@@ -11,8 +11,8 @@ namespace BeboerWeb.Persistence.DbMapping
             builder.Property(lk => lk.Id).HasDefaultValueSql("NEWID()");
 
             builder
-                .HasOne(lk => lk.Bygning)
-                .WithMany(bn => bn.Lokaler);
+                .HasOne(lk => lk.Ejendom)
+                .WithMany(e => e.Lokaler);
         }
     }
 }

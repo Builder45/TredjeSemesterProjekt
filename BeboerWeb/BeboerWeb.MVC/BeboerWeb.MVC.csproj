@@ -24,10 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\BA\" />
     <Folder Include="Controllers\Lejer\" />
     <Folder Include="Controllers\Person\" />
-    <Folder Include="Controllers\VV\" />
   </ItemGroup>
 
 </Project>

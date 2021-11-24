@@ -28,7 +28,8 @@ namespace BeboerWeb.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     Fornavn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Efternavn = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Telefonnr = table.Column<int>(type: "int", nullable: false)
+                    Telefonnr = table.Column<int>(type: "int", nullable: false),
+                    BrugerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,7 +57,7 @@ namespace BeboerWeb.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Boligadminstratorer",
+                name: "Boligadminstrator",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
@@ -64,9 +65,9 @@ namespace BeboerWeb.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Boligadminstratorer", x => x.Id);
+                    table.PrimaryKey("PK_Boligadminstrator", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Boligadminstratorer_Person_PersonId",
+                        name: "FK_Boligadminstrator_Person_PersonId",
                         column: x => x.PersonId,
                         principalTable: "Person",
                         principalColumn: "Id");
@@ -90,92 +91,25 @@ namespace BeboerWeb.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bygning",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Adresse = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Postnr = table.Column<int>(type: "int", nullable: false),
-                    By = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EjendomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bygning", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Bygning_Ejendom_EjendomId",
-                        column: x => x.EjendomId,
-                        principalTable: "Ejendom",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AfdelingBoligadministrator",
-                columns: table => new
-                {
-                    AfdelingerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BoligadministratorerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AfdelingBoligadministrator", x => new { x.AfdelingerId, x.BoligadministratorerId });
-                    table.ForeignKey(
-                        name: "FK_AfdelingBoligadministrator_Afdeling_AfdelingerId",
-                        column: x => x.AfdelingerId,
-                        principalTable: "Afdeling",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AfdelingBoligadministrator_Boligadminstratorer_BoligadministratorerId",
-                        column: x => x.BoligadministratorerId,
-                        principalTable: "Boligadminstratorer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EjendomVicevaert",
-                columns: table => new
-                {
-                    EjendommeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    VicevaerterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EjendomVicevaert", x => new { x.EjendommeId, x.VicevaerterId });
-                    table.ForeignKey(
-                        name: "FK_EjendomVicevaert_Ejendom_EjendommeId",
-                        column: x => x.EjendommeId,
-                        principalTable: "Ejendom",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EjendomVicevaert_Vicevaert_VicevaerterId",
-                        column: x => x.VicevaerterId,
-                        principalTable: "Vicevaert",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Lejemaal",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Husleje = table.Column<double>(type: "float", nullable: false),
+                    Adresse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Etage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Husleje = table.Column<double>(type: "float", nullable: false),
                     Areal = table.Column<double>(type: "float", nullable: false),
                     Koekken = table.Column<bool>(type: "bit", nullable: false),
                     Badevaerelse = table.Column<bool>(type: "bit", nullable: false),
-                    BygningId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    EjendomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lejemaal", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Lejemaal_Bygning_BygningId",
-                        column: x => x.BygningId,
-                        principalTable: "Bygning",
+                        name: "FK_Lejemaal_Ejendom_EjendomId",
+                        column: x => x.EjendomId,
+                        principalTable: "Ejendom",
                         principalColumn: "Id");
                 });
 
@@ -184,21 +118,70 @@ namespace BeboerWeb.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    Adresse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Etage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Timepris = table.Column<double>(type: "float", nullable: false),
                     Areal = table.Column<double>(type: "float", nullable: false),
                     Koekken = table.Column<bool>(type: "bit", nullable: false),
                     Badevaerelse = table.Column<bool>(type: "bit", nullable: false),
-                    BygningId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    EjendomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lokale", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Lokale_Bygning_BygningId",
-                        column: x => x.BygningId,
-                        principalTable: "Bygning",
+                        name: "FK_Lokale_Ejendom_EjendomId",
+                        column: x => x.EjendomId,
+                        principalTable: "Ejendom",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdminOversigt",
+                columns: table => new
+                {
+                    AfdelingerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BoligadministratorerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdminOversigt", x => new { x.AfdelingerId, x.BoligadministratorerId });
+                    table.ForeignKey(
+                        name: "FK_AdminOversigt_Afdeling_AfdelingerId",
+                        column: x => x.AfdelingerId,
+                        principalTable: "Afdeling",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AdminOversigt_Boligadminstrator_BoligadministratorerId",
+                        column: x => x.BoligadministratorerId,
+                        principalTable: "Boligadminstrator",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceOversigt",
+                columns: table => new
+                {
+                    EjendommeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VicevaerterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceOversigt", x => new { x.EjendommeId, x.VicevaerterId });
+                    table.ForeignKey(
+                        name: "FK_ServiceOversigt_Ejendom_EjendommeId",
+                        column: x => x.EjendommeId,
+                        principalTable: "Ejendom",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceOversigt_Vicevaert_VicevaerterId",
+                        column: x => x.VicevaerterId,
+                        principalTable: "Vicevaert",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,21 +190,22 @@ namespace BeboerWeb.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     LejeperiodeStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LejeperiodeSlut = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    LejeperiodeSlut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LejemaalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lejer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Lejer_Lejemaal_Id",
-                        column: x => x.Id,
+                        name: "FK_Lejer_Lejemaal_LejemaalId",
+                        column: x => x.LejemaalId,
                         principalTable: "Lejemaal",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookinger",
+                name: "Booking",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
@@ -232,21 +216,21 @@ namespace BeboerWeb.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookinger", x => x.Id);
+                    table.PrimaryKey("PK_Booking", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookinger_Lokale_LokaleId",
+                        name: "FK_Booking_Lokale_LokaleId",
                         column: x => x.LokaleId,
                         principalTable: "Lokale",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Bookinger_Person_PersonId",
+                        name: "FK_Booking_Person_PersonId",
                         column: x => x.PersonId,
                         principalTable: "Person",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "LejerPerson",
+                name: "LejerOversigt",
                 columns: table => new
                 {
                     LejereId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -254,15 +238,15 @@ namespace BeboerWeb.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LejerPerson", x => new { x.LejereId, x.PersonerId });
+                    table.PrimaryKey("PK_LejerOversigt", x => new { x.LejereId, x.PersonerId });
                     table.ForeignKey(
-                        name: "FK_LejerPerson_Lejer_LejereId",
+                        name: "FK_LejerOversigt_Lejer_LejereId",
                         column: x => x.LejereId,
                         principalTable: "Lejer",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LejerPerson_Person_PersonerId",
+                        name: "FK_LejerOversigt_Person_PersonerId",
                         column: x => x.PersonerId,
                         principalTable: "Person",
                         principalColumn: "Id",
@@ -270,29 +254,24 @@ namespace BeboerWeb.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AfdelingBoligadministrator_BoligadministratorerId",
-                table: "AfdelingBoligadministrator",
+                name: "IX_AdminOversigt_BoligadministratorerId",
+                table: "AdminOversigt",
                 column: "BoligadministratorerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Boligadminstratorer_PersonId",
-                table: "Boligadminstratorer",
+                name: "IX_Boligadminstrator_PersonId",
+                table: "Boligadminstrator",
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookinger_LokaleId",
-                table: "Bookinger",
+                name: "IX_Booking_LokaleId",
+                table: "Booking",
                 column: "LokaleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookinger_PersonId",
-                table: "Bookinger",
+                name: "IX_Booking_PersonId",
+                table: "Booking",
                 column: "PersonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bygning_EjendomId",
-                table: "Bygning",
-                column: "EjendomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ejendom_AfdelingId",
@@ -300,24 +279,30 @@ namespace BeboerWeb.Persistence.Migrations
                 column: "AfdelingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EjendomVicevaert_VicevaerterId",
-                table: "EjendomVicevaert",
-                column: "VicevaerterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lejemaal_BygningId",
+                name: "IX_Lejemaal_EjendomId",
                 table: "Lejemaal",
-                column: "BygningId");
+                column: "EjendomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LejerPerson_PersonerId",
-                table: "LejerPerson",
+                name: "IX_Lejer_LejemaalId",
+                table: "Lejer",
+                column: "LejemaalId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LejerOversigt_PersonerId",
+                table: "LejerOversigt",
                 column: "PersonerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lokale_BygningId",
+                name: "IX_Lokale_EjendomId",
                 table: "Lokale",
-                column: "BygningId");
+                column: "EjendomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceOversigt_VicevaerterId",
+                table: "ServiceOversigt",
+                column: "VicevaerterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vicevaert_PersonId",
@@ -328,37 +313,34 @@ namespace BeboerWeb.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AfdelingBoligadministrator");
+                name: "AdminOversigt");
 
             migrationBuilder.DropTable(
-                name: "Bookinger");
+                name: "Booking");
 
             migrationBuilder.DropTable(
-                name: "EjendomVicevaert");
+                name: "LejerOversigt");
 
             migrationBuilder.DropTable(
-                name: "LejerPerson");
+                name: "ServiceOversigt");
 
             migrationBuilder.DropTable(
-                name: "Boligadminstratorer");
+                name: "Boligadminstrator");
 
             migrationBuilder.DropTable(
                 name: "Lokale");
 
             migrationBuilder.DropTable(
-                name: "Vicevaert");
-
-            migrationBuilder.DropTable(
                 name: "Lejer");
 
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "Vicevaert");
 
             migrationBuilder.DropTable(
                 name: "Lejemaal");
 
             migrationBuilder.DropTable(
-                name: "Bygning");
+                name: "Person");
 
             migrationBuilder.DropTable(
                 name: "Ejendom");
