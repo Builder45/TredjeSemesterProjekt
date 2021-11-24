@@ -4,6 +4,6 @@ namespace BeboerWeb.Application.Implementation.Person
 {
     public interface ICreatePersonUseCase
     {
-        void CreatePerson(OpretPersonRequest command);
+        void CreatePerson(CreatePersonRequest command);
     }
 }

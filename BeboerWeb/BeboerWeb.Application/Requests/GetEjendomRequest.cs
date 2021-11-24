@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BeboerWeb.Application.Requests
 {
-    internal class EjendomRequest
+    public class GetEjendomRequest
     {
+        public Guid Id { get; set; }
+
+
     }
 }

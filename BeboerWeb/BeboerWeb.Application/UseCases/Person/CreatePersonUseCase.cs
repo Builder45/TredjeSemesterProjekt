@@ -17,7 +17,7 @@ namespace BeboerWeb.Application.Implementation.Person
             _personRepository = personRepository;
         }
 
-        public void CreatePerson(PersonRequest command)
+        public void CreatePerson(CreatePersonRequest command)
         {
             var person = new Domain.Models.Person(command.Fornavn, command.Efternavn, command.Telefonnr, command.BrugerId);
             _personRepository.CreatePerson(person);
