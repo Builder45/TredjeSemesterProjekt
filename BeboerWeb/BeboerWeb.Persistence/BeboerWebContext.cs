@@ -14,7 +14,6 @@ namespace BeboerWeb.Persistence
         public DbSet<Afdeling> Afdeling { get; set; }
         public DbSet<Boligadministrator> Boligadminstrator { get; set; }
         public DbSet<Booking> Booking { get; set; }
-        public DbSet<Bygning> Bygning { get; set; }
         public DbSet<Ejendom> Ejendom { get; set; }
         public DbSet<Lejemaal> Lejemaal { get; set; }
         public DbSet<Lejer> Lejer { get; set; }

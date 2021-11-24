@@ -5,6 +5,7 @@ namespace BeboerWeb.Domain.Models
     public class Lokale
     {
         public Guid Id { get; set; }
+        public string Adresse { get; set; }
         public string Etage { get; set; }
         public double Timepris { get; set; }
         public double Areal { get; set; }
@@ -12,7 +13,7 @@ namespace BeboerWeb.Domain.Models
         public bool Badevaerelse { get; set; }
 
         public List<Booking> Bookinger { get; set; }
-        public Bygning Bygning { get; set; }
+        public Ejendom Ejendom { get; set; }
          
     }
 }

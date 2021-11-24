@@ -97,32 +97,6 @@ namespace BeboerWeb.Persistence.Migrations
                     b.ToTable("Booking");
                 });
 
-            modelBuilder.Entity("BeboerWeb.Domain.Models.Bygning", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
-
-                    b.Property<string>("Adresse")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("By")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("EjendomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Postnr")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EjendomId");
-
-                    b.ToTable("Bygning");
-                });
-
             modelBuilder.Entity("BeboerWeb.Domain.Models.Ejendom", b =>
                 {
                     b.Property<Guid>("Id")
@@ -156,13 +130,16 @@ namespace BeboerWeb.Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
+                    b.Property<string>("Adresse")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Areal")
                         .HasColumnType("float");
 
                     b.Property<bool>("Badevaerelse")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("BygningId")
+                    b.Property<Guid?>("EjendomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Etage")
@@ -176,7 +153,7 @@ namespace BeboerWeb.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BygningId");
+                    b.HasIndex("EjendomId");
 
                     b.ToTable("Lejemaal");
                 });
@@ -212,13 +189,16 @@ namespace BeboerWeb.Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
+                    b.Property<string>("Adresse")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Areal")
                         .HasColumnType("float");
 
                     b.Property<bool>("Badevaerelse")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("BygningId")
+                    b.Property<Guid?>("EjendomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Etage")
@@ -232,7 +212,7 @@ namespace BeboerWeb.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BygningId");
+                    b.HasIndex("EjendomId");
 
                     b.ToTable("Lokale");
                 });
@@ -347,15 +327,6 @@ namespace BeboerWeb.Persistence.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("BeboerWeb.Domain.Models.Bygning", b =>
-                {
-                    b.HasOne("BeboerWeb.Domain.Models.Ejendom", "Ejendom")
-                        .WithMany("Bygninger")
-                        .HasForeignKey("EjendomId");
-
-                    b.Navigation("Ejendom");
-                });
-
             modelBuilder.Entity("BeboerWeb.Domain.Models.Ejendom", b =>
                 {
                     b.HasOne("BeboerWeb.Domain.Models.Afdeling", "Afdeling")
@@ -367,11 +338,11 @@ namespace BeboerWeb.Persistence.Migrations
 
             modelBuilder.Entity("BeboerWeb.Domain.Models.Lejemaal", b =>
                 {
-                    b.HasOne("BeboerWeb.Domain.Models.Bygning", "Bygning")
+                    b.HasOne("BeboerWeb.Domain.Models.Ejendom", "Ejendom")
                         .WithMany("Lejemaal")
-                        .HasForeignKey("BygningId");
+                        .HasForeignKey("EjendomId");
 
-                    b.Navigation("Bygning");
+                    b.Navigation("Ejendom");
                 });
 
             modelBuilder.Entity("BeboerWeb.Domain.Models.Lejer", b =>
@@ -387,11 +358,11 @@ namespace BeboerWeb.Persistence.Migrations
 
             modelBuilder.Entity("BeboerWeb.Domain.Models.Lokale", b =>
                 {
-                    b.HasOne("BeboerWeb.Domain.Models.Bygning", "Bygning")
+                    b.HasOne("BeboerWeb.Domain.Models.Ejendom", "Ejendom")
                         .WithMany("Lokaler")
-                        .HasForeignKey("BygningId");
+                        .HasForeignKey("EjendomId");
 
-                    b.Navigation("Bygning");
+                    b.Navigation("Ejendom");
                 });
 
             modelBuilder.Entity("BeboerWeb.Domain.Models.Vicevaert", b =>
@@ -438,16 +409,11 @@ namespace BeboerWeb.Persistence.Migrations
                     b.Navigation("Ejendomme");
                 });
 
-            modelBuilder.Entity("BeboerWeb.Domain.Models.Bygning", b =>
+            modelBuilder.Entity("BeboerWeb.Domain.Models.Ejendom", b =>
                 {
                     b.Navigation("Lejemaal");
 
                     b.Navigation("Lokaler");
-                });
-
-            modelBuilder.Entity("BeboerWeb.Domain.Models.Ejendom", b =>
-                {
-                    b.Navigation("Bygninger");
                 });
 
             modelBuilder.Entity("BeboerWeb.Domain.Models.Lejemaal", b =>
