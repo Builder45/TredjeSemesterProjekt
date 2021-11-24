@@ -18,9 +18,9 @@ namespace BeboerWeb.Application.UseCases.EjendomUC
             _ejendomRepository = ejendomRepository;
         }
 
-        Ejendom IGetEjendomUseCase.GetEjendom(GetEjendomRequest command)
+        public Ejendom GetEjendom(GetEjendomRequest command)
         {
-            return _ejendomRepository.GetEjendom(command.EjendomId);
+            return _ejendomRepository.GetEjendom(command.Id);
         }
 
         public List<Ejendom> GetEjendomme()
