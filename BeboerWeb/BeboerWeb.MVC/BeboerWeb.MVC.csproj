@@ -23,4 +23,9 @@
     <ProjectReference Include="..\BeboerWeb.API.Contract\BeboerWeb.API.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Dashboard\Lejer\" />
+    <Folder Include="Views\Dashboard\VV\" />
+  </ItemGroup>
+
 </Project>
