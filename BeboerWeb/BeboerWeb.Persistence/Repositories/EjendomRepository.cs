@@ -36,7 +36,7 @@ namespace BeboerWeb.Persistence.Repositories
         public void UpdateEjendom(Ejendom ejendom)
         {
             if (!ejendomExists(ejendom))
-                throw new Exception("Ejendom with given ID does not exist");
+                throw new ArgumentException("Ejendom with given ID does not exist");
 
             _db.Ejendom.Update(ejendom);
             _db.SaveChanges();
