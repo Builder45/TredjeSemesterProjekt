@@ -17,6 +17,12 @@ namespace BeboerWeb.Persistence.Repositories
             _db = db;
         }
 
+        public void CreateEjendom(Ejendom ejendom)
+        {
+            _db.Add(ejendom);
+            _db.SaveChanges();
+        }
+
         public Ejendom GetEjendom(Guid id)
         {
             return _db.Ejendom.FirstOrDefault(e => e.Id == id);
@@ -25,6 +31,20 @@ namespace BeboerWeb.Persistence.Repositories
         public List<Ejendom> GetEjendomme()
         {
             return _db.Ejendom.ToList();
+        }
+
+        public void UpdateEjendom(Ejendom ejendom)
+        {
+            if (!ejendomExists(ejendom))
+                throw new Exception("Ejendom with given ID does not exist");
+
+            _db.Ejendom.Update(ejendom);
+            _db.SaveChanges();
+        }
+
+        private bool ejendomExists(Ejendom ejendom)
+        {
+            return _db.Ejendom.Any(e => e.Id == ejendom.Id);
         }
     }
 }

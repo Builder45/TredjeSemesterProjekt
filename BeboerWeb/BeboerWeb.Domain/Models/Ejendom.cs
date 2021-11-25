@@ -14,5 +14,12 @@ namespace BeboerWeb.Domain.Models
         public List<Lokale> Lokaler { get; set; }
         public Afdeling Afdeling { get; set; }
 
+        public Ejendom() { }
+        public Ejendom(string adresse, int postnr, string by)
+        {
+            Adresse = adresse;
+            Postnr = postnr;
+            By = by;
+        }
     }
 }

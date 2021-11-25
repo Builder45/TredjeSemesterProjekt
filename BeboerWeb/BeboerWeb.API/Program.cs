@@ -1,6 +1,8 @@
-using BeboerWeb.Application.Implementation.Person;
+using BeboerWeb.Application.UseCases.PersonUC;
+using BeboerWeb.Application.UseCases.PersonUC.Interfaces;
 using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.UseCases.EjendomUC;
+using BeboerWeb.Application.UseCases.EjendomUC.Interfaces;
 using BeboerWeb.Persistence;
 using BeboerWeb.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +14,15 @@ builder.Services.AddDbContext<BeboerWebContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")));
 
 
-
+// IOC repositories
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IEjendomRepository, EjendomRepository>();
 
+// IOC usecases
 builder.Services.AddScoped<ICreatePersonUseCase, CreatePersonUseCase>();
+builder.Services.AddScoped<ICreateEjendomUseCase, CreateEjendomUseCase>();
 builder.Services.AddScoped<IGetEjendomUseCase, GetEjendomUseCase>();
+builder.Services.AddScoped <IUpdateEjendomUseCase, UpdateEjendomUseCase> ();
 
 // Add services to the container
 builder.Services.AddControllers();

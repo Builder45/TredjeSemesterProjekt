@@ -10,9 +10,10 @@ namespace BeboerWeb.Application.Persistence
     public interface IEjendomRepository
 
     {
+        void CreateEjendom(Ejendom ejendom);
         public Ejendom GetEjendom(Guid id);
-
         List<Ejendom> GetEjendomme();
+        void UpdateEjendom(Ejendom ejendom);
 
     }
 }

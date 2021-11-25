@@ -5,27 +5,20 @@ using BeboerWeb.Domain.Models;
 
 namespace BeboerWeb.Application.UseCases.EjendomUC
 {
-    public class GetEjendomUseCase : IGetEjendomUseCase
+    public class UpdateEjendomUseCase : IUpdateEjendomUseCase
     {
         private readonly IEjendomRepository _ejendomRepository;
 
-        public GetEjendomUseCase(IEjendomRepository ejendomRepository)
+        public UpdateEjendomUseCase(IEjendomRepository ejendomRepository)
         {
             _ejendomRepository = ejendomRepository;
         }
 
-        public Ejendom GetEjendom(GetEjendomRequest command)
+        public void UpdateEjendom(UpdateEjendomRequest command)
         {
-            return _ejendomRepository.GetEjendom(command.EjendomId);
+            var ejendom = new Ejendom(command.Adresse, command.Postnr, command.By);
+            ejendom.Id = command.Id;
+            _ejendomRepository.UpdateEjendom(ejendom);
         }
-
-        public List<Ejendom> GetEjendomme()
-        {
-            return _ejendomRepository.GetEjendomme();
-        }
-
-
-
     }
-    
 }

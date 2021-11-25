@@ -1,6 +1,6 @@
 ﻿using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.Application.Requests;
-using BeboerWeb.Application.UseCases.EjendomUC;
+using BeboerWeb.Application.UseCases.EjendomUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,11 +11,15 @@ namespace BeboerWeb.API.Controllers
     [ApiController]
     public class EjendomController : ControllerBase
     {
+        private readonly ICreateEjendomUseCase _createEjendomUseCase;
         private readonly IGetEjendomUseCase _getEjendomUseCase;
+        private readonly IUpdateEjendomUseCase _updateEjendomUseCase;
 
-        public EjendomController(IGetEjendomUseCase getEjendomUseCase)
+        public EjendomController(ICreateEjendomUseCase createEjendomUseCase, IGetEjendomUseCase getEjendomUseCase, IUpdateEjendomUseCase updateEjendomUseCase)
         {
+            _createEjendomUseCase = createEjendomUseCase;
             _getEjendomUseCase = getEjendomUseCase;
+            _updateEjendomUseCase = updateEjendomUseCase;
         }
 
         // GET: api/<EjendomController>
@@ -44,12 +48,14 @@ namespace BeboerWeb.API.Controllers
         [HttpPost]
         public void Post([FromBody] EjendomDTO dto)
         {
+            _createEjendomUseCase.CreateEjendom(new CreateEjendomRequest(dto.Adresse, dto.Postnr, dto.By));
         }
 
-        // PUT api/<EjendomController>/5
-        [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] EjendomDTO dto)
+        // PUT api/<EjendomController>
+        [HttpPut]
+        public void Put([FromBody] EjendomDTO dto)
         {
+            _updateEjendomUseCase.UpdateEjendom(new UpdateEjendomRequest(dto.Id, dto.Adresse, dto.Postnr, dto.By));
         }
 
         // DELETE api/<EjendomController>/5
