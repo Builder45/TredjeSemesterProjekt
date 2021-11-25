@@ -1,12 +1,9 @@
 ﻿using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BeboerWeb.Application.UseCases.PersonUC.Interfaces;
+using BeboerWeb.Domain.Models;
 
-namespace BeboerWeb.Application.Implementation.PersonUC
+namespace BeboerWeb.Application.UseCases.PersonUC
 {
     public class CreatePersonUseCase : ICreatePersonUseCase
     {
@@ -19,7 +16,7 @@ namespace BeboerWeb.Application.Implementation.PersonUC
 
         public void CreatePerson(CreatePersonRequest command)
         {
-            var person = new Domain.Models.Person(command.Fornavn, command.Efternavn, command.Telefonnr, command.BrugerId);
+            var person = new Person(command.Fornavn, command.Efternavn, command.Telefonnr, command.BrugerId);
             _personRepository.CreatePerson(person);
         }
     }

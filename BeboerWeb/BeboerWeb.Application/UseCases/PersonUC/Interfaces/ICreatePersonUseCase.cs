@@ -1,6 +1,6 @@
 ﻿using BeboerWeb.Application.Requests;
 
-namespace BeboerWeb.Application.Implementation.Person
+namespace BeboerWeb.Application.UseCases.PersonUC.Interfaces
 {
     public interface ICreatePersonUseCase
     {
