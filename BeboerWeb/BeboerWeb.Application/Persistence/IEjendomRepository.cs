@@ -11,7 +11,7 @@ namespace BeboerWeb.Application.Persistence
 
     {
         void CreateEjendom(Ejendom ejendom);
-        public Ejendom GetEjendom(Guid id);
+        Ejendom GetEjendom(Guid id);
         List<Ejendom> GetEjendomme();
         void UpdateEjendom(Ejendom ejendom);
 

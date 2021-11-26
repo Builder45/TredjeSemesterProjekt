@@ -10,5 +10,8 @@ namespace BeboerWeb.Application.Persistence
     public interface IPersonRepository
     {
         void CreatePerson(Person person);
+        Person GetPerson(Guid id);
+        List<Person> GetPersoner();
+        void UpdatePerson(Person person);
     }
 }
