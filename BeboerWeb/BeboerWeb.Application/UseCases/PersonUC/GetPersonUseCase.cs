@@ -19,6 +19,11 @@ namespace BeboerWeb.Application.UseCases.PersonUC
             return _personRepository.GetPerson(command.Id);
         }
 
+        public Person GetPersonByUser(GetPersonByUserRequest command)
+        {
+            return _personRepository.GetPersonByUser(command.BrugerId);
+        }
+
         public List<Person> GetPersoner()
         {
             return _personRepository.GetPersoner();

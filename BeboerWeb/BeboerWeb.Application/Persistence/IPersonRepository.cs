@@ -11,6 +11,7 @@ namespace BeboerWeb.Application.Persistence
     {
         void CreatePerson(Person person);
         Person GetPerson(Guid id);
+        Person GetPersonByUser(Guid brugerId);
         List<Person> GetPersoner();
         void UpdatePerson(Person person);
     }

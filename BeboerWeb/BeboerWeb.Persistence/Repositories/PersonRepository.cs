@@ -28,6 +28,11 @@ namespace BeboerWeb.Persistence.Repositories
             return _db.Person.FirstOrDefault(e => e.Id == id);
         }
 
+        public Person GetPersonByUser(Guid brugerId)
+        {
+            return _db.Person.First(e => e.BrugerId == brugerId);
+        }
+
         public List<Person> GetPersoner()
         {
             return _db.Person.ToList();

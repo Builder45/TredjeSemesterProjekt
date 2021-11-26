@@ -45,6 +45,17 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
+        // GET api/<PersonController>/5
+        [HttpGet("ByUser/{brugerId}")]
+        public PersonDTO GetByUser(Guid brugerId)
+        {
+            var model = _getPersonUseCase.GetPersonByUser(new GetPersonByUserRequest { BrugerId = brugerId });
+            var dto = new PersonDTO
+            { Id = model.Id, Fornavn = model.Fornavn, Efternavn = model.Efternavn, Telefonnr = model.Telefonnr, BrugerId = model.BrugerId };
+
+            return dto;
+        }
+
         // POST api/<PersonController>
         [HttpPost]
         public void Post([FromBody] PersonDTO dto)
