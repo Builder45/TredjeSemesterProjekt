@@ -30,7 +30,8 @@ namespace BeboerWeb.MVC.Controllers.BA
         // GET: BrugerController/Create
         public ActionResult Create()
         {
-            return View("Areas/Identity/Pages/Account/Register.cshtml");
+            //return View("Areas/Identity/Pages/Account/Register.cshtml");
+            return Redirect("~/Identity/Account/Register");
         }
 
         // POST: BrugerController/Create

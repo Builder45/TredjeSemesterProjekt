@@ -23,6 +23,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
 {
+    [Authorize(Policy = "BA")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
