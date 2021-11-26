@@ -7,14 +7,11 @@
 <h1>Oversigt</h1>
 <h4>Person</h4>
 <p>
-	<a asp-action="Create">Create New</a>
+	<a asp-action="Create">Opret ny person</a>
 </p>
 <table class="table">
 	<thead>
 	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.First().Id)
-		</th>
 		<th>
 			@Html.DisplayNameFor(model => model.First().Fornavn)
 		</th>
@@ -24,9 +21,6 @@
 		<th>
 			@Html.DisplayNameFor(model => model.First().Telefonnr)
 		</th>		
-		<th>
-			@Html.DisplayNameFor(model => model.First().BrugerId)
-		</th>
 		<th></th>
 	</tr>
 	</thead>

@@ -5,20 +5,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
-    public class PersonController : Controller
+    public class BAPersonController : Controller
     {
 
         private readonly IPersonService _personService;
-        public PersonController(IPersonService personService)
+        public BAPersonController(IPersonService personService)
         {
             _personService = personService;
         }
 
-        // GET: BrugerController
+        // GET: PersonController
         public async Task<ActionResult> Index()
         {
             var model = await _personService.GetPersonAsync();
-            return View("Views/Dashboard/BA/Perosn/Index.cshtml", model);
+            return View("Views/Dashboard/BA/Person/Index.cshtml", model);
         }
 
         // GET: BrugerController/Details/5
@@ -30,7 +30,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         // GET: BrugerController/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Areas/Identity/Pages/Account/Register.cshtml");
         }
 
         // POST: BrugerController/Create
