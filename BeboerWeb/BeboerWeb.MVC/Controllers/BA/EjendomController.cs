@@ -1,4 +1,5 @@
 ﻿using BeboerWeb.API.Contract;
+using BeboerWeb.API.Contract.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ namespace BeboerWeb.MVC.Controllers.BA
 {
     public class EjendomController : Controller
     {
-
+        
         private readonly IEjendomService _ejendomService;
 
         public EjendomController(IEjendomService ejendomService)
@@ -30,43 +31,46 @@ namespace BeboerWeb.MVC.Controllers.BA
         // GET: EjendomController/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Views/Dashboard/BA/Ejendom/Create.cshtml");
         }
 
         // POST: EjendomController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(EjendomDTO ejendom)
         {
-            try
+            if (ModelState.IsValid)
             {
+                await _ejendomService.CreateEjendomAsync(ejendom);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View("Views/Dashboard/BA/Ejendom/Create.cshtml", ejendom);
         }
 
         // GET: EjendomController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            var model = await _ejendomService.GetEjendomByIdAsync(id);
+
+            return View("Views/Dashboard/BA/Ejendom/Edit.cshtml", model);
         }
 
         // POST: EjendomController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task <ActionResult> Edit(Guid id, EjendomDTO ejendom)
         {
-            try
+            if (id != ejendom.Id) return NotFound();
+
+            if (ModelState.IsValid)
             {
+                await _ejendomService.UpdateEjendomAsync(ejendom);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View("Views/Dashboard/BA/Ejendom/Create.cshtml",ejendom);
+
+
         }
 
         // GET: EjendomController/Delete/5

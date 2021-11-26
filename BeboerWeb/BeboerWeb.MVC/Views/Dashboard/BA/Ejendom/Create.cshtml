@@ -1,0 +1,43 @@
+﻿@model BeboerWeb.API.Contract.DTO.EjendomDTO
+@{
+	Layout = "../_BALayout.cshtml";
+    ViewData["Name"] = "Create";
+}
+
+<h1>Opret</h1>
+
+<h4>Ejendom</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+                <label asp-for="Adresse" class="control-label"></label>
+                <input asp-for="Adresse" class="form-control" />
+                <span asp-validation-for="Adresse" class="text-danger"></span>
+
+                <label asp-for="Postnr" class="control-label"></label>
+                <input asp-for="Postnr" class="form-control" />
+                <span asp-validation-for="Postnr" class="text-danger"></span>
+
+                <label asp-for="By" class="control-label"></label>
+                <input asp-for="By" class="form-control" />
+                <span asp-validation-for="By" class="text-danger"></span>
+
+            </div>
+	        <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Tilbage til oversigt</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
