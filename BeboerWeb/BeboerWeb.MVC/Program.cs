@@ -4,6 +4,7 @@ using BeboerWeb.MVC.Services.PersonService;
 using BeboerWeb.MVC.Services.EjendomService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using BeboerWeb.MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

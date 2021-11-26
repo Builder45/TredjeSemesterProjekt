@@ -18,7 +18,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         public async Task<ActionResult> Index()
         {
             var model = await _ejendomService.GetEjendommeAsync();
-            return View(model);
+            return View("Views/Dashboard/BA/Ejendom/Index.cshtml", model);
         }
 
         // GET: EjendomController/Details/5

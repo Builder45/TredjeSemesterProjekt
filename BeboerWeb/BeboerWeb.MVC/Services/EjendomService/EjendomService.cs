@@ -25,12 +25,8 @@ namespace BeboerWeb.MVC.Services.EjendomService
             _httpClient = httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri(options.Value.BaseUrl);
         }
-    }
-
-    public async Task<List<EjendomDTO>> GetEjendommeAsync()
-    {
+        public async Task<List<EjendomDTO>> GetEjendommeAsync() =>
      await _httpClient.GetFromJsonAsync<List<EjendomDTO>>(
-            "api/Ejendom");
-    }
-
+           "api/Ejendom");
+    } 
 }

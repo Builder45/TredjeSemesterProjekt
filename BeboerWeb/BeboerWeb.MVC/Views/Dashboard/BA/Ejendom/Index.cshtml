@@ -1,6 +1,7 @@
 ﻿@model List<BeboerWeb.API.Contract.DTO.EjendomDTO>
 @{
     ViewData["Name"] = "Index";
+	Layout = "../_BALayout.cshtml";
 }
 
 <h1>Index</h1>
@@ -15,8 +16,11 @@
 			@Html.DisplayNameFor(model => model.First().Adresse)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.First().Id)
+			@Html.DisplayNameFor(model => model.First().Postnr)
 		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().By)
+		</th>		
 		<th></th>
 	</tr>
 	</thead>
@@ -27,7 +31,10 @@
 				@Html.DisplayFor(modelItem => item.Adresse)
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.Id)
+				@Html.DisplayFor(modelItem => item.Postnr)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.By)
 			</td>
 			<td>
 				<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
