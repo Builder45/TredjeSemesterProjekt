@@ -1,0 +1,53 @@
+﻿@model List<BeboerWeb.API.Contract.DTO.PersonDTO>
+@{
+    ViewData["Name"] = "Index";
+	Layout = "../_BALayout.cshtml";
+}
+
+<h1>Oversigt</h1>
+<h4>Person</h4>
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Id)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Fornavn)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Efternavn)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Telefonnr)
+		</th>		
+		<th>
+			@Html.DisplayNameFor(model => model.First().BrugerId)
+		</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Fornavn)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Efternavn)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Telefonnr)
+			</td>
+			<td>
+				<a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+				<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+				<a asp-action="Delete" asp-route-id="@item.Id">Manage Rolle</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>

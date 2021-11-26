@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace BeboerWeb.API.Contract
 {
     public interface IPersonService
-    {    
+    {
+
+        Task<List<PersonDTO>> GetPersonAsync();
+
         //[HttpPost]
         public Task CreatePerson(PersonDTO dto);
-
-
-
     }
 }

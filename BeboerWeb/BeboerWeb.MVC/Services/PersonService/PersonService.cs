@@ -24,5 +24,9 @@ namespace BeboerWeb.MVC.Services.PersonService
         {
             await _httpClient.PostAsJsonAsync(_personServiceConfig.ServiceUrl, dto);
         }
+
+        public async Task<List<PersonDTO>> GetPersonAsync() =>
+     await _httpClient.GetFromJsonAsync<List<PersonDTO>>(
+           "api/Person");
     }
 }
