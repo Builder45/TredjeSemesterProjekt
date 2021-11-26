@@ -12,24 +12,37 @@ namespace BeboerWeb.API.Controllers
     public class PersonController : ControllerBase
     {
         private readonly ICreatePersonUseCase _createPersonUseCase;
+        private readonly IGetPersonUseCase _getPersonUseCase;
+        private readonly IUpdatePersonUseCase _updatePersonUseCase;
 
-        public PersonController(ICreatePersonUseCase createPersonUseCase)
+        public PersonController(ICreatePersonUseCase createPersonUseCase, IGetPersonUseCase getPersonUseCase, IUpdatePersonUseCase updatePersonUseCase)
         {
             _createPersonUseCase = createPersonUseCase;
+            _getPersonUseCase = getPersonUseCase;
+            _updatePersonUseCase = updatePersonUseCase;
         }
 
         // GET: api/<PersonController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<PersonDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            var models = _getPersonUseCase.GetPersoner();
+            var dtos = new List<PersonDTO>();
+            models.ForEach(e => dtos.Add(new PersonDTO
+                { Id = e.Id, Fornavn = e.Fornavn, Efternavn = e.Efternavn, Telefonnr = e.Telefonnr, BrugerId = e.BrugerId }));
+
+            return dtos;
         }
 
         // GET api/<PersonController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public PersonDTO Get(Guid id)
         {
-            return "value";
+            var model = _getPersonUseCase.GetPerson(new GetPersonRequest { Id = id });
+            var dto = new PersonDTO 
+                { Id = model.Id, Fornavn = model.Fornavn, Efternavn = model.Efternavn, Telefonnr = model.Telefonnr, BrugerId = model.BrugerId };
+
+            return dto;
         }
 
         // POST api/<PersonController>
@@ -40,15 +53,16 @@ namespace BeboerWeb.API.Controllers
         }
 
         // PUT api/<PersonController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromBody] PersonDTO dto)
         {
+            _updatePersonUseCase.UpdatePerson(new UpdatePersonRequest(dto.Id, dto.Fornavn, dto.Efternavn, dto.Telefonnr, dto.BrugerId));
         }
 
-        // DELETE api/<PersonController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<PersonController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

@@ -20,6 +20,8 @@ builder.Services.AddScoped<IEjendomRepository, EjendomRepository>();
 
 // IOC usecases
 builder.Services.AddScoped<ICreatePersonUseCase, CreatePersonUseCase>();
+builder.Services.AddScoped<IGetPersonUseCase, GetPersonUseCase>();
+builder.Services.AddScoped<IUpdatePersonUseCase, UpdatePersonUseCase>();
 builder.Services.AddScoped<ICreateEjendomUseCase, CreateEjendomUseCase>();
 builder.Services.AddScoped<IGetEjendomUseCase, GetEjendomUseCase>();
 builder.Services.AddScoped <IUpdateEjendomUseCase, UpdateEjendomUseCase> ();
