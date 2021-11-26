@@ -1,29 +1,39 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BeboerWeb.API.Contract;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BeboerWeb.MVC.Controllers.VV.Ejendom
+namespace BeboerWeb.MVC.Controllers.BA
 {
-    public class Ejendom : Controller
+    public class EjendomController : Controller
     {
-        // GET: Ejendom
-        public ActionResult Index()
+
+        private readonly IEjendomService _ejendomService;
+
+        public EjendomController(IEjendomService ejendomService)
         {
-            return View();
+            _ejendomService = ejendomService;
         }
 
-        // GET: Ejendom/Details/5
+         // GET: EjendomController
+        public async Task<ActionResult> Index()
+        {
+            var model = await _ejendomService.GetEjendommeAsync();
+            return View("Views/Dashboard/BA/Ejendom/Index.cshtml", model);
+        }
+
+        // GET: EjendomController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Ejendom/Create
+        // GET: EjendomController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Ejendom/Create
+        // POST: EjendomController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +48,13 @@ namespace BeboerWeb.MVC.Controllers.VV.Ejendom
             }
         }
 
-        // GET: Ejendom/Edit/5
+        // GET: EjendomController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Ejendom/Edit/5
+        // POST: EjendomController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +69,13 @@ namespace BeboerWeb.MVC.Controllers.VV.Ejendom
             }
         }
 
-        // GET: Ejendom/Delete/5
+        // GET: EjendomController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Ejendom/Delete/5
+        // POST: EjendomController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

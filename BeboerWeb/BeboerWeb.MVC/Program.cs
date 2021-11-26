@@ -1,8 +1,10 @@
 using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Services.PersonService;
+using BeboerWeb.MVC.Services.EjendomService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using BeboerWeb.MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,7 @@ builder.Services.Configure<ApiConfig>(
     builder.Configuration.GetSection("ApiConfig"));
 
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IEjendomService, EjendomService>();
 
 
 var app = builder.Build();

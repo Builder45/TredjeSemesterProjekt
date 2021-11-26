@@ -1,0 +1,47 @@
+﻿@model List<BeboerWeb.API.Contract.DTO.EjendomDTO>
+@{
+    ViewData["Name"] = "Index";
+	Layout = "../_BALayout.cshtml";
+}
+
+<h1>Index</h1>
+<h4>Ejendom</h4>
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Adresse)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Postnr)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().By)
+		</th>		
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Adresse)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Postnr)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.By)
+			</td>
+			<td>
+				<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+				<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+				<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
