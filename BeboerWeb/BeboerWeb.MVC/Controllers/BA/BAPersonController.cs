@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
+    [Route("Dashboard/Admin/Brugere/[action]")]
     public class BAPersonController : Controller
     {
 
@@ -14,7 +15,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             _personService = personService;
         }
 
-        // GET: PersonController
         public async Task<ActionResult> Index()
         {
             var model = await _personService.GetPersonAsync();
