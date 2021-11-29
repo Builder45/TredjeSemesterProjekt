@@ -24,7 +24,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         // GET: BrugerController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View("Views/Dashboard/BA/Person/Details.cshtml");
         }
 
         // GET: BrugerController/Create
@@ -51,8 +51,8 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         // GET: BrugerController/Edit/5
         public ActionResult Edit(int id)
-        {
-            return View();
+        {           
+            return View("Views/Dashboard/BA/Person/Edit.cshtml");
         }
 
         // POST: BrugerController/Edit/5

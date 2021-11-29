@@ -21,6 +21,9 @@
 		<th>
 			@Html.DisplayNameFor(model => model.First().Telefonnr)
 		</th>		
+		@*<th>
+			@Html.DisplayNameFor(model => model.First().Rolle)
+		</th>*@
 		<th></th>
 	</tr>
 	</thead>
@@ -36,10 +39,13 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.Telefonnr)
 			</td>
+			@*<td>
+				@Html.DisplayFor(modelItem => item)
+			</td>*@
 			<td>
 				<a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
-				<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
-				<a asp-action="Delete" asp-route-id="@item.Id">Manage Rolle</a>
+				<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> @*|*@
+				@*<a asp-action="Delete" asp-route-id="@item.Id">Manage Rolle</a>*@
 			</td>
 		</tr>
 	}
