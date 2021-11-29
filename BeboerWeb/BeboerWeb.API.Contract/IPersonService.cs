@@ -11,11 +11,11 @@ namespace BeboerWeb.API.Contract
     public interface IPersonService
     {
 
-        Task<List<PersonDTO>> GetPersonAsync();
+        Task<List<PersonDTO>> GetPersonsAsync();
 
-        Task<PersonDTO> GetPersonByUserAsync(Guid id);
+        Task<PersonDTO> GetPersonByUserIdAsync(Guid id);
 
-        Task<PersonDTO> GetPersonByIdAsync(Guid id);
+        Task<PersonDTO> GetPersonByPersonIdAsync(Guid id);
 
         Task UpdatePersonAsync(PersonDTO person);
 

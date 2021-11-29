@@ -78,7 +78,7 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account.Manage
         {
             var userId = await _userManager.GetUserIdAsync(user);
 
-            var person = await _personService.GetPersonByUserAsync(Guid.Parse(userId));
+            var person = await _personService.GetPersonByUserIdAsync(Guid.Parse(userId));
 
             var userName = await _userManager.GetUserNameAsync(user);
             var telefonNr = person.Telefonnr;
@@ -110,7 +110,7 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account.Manage
         {
             var user = await _userManager.GetUserAsync(User);
             var userId = await _userManager.GetUserIdAsync(user);
-            var person = await _personService.GetPersonByUserAsync(Guid.Parse(userId));
+            var person = await _personService.GetPersonByUserIdAsync(Guid.Parse(userId));
 
             if (user == null)
             {

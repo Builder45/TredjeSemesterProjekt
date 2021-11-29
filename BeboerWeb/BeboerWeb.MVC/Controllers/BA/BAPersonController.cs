@@ -24,7 +24,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         public async Task<ActionResult> Index()
         {
             var model = new List<BrugerViewModel>();
-            var personList = await _personService.GetPersonAsync();
+            var personList = await _personService.GetPersonsAsync();
             var brugerList = await _userDb.Users.ToListAsync();
             foreach (var person in personList)
             {
@@ -73,7 +73,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         // GET: BrugerController/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
-            var personModel = await _personService.GetPersonByIdAsync(id);
+            var personModel = await _personService.GetPersonByPersonIdAsync(id);
             var model = new BrugerViewModel();
             model.AddDataFromDTO(personModel);
 
