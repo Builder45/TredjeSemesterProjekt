@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
@@ -14,11 +16,13 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         private readonly IPersonService _personService;
         private readonly ApplicationDbContext _userDb;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public BAPersonController(IPersonService personService, ApplicationDbContext userDb)
+        public BAPersonController(IPersonService personService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager)
         {
             _userDb = userDb;
             _personService = personService;
+            _userManager = userManager;
         }
 
         public async Task<ActionResult> Index()
@@ -89,16 +93,53 @@ namespace BeboerWeb.MVC.Controllers.BA
         // POST: BrugerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <ActionResult> Edit(Guid id, BrugerViewModel bruger)
+        public async Task <ActionResult> Edit(BrugerViewModel bruger)
         {
-            if (id != bruger.Id) return NotFound();
-
             if (ModelState.IsValid)
             {
                 await _personService.UpdatePersonAsync(new PersonDTO { BrugerId = bruger.BrugerId, Fornavn = bruger.Fornavn, Efternavn = bruger.Efternavn, Id = bruger.Id, Telefonnr = bruger.Telefonnr});
                 return RedirectToAction(nameof(Index));
             }
             return View("Views/Dashboard/BA/Person/Edit.cshtml", bruger);
+        }
+
+        public async Task<ActionResult> EditPolicies(Guid id)
+        {
+            var model = new UserPolicyViewModel();
+            model.BrugerId = id;
+
+            var user = await _userDb.Users.FindAsync(id.ToString());
+            model.Email = user.Email;
+
+            bool userIsVV = _userDb.UserClaims
+                .Any(c => c.UserId == id.ToString() && c.ClaimType == "IsVV" && c.ClaimValue == "Yes");
+            if (userIsVV)
+            {
+                model.WasVV = true;
+                model.IsVV = true;
+            }
+
+            return View("Views/Dashboard/BA/Person/EditPolicies.cshtml", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPolicies(UserPolicyViewModel model)
+        {
+            if (model.IsVV != model.WasVV)
+            {
+                var bruger = await _userManager.FindByIdAsync(model.BrugerId.ToString());
+                if (model.IsVV)
+                {
+                    await _userManager.AddClaimAsync(bruger, new Claim("IsVV", "Yes"));
+                }
+                else
+                {
+                    await _userManager.RemoveClaimAsync(bruger, new Claim("IsVV", "Yes"));
+                }
+            }
+
+            return View();
         }
 
         // GET: BrugerController/Delete/5

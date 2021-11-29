@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.Persistence", "Be
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.API.Contract", "BeboerWeb.API.Contract\BeboerWeb.API.Contract.csproj", "{8FCD17B1-5017-4CBE-9234-C2B66835624F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeboerWeb.API.Tests", "BeboerWeb.API.Tests\BeboerWeb.API.Tests.csproj", "{A7471BEC-C118-40D7-AC2A-ECCF9C323405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.API.Tests", "BeboerWeb.API.Tests\BeboerWeb.API.Tests.csproj", "{A7471BEC-C118-40D7-AC2A-ECCF9C323405}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
