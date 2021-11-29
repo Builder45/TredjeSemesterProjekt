@@ -1,4 +1,4 @@
-﻿@model List<BeboerWeb.API.Contract.DTO.PersonDTO>
+﻿@model List<BrugerViewModel>
 @{
     ViewData["Name"] = "Index";
 	Layout = "../_BALayout.cshtml";
@@ -13,6 +13,9 @@
 	<thead>
 	<tr>
 		<th>
+			@Html.DisplayNameFor(model => model.First().Email)
+		</th>
+		<th>
 			@Html.DisplayNameFor(model => model.First().Fornavn)
 		</th>
 		<th>
@@ -21,12 +24,18 @@
 		<th>
 			@Html.DisplayNameFor(model => model.First().Telefonnr)
 		</th>		
+		@*<th>
+			@Html.DisplayNameFor(model => model.First().Rolle)
+		</th>*@
 		<th></th>
 	</tr>
 	</thead>
 	<tbody>
 	@foreach (var item in Model) {
 		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Email)
+			</td>
 			<td>
 				@Html.DisplayFor(modelItem => item.Fornavn)
 			</td>
@@ -36,10 +45,13 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.Telefonnr)
 			</td>
+			@*<td>
+				@Html.DisplayFor(modelItem => item)
+			</td>*@
 			<td>
 				<a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
-				<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
-				<a asp-action="Delete" asp-route-id="@item.Id">Manage Rolle</a>
+				<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> @*|*@
+				@*<a asp-action="Delete" asp-route-id="@item.Id">Manage Rolle</a>*@
 			</td>
 		</tr>
 	}

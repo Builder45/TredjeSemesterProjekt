@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using BeboerWeb.API.Contract.DTO;
 using Microsoft.AspNetCore.Mvc;
+using BeboerWeb.MVC.Data;
+using BeboerWeb.MVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
@@ -10,21 +13,39 @@ namespace BeboerWeb.MVC.Controllers.BA
     {
 
         private readonly IPersonService _personService;
-        public BAPersonController(IPersonService personService)
+        private readonly ApplicationDbContext _userDb;
+
+        public BAPersonController(IPersonService personService, ApplicationDbContext userDb)
         {
+            _userDb = userDb;
             _personService = personService;
         }
 
         public async Task<ActionResult> Index()
         {
-            var model = await _personService.GetPersonAsync();
+            var model = new List<BrugerViewModel>();
+            var personList = await _personService.GetPersonAsync();
+            var brugerList = await _userDb.Users.ToListAsync();
+            foreach (var person in personList)
+            {
+                var brugerModel = new BrugerViewModel();
+                brugerModel.AddDataFromDTO(person);
+
+                var bruger = brugerList.Find(bruger => bruger.Id == person.BrugerId.ToString());
+                if (bruger != null)
+                {
+                    brugerModel.Email = bruger.Email;
+                }
+
+                model.Add(brugerModel);
+            }
             return View("Views/Dashboard/BA/Person/Index.cshtml", model);
         }
 
         // GET: BrugerController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View("Views/Dashboard/BA/Person/Details.cshtml");
         }
 
         // GET: BrugerController/Create
@@ -50,24 +71,34 @@ namespace BeboerWeb.MVC.Controllers.BA
         }
 
         // GET: BrugerController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            var personModel = await _personService.GetPersonByIdAsync(id);
+            var model = new BrugerViewModel();
+            model.AddDataFromDTO(personModel);
+
+            var bruger = await _userDb.Users.FindAsync(model.BrugerId.ToString());
+            if (bruger != null)
+            {
+                model.Email = bruger.Email;
+            }
+
+            return View("Views/Dashboard/BA/Person/Edit.cshtml", model);
         }
 
         // POST: BrugerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task <ActionResult> Edit(Guid id, BrugerViewModel bruger)
         {
-            try
+            if (id != bruger.Id) return NotFound();
+
+            if (ModelState.IsValid)
             {
+                await _personService.UpdatePersonAsync(new PersonDTO { BrugerId = bruger.BrugerId, Fornavn = bruger.Fornavn, Efternavn = bruger.Efternavn, Id = bruger.Id, Telefonnr = bruger.Telefonnr});
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View("Views/Dashboard/BA/Person/Edit.cshtml", bruger);
         }
 
         // GET: BrugerController/Delete/5
