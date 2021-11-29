@@ -1,6 +1,5 @@
 ﻿using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.Requests.Ejendom;
-using BeboerWeb.Application.Requests.Ejendom;
 using BeboerWeb.Application.UseCases.EjendomUC.Interfaces;
 using BeboerWeb.Domain.Models;
 

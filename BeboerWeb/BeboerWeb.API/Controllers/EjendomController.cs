@@ -1,5 +1,5 @@
 ﻿using BeboerWeb.API.Contract.DTO;
-using BeboerWeb.Application.Requests;
+using BeboerWeb.Application.Requests.Ejendom;
 using BeboerWeb.Application.UseCases.EjendomUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

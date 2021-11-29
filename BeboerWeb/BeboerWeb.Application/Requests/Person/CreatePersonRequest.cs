@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeboerWeb.Application.Requests
+namespace BeboerWeb.Application.Requests.Person
 {
     public class CreatePersonRequest
     {

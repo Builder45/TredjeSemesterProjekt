@@ -1,6 +1,6 @@
 ﻿using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.Application.UseCases.PersonUC.Interfaces;
-using BeboerWeb.Application.Requests;
+using BeboerWeb.Application.Requests.Person;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
