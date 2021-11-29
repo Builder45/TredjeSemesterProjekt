@@ -20,9 +20,9 @@ namespace BeboerWeb.MVC.Services.PersonService
             _httpClient.BaseAddress = new Uri(options.Value.BaseUrl);
         }
 
-        public async Task<PersonDTO> GetPersonByIdAsync(Guid id) =>
+        public async Task<PersonDTO> GetPersonByUserAsync(Guid id) =>
            await _httpClient.GetFromJsonAsync<PersonDTO>(
-               $"api/Person/{id}");
+               $"api/Person/ByUser/{id}");
 
         public async Task CreatePerson(PersonDTO dto)
         {

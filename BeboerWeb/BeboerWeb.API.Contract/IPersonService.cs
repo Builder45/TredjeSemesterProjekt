@@ -13,7 +13,7 @@ namespace BeboerWeb.API.Contract
 
         Task<List<PersonDTO>> GetPersonAsync();
 
-        Task<PersonDTO> GetPersonByIdAsync(Guid id);
+        Task<PersonDTO> GetPersonByUserAsync(Guid id);
 
         Task UpdatePersonAsync(PersonDTO person);
 

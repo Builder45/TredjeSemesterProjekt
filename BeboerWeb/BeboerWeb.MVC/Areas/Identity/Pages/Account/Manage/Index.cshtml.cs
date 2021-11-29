@@ -6,6 +6,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using BeboerWeb.API.Contract;
+using BeboerWeb.API.Contract.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,20 +18,26 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IPersonService _personService;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IPersonService personService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _personService = personService;
         }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        public string Username { get; set; }
+        public string Loginnavn { get; set; }
+        public string Fornavn { get; set; }
+        public string Efternavn { get; set; }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -56,20 +64,33 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            [Display(Name = "Telefonnummer")]
+            public string Telefonnr { get; set; }
+
+            [Display(Name ="Fornavn")]
+            public string Fornavn { get; set; }
+
+            [Display(Name = "Efternavn")]
+            public string Efternavn { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var userId = await _userManager.GetUserIdAsync(user);
 
-            Username = userName;
+            var person = await _personService.GetPersonByUserAsync(Guid.Parse(userId));
+
+            var userName = await _userManager.GetUserNameAsync(user);
+            var telefonNr = person.Telefonnr;
+
+
+            Loginnavn = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Fornavn = person.Fornavn,
+                Efternavn = person.Efternavn,
+                Telefonnr = Convert.ToString(telefonNr)
             };
         }
 
@@ -88,6 +109,9 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            var userId = await _userManager.GetUserIdAsync(user);
+            var person = await _personService.GetPersonByUserAsync(Guid.Parse(userId));
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -99,15 +123,23 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            var phoneNumber = Convert.ToString(person.Telefonnr);
+            var fornavn = person.Fornavn;
+            var efternavn = person.Efternavn;
+            var telefonNr = person.Telefonnr;
+
+            if (Input.Telefonnr != phoneNumber || Input.Fornavn != fornavn || Input.Efternavn != efternavn )
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
+
+                PersonDTO newPerson = new PersonDTO { Id = person.Id, Fornavn = Input.Fornavn, Efternavn = Input.Efternavn, Telefonnr = Convert.ToInt32(Input.Telefonnr), BrugerId = person.BrugerId };
+
+                await _personService.UpdatePersonAsync(newPerson); 
+
+                //if (!setPhoneResult.Succeeded)
+                //{
+                //    StatusMessage = "Unexpected error when trying to set phone number.";
+                //    return RedirectToPage();
+                //}
             }
 
             await _signInManager.RefreshSignInAsync(user);
