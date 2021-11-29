@@ -1,5 +1,6 @@
 ﻿using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.Requests;
+using BeboerWeb.Application.Requests.Person;
 using BeboerWeb.Application.UseCases.PersonUC.Interfaces;
 using BeboerWeb.Domain.Models;
 

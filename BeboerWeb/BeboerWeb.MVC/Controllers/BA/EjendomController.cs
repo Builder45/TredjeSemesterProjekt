@@ -61,8 +61,6 @@ namespace BeboerWeb.MVC.Controllers.BA
         [ValidateAntiForgeryToken]
         public async Task <ActionResult> Edit(Guid id, EjendomDTO ejendom)
         {
-            if (id != ejendom.Id) return NotFound();
-
             if (ModelState.IsValid)
             {
                 await _ejendomService.UpdateEjendomAsync(ejendom);

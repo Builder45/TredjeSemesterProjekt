@@ -14,5 +14,16 @@ namespace BeboerWeb.Domain.Models
 
         public Ejendom Ejendom { get; set; }
         public Lejer Lejer { get; set; }
+
+        public Lejemaal (string adresse, string etage, double husleje, double areal, bool koekken, bool badevaerelse, Ejendom ejendom)
+        {
+            Adresse = adresse;
+            Etage= etage;
+            Husleje = husleje; 
+            Areal = areal;
+            Koekken = koekken;
+            Badevaerelse = badevaerelse;
+
+        }
     }
 }

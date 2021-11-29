@@ -1,4 +1,4 @@
-﻿using BeboerWeb.Application.Requests;
+﻿using BeboerWeb.Application.Requests.Person;
 
 namespace BeboerWeb.Application.UseCases.PersonUC.Interfaces
 {

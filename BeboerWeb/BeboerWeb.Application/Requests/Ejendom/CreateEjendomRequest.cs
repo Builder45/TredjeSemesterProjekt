@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeboerWeb.Application.Requests
+namespace BeboerWeb.Application.Requests.Ejendom
 {
-    public class UpdateEjendomRequest
+    public class CreateEjendomRequest
     {
-        public Guid Id { get; set; }
         public string Adresse { get; set; }
         public int Postnr { get; set; }
         public string By { get; set; }
 
-        public UpdateEjendomRequest(Guid id, string adresse, int postnr, string by)
+        public CreateEjendomRequest(string adresse, int postnr, string by)
         {
-            Id = id;
             Adresse = adresse;
             Postnr = postnr;
             By = by;

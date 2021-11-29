@@ -1,4 +1,4 @@
-﻿using BeboerWeb.Application.Requests;
+﻿using BeboerWeb.Application.Requests.Ejendom;
 
 namespace BeboerWeb.Application.UseCases.EjendomUC.Interfaces
 {

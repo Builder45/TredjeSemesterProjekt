@@ -1,4 +1,4 @@
-﻿namespace BeboerWeb.Application.Requests
+﻿namespace BeboerWeb.Application.Requests.Ejendom
 {
     public class GetEjendomRequest
     {

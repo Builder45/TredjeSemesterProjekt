@@ -1,4 +1,4 @@
-﻿namespace BeboerWeb.Application.Requests
+﻿namespace BeboerWeb.Application.Requests.Person
 {
     public class UpdatePersonRequest
     {
