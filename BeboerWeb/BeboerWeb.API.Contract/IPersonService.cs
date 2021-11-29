@@ -15,6 +15,8 @@ namespace BeboerWeb.API.Contract
 
         Task<PersonDTO> GetPersonByUserAsync(Guid id);
 
+        Task<PersonDTO> GetPersonByIdAsync(Guid id);
+
         Task UpdatePersonAsync(PersonDTO person);
 
         //[HttpPost]

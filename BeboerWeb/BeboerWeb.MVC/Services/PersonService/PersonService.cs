@@ -24,6 +24,10 @@ namespace BeboerWeb.MVC.Services.PersonService
            await _httpClient.GetFromJsonAsync<PersonDTO>(
                $"api/Person/ByUser/{id}");
 
+        public async Task<PersonDTO> GetPersonByIdAsync(Guid id) =>
+           await _httpClient.GetFromJsonAsync<PersonDTO>(
+               $"api/Person/{id}");
+
         public async Task CreatePerson(PersonDTO dto)
         {
             await _httpClient.PostAsJsonAsync(_personServiceConfig.ServiceUrl, dto);
