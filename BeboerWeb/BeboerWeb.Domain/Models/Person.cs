@@ -13,6 +13,7 @@ namespace BeboerWeb.Domain.Models
         public List<Lejer> Lejere { get; set; }
         public List<Booking> Bookinger { get; set; }
 
+        // Tom constructor vigtig for EF
         public Person() { }
         public Person(string fornavn, string efternavn, int telefonnr, Guid brugerId)
         {

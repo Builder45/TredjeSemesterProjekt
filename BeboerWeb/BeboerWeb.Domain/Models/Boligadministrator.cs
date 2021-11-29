@@ -8,5 +8,8 @@ namespace BeboerWeb.Domain.Models
 
         public List<Afdeling> Afdelinger { get; set; }
         public Person Person { get; set; }
+
+        // Tom constructor vigtig for EF
+        public Boligadministrator() { }
     }
 }

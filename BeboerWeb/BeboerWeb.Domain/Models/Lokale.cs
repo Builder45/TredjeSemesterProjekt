@@ -14,6 +14,8 @@ namespace BeboerWeb.Domain.Models
 
         public List<Booking> Bookinger { get; set; }
         public Ejendom Ejendom { get; set; }
-         
+
+        // Tom constructor vigtig for EF
+        public Lokale() { }
     }
 }

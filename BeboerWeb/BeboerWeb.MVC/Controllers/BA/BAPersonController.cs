@@ -139,7 +139,7 @@ namespace BeboerWeb.MVC.Controllers.BA
                 }
             }
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: BrugerController/Delete/5

@@ -15,6 +15,8 @@ namespace BeboerWeb.Domain.Models
         public Ejendom Ejendom { get; set; }
         public Lejer Lejer { get; set; }
 
+        // Tom constructor vigtig for EF
+        public Lejemaal() { }
         public Lejemaal (string adresse, string etage, double husleje, double areal, bool koekken, bool badevaerelse, Ejendom ejendom)
         {
             Adresse = adresse;

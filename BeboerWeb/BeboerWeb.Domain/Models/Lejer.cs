@@ -10,5 +10,8 @@ namespace BeboerWeb.Domain.Models
 
         public Lejemaal Lejemaal { get; set; }
         public List<Person> Personer { get; set; }
+
+        // Tom constructor vigtig for EF
+        public Lejer() { }
     }
 }

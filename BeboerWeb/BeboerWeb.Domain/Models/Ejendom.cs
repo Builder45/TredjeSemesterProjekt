@@ -14,6 +14,7 @@ namespace BeboerWeb.Domain.Models
         public List<Lokale> Lokaler { get; set; }
         public Afdeling Afdeling { get; set; }
 
+        // Tom constructor vigtig for EF
         public Ejendom() { }
         public Ejendom(string adresse, int postnr, string by)
         {
