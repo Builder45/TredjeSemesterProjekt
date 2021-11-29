@@ -50,9 +50,10 @@ namespace BeboerWeb.MVC.Controllers.BA
         }
 
         // GET: BrugerController/Edit/5
-        public ActionResult Edit(int id)
-        {           
-            return View("Views/Dashboard/BA/Person/Edit.cshtml");
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var model = await _personService.GetPersonByIdAsync(id);
+            return View("Views/Dashboard/BA/Person/Edit.cshtml", model);
         }
 
         // POST: BrugerController/Edit/5
