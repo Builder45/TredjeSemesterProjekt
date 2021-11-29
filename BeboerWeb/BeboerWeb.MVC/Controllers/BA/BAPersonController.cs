@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using BeboerWeb.API.Contract.DTO;
 using Microsoft.AspNetCore.Mvc;
+using BeboerWeb.MVC.Data;
+using BeboerWeb.MVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
@@ -10,14 +13,28 @@ namespace BeboerWeb.MVC.Controllers.BA
     {
 
         private readonly IPersonService _personService;
-        public BAPersonController(IPersonService personService)
+        private readonly ApplicationDbContext _userDb;
+
+        public BAPersonController(IPersonService personService, ApplicationDbContext userDb)
         {
+            _userDb = userDb;
             _personService = personService;
         }
 
         public async Task<ActionResult> Index()
         {
-            var model = await _personService.GetPersonAsync();
+            var model = new List<BrugerViewModel>();
+            var personList = await _personService.GetPersonAsync();
+            var brugerList = await _userDb.Users.ToListAsync();
+            foreach (var person in personList)
+            {
+                var brugerModel = new BrugerViewModel(person);
+
+                var bruger = brugerList.Find(bruger => bruger.Id == person.BrugerId.ToString());
+                brugerModel.Email = bruger.Email;
+
+                model.Add(brugerModel);
+            }
             return View("Views/Dashboard/BA/Person/Index.cshtml", model);
         }
 
@@ -52,7 +69,12 @@ namespace BeboerWeb.MVC.Controllers.BA
         // GET: BrugerController/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
-            var model = await _personService.GetPersonByIdAsync(id);
+            var personModel = await _personService.GetPersonByIdAsync(id);
+            var model = new BrugerViewModel(personModel);
+
+            var bruger = await _userDb.Users.FindAsync(model.BrugerId);
+            model.Email = bruger.Email;
+
             return View("Views/Dashboard/BA/Person/Edit.cshtml", model);
         }
 

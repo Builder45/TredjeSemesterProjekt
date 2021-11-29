@@ -1,4 +1,4 @@
-﻿@model List<BeboerWeb.API.Contract.DTO.PersonDTO>
+﻿@model List<BrugerViewModel>
 @{
     ViewData["Name"] = "Index";
 	Layout = "../_BALayout.cshtml";
@@ -12,6 +12,9 @@
 <table class="table">
 	<thead>
 	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Email)
+		</th>
 		<th>
 			@Html.DisplayNameFor(model => model.First().Fornavn)
 		</th>
@@ -30,6 +33,9 @@
 	<tbody>
 	@foreach (var item in Model) {
 		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Email)
+			</td>
 			<td>
 				@Html.DisplayFor(modelItem => item.Fornavn)
 			</td>
