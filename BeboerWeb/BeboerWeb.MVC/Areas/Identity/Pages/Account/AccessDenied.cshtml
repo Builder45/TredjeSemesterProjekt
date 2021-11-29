@@ -1,0 +1,12 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+    Layout = "~/Views/Shared/Login/_Layout.cshtml";
+}
+
+<header>
+    <h1 class="text-danger">Adgang benægtet</h1>
+    <p class="text-danger">Du prøver at tilgå en side, som du ikke har adgang til.</p>
+    <button>Gå tilbage til forsiden</button>
+</header>
