@@ -28,10 +28,14 @@ namespace BeboerWeb.MVC.Controllers.BA
             var brugerList = await _userDb.Users.ToListAsync();
             foreach (var person in personList)
             {
-                var brugerModel = new BrugerViewModel(person);
+                var brugerModel = new BrugerViewModel();
+                brugerModel.AddDataFromDTO(person);
 
                 var bruger = brugerList.Find(bruger => bruger.Id == person.BrugerId.ToString());
-                brugerModel.Email = bruger.Email;
+                if (bruger != null)
+                {
+                    brugerModel.Email = bruger.Email;
+                }
 
                 model.Add(brugerModel);
             }
@@ -70,10 +74,14 @@ namespace BeboerWeb.MVC.Controllers.BA
         public async Task<ActionResult> Edit(Guid id)
         {
             var personModel = await _personService.GetPersonByIdAsync(id);
-            var model = new BrugerViewModel(personModel);
+            var model = new BrugerViewModel();
+            model.AddDataFromDTO(personModel);
 
             var bruger = await _userDb.Users.FindAsync(model.BrugerId.ToString());
-            model.Email = bruger.Email;
+            if (bruger != null)
+            {
+                model.Email = bruger.Email;
+            }
 
             return View("Views/Dashboard/BA/Person/Edit.cshtml", model);
         }
@@ -81,7 +89,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         // POST: BrugerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <ActionResult> Edit(Guid id, BrugerViewModel? bruger)
+        public async Task <ActionResult> Edit(Guid id, BrugerViewModel bruger)
         {
             if (id != bruger.Id) return NotFound();
 

@@ -10,8 +10,7 @@ namespace BeboerWeb.MVC.Models
         public int Telefonnr { get; set; }
         public Guid BrugerId { get; set; }
         public string Email { get; set; }
-
-        public BrugerViewModel(PersonDTO dto)
+        public void AddDataFromDTO(PersonDTO dto)
         {
             Id = dto.Id;
             Fornavn = dto.Fornavn;
