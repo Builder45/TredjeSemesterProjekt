@@ -72,7 +72,7 @@ namespace BeboerWeb.MVC.Controllers.BA
             var personModel = await _personService.GetPersonByIdAsync(id);
             var model = new BrugerViewModel(personModel);
 
-            var bruger = await _userDb.Users.FindAsync(model.BrugerId);
+            var bruger = await _userDb.Users.FindAsync(model.BrugerId.ToString());
             model.Email = bruger.Email;
 
             return View("Views/Dashboard/BA/Person/Edit.cshtml", model);
@@ -81,16 +81,16 @@ namespace BeboerWeb.MVC.Controllers.BA
         // POST: BrugerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task <ActionResult> Edit(Guid id, BrugerViewModel? bruger)
         {
-            try
+            if (id != bruger.Id) return NotFound();
+
+            if (ModelState.IsValid)
             {
+                await _personService.UpdatePersonAsync(new PersonDTO { BrugerId = bruger.BrugerId, Fornavn = bruger.Fornavn, Efternavn = bruger.Efternavn, Id = bruger.Id, Telefonnr = bruger.Telefonnr});
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View("Views/Dashboard/BA/Person/Edit.cshtml", bruger);
         }
 
         // GET: BrugerController/Delete/5

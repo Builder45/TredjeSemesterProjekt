@@ -16,6 +16,10 @@
 	        <input type="hidden" asp-for="Id" />
             <div class="form-group">
 
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+
                 <label asp-for="Fornavn" class="control-label"></label>
                 <input asp-for="Fornavn" class="form-control" />
                 <span asp-validation-for="Fornavn" class="text-danger"></span>
