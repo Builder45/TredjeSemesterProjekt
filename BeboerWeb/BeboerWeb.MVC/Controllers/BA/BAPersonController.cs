@@ -1,5 +1,4 @@
 ﻿using BeboerWeb.API.Contract;
-using Microsoft.AspNetCore.Http;
 using BeboerWeb.API.Contract.DTO;
 using Microsoft.AspNetCore.Mvc;
 using BeboerWeb.MVC.Data;
@@ -19,7 +18,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         private readonly ApplicationDbContext _userDb;
         private readonly UserManager<IdentityUser> _userManager;
 
-        private string viewPath = "Views/Dashboard/BA/Person";
+        private readonly string viewPath = "Views/Dashboard/BA/Person";
 
         public BAPersonController(IPersonService personService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager)
         {
@@ -87,13 +86,15 @@ namespace BeboerWeb.MVC.Controllers.BA
         [Route("roller")]
         public async Task<ActionResult> EditPolicies(Guid id)
         {
-            var model = new UserPolicyViewModel();
-            model.BrugerId = id;
+            var model = new UserPolicyViewModel
+            {
+                BrugerId = id
+            };
 
             var user = await _userDb.Users.FindAsync(id.ToString());
-            model.Email = user.Email;
+            if (user != null) model.Email = user.Email;
 
-            bool userIsVV = _userDb.UserClaims
+            var userIsVV = _userDb.UserClaims
                 .Any(c => c.UserId == id.ToString() && c.ClaimType == "IsVV" && c.ClaimValue == "Yes");
             if (userIsVV)
             {
