@@ -26,39 +26,23 @@ namespace BeboerWeb.MVC.Controllers.BA
             _userManager = userManager;
         }
 
-
         [Route("")]
         public async Task<ActionResult> Index()
         {
-            var model = new List<BrugerViewModel>();
-            var personList = await _lejemmalService.GetLejemaalAsync();
-            var brugerList = await _userDb.Users.ToListAsync();
-            foreach (var person in personList)
-            {
-                var brugerModel = new BrugerViewModel();
-                brugerModel.AddDataFromDTO(lejemaal);
-
-                var bruger = brugerList.Find(bruger => bruger.Id == person.BrugerId.ToString());
-                if (bruger != null)
-                {
-                    brugerModel.Email = bruger.Email;
-                }
-
-                model.Add(brugerModel);
-            }
-            return View($"{viewPath}/Index.cshtml", model);
+            var model = await _lejemmalService.GetLejemaalAsync();
+            return View("Views/Dashboard/BA/Lejemaal/Index.cshtml", model);
         }
 
-        // GET: LejemaalController/Details/5
+        [Route("detaljer")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: LejemaalController/Create
+        [Route("opret")]
         public ActionResult Create()
         {
-            return View();
+            return View("Views/Dashboard/BA/Lejemaal/Create.cshtml");
         }
 
         // POST: LejemaalController/Create
@@ -72,14 +56,14 @@ namespace BeboerWeb.MVC.Controllers.BA
             }
             catch
             {
-                return View();
+                return View("Views/Dashboard/BA/Lejemaal/Create.cshtml");
             }
         }
-
-        // GET: LejemaalController/Edit/5
+        
+        [Route("rediger")]
         public ActionResult Edit(int id)
         {
-            return View();
+            return View("Views/Dashboard/BA/Lejemaal/Edit.cshtml");
         }
 
         // POST: LejemaalController/Edit/5
@@ -93,11 +77,11 @@ namespace BeboerWeb.MVC.Controllers.BA
             }
             catch
             {
-                return View();
+                return View("Views/Dashboard/BA/Lejemaal/Edit.cshtml");
             }
         }
 
-        // GET: LejemaalController/Delete/5
+        [Route("slet")]
         public ActionResult Delete(int id)
         {
             return View();

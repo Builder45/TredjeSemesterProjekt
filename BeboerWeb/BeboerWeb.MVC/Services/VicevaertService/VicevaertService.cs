@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
+using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
 using Microsoft.Extensions.Options;
 
 namespace BeboerWeb.MVC.Services.VicevaertService
 {
-    public class VicevaertService
+    public class VicevaertService : IVicevaertService
     {
         private readonly VicevaertServiceConfig _vicevaertServiceConfig;
         private readonly IHttpClientFactory _httpClientFactory;
