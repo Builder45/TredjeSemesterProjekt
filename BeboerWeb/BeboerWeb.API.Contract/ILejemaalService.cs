@@ -5,9 +5,7 @@ namespace BeboerWeb.API.Contract;
 public interface ILejemaalService
 {
     Task<List<LejemaalDTO>> GetLejemaalAsync();
-
-    Task<LejemaalDTO> GetLejemaalByUserIdAsync(Guid id);
-
+    
     Task<LejemaalDTO> GetLejemaalByLejemaalIdAsync(Guid id);
 
     Task UpdateLejemaalAsync(LejemaalDTO lejemaal);

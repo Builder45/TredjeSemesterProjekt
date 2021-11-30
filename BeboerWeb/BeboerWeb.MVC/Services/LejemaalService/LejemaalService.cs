@@ -22,13 +22,10 @@ namespace BeboerWeb.MVC.Services.LejemaalService
         }
 
         public async Task<List<LejemaalDTO>> GetLejemaalAsync() =>
-            await _httpClient.GetFromJsonAsync<List<LejemaalDTO>>("api/Lejemaal");
+            await _httpClient.GetFromJsonAsync<List<LejemaalDTO>>(_lejemaalServiceConfig.ServiceUrl);
 
-        public async Task<LejemaalDTO> GetLejemaalByUserIdAsync(Guid id) =>
-           await _httpClient.GetFromJsonAsync<LejemaalDTO>($"api/Lejemaal/ByUser/{id}");
-
-        public async Task<LejemaalDTO> GetLejemaalByLejemaalIdAsync(Guid id) =>
-           await _httpClient.GetFromJsonAsync<LejemaalDTO>($"api/Lejemaal/{id}");
+         public async Task<LejemaalDTO> GetLejemaalByLejemaalIdAsync(Guid id) =>
+           await _httpClient.GetFromJsonAsync<LejemaalDTO>(_lejemaalServiceConfig.ServiceUrl+$"/{id}");
 
         public async Task CreateLejemaal(LejemaalDTO dto)
         {
@@ -36,6 +33,6 @@ namespace BeboerWeb.MVC.Services.LejemaalService
         }
 
         public async Task UpdateLejemaalAsync(LejemaalDTO lejemaal) =>
-            await _httpClient.PutAsJsonAsync("api/Lejemaal", lejemaal);
+            await _httpClient.PutAsJsonAsync(_lejemaalServiceConfig.ServiceUrl, lejemaal);
     }
 }
