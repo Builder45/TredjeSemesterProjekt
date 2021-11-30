@@ -12,6 +12,11 @@ namespace BeboerWeb.Persistence.Repositories
             _db = db;
         }
 
+        public Vicevaert GetVicevaertByPerson(Guid personId)
+        {
+            return _db.Vicevaert.First(v => v.Person.Id == personId);
+        }
+
         public void LinkVicevaert(Vicevaert vicevaert)
         {
             _db.Vicevaert.Add(vicevaert);
@@ -20,7 +25,8 @@ namespace BeboerWeb.Persistence.Repositories
 
         public void UnlinkVicevaert(Vicevaert vicevaert)
         {
-            _db.Vicevaert.Remove(vicevaert);
+            var vicevaertToDelete = GetVicevaertByPerson(vicevaert.Person.Id);
+            _db.Vicevaert.Remove(vicevaertToDelete);
             _db.SaveChanges();
         }
     }
