@@ -3,6 +3,10 @@ using BeboerWeb.Application.UseCases.PersonUC.Interfaces;
 using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.UseCases.EjendomUC;
 using BeboerWeb.Application.UseCases.EjendomUC.Interfaces;
+using BeboerWeb.Application.UseCases.LejemaalUC;
+using BeboerWeb.Application.UseCases.LejemaalUC.Interfaces;
+using BeboerWeb.Application.UseCases.VicevaertUC;
+using BeboerWeb.Application.UseCases.VicevaertUC.Interfaces;
 using BeboerWeb.Persistence;
 using BeboerWeb.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +21,8 @@ builder.Services.AddDbContext<BeboerWebContext>(options =>
 // IOC repositories
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IEjendomRepository, EjendomRepository>();
+builder.Services.AddScoped<ILejemaalRepository, LejemaalRepository>();
+builder.Services.AddScoped<IVicevaertRepository, VicevaertRepository>();
 
 // IOC usecases
 builder.Services.AddScoped<ICreatePersonUseCase, CreatePersonUseCase>();
@@ -24,7 +30,9 @@ builder.Services.AddScoped<IGetPersonUseCase, GetPersonUseCase>();
 builder.Services.AddScoped<IUpdatePersonUseCase, UpdatePersonUseCase>();
 builder.Services.AddScoped<ICreateEjendomUseCase, CreateEjendomUseCase>();
 builder.Services.AddScoped<IGetEjendomUseCase, GetEjendomUseCase>();
-builder.Services.AddScoped <IUpdateEjendomUseCase, UpdateEjendomUseCase> ();
+builder.Services.AddScoped<IUpdateEjendomUseCase, UpdateEjendomUseCase>();
+builder.Services.AddScoped<ILinkVicevaertUseCase, LinkVicevaertUseCase>();
+builder.Services.AddScoped<ICreateLejemaalUseCase, CreateLejemaalUseCase>();
 
 // Add services to the container
 builder.Services.AddControllers();
