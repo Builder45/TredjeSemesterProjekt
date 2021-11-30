@@ -25,7 +25,7 @@ namespace BeboerWeb.Domain.Models
             Areal = areal;
             Koekken = koekken;
             Badevaerelse = badevaerelse;
-
+            Ejendom = ejendom;
         }
     }
 }

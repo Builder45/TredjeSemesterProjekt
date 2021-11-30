@@ -25,7 +25,8 @@ namespace BeboerWeb.Persistence.Repositories
 
         public Ejendom GetEjendom(Guid id)
         {
-            return _db.Ejendom.FirstOrDefault(e => e.Id == id);
+            //return _db.Ejendom.FirstOrDefault(e => e.Id == id);
+            return _db.Ejendom.Find(id);
         }
 
         public List<Ejendom> GetEjendomme()
