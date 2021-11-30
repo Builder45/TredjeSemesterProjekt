@@ -36,14 +36,14 @@ namespace BeboerWeb.API.Controllers
         [HttpPost]
         public void Post([FromBody] VicevaertDTO dto)
         {
-            _linkVicevaertUseCase.LinkVicevaert(new LinkVicevaertRequest {PersonId = dto.PersonId});
+            _linkVicevaertUseCase.LinkVicevaert(new LinkVicevaertRequest {BrugerId = dto.BrugerId});
         }
 
         // DELETE api/<VicevaertController>/5
         [HttpDelete("id")]
         public void Delete(Guid id)
         {
-            _linkVicevaertUseCase.UnlinkVicevaert(new LinkVicevaertRequest { PersonId = id });
+            _linkVicevaertUseCase.UnlinkVicevaert(new LinkVicevaertRequest { BrugerId = id });
         }
     }
 }

@@ -21,14 +21,14 @@ namespace BeboerWeb.MVC.Services.VicevaertService
             _httpClient.BaseAddress = new Uri(options.Value.BaseUrl);
         }
 
-        public async Task LinkVicevaert(VicevaertDTO dto)
+        public async Task LinkVicevaertAsync(VicevaertDTO dto)
         {
             await _httpClient.PostAsJsonAsync(_vicevaertServiceConfig.ServiceUrl, dto);
         }
 
-        public async Task UnlinkVicevaert(VicevaertDTO dto)
+        public async Task UnlinkVicevaertAsync(VicevaertDTO dto)
         {
-            await _httpClient.DeleteAsync(_vicevaertServiceConfig.ServiceUrl + $"/{dto.PersonId}");
+            await _httpClient.DeleteAsync(_vicevaertServiceConfig.ServiceUrl + $"/{dto.BrugerId}");
         }
     }
 }

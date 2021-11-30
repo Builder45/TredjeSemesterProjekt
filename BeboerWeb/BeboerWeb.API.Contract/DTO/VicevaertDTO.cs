@@ -2,6 +2,6 @@
 {
     public class VicevaertDTO
     {
-        public Guid PersonId { get; set; }
+        public Guid BrugerId { get; set; }
     }
 }

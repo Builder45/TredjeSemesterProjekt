@@ -18,19 +18,19 @@ namespace BeboerWeb.Application.UseCases.VicevaertUC
 
         public void LinkVicevaert(LinkVicevaertRequest command)
         {
-            var vicevaert = GetVicevaertWithPerson(command.PersonId);
+            var vicevaert = GetVicevaertWithPerson(command.BrugerId);
             _vicevaertRepository.LinkVicevaert(vicevaert);
         }
 
         public void UnlinkVicevaert(LinkVicevaertRequest command)
         {
-            var vicevaert = GetVicevaertWithPerson(command.PersonId);
+            var vicevaert = GetVicevaertWithPerson(command.BrugerId);
             _vicevaertRepository.UnlinkVicevaert(vicevaert);
         }
 
         private Vicevaert GetVicevaertWithPerson(Guid id)
         {
-            var person = _personRepository.GetPerson(id);
+            var person = _personRepository.GetPersonByUser(id);
             var vicevaert = new Vicevaert
             {
                 Person = person

@@ -12,23 +12,25 @@ using Microsoft.AspNetCore.Authorization;
 namespace BeboerWeb.MVC.Controllers.BA
 {
     [Authorize(Policy = "BA")]
-    [Route("dashboard/admin/brugere/")]
+    //[Route("dashboard/admin/brugere/")]
     public class BAPersonController : Controller
     {
         private readonly IPersonService _personService;
+        private readonly IVicevaertService _vicevaertService;
         private readonly ApplicationDbContext _userDb;
         private readonly UserManager<IdentityUser> _userManager;
 
         private readonly string viewPath = "Views/Dashboard/BA/Person";
 
-        public BAPersonController(IPersonService personService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager)
+        public BAPersonController(IPersonService personService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager, IVicevaertService vicevaertService)
         {
             _userDb = userDb;
             _personService = personService;
+            _vicevaertService = vicevaertService;
             _userManager = userManager;
         }
 
-        [Route("")]
+        //[Route("")]
         public async Task<ActionResult> Index()
         {
             var model = new List<BrugerViewModel>();
@@ -50,13 +52,13 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Index.cshtml", model);
         }
 
-        [Route("opret")]
+        //[Route("opret")]
         public ActionResult Create()
         {
             return Redirect("~/Identity/Account/Register");
         }
 
-        [Route("rediger")]
+        //[Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
             var personModel = await _personService.GetPersonByPersonIdAsync(id);
@@ -84,7 +86,7 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Edit.cshtml", bruger);
         }
 
-        [Route("roller")]
+        //[Route("roller")]
         public async Task<ActionResult> EditPolicies(Guid id)
         {
             var model = new UserPolicyViewModel
@@ -116,10 +118,12 @@ namespace BeboerWeb.MVC.Controllers.BA
                 if (model.IsVV)
                 {
                     await _userManager.AddClaimAsync(bruger, new Claim("IsVV", "Yes"));
+                    await _vicevaertService.LinkVicevaertAsync(new VicevaertDTO {BrugerId = model.BrugerId});
                 }
                 else
                 {
                     await _userManager.RemoveClaimAsync(bruger, new Claim("IsVV", "Yes"));
+                    await _vicevaertService.UnlinkVicevaertAsync(new VicevaertDTO { BrugerId = model.BrugerId });
                 }
             }
 

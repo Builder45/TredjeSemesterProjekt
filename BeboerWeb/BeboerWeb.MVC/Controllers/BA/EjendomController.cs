@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BeboerWeb.MVC.Controllers.BA
 {
     [Authorize(Policy = "BA")]
-    [Route("dashboard/admin/ejendom/")]
+    //[Route("dashboard/admin/ejendom/")]
     public class EjendomController : Controller
     {
         
@@ -18,20 +18,20 @@ namespace BeboerWeb.MVC.Controllers.BA
             _ejendomService = ejendomService;
         }
 
-        [Route("")]
+        //[Route("")]
         public async Task<ActionResult> Index()
         {
             var model = await _ejendomService.GetEjendommeAsync();
             return View("Views/Dashboard/BA/Ejendom/Index.cshtml", model);
         }
 
-        [Route("detaljer")]
+        //[Route("detaljer")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        [Route("opret")]
+        //[Route("opret")]
         public ActionResult Create()
         {
             return View("Views/Dashboard/BA/Ejendom/Create.cshtml");
@@ -51,7 +51,7 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View("Views/Dashboard/BA/Ejendom/Create.cshtml", ejendom);
         }
 
-        [Route("rediger")]
+        //[Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
             var model = await _ejendomService.GetEjendomByIdAsync(id);
@@ -74,7 +74,7 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         }
 
-        [Route("slet")]
+        //[Route("slet")]
         public ActionResult Delete(int id)
         {
             return View();

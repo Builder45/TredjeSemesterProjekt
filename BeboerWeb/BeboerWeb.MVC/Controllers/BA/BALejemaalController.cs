@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BeboerWeb.MVC.Controllers.BA
 {
     [Authorize(Policy = "BA")]
-    [Route("dashboard/admin/lejemaal/")]
+    //[Route("dashboard/admin/lejemaal/")]
     public class BALejemaalController : Controller
     {
         private readonly ILejemaalService _lejemmalService;
@@ -26,20 +26,20 @@ namespace BeboerWeb.MVC.Controllers.BA
             _userManager = userManager;
         }
 
-        [Route("")]
+        //[Route("")]
         public async Task<ActionResult> Index()
         {
             var model = await _lejemmalService.GetLejemaalAsync();
             return View("Views/Dashboard/BA/Lejemaal/Index.cshtml", model);
         }
 
-        [Route("detaljer")]
+        //[Route("detaljer")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        [Route("opret")]
+        //[Route("opret")]
         public ActionResult Create()
         {
             return View("Views/Dashboard/BA/Lejemaal/Create.cshtml");
@@ -81,7 +81,7 @@ namespace BeboerWeb.MVC.Controllers.BA
             }
         }
 
-        [Route("slet")]
+        //[Route("slet")]
         public ActionResult Delete(int id)
         {
             return View();
