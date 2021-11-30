@@ -32,21 +32,20 @@
 
                 <label asp-for="Koekken" class="control-label"></label>
                 <input asp-for="Koekken" class="form-control"/>
-                <span asp-validation-for="Koekken" class="text-danger"></span>
-                
+                <div>
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioJa" value="true">
+                    <label class="form-check-label" for="inlineRadioJa">Ja</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioNej" value="false">
+                    <label class="form-check-label" for="inlineRadioNej">Nej</label>
+                </div>
                 <label asp-for="Badevaerelse" class="control-label"></label>
                 <input asp-for="Badevaerelse" class="form-control"/>
                 <span asp-validation-for="Badevaerelse" class="text-danger"></span>
             </div>
 
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">1</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">2</label>
-            </div>
+
 
 	        <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
