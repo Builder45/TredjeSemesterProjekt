@@ -29,5 +29,15 @@ namespace BeboerWeb.Persistence.Repositories
             _db.Vicevaert.Remove(vicevaertToDelete);
             _db.SaveChanges();
         }
+
+        public void AddVicevaertToEjendom(Guid personId, Guid ejendomId)
+        {
+            var ejendom = _db.Ejendom.First(e => e.Id == ejendomId);
+            var vicevaert = GetVicevaertByPerson(personId);
+
+            ejendom.Vicevaerter.Add(vicevaert);
+            _db.Ejendom.Update(ejendom);
+            _db.SaveChanges();
+        }
     }
 }

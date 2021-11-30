@@ -6,5 +6,6 @@ namespace BeboerWeb.Application.Persistence
     {
         void LinkVicevaert(Vicevaert vicevaert);
         void UnlinkVicevaert(Vicevaert vicevaert);
+        void AddVicevaertToEjendom(Guid personId, Guid ejendomId);
     }
 }

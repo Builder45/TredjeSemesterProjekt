@@ -32,6 +32,7 @@ builder.Services.AddScoped<ICreateEjendomUseCase, CreateEjendomUseCase>();
 builder.Services.AddScoped<IGetEjendomUseCase, GetEjendomUseCase>();
 builder.Services.AddScoped<IUpdateEjendomUseCase, UpdateEjendomUseCase>();
 builder.Services.AddScoped<ILinkVicevaertUseCase, LinkVicevaertUseCase>();
+builder.Services.AddScoped<IAddVicevaertToEjendomUseCase, AddVicevaertToEjendomUseCase>();
 builder.Services.AddScoped<ICreateLejemaalUseCase, CreateLejemaalUseCase>();
 builder.Services.AddScoped<IGetLejemaalUseCase, GetLejemaalUseCase>();
 

@@ -12,10 +12,12 @@ namespace BeboerWeb.API.Controllers
     public class VicevaertController : ControllerBase
     {
         private readonly ILinkVicevaertUseCase _linkVicevaertUseCase;
+        private readonly IAddVicevaertToEjendomUseCase _addVicevaertToEjendomUseCase;
 
-        public VicevaertController(ILinkVicevaertUseCase linkVicevaertUseCase)
+        public VicevaertController(ILinkVicevaertUseCase linkVicevaertUseCase, IAddVicevaertToEjendomUseCase addVicevaertToEjendomUseCase)
         {
             _linkVicevaertUseCase = linkVicevaertUseCase;
+            _addVicevaertToEjendomUseCase = addVicevaertToEjendomUseCase;
         }
 
         // GET: api/<VicevaertController>
@@ -37,6 +39,12 @@ namespace BeboerWeb.API.Controllers
         public void Post([FromBody] VicevaertDTO dto)
         {
             _linkVicevaertUseCase.LinkVicevaert(new LinkVicevaertRequest {BrugerId = dto.BrugerId});
+        }
+
+        [HttpPost("ToEjendom")]
+        public void Post([FromBody] ServiceOversigtDTO dto)
+        {
+            _addVicevaertToEjendomUseCase.AddVicevaertToEjendom(new AddVicevaertToEjendomRequest {EjendomId = dto.EjendomId, PersonId = dto.PersonId});
         }
 
         // DELETE api/<VicevaertController>/5
