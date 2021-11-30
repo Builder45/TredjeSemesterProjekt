@@ -1,10 +1,13 @@
 ﻿using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
+    [Authorize(Policy = "BA")]
+    [Route("dashboard/admin/ejendom/")]
     public class EjendomController : Controller
     {
         
@@ -15,20 +18,20 @@ namespace BeboerWeb.MVC.Controllers.BA
             _ejendomService = ejendomService;
         }
 
-         // GET: EjendomController
+        [Route("")]
         public async Task<ActionResult> Index()
         {
             var model = await _ejendomService.GetEjendommeAsync();
             return View("Views/Dashboard/BA/Ejendom/Index.cshtml", model);
         }
 
-        // GET: EjendomController/Details/5
+        [Route("detaljer")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: EjendomController/Create
+        [Route("opret")]
         public ActionResult Create()
         {
             return View("Views/Dashboard/BA/Ejendom/Create.cshtml");
@@ -48,7 +51,7 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View("Views/Dashboard/BA/Ejendom/Create.cshtml", ejendom);
         }
 
-        // GET: EjendomController/Edit/5
+        [Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
             var model = await _ejendomService.GetEjendomByIdAsync(id);
@@ -71,7 +74,7 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         }
 
-        // GET: EjendomController/Delete/5
+        [Route("slet")]
         public ActionResult Delete(int id)
         {
             return View();
