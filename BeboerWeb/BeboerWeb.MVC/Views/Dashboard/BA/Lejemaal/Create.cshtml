@@ -30,19 +30,21 @@
                 <input asp-for="Areal" class="form-control"/>
                 <span asp-validation-for="Areal" class="text-danger"></span>
 
-                <label asp-for="Koekken" class="control-label"></label>
-                <input asp-for="Koekken" class="form-control"/>
                 <div>
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioJa" value="true">
+                    <label asp-for="Koekken" class="control-label"></label>
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioKoekkenJa" value="true">
                     <label class="form-check-label" for="inlineRadioJa">Ja</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioNej" value="false">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioKoekkenNej" value="false">
                     <label class="form-check-label" for="inlineRadioNej">Nej</label>
                 </div>
-                <label asp-for="Badevaerelse" class="control-label"></label>
-                <input asp-for="Badevaerelse" class="form-control"/>
-                <span asp-validation-for="Badevaerelse" class="text-danger"></span>
+                
+                <div>
+                    <label asp-for="Badevaerelse" class="control-label"></label>
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioBadevaerelseJa" value="true">
+                    <label class="form-check-label" for="inlineRadioJa">Ja</label>
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioBadevaerelseNej" value="false">
+                    <label class="form-check-label" for="inlineRadioNej">Nej</label>
+                </div>
             </div>
 
 
