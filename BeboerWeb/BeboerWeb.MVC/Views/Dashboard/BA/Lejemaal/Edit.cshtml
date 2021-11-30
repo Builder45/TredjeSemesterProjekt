@@ -1,0 +1,57 @@
+﻿@model BeboerWeb.API.Contract.DTO.LejemaalDTO
+
+@{
+    ViewData["Name"] = "Edit";
+    Layout = "../_BALayout.cshtml";
+}
+
+<h1>Rediger</h1>
+
+<h4>Lejemål</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	        <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+
+                <label asp-for="Husleje" class="control-label"></label>
+                <input asp-for="Husleje" class="form-control"/>
+                <span asp-validation-for="Husleje" class="text-danger"></span>
+
+                <label asp-for="Adresse" class="control-label"></label>
+                <input asp-for="Adresse" class="form-control"/>
+                <span asp-validation-for="Adresse" class="text-danger"></span>
+                
+                <label asp-for="Etage" class="control-label"></label>
+                <input asp-for="Etage" class="form-control"/>
+                <span asp-validation-for="Etage" class="text-danger"></span>
+
+                <label asp-for="Areal" class="control-label"></label>
+                <input asp-for="Areal" class="form-control"/>
+                <span asp-validation-for="Areal" class="text-danger"></span>
+
+                <label asp-for="Koekken" class="control-label"></label>
+                <input asp-for="Koekken" class="form-control"/>
+                <span asp-validation-for="Koekken" class="text-danger"></span>
+                
+                <label asp-for="Badevaerelse" class="control-label"></label>
+                <input asp-for="Badevaerelse" class="form-control"/>
+                <span asp-validation-for="Badevaerelse" class="text-danger"></span>
+            </div>
+
+	        <div class="form-group">
+                <input type="submit" value="Gem" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Tilbage til oversigt</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -7,6 +7,7 @@ namespace BeboerWeb.MVC.Services
             public string BaseUrl { get; set; }
             public PersonServiceConfig PersonServiceConfig { get; set; }
             public EjendomServiceConfig EjendomServiceConfig { get; set; }
+            public LejemaalServiceConfig LejemaalServiceConfig { get; set; } 
 
         }
     }

@@ -1,0 +1,63 @@
+﻿@model List<BeboerWeb.API.Contract.DTO.LejemaalDTO>
+@{
+    ViewData["Name"] = "Index";
+	Layout = "../_BALayout.cshtml";
+}
+
+<h1>Oversigt</h1>
+<h4>Lejemaal</h4>
+<p>
+	<a asp-action="Create">Opret nyt lejemål</a>
+</p>
+<table class="table">
+	<thead>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Adresse)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Etage)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Husleje)
+        </th>		
+        <th>
+            @Html.DisplayNameFor(model => model.First().Areal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Koekken)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Badevaerelse)
+        </th>
+        <th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model) {
+		<tr>
+            <td>
+                @Html.DisplayNameFor(model => model.First().Adresse)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.First().Etage)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.First().Husleje)
+            </td>		
+            <td>
+                @Html.DisplayNameFor(model => model.First().Areal)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.First().Koekken)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.First().Badevaerelse)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> 
+            </td>
+		</tr>
+	}
+	</tbody>
+</table>
