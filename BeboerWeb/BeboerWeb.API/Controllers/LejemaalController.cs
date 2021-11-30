@@ -13,35 +13,73 @@ namespace BeboerWeb.API.Controllers
     public class LejemaalController : ControllerBase
     {
         private readonly ICreateLejemaalUseCase _createLejemaalUseCase;
-        // private readonly IGetLejemaalUseCase _getLejemaalUseCase;
+         private readonly IGetLejemaalUseCase _getLejemaalUseCase;
         // private readonly IUpdateLejemaalUseCase _updateLejemaalUseCase;
 
-        public LejemaalController(ICreateLejemaalUseCase createLejemaalUseCase) //IGetLejemaalUseCase getLejemaalUseCase, IUpdateLejemaalUseCase updateLejemaalUseCase)
+        public LejemaalController(ICreateLejemaalUseCase createLejemaalUseCase ,IGetLejemaalUseCase getLejemaalUseCase)//, IUpdateLejemaalUseCase updateLejemaalUseCase)
         {
             _createLejemaalUseCase = createLejemaalUseCase;
 
-            //_getLejemaalUseCase = getLejemaalUseCase;
+            _getLejemaalUseCase = getLejemaalUseCase;
             //_updateLejemaalUseCase = updateLejemaalUseCase;
 
         }
 
 
         // GET: api/<LejemaalController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{ejendomid}/{id}")]
+        public IEnumerable<LejemaalDTO> GetAllByEjendom(Guid ejendomId)
         {
-            return new string[] { "value1", "value2" };
+            var model = _getLejemaalUseCase.GetLejemaalsInEjendom(new GetLejemaalRequest{EjendomId = ejendomId});
+            var dto = new List<LejemaalDTO>();
+            model.ForEach(a => dto.Add(new LejemaalDTO
+            {
+                Id = a.Id,
+                Adresse = a.Adresse,
+                Etage = a.Etage,
+                Husleje = a.Husleje,
+                Areal = a.Areal,
+                Koekken = a.Koekken,
+                Badevaerelse = a.Badevaerelse,
+                EjendomId = a.Ejendom.Id
+            }));
+            return dto;
+        }
+
+        [HttpGet]
+        public IEnumerable<LejemaalDTO> GetAll()
+        {
+            var model = _getLejemaalUseCase.GetLejemaals();
+            var dto = new List<LejemaalDTO>();
+            model.ForEach(a => dto.Add(new LejemaalDTO
+            {
+                Id = a.Id,
+                Adresse = a.Adresse,
+                Etage = a.Etage,
+                Husleje = a.Husleje,
+                Areal = a.Areal,
+                Koekken = a.Koekken,
+                Badevaerelse = a.Badevaerelse,
+                EjendomId = a.Ejendom.Id
+            }));
+            return dto;
         }
 
         // GET api/<LejemaalController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public LejemaalDTO Get(Guid id)
         {
-            return "value";
+            var model = _getLejemaalUseCase.GetLejemaal(new GetLejemaalRequest
+                {LejemaalId = id });
+            var dto = new LejemaalDTO
+            {
+                Id = model.Id, Adresse = model.Adresse, Etage = model.Etage, Husleje = model.Husleje, Areal = model.Areal, Koekken = model.Koekken, Badevaerelse = model.Badevaerelse, EjendomId = model.Ejendom.Id
+            };
+            return dto;
         }
 
-        // POST api/<LejemaalController>
-        [HttpPost]
+       // POST api/<LejemaalController>
+       [HttpPost]
         public void Post([FromBody] LejemaalDTO dto)
         {
             _createLejemaalUseCase.CreateLejemaal(new CreateLejemaalRequest

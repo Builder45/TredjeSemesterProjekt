@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BeboerWeb.Application.Persistence;
 using BeboerWeb.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.Persistence.Repositories
 {
@@ -20,13 +21,21 @@ namespace BeboerWeb.Persistence.Repositories
 
         public Lejemaal GetLejemaal(Guid id)
         {
-            throw new NotImplementedException();
+            return _db.Lejemaal.Include(a => a.Ejendom).First(a=>a.Id == id);
         }
 
-        public List<Lejemaal> GetLejemaal()
+        public List<Lejemaal> GetLejemaalsByEjendom(Guid EjendomId)
         {
-            throw new NotImplementedException();
+            return _db.Ejendom.Include(a=>a.Lejemaal).FirstOrDefault(a=>a.Id==EjendomId)?.Lejemaal??
+                   new List<Lejemaal>();
         }
+
+        public List<Lejemaal> GetLejemaals()
+        {
+            //return _db.Lejemaal.ToList();
+            return _db.Lejemaal.Include(a => a.Ejendom).ToList();
+        }
+
 
         public void CreateLejemaal(Lejemaal lejemaal)
         {

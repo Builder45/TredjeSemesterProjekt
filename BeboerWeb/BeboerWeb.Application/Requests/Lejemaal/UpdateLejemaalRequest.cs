@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeboerWeb.Application.UseCases.LejemaalUC.Interfaces
+namespace BeboerWeb.Application.Requests.Lejemaal
 {
-    public interface IUpdateLejemaalUseCase
+    public class UpdateLejemaalRequest
     {
     }
 }
