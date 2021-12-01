@@ -1,11 +1,11 @@
-﻿@model List<BeboerWeb.API.Contract.DTO.LejemaalDTO>
+﻿@model List<LejemaalViewModel>
 @{
     ViewData["Name"] = "Index";
 	Layout = "../_BALayout.cshtml";
 }
 
 <h1>Oversigt</h1>
-<h4>Lejemaal</h4>
+<h4>Lejemål</h4>
 <p>
 	<a asp-action="Create">Opret nyt lejemål</a>
 </p>
@@ -37,22 +37,22 @@
 	@foreach (var item in Model) {
 		<tr>
             <td>
-                @Html.DisplayNameFor(model => model.First().Adresse)
+                @Html.DisplayFor(modelitem => item.Adresse)
             </td>
             <td>
-                @Html.DisplayNameFor(model => model.First().Etage)
+                @Html.DisplayFor(modelitem => item.Etage)
             </td>
             <td>
-                @Html.DisplayNameFor(model => model.First().Husleje)
+                @Html.DisplayFor(modelitem => item.Husleje)
             </td>		
             <td>
-                @Html.DisplayNameFor(model => model.First().Areal)
+                @Html.DisplayFor(modelitem => item.Areal)
             </td>
             <td>
-                @Html.DisplayNameFor(model => model.First().Koekken)
+                @Html.DisplayFor(modelitem => item.Koekken)
             </td>
             <td>
-                @Html.DisplayNameFor(model => model.First().Badevaerelse)
+                @Html.DisplayFor(modelitem => item.Badevaerelse)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> 

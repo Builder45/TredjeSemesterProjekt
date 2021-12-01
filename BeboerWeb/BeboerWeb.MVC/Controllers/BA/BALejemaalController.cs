@@ -1,4 +1,5 @@
 ﻿using BeboerWeb.API.Contract;
+using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -13,23 +14,30 @@ namespace BeboerWeb.MVC.Controllers.BA
     //[Route("dashboard/admin/lejemaal/")]
     public class BALejemaalController : Controller
     {
-        private readonly ILejemaalService _lejemmalService;
+        private readonly ILejemaalService _lejemaalService;
         private readonly ApplicationDbContext _userDb;
         private readonly UserManager<IdentityUser> _userManager;
 
         private readonly string viewPath = "Views/Dashboard/BA/Lejemaal";
 
-        public BALejemaalController(ILejemaalService lejemallService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager)
+        public BALejemaalController(ILejemaalService lejemaalService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager)
         {
             _userDb = userDb;
-            _lejemmalService = lejemallService;
+            _lejemaalService = lejemaalService;
             _userManager = userManager;
         }
 
         //[Route("")]
         public async Task<ActionResult> Index()
         {
-            var model = await _lejemmalService.GetLejemaalAsync();
+            var dtos = await _lejemaalService.GetLejemaalAsync();
+            var model = new List<LejemaalViewModel>();
+            foreach (var dto in dtos)
+            {
+               var lejemaal = new LejemaalViewModel();
+               lejemaal.AddDataFromDto(dto);
+               model.Add(lejemaal);
+            }
             return View("Views/Dashboard/BA/Lejemaal/Index.cshtml", model);
         }
 
@@ -48,16 +56,15 @@ namespace BeboerWeb.MVC.Controllers.BA
         // POST: LejemaalController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async  Task<ActionResult> Create(LejemaalDTO lejemaal)
         {
-            try
+            if (ModelState.IsValid)
             {
+                await _lejemaalService.CreateLejemaal(lejemaal);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View("Views/Dashboard/BA/Lejemaal/Create.cshtml");
-            }
+
+            return View("Views/Dashboard/BA/Lejemaal/Create.cshtml");
         }
         
         [Route("rediger")]
