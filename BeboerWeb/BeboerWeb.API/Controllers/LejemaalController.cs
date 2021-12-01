@@ -85,8 +85,8 @@ namespace BeboerWeb.API.Controllers
                 (dto.Adresse,dto.Etage,dto.Husleje,dto.Areal,dto.Koekken,dto.Badevaerelse,dto.EjendomId));
         }
 
-        // PUT api/<LejemaalController>/5
-        [HttpPut("{id}")]
+        // PUT api/<LejemaalController>
+        [HttpPut]
         public void Put([FromBody] LejemaalDTO dto)
         {
             _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest(dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId));

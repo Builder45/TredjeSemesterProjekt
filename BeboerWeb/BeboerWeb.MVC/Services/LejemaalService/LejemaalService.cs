@@ -32,7 +32,7 @@ namespace BeboerWeb.MVC.Services.LejemaalService
             await _httpClient.PostAsJsonAsync(_lejemaalServiceConfig.ServiceUrl, dto);
         }
 
-        public async Task UpdateLejemaalAsync(LejemaalDTO lejemaal) =>
-            await _httpClient.PutAsJsonAsync(_lejemaalServiceConfig.ServiceUrl, lejemaal);
+        public async Task UpdateLejemaalAsync(LejemaalDTO dto) =>
+            await _httpClient.PutAsJsonAsync(_lejemaalServiceConfig.ServiceUrl, dto);
     }
 }

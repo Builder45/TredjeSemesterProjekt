@@ -4,11 +4,12 @@
 	Layout = "../_BALayout.cshtml";
 }
 
-<h1>Oversigt</h1>
-<h4>Lejemål</h4>
-<p>
-	<a asp-action="Create">Opret nyt lejemål</a>
-</p>
+<h1>Oversigt over lejemål</h1>
+<br/>
+<a asp-action="Create">
+    <input type="button" value="Opret lejemål" class="btn btn-primary" />
+</a>
+<br/>
 <table class="table">
 	<thead>
 	<tr>
@@ -55,9 +56,10 @@
                 @Html.DisplayFor(modelitem => item.Badevaerelse)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> 
+                <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Se lejere</a> 
             </td>
-		</tr>
+        </tr>
 	}
 	</tbody>
 </table>

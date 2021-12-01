@@ -7,27 +7,30 @@ namespace BeboerWeb.MVC.Models
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "Der mangler en adresse!")]
+        [Required(ErrorMessage = "Du mangler at udfylde adressen:")]
+        [Display(Prompt = "Adresse (f.eks: Hybenvej 12)")]
         public string Adresse { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Du mangler at angive etagen:")]
+        [Display(Prompt = "Etage (f.eks: stue / 2.tv)")]
         public string Etage { get; set; }
 
-        [Required]
-        public double Husleje { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Du mangler at angive lejemålets areal:")]
+        [Display(Prompt = "Areal")]
         public double Areal { get; set; }
 
+        [Required(ErrorMessage = "Du mangler at angive en husleje:")]
+        [Display(Prompt = "Husleje")]
+        public double Husleje { get; set; }
+
         [Display(Name = "Køkken")]
-        [Required(ErrorMessage = "Test")]
         public bool Koekken { get; set; }
 
         [Display(Name = "Badeværelse")]
-        [Required(ErrorMessage = "Test")]
         public bool Badevaerelse { get; set; }
 
         [Required]
+        [Display(Prompt = "Tilknyttet Ejendom")]
         public Guid EjendomId { get; set; }
 
         public void AddDataFromDto(LejemaalDTO dto)
