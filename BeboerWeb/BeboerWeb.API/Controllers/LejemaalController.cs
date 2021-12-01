@@ -13,15 +13,14 @@ namespace BeboerWeb.API.Controllers
     public class LejemaalController : ControllerBase
     {
         private readonly ICreateLejemaalUseCase _createLejemaalUseCase;
-         private readonly IGetLejemaalUseCase _getLejemaalUseCase;
-        // private readonly IUpdateLejemaalUseCase _updateLejemaalUseCase;
+        private readonly IGetLejemaalUseCase _getLejemaalUseCase;
+        private readonly IUpdateLejemaalUseCase _updateLejemaalUseCase;
 
-        public LejemaalController(ICreateLejemaalUseCase createLejemaalUseCase ,IGetLejemaalUseCase getLejemaalUseCase)//, IUpdateLejemaalUseCase updateLejemaalUseCase)
+        public LejemaalController(ICreateLejemaalUseCase createLejemaalUseCase, IGetLejemaalUseCase getLejemaalUseCase, IUpdateLejemaalUseCase updateLejemaalUseCase)
         {
             _createLejemaalUseCase = createLejemaalUseCase;
-
             _getLejemaalUseCase = getLejemaalUseCase;
-            //_updateLejemaalUseCase = updateLejemaalUseCase;
+            _updateLejemaalUseCase = updateLejemaalUseCase;
 
         }
 
@@ -88,8 +87,9 @@ namespace BeboerWeb.API.Controllers
 
         // PUT api/<LejemaalController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] LejemaalDTO dto)
         {
+            _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest(dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
         }
     }
 }

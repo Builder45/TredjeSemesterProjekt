@@ -45,7 +45,21 @@ namespace BeboerWeb.Persistence.Repositories
 
         public void UpdateLejemaal(Lejemaal lejemaal)
         {
-            throw new NotImplementedException();
+            //var existingLejemaal = _db.Lejemaal
+            //    .Where(p => p.Id == lejemaal.Id)
+            //    .Include(a => a.Ejendom);
+
+            //_db.Entry(existingLejemaal).CurrentValues.SetValues(lejemaal);
+
+            if (!lejemaalExists(lejemaal))
+                throw new ArgumentException("Lejemaal with given ID does not exist");
+            _db.Lejemaal.Update(lejemaal);
+
+            _db.SaveChanges();
+        }
+        private bool lejemaalExists(Lejemaal lejemaal)
+        {
+            return _db.Lejemaal.Any(e => e.Id == lejemaal.Id);
         }
     }
 }

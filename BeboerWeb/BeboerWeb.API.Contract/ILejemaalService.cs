@@ -10,6 +10,5 @@ public interface ILejemaalService
 
     Task UpdateLejemaalAsync(LejemaalDTO lejemaal);
 
-    //[HttpPost]
     public Task CreateLejemaal(LejemaalDTO dto);
 }

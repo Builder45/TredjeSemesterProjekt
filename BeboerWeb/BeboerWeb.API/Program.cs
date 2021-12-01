@@ -35,6 +35,7 @@ builder.Services.AddScoped<ILinkVicevaertUseCase, LinkVicevaertUseCase>();
 builder.Services.AddScoped<IAddVicevaertToEjendomUseCase, AddVicevaertToEjendomUseCase>();
 builder.Services.AddScoped<ICreateLejemaalUseCase, CreateLejemaalUseCase>();
 builder.Services.AddScoped<IGetLejemaalUseCase, GetLejemaalUseCase>();
+builder.Services.AddScoped<IUpdateLejemaalUseCase, UpdateLejemaalUseCase>();
 
 // Add services to the container
 builder.Services.AddControllers();
