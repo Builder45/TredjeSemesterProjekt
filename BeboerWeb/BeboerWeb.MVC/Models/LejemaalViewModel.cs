@@ -6,16 +6,28 @@ namespace BeboerWeb.MVC.Models
     public class LejemaalViewModel
     {
         public Guid Id { get; set; }
+
         [Required(ErrorMessage = "Der mangler en adresse!")]
         public string Adresse { get; set; }
+
         [Required]
         public string Etage { get; set; }
+
         [Required]
         public double Husleje { get; set; }
+
         [Required]
         public double Areal { get; set; }
+
+        [Display(Name = "Køkken")]
+        [Required(ErrorMessage = "Test")]
         public bool Koekken { get; set; }
+
+        [Display(Name = "Badeværelse")]
+        [Required(ErrorMessage = "Test")]
         public bool Badevaerelse { get; set; }
+
+        [Required]
         public Guid EjendomId { get; set; }
 
         public void AddDataFromDto(LejemaalDTO dto)

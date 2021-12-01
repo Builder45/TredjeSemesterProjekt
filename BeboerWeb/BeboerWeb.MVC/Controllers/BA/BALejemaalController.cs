@@ -54,14 +54,14 @@ namespace BeboerWeb.MVC.Controllers.BA
         public async Task<ActionResult> Create()
         {
             var model = new ComboViewModel();
-            model.EjendomViewModels = new List<EjendomViewModel>();
+            model.Ejendomme = new List<EjendomViewModel>();
 
             var dtos = await _ejendomService.GetEjendommeAsync();
             foreach (var dto in dtos)
             {
                 var ejendom = new EjendomViewModel();
                 ejendom.AddDataFromDto(dto);
-                model.EjendomViewModels.Add(ejendom);
+                model.Ejendomme.Add(ejendom);
             }
 
             return View("Views/Dashboard/BA/Lejemaal/Create.cshtml", model);
@@ -70,10 +70,11 @@ namespace BeboerWeb.MVC.Controllers.BA
         // POST: LejemaalController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async  Task<ActionResult> Create(LejemaalDTO lejemaal)
+        public async  Task<ActionResult> Create(ComboViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var lejemaal = model.GetLejemaalDTO();
                 await _lejemaalService.CreateLejemaal(lejemaal);
                 return RedirectToAction(nameof(Index));
             }

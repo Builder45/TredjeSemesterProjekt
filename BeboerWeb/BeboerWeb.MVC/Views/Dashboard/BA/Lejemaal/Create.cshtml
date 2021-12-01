@@ -14,43 +14,32 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
 
-                <label asp-for="LejemaalViewModel.Husleje" class="control-label"></label>
-                <input asp-for="LejemaalViewModel.Husleje" class="form-control"/>
-                <span asp-validation-for="LejemaalViewModel.Husleje" class="text-danger"></span>
+                <label asp-for="Lejemaal.Husleje" class="control-label"></label>
+                <input asp-for="Lejemaal.Husleje" class="form-control"/>
+                <span asp-validation-for="Lejemaal.Husleje" class="text-danger"></span>
                 <br/>
-                <label asp-for="LejemaalViewModel.Adresse" class="control-label"></label>
-                <input asp-for="LejemaalViewModel.Adresse" class="form-control"/>
-                <span asp-validation-for="LejemaalViewModel.Adresse" class="text-danger"></span>
+                <label asp-for="Lejemaal.Adresse" class="control-label"></label>
+                <input asp-for="Lejemaal.Adresse" class="form-control"/>
+                <span asp-validation-for="Lejemaal.Adresse" class="text-danger"></span>
                 <br/>
-                <label asp-for="LejemaalViewModel.Etage" class="control-label"></label>
-                <input asp-for="LejemaalViewModel.Etage" class="form-control"/>
-                <span asp-validation-for="LejemaalViewModel.Etage" class="text-danger"></span>
+                <label asp-for="Lejemaal.Etage" class="control-label"></label>
+                <input asp-for="Lejemaal.Etage" class="form-control"/>
+                <span asp-validation-for="Lejemaal.Etage" class="text-danger"></span>
                 <br/>
-                <label asp-for="LejemaalViewModel.Areal" class="control-label"></label>
-                <input asp-for="LejemaalViewModel.Areal" class="form-control"/>
-                <span asp-validation-for="LejemaalViewModel.Areal" class="text-danger"></span>
+                <label asp-for="Lejemaal.Areal" class="control-label"></label>
+                <input asp-for="Lejemaal.Areal" class="form-control"/>
+                <span asp-validation-for="Lejemaal.Areal" class="text-danger"></span>
                 <br/>
-                <div>
-                    <label asp-for="LejemaalViewModel.Koekken" class="control-label"></label>
-                    <input class="form-check-input" type="radio" name="Koekken" id="inlineRadioKoekkenJa" value="true">
-                    <label class="form-check-label" for="inlineRadioJa">Ja</label>
-                    <input class="form-check-input" type="radio" name="Koekken" id="inlineRadioKoekkenNej" value="false">
-                    <label class="form-check-label" for="inlineRadioNej">Nej</label>
-                </div>
+                <label asp-for="Lejemaal.Koekken" class="control-label"></label>
+                <input asp-for="Lejemaal.Koekken">
                 <br/>
-                <div>
-                    <label asp-for="LejemaalViewModel.Badevaerelse" class="control-label"></label>
-                    <input class="form-check-input" type="radio" name="Badevaerelse" id="inlineRadioBadevaerelseJa" value="true">
-                    <label class="form-check-label" for="inlineRadioJa">Ja</label>
-                    <input class="form-check-input" type="radio" name="Badevaerelse" id="inlineRadioBadevaerelseNej" value="false">
-                    <label class="form-check-label" for="inlineRadioNej">Nej</label>
-                </div>
+                <label asp-for="Lejemaal.Badevaerelse" class="control-label"></label>
+                <input asp-for="Lejemaal.Badevaerelse" class="form-check-input">
                 <br/>
-                <select class="form-select" aria-label="Bruh">
-                    <option selected>Vælg Ejendom</option>
-                    @foreach (var ejendom in Model.EjendomViewModels)
+                <select asp-for="Lejemaal.EjendomId" class="form-select" aria-label="Bruh">
+                    @*<option selected>Vælg Ejendom</option>*@
+                    @foreach (var ejendom in Model.Ejendomme)
                     {
-                        <label asp-for="LejemaalViewModel.EjendomId"></label>
                         <option value="@ejendom.Id">@ejendom.Adresse, @ejendom.Postnr @ejendom.By</option>
                     }
                 </select>
