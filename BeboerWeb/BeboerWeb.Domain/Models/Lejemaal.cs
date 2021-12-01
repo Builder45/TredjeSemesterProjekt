@@ -13,7 +13,7 @@ namespace BeboerWeb.Domain.Models
         public bool Badevaerelse { get; set; }
 
         public Ejendom Ejendom { get; set; }
-        public Lejer Lejer { get; set; }
+        public List<Lejer> Lejere { get; set; }
 
         // Tom constructor vigtig for EF
         public Lejemaal() { }

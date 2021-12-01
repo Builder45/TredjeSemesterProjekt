@@ -5,6 +5,8 @@ using BeboerWeb.Application.UseCases.EjendomUC;
 using BeboerWeb.Application.UseCases.EjendomUC.Interfaces;
 using BeboerWeb.Application.UseCases.LejemaalUC;
 using BeboerWeb.Application.UseCases.LejemaalUC.Interfaces;
+using BeboerWeb.Application.UseCases.LejerUC;
+using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using BeboerWeb.Application.UseCases.VicevaertUC;
 using BeboerWeb.Application.UseCases.VicevaertUC.Interfaces;
 using BeboerWeb.Persistence;
@@ -23,6 +25,7 @@ builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IEjendomRepository, EjendomRepository>();
 builder.Services.AddScoped<ILejemaalRepository, LejemaalRepository>();
 builder.Services.AddScoped<IVicevaertRepository, VicevaertRepository>();
+builder.Services.AddScoped<ILejerRepository, LejerRepository>();
 
 // IOC usecases
 builder.Services.AddScoped<ICreatePersonUseCase, CreatePersonUseCase>();
@@ -36,6 +39,9 @@ builder.Services.AddScoped<IAddVicevaertToEjendomUseCase, AddVicevaertToEjendomU
 builder.Services.AddScoped<ICreateLejemaalUseCase, CreateLejemaalUseCase>();
 builder.Services.AddScoped<IGetLejemaalUseCase, GetLejemaalUseCase>();
 builder.Services.AddScoped<IUpdateLejemaalUseCase, UpdateLejemaalUseCase>();
+builder.Services.AddScoped<ICreateLejerUseCase, CreateLejerUseCase>();
+builder.Services.AddScoped<IUpdateLejerUseCase, UpdateLejerUseCase>();
+builder.Services.AddScoped<IGetLejerUseCase, GetLejerUseCase>();
 
 // Add services to the container
 builder.Services.AddControllers();

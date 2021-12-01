@@ -11,15 +11,20 @@ namespace BeboerWeb.Persistence.DbMapping
             builder.Property(le => le.Id).HasDefaultValueSql("NEWID()");
             builder.Property<Guid>("LejemaalId");
 
+
+            builder
+                .HasOne(lm => lm.Lejemaal)
+                .WithMany(e => e.Lejere);
+
             builder
                 .HasMany(le => le.Personer)
                 .WithMany(p => p.Lejere)
                 .UsingEntity(join => join.ToTable("LejerOversigt"));
 
-            builder
-                .HasOne(le => le.Lejemaal)
-                .WithOne(lm => lm.Lejer)
-                .HasForeignKey<Lejer>("LejemaalId");
+            //builder
+            //    .HasOne(le => le.Lejemaal)
+            //    .WithOne(lm => lm.Lejer)
+            //    .HasForeignKey<Lejer>("LejemaalId");
         }
     }
 }
