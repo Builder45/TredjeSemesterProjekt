@@ -2,6 +2,7 @@
 using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Models;
+using BeboerWeb.MVC.Services.EjendomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,15 +16,17 @@ namespace BeboerWeb.MVC.Controllers.BA
     public class BALejemaalController : Controller
     {
         private readonly ILejemaalService _lejemaalService;
+        private readonly IEjendomService _ejendomService;
         private readonly ApplicationDbContext _userDb;
         private readonly UserManager<IdentityUser> _userManager;
 
         private readonly string viewPath = "Views/Dashboard/BA/Lejemaal";
 
-        public BALejemaalController(ILejemaalService lejemaalService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager)
+        public BALejemaalController(ILejemaalService lejemaalService, IEjendomService ejendomService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager)
         {
             _userDb = userDb;
             _lejemaalService = lejemaalService;
+            _ejendomService = ejendomService;
             _userManager = userManager;
         }
 
@@ -48,9 +51,20 @@ namespace BeboerWeb.MVC.Controllers.BA
         }
 
         //[Route("opret")]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View("Views/Dashboard/BA/Lejemaal/Create.cshtml");
+            var model = new ComboViewModel();
+            model.EjendomViewModels = new List<EjendomViewModel>();
+
+            var dtos = await _ejendomService.GetEjendommeAsync();
+            foreach (var dto in dtos)
+            {
+                var ejendom = new EjendomViewModel();
+                ejendom.AddDataFromDto(dto);
+                model.EjendomViewModels.Add(ejendom);
+            }
+
+            return View("Views/Dashboard/BA/Lejemaal/Create.cshtml", model);
         }
 
         // POST: LejemaalController/Create

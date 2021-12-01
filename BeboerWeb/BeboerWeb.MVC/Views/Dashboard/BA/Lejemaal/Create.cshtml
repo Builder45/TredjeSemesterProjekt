@@ -1,4 +1,4 @@
-﻿@model LejemaalViewModel
+﻿@model ComboViewModel
 @{
 	Layout = "../_BALayout.cshtml";
     ViewData["Name"] = "Create";
@@ -14,24 +14,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
 
-                <label asp-for="Husleje" class="control-label"></label>
-                <input asp-for="Husleje" class="form-control"/>
-                <span asp-validation-for="Husleje" class="text-danger"></span>
+                <label asp-for="LejemaalViewModel.Husleje" class="control-label"></label>
+                <input asp-for="LejemaalViewModel.Husleje" class="form-control"/>
+                <span asp-validation-for="LejemaalViewModel.Husleje" class="text-danger"></span>
                 <br/>
-                <label asp-for="Adresse" class="control-label"></label>
-                <input asp-for="Adresse" class="form-control"/>
-                <span asp-validation-for="Adresse" class="text-danger"></span>
+                <label asp-for="LejemaalViewModel.Adresse" class="control-label"></label>
+                <input asp-for="LejemaalViewModel.Adresse" class="form-control"/>
+                <span asp-validation-for="LejemaalViewModel.Adresse" class="text-danger"></span>
                 <br/>
-                <label asp-for="Etage" class="control-label"></label>
-                <input asp-for="Etage" class="form-control"/>
-                <span asp-validation-for="Etage" class="text-danger"></span>
+                <label asp-for="LejemaalViewModel.Etage" class="control-label"></label>
+                <input asp-for="LejemaalViewModel.Etage" class="form-control"/>
+                <span asp-validation-for="LejemaalViewModel.Etage" class="text-danger"></span>
                 <br/>
-                <label asp-for="Areal" class="control-label"></label>
-                <input asp-for="Areal" class="form-control"/>
-                <span asp-validation-for="Areal" class="text-danger"></span>
+                <label asp-for="LejemaalViewModel.Areal" class="control-label"></label>
+                <input asp-for="LejemaalViewModel.Areal" class="form-control"/>
+                <span asp-validation-for="LejemaalViewModel.Areal" class="text-danger"></span>
                 <br/>
                 <div>
-                    <label asp-for="Koekken" class="control-label"></label>
+                    <label asp-for="LejemaalViewModel.Koekken" class="control-label"></label>
                     <input class="form-check-input" type="radio" name="Koekken" id="inlineRadioKoekkenJa" value="true">
                     <label class="form-check-label" for="inlineRadioJa">Ja</label>
                     <input class="form-check-input" type="radio" name="Koekken" id="inlineRadioKoekkenNej" value="false">
@@ -39,27 +39,24 @@
                 </div>
                 <br/>
                 <div>
-                    <label asp-for="Badevaerelse" class="control-label"></label>
+                    <label asp-for="LejemaalViewModel.Badevaerelse" class="control-label"></label>
                     <input class="form-check-input" type="radio" name="Badevaerelse" id="inlineRadioBadevaerelseJa" value="true">
                     <label class="form-check-label" for="inlineRadioJa">Ja</label>
                     <input class="form-check-input" type="radio" name="Badevaerelse" id="inlineRadioBadevaerelseNej" value="false">
                     <label class="form-check-label" for="inlineRadioNej">Nej</label>
                 </div>
                 <br/>
+                <select class="form-select" aria-label="Bruh">
+                    <option selected>Vælg Ejendom</option>
+                    @foreach (var ejendom in Model.EjendomViewModels)
+                    {
+                        <label asp-for="LejemaalViewModel.EjendomId"></label>
+                        <option value="@ejendom.Id">@ejendom.Adresse, @ejendom.Postnr @ejendom.By</option>
+                    }
+                </select>
             </div>
 
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Ejendom
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-            </div>
+            
             <br/>
 
 	        <div class="form-group">
