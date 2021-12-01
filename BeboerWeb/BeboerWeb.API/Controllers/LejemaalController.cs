@@ -26,7 +26,7 @@ namespace BeboerWeb.API.Controllers
 
 
         // GET: api/<LejemaalController>
-        [HttpGet("{ejendomid}/{id}")]
+        [HttpGet("Ejendom/{ejendomId}")]
         public IEnumerable<LejemaalDTO> GetAllByEjendom(Guid ejendomId)
         {
             var model = _getLejemaalUseCase.GetLejemaalsInEjendom(new GetLejemaalRequest{EjendomId = ejendomId});
