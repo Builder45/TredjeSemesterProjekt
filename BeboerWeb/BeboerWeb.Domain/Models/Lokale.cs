@@ -17,5 +17,16 @@ namespace BeboerWeb.Domain.Models
 
         // Tom constructor vigtig for EF
         public Lokale() { }
+
+        public Lokale(string adresse, string etage, double timepris, double areal, bool koekken, bool badevaerelse, Ejendom ejendom)
+        {
+            Adresse = adresse;
+            Etage = etage;
+            Timepris = timepris;
+            Areal = areal;
+            Koekken = koekken;
+            Badevaerelse = badevaerelse;
+            Ejendom = ejendom;
+        }
     }
 }
