@@ -43,8 +43,6 @@ namespace BeboerWeb.Persistence.Repositories
             var lejer = _db.Lejer.First(l => l.Id == lejerId);
             var person = _db.Person.First(p => p.Id == personId);
             lejer.Personer.Add(person);
-            person.Lejere.Add(lejer);
-            _db.Update(person);
             _db.Update(lejer);
             _db.SaveChanges();
         }

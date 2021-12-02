@@ -10,7 +10,7 @@ namespace BeboerWeb.Domain.Models
         public int Telefonnr { get; set; }
         public Guid BrugerId { get; set; }
 
-        public List<Lejer> Lejere { get; set; }
+        public List<Lejer> Lejere { get; set; } = new List<Lejer>();
         public List<Booking> Bookinger { get; set; }
 
         // Tom constructor vigtig for EF
