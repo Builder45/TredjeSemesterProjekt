@@ -27,15 +27,25 @@ namespace BeboerWeb.Persistence.Repositories
         {
             return _db.Lejer.Include(a => a.Lejemaal).Where(l => l.Lejemaal.Id == lejemaalId).ToList();
         }
-
         public List<Lejer> GetLejereByEjendom(Guid ejendomId)
         {
             return _db.Lejer.Include(a => a.Lejemaal).Where(l => l.Lejemaal.Ejendom.Id == ejendomId).ToList();
         }
-
-        public void CreateLejer(Lejer lejer)
+        public Guid CreateLejer(Lejer lejer)
         {
             _db.Add(lejer);
+            _db.SaveChanges();
+
+            return lejer.Id;
+        }
+        public void LinkLejerWithPerson(Guid lejerId, Guid personId)
+        {
+            var lejer = _db.Lejer.First(l => l.Id == lejerId);
+            var person = _db.Person.First(p => p.Id == personId);
+            lejer.Personer.Add(person);
+            person.Lejere.Add(lejer);
+            _db.Update(person);
+            _db.Update(lejer);
             _db.SaveChanges();
         }
 

@@ -60,7 +60,7 @@ namespace BeboerWeb.API.Controllers
         public void Post([FromBody] LejerDTO dto)
         {
             _createLejerUseCase.CreateLejer(new CreateLejerRequest
-                (dto.LejeperiodeStart, dto.LejeperiodeSlut, dto.LejemaalId));
+                (dto.LejeperiodeStart, dto.LejeperiodeSlut, dto.LejemaalId, dto.PersonIds));
         }
 
         // PUT api/<LejerController>/5

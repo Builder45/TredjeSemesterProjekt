@@ -10,14 +10,14 @@ namespace BeboerWeb.Application.Requests.Lejer
     {
         public DateTime LejeperiodeStart { get; set; }
         public DateTime LejeperiodeSlut { get; set; }
-
         public Guid LejemaalId { get; set; }
-
-        public CreateLejerRequest(DateTime lejeperiodeStart, DateTime lejeperiodeSlut, Guid lejemaalId)
+        public List<Guid> PersonIds { get; set; }
+        public CreateLejerRequest(DateTime lejeperiodeStart, DateTime lejeperiodeSlut, Guid lejemaalId, List<Guid> personIds)
         {
             LejeperiodeStart = lejeperiodeStart;
             LejeperiodeSlut = lejeperiodeSlut;
             LejemaalId = lejemaalId;
+            PersonIds = personIds;
         }
     }
 }

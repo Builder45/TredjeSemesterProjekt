@@ -23,9 +23,18 @@ namespace BeboerWeb.Application.UseCases.LejerUC
 
         public void CreateLejer(CreateLejerRequest command)
         {
+            
             var lejemaal = _lejemaalRepository.GetLejemaal(command.LejemaalId);
             var lejer = new Lejer(command.LejeperiodeStart, command.LejeperiodeSlut, lejemaal);
-            _lejerRepository.CreateLejer(lejer);
+            var lejerId = _lejerRepository.CreateLejer(lejer);
+
+            if (command.PersonIds.Count > 0)
+            {
+                foreach (var id in command.PersonIds)
+                {
+                    _lejerRepository.LinkLejerWithPerson(lejerId, id);
+                }
+            }
         }
     }
 }
