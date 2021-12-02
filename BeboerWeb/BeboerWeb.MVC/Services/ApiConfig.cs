@@ -1,4 +1,5 @@
 ﻿using BeboerWeb.MVC.Services.EjendomService;
+using BeboerWeb.MVC.Services.LejerService;
 using BeboerWeb.MVC.Services.LokaleService;
 using BeboerWeb.MVC.Services.VicevaertService;
 
@@ -10,6 +11,7 @@ namespace BeboerWeb.MVC.Services
             public PersonServiceConfig PersonServiceConfig { get; set; }
             public EjendomServiceConfig EjendomServiceConfig { get; set; }
             public LejemaalServiceConfig LejemaalServiceConfig { get; set; }
+            public LejerServiceConfig LejerServiceConfig { get; set; }
             public LokaleServiceConfig LokaleServiceConfig { get; set; }
             public VicevaertServiceConfig VicevaertServiceConfig { get; set; }
 

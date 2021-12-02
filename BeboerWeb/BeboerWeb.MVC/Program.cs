@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BeboerWeb.MVC.Services;
 using BeboerWeb.MVC.Services.LejemaalService;
+using BeboerWeb.MVC.Services.LejerService;
 using BeboerWeb.MVC.Services.LokaleService;
 using BeboerWeb.MVC.Services.VicevaertService;
 
@@ -52,6 +53,7 @@ builder.Services.Configure<ApiConfig>(
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IEjendomService, EjendomService>();
 builder.Services.AddScoped<ILejemaalService, LejemaalService>();
+builder.Services.AddScoped<ILejerService, LejerService>();
 builder.Services.AddScoped<ILokaleService, LokaleService>();
 builder.Services.AddScoped<IVicevaertService, VicevaertService>();
 
