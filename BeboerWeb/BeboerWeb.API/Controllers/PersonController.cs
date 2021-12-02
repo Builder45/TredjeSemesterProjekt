@@ -1,6 +1,7 @@
 ﻿using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.Application.UseCases.PersonUC.Interfaces;
 using BeboerWeb.Application.Requests.Person;
+using BeboerWeb.Application.UseCases.PersonUC;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,12 +15,13 @@ namespace BeboerWeb.API.Controllers
         private readonly ICreatePersonUseCase _createPersonUseCase;
         private readonly IGetPersonUseCase _getPersonUseCase;
         private readonly IUpdatePersonUseCase _updatePersonUseCase;
-
-        public PersonController(ICreatePersonUseCase createPersonUseCase, IGetPersonUseCase getPersonUseCase, IUpdatePersonUseCase updatePersonUseCase)
+        private readonly IIsActiveLejerUseCase _isActiveLejerUseCase;
+        public PersonController(ICreatePersonUseCase createPersonUseCase, IGetPersonUseCase getPersonUseCase, IUpdatePersonUseCase updatePersonUseCase, IIsActiveLejerUseCase isActiveLejerUseCase)
         {
             _createPersonUseCase = createPersonUseCase;
             _getPersonUseCase = getPersonUseCase;
             _updatePersonUseCase = updatePersonUseCase;
+            _isActiveLejerUseCase = isActiveLejerUseCase;
         }
 
         // GET: api/<PersonController>
@@ -38,9 +40,10 @@ namespace BeboerWeb.API.Controllers
         [HttpGet("{id}")]
         public PersonDTO Get(Guid id)
         {
+            var isActive = _isActiveLejerUseCase.IsActiveLejer(new IsActiveLejerRequest(id));
             var model = _getPersonUseCase.GetPerson(new GetPersonRequest { Id = id });
             var dto = new PersonDTO 
-                { Id = model.Id, Fornavn = model.Fornavn, Efternavn = model.Efternavn, Telefonnr = model.Telefonnr, BrugerId = model.BrugerId };
+                { Id = model.Id, Fornavn = model.Fornavn, Efternavn = model.Efternavn, Telefonnr = model.Telefonnr, BrugerId = model.BrugerId, IsActiveLejer = isActive};
 
             return dto;
         }
@@ -49,9 +52,11 @@ namespace BeboerWeb.API.Controllers
         [HttpGet("ByUser/{brugerId}")]
         public PersonDTO GetByUser(Guid brugerId)
         {
+            var isActive = _isActiveLejerUseCase.IsActiveLejer(new IsActiveLejerRequest(brugerId));
+
             var model = _getPersonUseCase.GetPersonByUser(new GetPersonByUserRequest { BrugerId = brugerId });
             var dto = new PersonDTO
-            { Id = model.Id, Fornavn = model.Fornavn, Efternavn = model.Efternavn, Telefonnr = model.Telefonnr, BrugerId = model.BrugerId };
+            { Id = model.Id, Fornavn = model.Fornavn, Efternavn = model.Efternavn, Telefonnr = model.Telefonnr, BrugerId = model.BrugerId, IsActiveLejer = isActive };
 
             return dto;
         }
@@ -69,11 +74,5 @@ namespace BeboerWeb.API.Controllers
         {
             _updatePersonUseCase.UpdatePerson(new UpdatePersonRequest(dto.Id, dto.Fornavn, dto.Efternavn, dto.Telefonnr, dto.BrugerId));
         }
-
-        //// DELETE api/<PersonController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

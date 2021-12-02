@@ -13,5 +13,6 @@ namespace BeboerWeb.API.Contract.DTO
         public string Efternavn { get; set; }
         public int Telefonnr { get; set; }
         public Guid BrugerId { get; set; }
+        public bool IsActiveLejer { get; set; }
     }
 }

@@ -48,6 +48,7 @@ builder.Services.AddScoped<IGetLejerUseCase, GetLejerUseCase>();
 builder.Services.AddScoped<ICreateLokaleUseCase, CreateLokaleUseCase>();
 builder.Services.AddScoped<IUpdateLokaleUseCase, UpdateLokaleUseCase>();
 builder.Services.AddScoped<IGetLokaleUseCase, GetLokaleUseCase>();
+builder.Services.AddScoped<IIsActiveLejerUseCase, IsActiveLejerUseCase>();
 
 
 // Add services to the container

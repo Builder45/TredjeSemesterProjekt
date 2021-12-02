@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.Persistence.Repositories
 {
@@ -25,7 +26,7 @@ namespace BeboerWeb.Persistence.Repositories
 
         public Person GetPerson(Guid id)
         {
-            return _db.Person.FirstOrDefault(e => e.Id == id);
+            return _db.Person.Include(p=>p.Lejere).FirstOrDefault(e => e.Id == id);
         }
 
         public Person GetPersonByUser(Guid brugerId)
@@ -47,10 +48,28 @@ namespace BeboerWeb.Persistence.Repositories
             _db.SaveChanges();
         }
 
+        //public bool IsActiveLejer(Guid personId)
+        //{
+        //    var activeLejer = false;
+
+        //    var person = _db.Person.First(p => p.Id == personId);
+
+        //    foreach (var lejer in person.Lejere)
+        //    {
+        //        if (DateTime.Now > lejer.LejeperiodeStart && DateTime.Now < lejer.LejeperiodeSlut)
+        //        {
+        //            activeLejer = true;
+        //        }
+        //    }
+        //    return activeLejer;
+        //}
+
         private bool personExists(Person person)
         {
             return _db.Person.Any(e => e.Id == person.Id);
         }
+
+        
 
     }
 
