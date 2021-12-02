@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.Requests.Lejer;
 using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using BeboerWeb.Domain.Models;
@@ -11,6 +12,11 @@ namespace BeboerWeb.Application.UseCases.LejerUC
 {
     public class GetLejerUseCase : IGetLejerUseCase
     {
+        private readonly ILejerRepository _repository;
+        public GetLejerUseCase(ILejerRepository repository)
+        {
+            _repository = repository;
+        }
         public Lejer GetLejer(GetLejerRequest command)
         {
             throw new NotImplementedException();
@@ -23,12 +29,12 @@ namespace BeboerWeb.Application.UseCases.LejerUC
 
         public List<Lejer> GetLejereByEjendom(GetLejerRequest command)
         {
-            throw new NotImplementedException();
+            return _repository.GetLejereByEjendom(command.EjendomId);
         }
 
         public List<Lejer> GetLejereByLejemaal(GetLejerRequest command)
         {
-            throw new NotImplementedException();
+            return _repository.GetLejereByLejemaal(command.LejemaalId);
         }
     }
 }

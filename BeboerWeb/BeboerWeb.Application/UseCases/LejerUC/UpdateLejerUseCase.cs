@@ -3,17 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.Requests.Lejer;
 using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using BeboerWeb.Domain.Models;
 
 namespace BeboerWeb.Application.UseCases.LejerUC
 {
-    public class UpdateLejerUseCase :IUpdateLejerUseCase
+    public class UpdateLejerUseCase : IUpdateLejerUseCase
     {
-        public Lejer UpdateLejer(UpdateLejerRequest command)
+        private readonly ILejerRepository _lejerRepository;
+        private readonly ILejemaalRepository _lejemaalRepository;
+
+        public UpdateLejerUseCase(ILejerRepository lejerRepository, ILejemaalRepository lejemaalRepository)
         {
-            throw new NotImplementedException();
+            _lejerRepository = lejerRepository;
+            _lejemaalRepository = lejemaalRepository;
         }
+        public void UpdateLejer(UpdateLejerRequest command)
+        {
+            var lejemaal = _lejemaalRepository.GetLejemaal(command.LejemaalId);
+            var lejer = new Lejer(command.LejeperiodeStart, command.LejeperiodeSlut, lejemaal);
+            lejer.Id = command.Id;
+            _lejerRepository.UpdateLejer(lejer);
+        }
+        
     }
 }

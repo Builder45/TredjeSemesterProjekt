@@ -28,6 +28,11 @@ namespace BeboerWeb.Persistence.Repositories
             return _db.Lejer.Include(a => a.Lejemaal).Where(l => l.Lejemaal.Id == lejemaalId).ToList();
         }
 
+        public List<Lejer> GetLejereByEjendom(Guid ejendomId)
+        {
+            return _db.Lejer.Include(a => a.Lejemaal).Where(l => l.Lejemaal.Ejendom.Id == ejendomId).ToList();
+        }
+
         public void CreateLejer(Lejer lejer)
         {
             _db.Add(lejer);

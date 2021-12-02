@@ -7,6 +7,7 @@ namespace BeboerWeb.Application.Persistence
         Lejer GetLejer(Guid id);
         List<Lejer> GetLejere();
         List<Lejer> GetLejereByLejemaal(Guid lejemaalId);
+        List<Lejer> GetLejereByEjendom(Guid ejendomId);
         void CreateLejer(Lejer lejer);
         void UpdateLejer(Lejer lejer);
     }

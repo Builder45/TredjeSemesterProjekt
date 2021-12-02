@@ -10,6 +10,6 @@ namespace BeboerWeb.Application.UseCases.LejerUC.Interfaces
 {
     public interface IUpdateLejerUseCase
     {
-        Lejer UpdateLejer(UpdateLejerRequest command);
+        void UpdateLejer(UpdateLejerRequest command);
     }
 }

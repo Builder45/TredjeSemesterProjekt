@@ -1,5 +1,7 @@
 ﻿using BeboerWeb.API.Contract.DTO;
+using BeboerWeb.Application.Requests.Lejemaal;
 using BeboerWeb.Application.Requests.Lejer;
+using BeboerWeb.Application.UseCases.LejemaalUC.Interfaces;
 using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,19 +22,38 @@ namespace BeboerWeb.API.Controllers
             _getLejerUseCase = getLejerUseCase;
             _updateLejerUseCase = updateLejerUseCase;
         }
-        // GET: api/<LejerController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         // GET api/<LejerController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("Lejemaal/{lejemaalId}")]
+        public IEnumerable<LejerDTO>  GetLejereByLejemaal(Guid lejemaalId)
         {
-            return "value";
+            var model = _getLejerUseCase.GetLejereByLejemaal(new GetLejerRequest {LejemaalId = lejemaalId });
+            var dto = new List<LejerDTO>();
+            model.ForEach(a => dto.Add(new LejerDTO
+            {
+                Id = a.Id,
+                LejeperiodeStart = a.LejeperiodeStart,
+                LejeperiodeSlut = a.LejeperiodeSlut,
+                LejemaalId = a.Lejemaal.Id
+            }));
+            return dto;
         }
+
+        [HttpGet("Ejendom/{ejendomId}")]
+        public IEnumerable<LejerDTO> GetLejereByEjendom(Guid ejendomId)
+        {
+            var model = _getLejerUseCase.GetLejereByEjendom(new GetLejerRequest { EjendomId = ejendomId });
+            var dto = new List<LejerDTO>();
+            model.ForEach(a => dto.Add(new LejerDTO
+            {
+                Id = a.Id,
+                LejeperiodeStart = a.LejeperiodeStart,
+                LejeperiodeSlut = a.LejeperiodeSlut,
+                LejemaalId = a.Lejemaal.Id
+            }));
+            return dto;
+        }
+
 
         // POST api/<LejerController>
         [HttpPost]
@@ -43,15 +64,10 @@ namespace BeboerWeb.API.Controllers
         }
 
         // PUT api/<LejerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromBody] LejerDTO dto)
         {
-        }
-
-        // DELETE api/<LejerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            _updateLejerUseCase.UpdateLejer(new UpdateLejerRequest(dto.Id, dto.LejeperiodeStart,dto.LejeperiodeSlut,dto.LejemaalId));
         }
     }
 }
