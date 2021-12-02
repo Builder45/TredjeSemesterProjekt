@@ -1,0 +1,54 @@
+﻿@model LokaleEjendommeViewModel
+@{
+	Layout = "../_BALayout.cshtml";
+    ViewData["Name"] = "Create";
+}
+
+<h1>Opret et nyt lokale</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span asp-validation-for="Lokale.Adresse" class="text-danger"></span>
+                <input asp-for="Lokale.Adresse" class="form-control"/>
+                <br/>
+                <span asp-validation-for="Lokale.Etage" class="text-danger"></span>
+                <input asp-for="Lokale.Etage" class="form-control"/>
+                <br/>
+                <span asp-validation-for="Lokale.Areal" class="text-danger"></span>
+                <input asp-for="Lokale.Areal" class="form-control"/>
+                <br/>
+                <span asp-validation-for="Lokale.Timepris" class="text-danger"></span>
+                <input asp-for="Lokale.Timepris" class="form-control"/>
+                <br/>
+                <input asp-for="Lokale.Koekken" class="form-check-input">
+                <label asp-for="Lokale.Koekken" class="control-label"></label>
+                <input asp-for="Lokale.Badevaerelse" class="form-check-input">
+                <label asp-for="Lokale.Badevaerelse" class="control-label"></label>
+                <br/>
+                <br/>
+                <label>Tilknyt til ejendom:</label>
+                <select asp-for="Lokale.EjendomId" class="form-select">
+                    @foreach (var ejendom in Model.Ejendomme)
+                    {
+                        <option value="@ejendom.Id">@ejendom.Adresse, @ejendom.Postnr @ejendom.By</option>
+                    }
+                </select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Opret" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="Index">Tilbage til oversigt</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

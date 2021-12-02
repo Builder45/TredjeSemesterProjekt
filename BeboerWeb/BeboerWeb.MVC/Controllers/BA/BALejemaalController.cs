@@ -41,16 +41,10 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Index.cshtml", model);
         }
 
-        //[Route("detaljer")]
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         //[Route("opret")]
         public async Task<ActionResult> Create()
         {
-            var model = new ComboViewModel();
+            var model = new LejemaalEjendommeViewModel();
             model.Ejendomme = new List<EjendomViewModel>();
 
             var dtos = await _ejendomService.GetEjendommeAsync();
@@ -66,7 +60,7 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ComboViewModel model)
+        public async Task<ActionResult> Create(LejemaalEjendommeViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +75,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         //[Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var model = new ComboViewModel();
+            var model = new LejemaalEjendommeViewModel();
             var lejemaalDto = await _lejemaalService.GetLejemaalByLejemaalIdAsync(id);
 
             model.Lejemaal = new LejemaalViewModel();
@@ -101,7 +95,7 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ComboViewModel model)
+        public async Task<ActionResult> Edit(LejemaalEjendommeViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -111,26 +105,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             }
 
             return View($"{viewPath}/Edit.cshtml");
-        }
-
-        //[Route("slet")]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

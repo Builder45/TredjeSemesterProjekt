@@ -2,7 +2,7 @@
 
 namespace BeboerWeb.MVC.Models
 {
-    public class ComboViewModel
+    public class LejemaalEjendommeViewModel
     {
         public LejemaalViewModel Lejemaal { get; set; }
         public List<EjendomViewModel> Ejendomme { get; set;}

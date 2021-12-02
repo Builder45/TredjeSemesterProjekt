@@ -1,56 +1,100 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BeboerWeb.API.Contract;
+using BeboerWeb.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
     public class BALokaleController : Controller
     {
-        public ActionResult Index()
+        private readonly ILokaleService _lokaleService;
+        private readonly IEjendomService _ejendomService;
+
+        private readonly string viewPath = "Views/Dashboard/BA/Lokale";
+
+        public BALokaleController(ILokaleService lokaleService, IEjendomService ejendomService)
         {
-            return View();
+            _lokaleService = lokaleService;
+            _ejendomService = ejendomService;
         }
 
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var dtos = await _lokaleService.GetLokalerAsync();
+            var dtosInOrder = dtos.OrderBy(l => l.EjendomId).ThenBy(l => l.Adresse);
+            var model = new List<LokaleViewModel>();
+            foreach (var dto in dtosInOrder)
+            {
+                var lokale = new LokaleViewModel();
+                lokale.AddDataFromDto(dto);
+                model.Add(lokale);
+            }
+            return View($"{viewPath}/Index.cshtml", model);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new LokaleEjendommeViewModel
+            {
+                Ejendomme = new List<EjendomViewModel>()
+            };
+
+            var dtos = await _ejendomService.GetEjendommeAsync();
+            foreach (var dto in dtos)
+            {
+                var ejendom = new EjendomViewModel();
+                ejendom.AddDataFromDto(dto);
+                model.Ejendomme.Add(ejendom);
+            }
+
+            return View($"{viewPath}/Create.cshtml", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(LokaleEjendommeViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
+                var lejemaal = model.GetLokaleDTO();
+                await _lokaleService.CreateLokaleAsync(lejemaal);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View($"{viewPath}/Create.cshtml");
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            var model = new LokaleEjendommeViewModel();
+            var lokaleDto = await _lokaleService.GetLokaleAsync(id);
+
+            model.Lokale = new LokaleViewModel();
+            model.Lokale.AddDataFromDto(lokaleDto);
+
+            model.Ejendomme = new List<EjendomViewModel>();
+            var dtos = await _ejendomService.GetEjendommeAsync();
+            foreach (var dto in dtos)
+            {
+                var ejendom = new EjendomViewModel();
+                ejendom.AddDataFromDto(dto);
+                model.Ejendomme.Add(ejendom);
+            }
+
+            return View($"{viewPath}/Edit.cshtml", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(LokaleEjendommeViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
+                var lejemaal = model.GetLokaleDTO();
+                await _lokaleService.UpdateLokaleAsync(lejemaal);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View($"{viewPath}/Edit.cshtml");
         }
     }
 }

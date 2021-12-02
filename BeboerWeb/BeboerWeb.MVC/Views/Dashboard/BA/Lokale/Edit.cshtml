@@ -1,0 +1,60 @@
+﻿@model LokaleEjendommeViewModel
+
+@{
+    ViewData["Name"] = "Edit";
+    Layout = "../_BALayout.cshtml";
+}
+
+<h1>Redigering af lokale</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Lokale.Id"/>
+            <div class="form-group">
+                <label asp-for="Lokale.Adresse" class="control-label"></label>
+                <span asp-validation-for="Lokale.Adresse" class="text-danger"></span>
+                <input asp-for="Lokale.Adresse" class="form-control"/>
+                <br/>
+                <label asp-for="Lokale.Etage" class="control-label"></label>
+                <span asp-validation-for="Lokale.Etage" class="text-danger"></span>
+                <input asp-for="Lokale.Etage" class="form-control"/>
+                <br/>
+                <label asp-for="Lokale.Areal" class="control-label"></label>
+                <span asp-validation-for="Lokale.Areal" class="text-danger"></span>
+                <input asp-for="Lokale.Areal" class="form-control"/>
+                <br/>
+                <label asp-for="Lokale.Timepris" class="control-label"></label>
+                <span asp-validation-for="Lokale.Timepris" class="text-danger"></span>
+                <input asp-for="Lokale.Timepris" class="form-control"/>
+                <br/>
+                <input asp-for="Lokale.Koekken" class="form-check-input">
+                <label asp-for="Lokale.Koekken" class="control-label"></label>
+                <input asp-for="Lokale.Badevaerelse" class="form-check-input">
+                <label asp-for="Lokale.Badevaerelse" class="control-label"></label>
+                <br/>
+                <br/>
+                <label>Tilknyt til ejendom:</label>
+                <select asp-for="Lokale.EjendomId" class="form-select">
+                    @foreach (var ejendom in Model.Ejendomme)
+                    {
+                        <option value="@ejendom.Id">@ejendom.Postnr @ejendom.By - @ejendom.Adresse</option>
+                    }
+                </select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Gem" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="Index">Tilbage til oversigt</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

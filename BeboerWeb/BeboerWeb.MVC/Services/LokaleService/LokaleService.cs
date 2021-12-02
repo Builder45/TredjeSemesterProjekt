@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
 using Microsoft.Extensions.Options;
 

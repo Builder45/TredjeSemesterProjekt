@@ -1,0 +1,65 @@
+﻿@model List<LokaleViewModel>
+@{
+    ViewData["Name"] = "Index";
+	Layout = "../_BALayout.cshtml";
+}
+
+<h1>Oversigt over lokaler</h1>
+<br/>
+<a asp-action="Create">
+    <input type="button" value="Opret lokale" class="btn btn-primary" />
+</a>
+<br/>
+<table class="table">
+	<thead>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Adresse)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Etage)
+		</th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Areal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Koekken)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Badevaerelse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Timepris)
+        </th>	
+        <th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model) {
+		<tr>
+            <td>
+                @Html.DisplayFor(modelitem => item.Adresse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Etage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Areal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Koekken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Badevaerelse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Timepris)
+            </td>	
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Se bookinger</a> 
+            </td>
+        </tr>
+	}
+	</tbody>
+</table>
