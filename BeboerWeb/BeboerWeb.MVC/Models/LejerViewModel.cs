@@ -14,12 +14,15 @@ namespace BeboerWeb.MVC.Models
         public DateTime LejeperiodeSlut { get; set; }
         public Guid LejemaalId { get; set; }
 
+        public List<Guid> PersonIds { get; set; } = new List<Guid>();
+
         public void AddDataFromDto(LejerDTO dto)
         {
             Id = dto.Id;
             LejeperiodeStart = dto.LejeperiodeStart;
             LejeperiodeSlut = dto.LejeperiodeSlut;
             LejemaalId = dto.LejemaalId;
+            PersonIds = dto.PersonIds;
         }
     }
 }

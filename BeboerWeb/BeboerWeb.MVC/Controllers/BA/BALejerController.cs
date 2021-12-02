@@ -32,7 +32,7 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         public ActionResult Create()
         {
-            return View();
+            return View($"{viewPath}/Create.cshtml");
         }
 
         [HttpPost]
