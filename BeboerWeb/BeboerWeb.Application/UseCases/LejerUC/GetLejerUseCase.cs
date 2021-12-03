@@ -19,7 +19,7 @@ namespace BeboerWeb.Application.UseCases.LejerUC
         }
         public Lejer GetLejer(GetLejerRequest command)
         {
-            throw new NotImplementedException();
+            return _repository.GetLejer(command.LejerId);
         }
 
         public List<Lejer> GetLejere()

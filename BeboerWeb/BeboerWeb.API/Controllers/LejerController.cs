@@ -24,34 +24,67 @@ namespace BeboerWeb.API.Controllers
         }
 
         // GET api/<LejerController>/5
+        [HttpGet("{id}")]
+        public LejerDTO GetLejer(Guid id)
+        {
+            var model = _getLejerUseCase.GetLejer(new GetLejerRequest {LejerId = id});
+
+            var dto = new LejerDTO
+            {
+                Id = model.Id, 
+                LejeperiodeStart = model.LejeperiodeStart, 
+                LejeperiodeSlut = model.LejeperiodeSlut,
+                LejemaalId = model.Lejemaal.Id,
+                LejerNavne = new List<string>()
+            };
+
+            foreach (var person in model.Personer)
+            {
+                dto.LejerNavne.Add($"{person.Fornavn} {person.Efternavn.Substring(0, 1)}.");
+            }
+
+            return dto;
+        }
+
+        // GET api/<LejerController>/5
         [HttpGet("Lejemaal/{lejemaalId}")]
         public IEnumerable<LejerDTO>  GetLejereByLejemaal(Guid lejemaalId)
         {
             var model = _getLejerUseCase.GetLejereByLejemaal(new GetLejerRequest {LejemaalId = lejemaalId });
-            var dto = new List<LejerDTO>();
-            model.ForEach(a => dto.Add(new LejerDTO
+            var dtos = new List<LejerDTO>();
+            model.ForEach(a => dtos.Add(new LejerDTO
             {
                 Id = a.Id,
                 LejeperiodeStart = a.LejeperiodeStart,
                 LejeperiodeSlut = a.LejeperiodeSlut,
-                LejemaalId = a.Lejemaal.Id
+                LejemaalId = a.Lejemaal.Id,
+                LejerNavne = new List<string>()
             }));
-            return dto;
+
+            for (int i = 0; i < model.Count; i++)
+            {
+                foreach (var person in model[i].Personer)
+                {
+                    dtos[i].LejerNavne.Add($"{person.Fornavn} {person.Efternavn.Substring(0, 1)}.");
+                }
+            }
+
+            return dtos;
         }
 
         [HttpGet("Ejendom/{ejendomId}")]
         public IEnumerable<LejerDTO> GetLejereByEjendom(Guid ejendomId)
         {
             var model = _getLejerUseCase.GetLejereByEjendom(new GetLejerRequest { EjendomId = ejendomId });
-            var dto = new List<LejerDTO>();
-            model.ForEach(a => dto.Add(new LejerDTO
+            var dtos = new List<LejerDTO>();
+            model.ForEach(a => dtos.Add(new LejerDTO
             {
                 Id = a.Id,
                 LejeperiodeStart = a.LejeperiodeStart,
                 LejeperiodeSlut = a.LejeperiodeSlut,
                 LejemaalId = a.Lejemaal.Id
             }));
-            return dto;
+            return dtos;
         }
 
 

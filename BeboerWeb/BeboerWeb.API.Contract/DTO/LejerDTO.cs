@@ -13,5 +13,6 @@ namespace BeboerWeb.API.Contract.DTO
         public DateTime LejeperiodeSlut { get; set; }
         public Guid LejemaalId { get; set; }
         public List<Guid> PersonIds { get; set; } = new List<Guid>();
+        public List<string> LejerNavne { get; set; }
     }
 }

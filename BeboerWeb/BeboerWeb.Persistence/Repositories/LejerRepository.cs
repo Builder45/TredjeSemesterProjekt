@@ -15,21 +15,35 @@ namespace BeboerWeb.Persistence.Repositories
 
         public Lejer GetLejer(Guid id)
         {
-            return _db.Lejer.Include(l => l.Lejemaal).First(l => l.Id == id);
+            return _db.Lejer
+                .Include(l => l.Lejemaal)
+                .Include(l => l.Personer)
+                .First(l => l.Id == id);
         }
 
         public List<Lejer> GetLejere()
         {
-            return _db.Lejer.Include(a => a.Lejemaal).ToList();
+            return _db.Lejer
+                .Include(a => a.Lejemaal)
+                .Include(l => l.Personer)
+                .ToList();
         }
 
         public List<Lejer> GetLejereByLejemaal(Guid lejemaalId)
         {
-            return _db.Lejer.Include(a => a.Lejemaal).Where(l => l.Lejemaal.Id == lejemaalId).ToList();
+            return _db.Lejer
+                .Include(a => a.Lejemaal)
+                .Include(l => l.Personer)
+                .Where(l => l.Lejemaal.Id == lejemaalId)
+                .ToList();
         }
         public List<Lejer> GetLejereByEjendom(Guid ejendomId)
         {
-            return _db.Lejer.Include(a => a.Lejemaal).Where(l => l.Lejemaal.Ejendom.Id == ejendomId).ToList();
+            return _db.Lejer
+                .Include(a => a.Lejemaal)
+                .Include(l => l.Personer)
+                .Where(l => l.Lejemaal.Ejendom.Id == ejendomId)
+                .ToList();
         }
         public Guid CreateLejer(Lejer lejer)
         {
