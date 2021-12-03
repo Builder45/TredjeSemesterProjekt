@@ -1,4 +1,4 @@
-﻿@model LejerViewModel
+﻿@model LejerBrugerViewModel
 @{
 	Layout = "../_BALayout.cshtml";
     ViewData["Name"] = "Create";
@@ -10,13 +10,21 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Lejer.LejemaalId" />
             <div class="form-group">
-                <span asp-validation-for="LejeperiodeStart" class="text-danger"></span>
-                <input asp-for="LejeperiodeStart" type="date" class="form-control"/>
+                <label asp-for="Lejer.LejeperiodeStart" class="form-label"></label>
+                <input asp-for="Lejer.LejeperiodeStart" type="date" class="form-control" value="2021-01-01"/>
                 <br/>
-                <span asp-validation-for="LejeperiodeSlut" class="text-danger"></span>
-                <input asp-for="LejeperiodeSlut" type="date" class="form-control"/>
+                <label asp-for="Lejer.LejeperiodeSlut" class="form-label"></label>
+                <input asp-for="Lejer.LejeperiodeSlut" type="date" class="form-control" value="2021-01-01"/>
                 <br/>
+                <select asp-for="Lejer.PersonIds" class="mdb-select md-form">
+                    <option disabled selected>Vælg en bruger</option>
+                    @foreach (var bruger in Model.Brugere)
+                    {
+                        <option value="@bruger.Id">@bruger.Fornavn @bruger.Efternavn</option>
+                    }
+                </select>
             </div>
             <br/>
             <div class="form-group">
@@ -27,9 +35,13 @@
 </div>
 <br/>
 <div>
-    <a asp-action="Index">Tilbage til oversigt</a>
+    <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@Model.Lejer.LejemaalId">Tilbage til oversigt.</a>
 </div>
-
+<script>
+    $(document).ready(function() {
+        $('.mdb-select').materialSelect();
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
