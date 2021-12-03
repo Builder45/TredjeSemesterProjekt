@@ -28,8 +28,8 @@ namespace BeboerWeb.MVC.Controllers
         [Authorize]
         public async Task<ActionResult> Index()
         {
-            var view = CheckRole();
-            return await view;
+            var roleRelevantView = CheckRole();
+            return await roleRelevantView;
         }
 
         // GET: BrugerController/Details/5
