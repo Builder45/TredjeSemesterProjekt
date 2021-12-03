@@ -1,0 +1,35 @@
+﻿@model List<LejerViewModel>
+@{
+    ViewData["Name"] = "Index";
+    Layout = "../_LejerLayout.cshtml";
+}
+
+<h1>Lejere ved ...</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LejeperiodeStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LejeperiodeSlut)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelitem => item.LejeperiodeStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.LejeperiodeSlut)
+            </td>
+            <td>
+                <a asp-controller="Lejer" asp-action="IndexByLejemaal" asp-route-id="@item.Id">Se lejemål</a> 
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

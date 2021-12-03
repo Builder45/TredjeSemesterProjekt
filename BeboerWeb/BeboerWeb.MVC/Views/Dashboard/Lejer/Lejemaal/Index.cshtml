@@ -1,0 +1,59 @@
+﻿@model List<LejemaalViewModel>
+@{
+    ViewData["Name"] = "Index";
+    Layout = "../_LejerLayout.cshtml";
+}
+
+<h1>Oversigt over lejemålet</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Adresse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Etage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Husleje)
+        </th>		
+        <th>
+            @Html.DisplayNameFor(model => model.First().Areal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Koekken)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Badevaerelse)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelitem => item.Adresse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Etage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Husleje)
+            </td>		
+            <td>
+                @Html.DisplayFor(modelitem => item.Areal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Koekken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Badevaerelse)
+            </td>
+            <td>|
+                <a asp-controller="Lejer" asp-action="IndexByLejemaal" asp-route-id="@item.Id">Se lejere</a> 
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

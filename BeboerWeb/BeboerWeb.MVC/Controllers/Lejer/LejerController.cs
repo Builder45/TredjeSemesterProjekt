@@ -1,29 +1,29 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BeboerWeb.MVC.Controllers.VV.Lejer
+namespace BeboerWeb.MVC.Controllers.Lejer
 {
-    public class Lejer : Controller
+    public class LejerController : Controller
     {
-        // GET: Lejer
+        // GET: LejerController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Lejer/Details/5
+        // GET: LejerController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Lejer/Create
+        // GET: LejerController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Lejer/Create
+        // POST: LejerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +38,13 @@ namespace BeboerWeb.MVC.Controllers.VV.Lejer
             }
         }
 
-        // GET: Lejer/Edit/5
+        // GET: LejerController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Lejer/Edit/5
+        // POST: LejerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +59,13 @@ namespace BeboerWeb.MVC.Controllers.VV.Lejer
             }
         }
 
-        // GET: Lejer/Delete/5
+        // GET: LejerController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Lejer/Delete/5
+        // POST: LejerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
