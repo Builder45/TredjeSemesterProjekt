@@ -52,9 +52,8 @@ namespace BeboerWeb.API.Controllers
         [HttpGet("ByUser/{brugerId}")]
         public PersonDTO GetByUser(Guid brugerId)
         {
-            var isActive = _isActiveLejerUseCase.IsActiveLejer(new IsActiveLejerRequest(brugerId));
-
             var model = _getPersonUseCase.GetPersonByUser(new GetPersonByUserRequest { BrugerId = brugerId });
+            var isActive = _isActiveLejerUseCase.IsActiveLejer(new IsActiveLejerRequest(model.Id));
             var dto = new PersonDTO
             { Id = model.Id, Fornavn = model.Fornavn, Efternavn = model.Efternavn, Telefonnr = model.Telefonnr, BrugerId = model.BrugerId, IsActiveLejer = isActive };
 

@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections;
+using System.Linq;
+using System.Security.Claims;
+using BeboerWeb.API.Contract;
+using BeboerWeb.MVC.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BeboerWeb.MVC.Controllers
 {
@@ -9,30 +15,21 @@ namespace BeboerWeb.MVC.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-
-        public DashboardController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly IPersonService _personService;
+        private readonly ApplicationDbContext _userDb;
+        public DashboardController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IPersonService personService, ApplicationDbContext userDb)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _personService = personService;
+            _userDb = userDb;
         }
 
         [Authorize]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            if (User.HasClaim("IsBA", "Yes"))
-            {
-                return View("BA/Index");
-            }
-            if (User.HasClaim("IsVV", "Yes"))
-            {
-                return View("VV/Index");
-            }
-            if (User.HasClaim("IsLejer", "Yes"))
-            {
-                return View("Lejer/Index");
-            }
-
-            return View("Bruger/Index");
+            var view = CheckRole();
+            return await view;
         }
 
         // GET: BrugerController/Details/5
@@ -102,6 +99,48 @@ namespace BeboerWeb.MVC.Controllers
             {
                 return View();
             }
+        }
+
+
+
+
+        private async Task<ActionResult> CheckRole()
+        {
+            if (User.HasClaim("IsBA", "Yes"))
+            {
+                return View("BA/Index");
+            }
+
+            var userId = _userManager.GetUserId(User);
+            var user = await _userDb.Users.FindAsync(userId);
+
+            var userIsLejerClaim = _userDb.UserClaims
+                .Any(c => c.UserId == userId.ToString() && c.ClaimType == "IsLejer" && c.ClaimValue == "Yes");
+
+            var person = await _personService.GetPersonByUserIdAsync(Guid.Parse(userId));
+            if (person.IsActiveLejer == true)
+            {
+                if (userIsLejerClaim)
+                {
+                    return View("Lejer/Index");
+                }
+                else
+                {
+                    var claim = new Claim("IsLejer", "Yes");
+                    await _userManager.AddClaimAsync(user, claim);
+                    return View("Lejer/Index");
+                }
+            }
+            if (person.IsActiveLejer == false)
+            {
+                if (userIsLejerClaim)
+                {
+                    var claim = new Claim("IsLejer", "Yes");
+                    await _userManager.RemoveClaimAsync(user, claim);
+                }
+            }
+
+            return View("Bruger/Index");
         }
     }
 }
