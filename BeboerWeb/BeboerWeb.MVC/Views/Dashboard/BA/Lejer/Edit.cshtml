@@ -1,35 +1,44 @@
 ﻿@model LejerBrugerViewModel
+
 @{
-	Layout = "../_BALayout.cshtml";
-    ViewData["Name"] = "Create";
+    ViewData["Name"] = "Edit";
+    Layout = "../_BALayout.cshtml";
 }
 
-<h1>Opret en ny lejer</h1>
+<h1>Redigering af lejemål</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Lejer.LejemaalId" />
+            <input type="hidden" asp-for="Lejer.Id"/>
+            <input type="hidden" asp-for="Lejer.LejemaalId"/>
             <div class="form-group">
                 <label asp-for="Lejer.LejeperiodeStart" class="form-label"></label>
-                <input asp-for="Lejer.LejeperiodeStart" type="date" class="form-control" value="2021-01-01"/>
+                <input asp-for="Lejer.LejeperiodeStart" type="date" class="form-control"/>
                 <br/>
                 <label asp-for="Lejer.LejeperiodeSlut" class="form-label"></label>
-                <input asp-for="Lejer.LejeperiodeSlut" type="date" class="form-control" value="2021-01-01"/>
+                <input asp-for="Lejer.LejeperiodeSlut" type="date" class="form-control"/>
                 <br/>
                 <label asp-for="Lejer.PersonIds" class="form-label"></label>
                 <select multiple asp-for="Lejer.PersonIds" class="mdb-select md-form" style="width: 100%">
                     @foreach (var bruger in Model.Brugere)
                     {
-                        <option value="@bruger.Id">@bruger.Email (@bruger.Fornavn @bruger.Efternavn)</option>
+                        @if (Model.Lejer.PersonIds.Contains(bruger.Id))
+                        {
+                            <option selected value="@bruger.Id">@bruger.Email (@bruger.Fornavn @bruger.Efternavn)</option>
+                        }
+                        else
+                        {
+                            <option value="@bruger.Id">@bruger.Email (@bruger.Fornavn @bruger.Efternavn)</option>
+                        }
                     }
                 </select>
                 <br/>
             </div>
             <br/>
             <div class="form-group">
-                <input type="submit" value="Opret" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -38,11 +47,7 @@
 <div>
     <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@Model.Lejer.LejemaalId">Tilbage til oversigt.</a>
 </div>
-<script>
-    $(document).ready(function() {
-        $('.mdb-select').materialSelect();
-    });
-</script>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

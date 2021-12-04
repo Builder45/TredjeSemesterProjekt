@@ -28,7 +28,7 @@ namespace BeboerWeb.MVC.Services.LejerService
         public async Task<List<LejerDTO>> GetLejereByLejemaalAsync(Guid id) =>
             await _httpClient.GetFromJsonAsync<List<LejerDTO>>($"{_lejerServiceConfig.ServiceUrl}/Lejemaal/{id}");
 
-        public async Task<LejerDTO> GetLejer(Guid id) =>
+        public async Task<LejerDTO> GetLejerAsync(Guid id) =>
             await _httpClient.GetFromJsonAsync<LejerDTO>($"{_lejerServiceConfig.ServiceUrl}/{id}");
 
         public async Task CreateLejer(LejerDTO dto) =>

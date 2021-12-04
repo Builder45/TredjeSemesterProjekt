@@ -12,5 +12,6 @@ namespace BeboerWeb.Application.Persistence
         void UpdateLejer(Lejer lejer);
 
         void LinkLejerWithPerson(Guid lejerId, Guid personId);
+        void UnlinkLejerWithPersoner(Guid lejerId);
     }
 }

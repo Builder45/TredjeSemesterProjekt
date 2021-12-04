@@ -35,12 +35,11 @@ namespace BeboerWeb.API.Controllers
                 LejeperiodeStart = model.LejeperiodeStart, 
                 LejeperiodeSlut = model.LejeperiodeSlut,
                 LejemaalId = model.Lejemaal.Id,
-                LejerNavne = new List<string>()
             };
 
             foreach (var person in model.Personer)
             {
-                dto.LejerNavne.Add($"{person.Fornavn} {person.Efternavn.Substring(0, 1)}.");
+                dto.PersonIds.Add(person.Id);
             }
 
             return dto;
@@ -65,7 +64,7 @@ namespace BeboerWeb.API.Controllers
             {
                 foreach (var person in model[i].Personer)
                 {
-                    dtos[i].LejerNavne.Add($"{person.Fornavn} {person.Efternavn.Substring(0, 1)}.");
+                    dtos[i].LejerNavne.Add($"{person.Fornavn} {person.Efternavn.Substring(0, 1)}. ");
                 }
             }
 
@@ -100,7 +99,7 @@ namespace BeboerWeb.API.Controllers
         [HttpPut]
         public void Put([FromBody] LejerDTO dto)
         {
-            _updateLejerUseCase.UpdateLejer(new UpdateLejerRequest(dto.Id, dto.LejeperiodeStart,dto.LejeperiodeSlut,dto.LejemaalId));
+            _updateLejerUseCase.UpdateLejer(new UpdateLejerRequest(dto.Id, dto.LejeperiodeStart, dto.LejeperiodeSlut, dto.LejemaalId, dto.PersonIds));
         }
     }
 }

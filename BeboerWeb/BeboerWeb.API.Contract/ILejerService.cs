@@ -6,7 +6,7 @@ namespace BeboerWeb.API.Contract
     {
         Task<List<LejerDTO>> GetLejereByEjendomAsync(Guid id);
         Task<List<LejerDTO>> GetLejereByLejemaalAsync(Guid id);
-        Task<LejerDTO> GetLejer(Guid id);
+        Task<LejerDTO> GetLejerAsync(Guid id);
         Task CreateLejer(LejerDTO dto);
         Task UpdateLejerAsync(LejerDTO dto);
     }

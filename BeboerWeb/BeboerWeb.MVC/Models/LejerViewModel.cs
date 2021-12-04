@@ -17,6 +17,7 @@ namespace BeboerWeb.MVC.Models
 
         public Guid LejemaalId { get; set; }
 
+        [Display(Name = "Tilknyt personer som lejer/medlejere")]
         public List<Guid> PersonIds { get; set; } = new List<Guid>();
 
         [Display(Name = "Lejer(e)")]
@@ -30,7 +31,7 @@ namespace BeboerWeb.MVC.Models
             LejemaalId = dto.LejemaalId;
             PersonIds = dto.PersonIds;
 
-            if (dto.LejerNavne.Count == 0) return;
+            if (dto.LejerNavne == null) return;
             LejerNavne.Remove("Tomgang");
             foreach (var navn in dto.LejerNavne)
             {

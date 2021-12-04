@@ -61,6 +61,17 @@ namespace BeboerWeb.Persistence.Repositories
             _db.SaveChanges();
         }
 
+        public void UnlinkLejerWithPersoner(Guid lejerId)
+        {
+            var lejer = _db.Lejer
+                .Include(l => l.Personer)
+                .First(l => l.Id == lejerId);
+            lejer.Personer.Clear();
+
+            _db.Update(lejer);
+            _db.SaveChanges();
+        }
+
         public void UpdateLejer(Lejer lejer)
         {
             _db.Update(lejer);

@@ -2,29 +2,37 @@
 using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Models;
+using BeboerWeb.MVC.Services.LejemaalService;
 using BeboerWeb.MVC.Services.PersonService;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
     public class BALejerController : Controller
     {
         private readonly ILejerService _lejerService;
+        private readonly ILejemaalService _lejemaalService;
         private readonly IPersonService _personService;
-        private readonly ApplicationDbContext _userDb;
+        private readonly UserManager<IdentityUser> _userManager;
 
         private readonly string viewPath = "Views/Dashboard/BA/Lejer";
 
-        public BALejerController(ILejerService lejerService, IPersonService personService, ApplicationDbContext userDb)
+        public BALejerController(ILejerService lejerService, IPersonService personService, UserManager<IdentityUser> userManager, ILejemaalService lejemaalService)
         {
             _lejerService = lejerService;
+            _lejemaalService = lejemaalService;
             _personService = personService;
-            _userDb = userDb;
+            _userManager = userManager;
         }
 
         public async Task<ActionResult> IndexByLejemaal(Guid id)
         {
+            var lejemaal = await _lejemaalService.GetLejemaalByLejemaalIdAsync(id);
+            ViewBag.LejemaalInfo = $"{lejemaal.Adresse} ({lejemaal.Etage})";
+
             var dtos = await _lejerService.GetLejereByLejemaalAsync(id);
             if (dtos.Count == 0)
             {
@@ -47,11 +55,15 @@ namespace BeboerWeb.MVC.Controllers.BA
             var model = new LejerBrugerViewModel();
             var dtos = await _personService.GetPersonsAsync();
             var brugerModels = new List<BrugerViewModel>();
+            
 
             foreach (var dto in dtos)
             {
                 var brugerModel = new BrugerViewModel();
                 brugerModel.AddDataFromDTO(dto);
+                
+                var tempIdentity = await _userManager.FindByIdAsync(dto.BrugerId.ToString());
+                brugerModel.Email = await _userManager.GetEmailAsync(tempIdentity);
                 brugerModels.Add(brugerModel);
             }
 
@@ -63,44 +75,66 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(LejerViewModel model)
+        public async Task<ActionResult> Create(LejerBrugerViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var lejer = new LejerDTO()
                 {
-                    LejeperiodeStart = model.LejeperiodeStart, 
-                    LejeperiodeSlut = model.LejeperiodeSlut,
-                    LejemaalId = model.LejemaalId
+                    LejeperiodeStart = model.Lejer.LejeperiodeStart, 
+                    LejeperiodeSlut = model.Lejer.LejeperiodeSlut,
+                    LejemaalId = model.Lejer.LejemaalId,
+                    PersonIds = model.Lejer.PersonIds
                 };
                 await _lejerService.CreateLejer(lejer);
 
                 //var indexModel = new List<LejerViewModel>();
                 //indexModel.Add(model);
                 //return View($"{viewPath}/Index.cshtml", indexModel);
-                return RedirectToAction("IndexByLejemaal", new {id = model.LejemaalId});
+                return RedirectToAction("IndexByLejemaal", new {id = model.Lejer.LejemaalId });
             }
 
             return View($"{viewPath}/Create.cshtml");
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            var model = new LejerBrugerViewModel();
+            var lejerDTO = await _lejerService.GetLejerAsync(id);
+
+            model.Lejer = new LejerViewModel();
+            model.Lejer.AddDataFromDto(lejerDTO);
+
+            var dtos = await _personService.GetPersonsAsync();
+            var brugerModels = new List<BrugerViewModel>();
+
+            foreach (var dto in dtos)
+            {
+                var brugerModel = new BrugerViewModel();
+                brugerModel.AddDataFromDTO(dto);
+
+                var tempIdentity = await _userManager.FindByIdAsync(dto.BrugerId.ToString());
+                brugerModel.Email = await _userManager.GetEmailAsync(tempIdentity);
+                brugerModels.Add(brugerModel);
+            }
+
+            model.Brugere = brugerModels;
+
+            return View($"{viewPath}/Edit.cshtml", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(LejerBrugerViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var lejer = model.GetLejerDTO();
+                await _lejerService.UpdateLejerAsync(lejer);
+                return RedirectToAction("IndexByLejemaal", new { id = model.Lejer.LejemaalId });
             }
-            catch
-            {
-                return View();
-            }
+
+            return View($"{viewPath}/Edit.cshtml");
         }
     }
 }
