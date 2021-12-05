@@ -18,9 +18,20 @@ namespace BeboerWeb.Domain.Models
 
         public Lejer(DateTime lejeperiodeStart, DateTime lejeperiodeSlut, Lejemaal lejemaal)
         {
+            if (lejeperiodeStart >= lejeperiodeSlut) throw new ArgumentException("Slutsdatoen skal være senere end startsdatoen");
+
             LejeperiodeStart = lejeperiodeStart;
             LejeperiodeSlut = lejeperiodeSlut;
             Lejemaal = lejemaal;
+        }
+
+        public bool IsOverlappingWith(Lejer otherLejer)
+        {
+            if (LejeperiodeStart >= otherLejer.LejeperiodeSlut)
+            {
+                return false;
+            }
+            return LejeperiodeSlut > otherLejer.LejeperiodeStart;
         }
     }
 }
