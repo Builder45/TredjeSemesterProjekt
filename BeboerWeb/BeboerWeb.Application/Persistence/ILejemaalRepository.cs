@@ -11,6 +11,8 @@ namespace BeboerWeb.Application.Persistence
     {
         public Lejemaal GetLejemaal(Guid id);
 
+        public Lejemaal GetLejemaalWithLejere(Guid lejemaalId, Guid brugerId);
+
         public List<Lejemaal> GetLejemaalsByEjendom(Guid EjendomId);
 
         public List<Lejemaal> GetLejemaals();

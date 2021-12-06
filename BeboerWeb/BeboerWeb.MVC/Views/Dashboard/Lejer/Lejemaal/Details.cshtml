@@ -1,4 +1,4 @@
-﻿@model List<LejemaalViewModel>
+﻿@model List<LejemaalLejerViewModel>
 
 @{
     ViewData["Name"] = "Details";
@@ -45,19 +45,24 @@
 <div class="myDiv">
 @foreach (var item in Model)
 {
-    <button type="button" class ="collapsible">@item.Adresse</button>
+    <button type="button" class ="collapsible">@item.Lejemaal.Adresse</button>
     <div class="content">
         <p>
-            Etage : @item.Etage
+            Etage : @item.Lejemaal.Etage
         </p>
         <p>
-            Husleje : @item.Husleje
+            Husleje : @item.Lejemaal.Husleje
         </p>
         <p>
-            Areal : @item.Areal
+            Areal : @item.Lejemaal.Areal
         </p>
-        @if (item.Koekken == true) {<p>Køkken : Ja</p>} else{<p>Køkken : Nej</p>}
-        @if (item.Badevaerelse == true){<p>Badeværelse : Ja</p>}else{<p>Badeværelse : Nej</p>}
+        @if (item.Lejemaal.Koekken == true) {<p>Køkken : Ja</p>} else{<p>Køkken : Nej</p>}
+        @if (item.Lejemaal.Badevaerelse == true){<p>Badeværelse : Ja</p>}else{<p>Badeværelse : Nej</p>}
+        
+        @foreach (var lejer in item.Lejere)
+        {
+            <p>Lejeperiode start : @lejer.LejeperiodeStart</p>
+        }
     </div>
 }
 </div>

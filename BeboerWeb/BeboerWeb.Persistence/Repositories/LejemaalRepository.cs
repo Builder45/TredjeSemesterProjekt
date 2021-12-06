@@ -32,11 +32,17 @@ namespace BeboerWeb.Persistence.Repositories
 
         public List<Lejemaal> GetLejemaals()
         {
-            //return _db.Lejemaal.ToList();
             return _db.Lejemaal.Include(a => a.Ejendom).ToList();
         }
 
+        public Lejemaal GetLejemaalWithLejere(Guid lejemaalId, Guid brugerId)
+        {
+            return _db.Lejemaal
+                .Include(a => a.Lejere.Where(f=>f.Personer.Any(p=>p.BrugerId==brugerId)))
+                .Include(e=>e.Ejendom)
+                .First(a => a.Id == lejemaalId);
 
+        }
         public void CreateLejemaal(Lejemaal lejemaal)
         {
             _db.Add(lejemaal);
@@ -45,12 +51,6 @@ namespace BeboerWeb.Persistence.Repositories
 
         public void UpdateLejemaal(Lejemaal lejemaal)
         {
-            //var existingLejemaal = _db.Lejemaal
-            //    .Where(p => p.Id == lejemaal.Id)
-            //    .Include(a => a.Ejendom);
-
-            //_db.Entry(existingLejemaal).CurrentValues.SetValues(lejemaal);
-
             if (!lejemaalExists(lejemaal))
                 throw new ArgumentException("Lejemaal with given ID does not exist");
             _db.Lejemaal.Update(lejemaal);

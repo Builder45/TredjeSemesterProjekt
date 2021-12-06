@@ -45,11 +45,11 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
-        [HttpGet("Person/{personId}")]
+        [HttpGet("Bruger/{brugerId}")]
 
-        public IEnumerable<LejerDTO> GetLejereByPerson(Guid personId)
+        public IEnumerable<LejerDTO> GetLejereByPerson(Guid brugerId)
         {
-            var model = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest {PersonId = personId});
+            var model = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest {BrugerId = brugerId});
             var dtos = new List<LejerDTO>();
             model.ForEach(a =>dtos.Add(new LejerDTO
             {

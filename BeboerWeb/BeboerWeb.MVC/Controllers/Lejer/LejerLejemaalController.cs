@@ -28,13 +28,15 @@ namespace BeboerWeb.MVC.Controllers.Lejer
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var dtos = await _lejemaalService.GetLejerLejemaal(Guid.Parse(userId));
             
-            var model = new List<LejemaalViewModel>();
+            var model = new List<LejemaalLejerViewModel>();
             foreach (var dto in dtos)
             {
-                var lejemaal = new LejemaalViewModel();
+                var lejemaal = new LejemaalLejerViewModel();
                 lejemaal.AddDataFromDto(dto);
                 model.Add(lejemaal);
             }
+
+
 
             return View($"{viewPath}/Details.cshtml", model);
         }

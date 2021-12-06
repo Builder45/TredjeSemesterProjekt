@@ -84,26 +84,37 @@ namespace BeboerWeb.API.Controllers
         [HttpGet("Lejer/{id}")]
         public IEnumerable<LejemaalDTO> GetLejerLejemaal(Guid id)
         {
-            var lejer = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest { BrugerId = id });
-            var model = new List<Lejemaal>();
-            //var lejer = _getLejerUseCase.GetLejer(new GetLejerRequest {LejerId = id});
-            foreach (var item in lejer)
-            {
-                model.Add(_getLejemaalUseCase.GetLejemaal(new GetLejemaalRequest { LejemaalId = item.Lejemaal.Id }));
-            }
+            var lejere = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest { BrugerId = id });
+            var models = new List<Lejemaal>();
 
-            var dtos = new List<LejemaalDTO>();
-            model.ForEach(a => dtos.Add(new LejemaalDTO
+            var lejerInOrderByLejeperiode = lejere.OrderByDescending(l => l.LejeperiodeStart);
+
+            foreach (var item in lejerInOrderByLejeperiode)
             {
-                Id = a.Id,
-                Adresse = a.Adresse,
-                Etage = a.Etage,
-                Husleje = a.Husleje,
-                Areal = a.Areal,
-                Koekken = a.Koekken,
-                Badevaerelse = a.Badevaerelse,
-                EjendomId = a.Ejendom.Id
-            }));
+                models.Add(_getLejemaalUseCase.GetLejemaalWithLejere(new GetLejemaalRequest { LejemaalId = item.Lejemaal.Id , BrugerId = id}));
+            }
+            var dtos = new List<LejemaalDTO>();
+
+            foreach (var model in models)
+            {
+                var dto = new LejemaalDTO
+                {
+                    Id = model.Id, Adresse = model.Adresse, Etage = model.Etage, Husleje = model.Husleje,
+                    Areal = model.Areal, Koekken = model.Koekken, Badevaerelse = model.Badevaerelse,
+                    EjendomId = model.Ejendom.Id
+                };
+
+                var lejerDtos = new List<LejerDTO>();
+                model.Lejere.ForEach(e=>lejerDtos.Add(new LejerDTO
+                    {
+                    Id =e.Id,
+                    LejeperiodeStart = e.LejeperiodeStart,
+                    LejeperiodeSlut = e.LejeperiodeSlut,
+                    LejemaalId = e.Lejemaal.Id
+                    }));
+                dto.Lejere = lejerDtos;
+                dtos.Add(dto);
+            }
             return dtos;
         }
 

@@ -31,6 +31,10 @@ namespace BeboerWeb.Application.UseCases.LejemaalUC
             return _repository.GetLejemaalsByEjendom(command.EjendomId);
         }
 
+        public Lejemaal GetLejemaalWithLejere(GetLejemaalRequest command)
+        {
+            return _repository.GetLejemaalWithLejere(command.LejemaalId, command.BrugerId);
+        }
 
         public List<Lejemaal> GetLejemaals()
         {

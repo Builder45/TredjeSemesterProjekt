@@ -12,6 +12,8 @@ namespace BeboerWeb.Application.UseCases.LejemaalUC.Interfaces
     {
         Lejemaal GetLejemaal(GetLejemaalRequest command);
 
+        Lejemaal GetLejemaalWithLejere(GetLejemaalRequest command);
+
         List<Lejemaal> GetLejemaalsInEjendom(GetLejemaalRequest command);
 
         List<Lejemaal> GetLejemaals();

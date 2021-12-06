@@ -16,5 +16,6 @@ namespace BeboerWeb.API.Contract.DTO
         public bool Koekken { get; set; }
         public bool Badevaerelse { get; set; }
         public Guid EjendomId { get; set; }
+        public List<LejerDTO> Lejere { get; set; }
     }
 }
