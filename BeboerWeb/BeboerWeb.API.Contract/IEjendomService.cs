@@ -10,6 +10,7 @@ namespace BeboerWeb.API.Contract
     public interface IEjendomService
     {
         Task<List<EjendomDTO>> GetEjendommeAsync();
+        Task<List<EjendomDTO>> GetEjendommeWithLokalerAsync();
 
         Task <EjendomDTO> GetEjendomByIdAsync(Guid id);
 

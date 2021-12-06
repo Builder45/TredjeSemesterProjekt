@@ -26,19 +26,18 @@ namespace BeboerWeb.MVC.Services.EjendomService
             _httpClient.BaseAddress = new Uri(options.Value.BaseUrl);
         }
         public async Task<List<EjendomDTO>> GetEjendommeAsync() =>
-     await _httpClient.GetFromJsonAsync<List<EjendomDTO>>(
-         _ejendomServiceConfig.ServiceUrl);
+            await _httpClient.GetFromJsonAsync<List<EjendomDTO>>(_ejendomServiceConfig.ServiceUrl);
+
+        public async Task<List<EjendomDTO>> GetEjendommeWithLokalerAsync() =>
+            await _httpClient.GetFromJsonAsync<List<EjendomDTO>>(_ejendomServiceConfig.ServiceUrl + "/Lokaler");
 
         public async Task<EjendomDTO> GetEjendomByIdAsync(Guid Id) =>
-     await _httpClient.GetFromJsonAsync<EjendomDTO>(
-         _ejendomServiceConfig.ServiceUrl+$"/{Id}");
+            await _httpClient.GetFromJsonAsync<EjendomDTO>(_ejendomServiceConfig.ServiceUrl+$"/{Id}");
 
 
 
-        public async Task CreateEjendomAsync(EjendomDTO ejendom)
-        {
+        public async Task CreateEjendomAsync(EjendomDTO ejendom) =>
             await _httpClient.PostAsJsonAsync(_ejendomServiceConfig.ServiceUrl, ejendom);
-        }
 
         public async Task UpdateEjendomAsync(EjendomDTO ejendom) =>
             await _httpClient.PutAsJsonAsync(_ejendomServiceConfig.ServiceUrl, ejendom);
