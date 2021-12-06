@@ -39,8 +39,6 @@ namespace BeboerWeb.API.Controllers
         {
             var models = _getEjendomUseCase.GetEjendommeWithLokaler();
             var dtos = new List<EjendomDTO>();
-            models.ForEach(e => dtos.Add(new EjendomDTO
-                { Id = e.Id, Adresse = e.Adresse, Postnr = e.Postnr, By = e.By}));
 
             foreach (var model in models)
             {
