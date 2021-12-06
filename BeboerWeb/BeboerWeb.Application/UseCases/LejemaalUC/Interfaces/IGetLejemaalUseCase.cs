@@ -16,5 +16,6 @@ namespace BeboerWeb.Application.UseCases.LejemaalUC.Interfaces
 
         List<Lejemaal> GetLejemaals();
 
+        
     }
 }

@@ -45,6 +45,23 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
+        [HttpGet("Person/{personId}")]
+
+        public IEnumerable<LejerDTO> GetLejereByPerson(Guid personId)
+        {
+            var model = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest {PersonId = personId});
+            var dtos = new List<LejerDTO>();
+            model.ForEach(a =>dtos.Add(new LejerDTO
+            {
+                Id = a.Id,
+                LejeperiodeStart = a.LejeperiodeStart,
+                LejeperiodeSlut = a.LejeperiodeSlut,
+                LejemaalId = a.Lejemaal.Id
+            }));
+            return dtos;
+        }
+
+
         // GET api/<LejerController>/5
         [HttpGet("Lejemaal/{lejemaalId}")]
         public IEnumerable<LejerDTO>  GetLejereByLejemaal(Guid lejemaalId)

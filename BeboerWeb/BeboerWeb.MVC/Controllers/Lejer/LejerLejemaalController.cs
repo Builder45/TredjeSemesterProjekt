@@ -1,7 +1,9 @@
-﻿using BeboerWeb.API.Contract;
+﻿using System.Security.Claims;
+using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace BeboerWeb.MVC.Controllers.Lejer
 {
@@ -9,22 +11,32 @@ namespace BeboerWeb.MVC.Controllers.Lejer
     {
         private readonly ILejemaalService _lejemaalService;
         private readonly IEjendomService _ejendomService;
-
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly string viewPath = "Views/Dashboard/Lejer/Lejemaal";
 
-        public LejerLejemaalController(ILejemaalService lejemaalService, IEjendomService ejendomService)
+        public LejerLejemaalController(ILejemaalService lejemaalService, IEjendomService ejendomService, UserManager<IdentityUser> userManager)
         {
             _lejemaalService = lejemaalService;
             _ejendomService = ejendomService;
+            _userManager = userManager;
         }
 
         //[Route("")]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> IndexByLejer()
         {
-            var dtos = await _lejemaalService.GetLejemaalAsync();
+            //var user = _userManager.GetUserIdAsync(HttpContext.User.);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var dtos = await _lejemaalService.GetLejerLejemaal(Guid.Parse(userId));
+            
             var model = new List<LejemaalViewModel>();
+            foreach (var dto in dtos)
+            {
+                var lejemaal = new LejemaalViewModel();
+                lejemaal.AddDataFromDto(dto);
+                model.Add(lejemaal);
+            }
 
-            return View($"{viewPath}/Index.cshtml", model);
+            return View($"{viewPath}/Details.cshtml", model);
         }
 
         // GET: LejerLejemaalController/Details/5

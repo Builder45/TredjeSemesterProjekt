@@ -11,6 +11,9 @@ namespace BeboerWeb.Application.Requests.Lejer
         public Guid LejerId { get; set; }
         public Guid LejemaalId { get; set; }
         public Guid EjendomId { get; set; }
+        public Guid PersonId { get; set; }
+        public Guid BrugerId { get; set; }
+
     }
 
 }

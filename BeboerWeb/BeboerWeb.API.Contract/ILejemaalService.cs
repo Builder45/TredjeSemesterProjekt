@@ -11,4 +11,6 @@ public interface ILejemaalService
     Task UpdateLejemaalAsync(LejemaalDTO lejemaal);
 
     public Task CreateLejemaal(LejemaalDTO dto);
+
+    Task<List<LejemaalDTO>> GetLejerLejemaal(Guid id);
 }

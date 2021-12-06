@@ -1,0 +1,80 @@
+﻿@model List<LejemaalViewModel>
+
+@{
+    ViewData["Name"] = "Details";
+    Layout = "../_LejerLayout.cshtml";
+}
+<style>
+    .container {
+        /*width: 80%;*/
+        height: 10%;
+        margin: auto;
+        padding: 10px;
+    }
+    .myDiv {
+        
+        background-color: white;    
+        display: block;
+        width: 50%;
+    }
+    .collapsible {
+        background-color: #777;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 22.5px;
+    }
+    .active, .collapsible:hover {
+        background-color: #555;
+    }
+    .content {
+        padding: 0 18px;
+        background-color: whitesmoke;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+</style>
+
+<h1>Detaljer om dit/dine lejemål</h1>
+<h1></h1>
+<div class="myDiv">
+@foreach (var item in Model)
+{
+    <button type="button" class ="collapsible">@item.Adresse</button>
+    <div class="content">
+        <p>
+            Etage : @item.Etage
+        </p>
+        <p>
+            Husleje : @item.Husleje
+        </p>
+        <p>
+            Areal : @item.Areal
+        </p>
+        @if (item.Koekken == true) {<p>Køkken : Ja</p>} else{<p>Køkken : Nej</p>}
+        @if (item.Badevaerelse == true){<p>Badeværelse : Ja</p>}else{<p>Badeværelse : Nej</p>}
+    </div>
+}
+</div>
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+</script>

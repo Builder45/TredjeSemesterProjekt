@@ -34,5 +34,8 @@ namespace BeboerWeb.MVC.Services.LejemaalService
 
         public async Task UpdateLejemaalAsync(LejemaalDTO dto) =>
             await _httpClient.PutAsJsonAsync(_lejemaalServiceConfig.ServiceUrl, dto);
+
+        public async Task<List<LejemaalDTO>> GetLejerLejemaal(Guid id) =>
+            await _httpClient.GetFromJsonAsync<List<LejemaalDTO>>(_lejemaalServiceConfig.ServiceUrl + $"/Lejer/{id}");
     }
 }

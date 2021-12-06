@@ -22,6 +22,11 @@ namespace BeboerWeb.Application.UseCases.LejerUC
             return _repository.GetLejer(command.LejerId);
         }
 
+        public List<Lejer> GetLejereByPerson(GetLejerRequest command)
+        {
+            return _repository.GetLejereByPerson(command.BrugerId);
+        }
+
         public List<Lejer> GetLejere()
         {
             throw new NotImplementedException();
@@ -36,5 +41,8 @@ namespace BeboerWeb.Application.UseCases.LejerUC
         {
             return _repository.GetLejereByLejemaal(command.LejemaalId);
         }
+
+        
+
     }
 }

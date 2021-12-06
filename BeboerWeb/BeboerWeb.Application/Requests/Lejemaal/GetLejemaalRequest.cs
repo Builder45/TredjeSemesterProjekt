@@ -11,5 +11,6 @@ namespace BeboerWeb.Application.Requests.Lejemaal
         public Guid LejemaalId { get; set; }
 
         public Guid EjendomId { get; set; }
+
     }
 }

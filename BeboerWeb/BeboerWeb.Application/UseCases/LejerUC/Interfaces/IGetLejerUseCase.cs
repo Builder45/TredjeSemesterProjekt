@@ -12,11 +12,14 @@ namespace BeboerWeb.Application.UseCases.LejerUC.Interfaces
     {
         Lejer GetLejer(GetLejerRequest command);
 
+        List<Lejer> GetLejereByPerson (GetLejerRequest command);
+
         List<Lejer> GetLejere();
 
         List<Lejer> GetLejereByEjendom(GetLejerRequest command);
 
         List<Lejer> GetLejereByLejemaal(GetLejerRequest command);
+        
 
 
     }

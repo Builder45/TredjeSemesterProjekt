@@ -29,6 +29,13 @@ namespace BeboerWeb.Persistence.Repositories
                 .ToList();
         }
 
+        public List<Lejer> GetLejereByPerson(Guid brugerId)
+        {
+            return _db.Person
+                       .Include(a => a.Lejere).ThenInclude(e => e.Lejemaal).FirstOrDefault(a => a.BrugerId == brugerId)?.Lejere??
+            new List<Lejer>();
+        }
+
         public List<Lejer> GetLejereByLejemaal(Guid lejemaalId)
         {
             return _db.Lejer
