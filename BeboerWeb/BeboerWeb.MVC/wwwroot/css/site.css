@@ -16,3 +16,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.overskrift {
+    font-size: 20px;
+    color: #000000;
+    }
+
+.dashboard-text {
+    font-family: serif; 
+}
+
+.unik-logo{
+    width:  5%;
+
+}
