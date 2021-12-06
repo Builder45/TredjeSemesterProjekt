@@ -1,25 +1,14 @@
-﻿@using System.Security.Claims
-@{
-
+﻿@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
-        if (User.HasClaim("IsBA", "Yes"))
-        {
-            Layout = "~/Views/Dashboard/BA/_BALayout.cshtml";
-        }
-        if (User.HasClaim("IsVV", "Yes"))
-        {
-        //layout          
-        }
-        if (User.HasClaim("IsLejer", "Yes"))
-        {
-        //layout          
-        }
-        //return layout
+        if (User.HasClaim("IsBA", "Yes")) Layout = "~/Views/Dashboard/BA/_BALayout.cshtml";
+        if (User.HasClaim("IsVV", "Yes")) Layout = "~/Views/Dashboard/VV/_VVLayout.cshtml";
+        if (User.HasClaim("IsLejer", "Yes")) Layout = "~/Views/Dashboard/Lejer/_LejerLayout.cshtml"; 
+        else Layout = "~/Views/Dashboard/Bruger/_BrugerLayout.cshtml";
     }
     else
     {
-        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+        Layout = "~/Views/Dashboard/Bruger/_BrugerLayout.cshtml";
     }
 }
 
@@ -37,7 +26,7 @@
         </div>
     </div>
 </div>
+@await RenderSectionAsync("Scripts", required: false)
 
-@section Scripts {
-    @RenderSection("Scripts", required: false)
-}
+
+
