@@ -12,5 +12,6 @@ namespace BeboerWeb.API.Contract.DTO
         public string Adresse { get; set; }
         public int Postnr { get; set; }
         public string By { get; set; }
+        public List<LokaleDTO> Lokaler { get; set; }
     }
 }

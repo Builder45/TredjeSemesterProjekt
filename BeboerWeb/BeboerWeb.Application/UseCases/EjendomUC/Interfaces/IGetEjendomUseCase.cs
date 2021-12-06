@@ -7,5 +7,6 @@ namespace BeboerWeb.Application.UseCases.EjendomUC.Interfaces
     {
         Ejendom GetEjendom(GetEjendomRequest command);
         List<Ejendom> GetEjendomme();
+        List<Ejendom> GetEjendommeWithLokaler();
     }
 }

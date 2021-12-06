@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.Persistence.Repositories
 {
@@ -32,6 +33,11 @@ namespace BeboerWeb.Persistence.Repositories
         public List<Ejendom> GetEjendomme()
         {
             return _db.Ejendom.ToList();
+        }
+
+        public List<Ejendom> GetEjendommeWithLokaler()
+        {
+            return _db.Ejendom.Include(e => e.Lokaler).ToList();
         }
 
         public void UpdateEjendom(Ejendom ejendom)

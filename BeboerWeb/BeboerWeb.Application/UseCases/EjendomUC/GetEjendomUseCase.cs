@@ -24,8 +24,10 @@ namespace BeboerWeb.Application.UseCases.EjendomUC
             return _ejendomRepository.GetEjendomme();
         }
 
-
-
+        public List<Ejendom> GetEjendommeWithLokaler()
+        {
+            return _ejendomRepository.GetEjendommeWithLokaler();
+        }
     }
     
 }

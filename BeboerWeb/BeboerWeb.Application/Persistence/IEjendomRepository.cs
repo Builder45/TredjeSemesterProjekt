@@ -13,6 +13,7 @@ namespace BeboerWeb.Application.Persistence
         void CreateEjendom(Ejendom ejendom);
         Ejendom GetEjendom(Guid id);
         List<Ejendom> GetEjendomme();
+        List<Ejendom> GetEjendommeWithLokaler();
         void UpdateEjendom(Ejendom ejendom);
 
     }

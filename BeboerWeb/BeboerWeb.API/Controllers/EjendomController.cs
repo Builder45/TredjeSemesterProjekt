@@ -34,6 +34,36 @@ namespace BeboerWeb.API.Controllers
             return dtos;
         }
 
+        [HttpGet("/Lokaler")]
+        public IEnumerable<EjendomDTO> GetWithLokaler()
+        {
+            var models = _getEjendomUseCase.GetEjendommeWithLokaler();
+            var dtos = new List<EjendomDTO>();
+            models.ForEach(e => dtos.Add(new EjendomDTO
+                { Id = e.Id, Adresse = e.Adresse, Postnr = e.Postnr, By = e.By}));
+
+            foreach (var model in models)
+            {
+                var dto = new EjendomDTO {Id = model.Id, Adresse = model.Adresse, Postnr = model.Postnr, By = model.By};
+                var lokaleDtos = new List<LokaleDTO>();
+                model.Lokaler.ForEach(e => lokaleDtos.Add(new LokaleDTO
+                {
+                    Id = e.Id,
+                    Adresse = e.Adresse, 
+                    Etage = e.Etage, 
+                    Areal = e.Areal, 
+                    Badevaerelse = e.Badevaerelse, 
+                    Koekken = e.Koekken,
+                    Timepris = e.Timepris,
+                    EjendomId = e.Ejendom.Id
+                }));
+                dto.Lokaler = lokaleDtos;
+                dtos.Add(dto);
+            }
+
+            return dtos;
+        }
+
         // GET api/<EjendomController>/5
         [HttpGet("{id}")]
         public EjendomDTO Get(Guid id)
