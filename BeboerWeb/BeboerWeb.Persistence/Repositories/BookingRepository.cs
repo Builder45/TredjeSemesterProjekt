@@ -20,9 +20,9 @@ namespace BeboerWeb.Persistence.Repositories
         public List<Booking> GetAllBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate)
         {
             var lokale = _db.Lokale
-                .Include(a => a.Bookinger)
-                .Where(a => a.Bookinger.Any(s => s.BookingPeriodeStart.Year == searchDate.Year)|| a.Bookinger.Any(s=>s.BookingPeriodeSlut.Year == searchDate.Year))
-                .Where(a => a.Bookinger.Any(s => s.BookingPeriodeStart.Month == searchDate.Month) || a.Bookinger.Any(s=>s.BookingPeriodeSlut.Month==searchDate.Month))
+                .Include(a => a.Bookinger
+                    .Where(s => s.BookingPeriodeStart.Year == searchDate.Year|| s.BookingPeriodeSlut.Year == searchDate.Year)
+                    .Where(s => s.BookingPeriodeStart.Month == searchDate.Month|| s.BookingPeriodeSlut.Month == searchDate.Month))
                 .FirstOrDefault(a => a.Id == lokaleId);
             if (lokale == null)
             {

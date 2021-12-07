@@ -24,7 +24,6 @@ namespace BeboerWeb.MVC.Controllers.Lejer
 
         public async Task<ActionResult> IndexByLejer()
         {
-
             return View($"{viewPath}/Details.cshtml");
         }
 
