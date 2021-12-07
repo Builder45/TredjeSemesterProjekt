@@ -1,10 +1,44 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using BeboerWeb.API.Contract;
+using BeboerWeb.MVC.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers.Lejer
 {
     public class LejerMedarbejderController : Controller
     {
+        private readonly ILejerService _lejerService;
+        private readonly IPersonService _personService;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly string viewPath = "Views/Dashboard/Lejer/MedarbejderOplysninger";
+
+        public LejerMedarbejderController(ILejerService lejerService, IPersonService personService,
+            UserManager<IdentityUser> userManager)
+        {
+            _lejerService = lejerService;
+            _personService = personService;
+            _userManager = userManager;
+        }
+
+        //[Route("")]
+        //public async Task<ActionResult> IndexByLejer()
+        //{
+        //    //var user = _userManager.GetUserIdAsync(HttpContext.User.);
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var dtos = await _lejerService.GetLejerAsync(Guid.Parse(userId));
+
+        //    var model = new List<LejemaalLejerViewModel>();
+        //    foreach (var dto in dtos)
+        //    {
+        //        var lejemaal = new LejemaalLejerViewModel();
+        //        lejemaal.AddDataFromDto(dto);
+        //        model.Add(lejemaal);
+        //    }
+        //    return View($"{viewPath}/Details.cshtml", model);
+        //}
+
         // GET: LejerMedarbejderController
         public ActionResult Index()
         {
