@@ -1,4 +1,5 @@
-﻿using BeboerWeb.Application.Persistence;
+﻿using System.Data;
+using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.Requests.Lokale;
 using BeboerWeb.Application.UseCases.LokaleUC.Interfaces;
 using BeboerWeb.Domain.Models;
@@ -13,7 +14,6 @@ public class GetLokaleUseCase : IGetLokaleUseCase
     {
         _repository = repository;
     }
-
     Lokale IGetLokaleUseCase.GetLokale(GetLokaleRequest command)
     {
         return _repository.GetLokale(command.LokaleId);

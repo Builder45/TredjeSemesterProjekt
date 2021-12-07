@@ -13,7 +13,7 @@ namespace BeboerWeb.Domain.Models
         public bool Koekken { get; set; }
         public bool Badevaerelse { get; set; }
 
-        public List<Booking> Bookinger { get; set; }
+        public List<Booking> Bookinger { get; set; } = new List<Booking>();
         public Ejendom Ejendom { get; set; }
 
         // Tom constructor vigtig for EF
