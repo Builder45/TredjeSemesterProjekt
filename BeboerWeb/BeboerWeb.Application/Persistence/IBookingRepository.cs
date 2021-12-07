@@ -11,5 +11,7 @@ namespace BeboerWeb.Application.Persistence
     {
         List<Booking> GetAllBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate);
 
+        void CreateBooking(Booking booking);
+
     }
 }

@@ -17,6 +17,12 @@ namespace BeboerWeb.Persistence.Repositories
             _db = db;
         }
 
+        public void CreateBooking(Booking booking)
+        {
+            _db.Add(booking);
+            _db.SaveChanges();
+        }
+
         public List<Booking> GetAllBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate)
         {
             var lokale = _db.Lokale

@@ -13,5 +13,7 @@ namespace BeboerWeb.API.Contract.DTO
         public DateTime BookingPeriodeSlut { get; set; }
         public Guid LokaleId { get; set; }
 
+        public Guid PersonId { get; set; }
+
     }
 }
