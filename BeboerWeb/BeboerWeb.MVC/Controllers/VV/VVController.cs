@@ -5,10 +5,11 @@ namespace BeboerWeb.MVC.Controllers.VV
 {
     public class VVController : Controller
     {
+        private readonly string viewPath = "Views/Dashboard/VV";
         // GET: VVController
         public ActionResult Index()
         {
-            return View();
+            return View($"{viewPath}/Index.cshtml");
         }
 
         // GET: VVController/Details/5
