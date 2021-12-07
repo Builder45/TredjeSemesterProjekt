@@ -42,33 +42,22 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
-<<<<<<< Updated upstream
-=======
         // POST api/<Booking>
         [HttpPost]
-        public void Post([FromBody] BookingDTO dto)
+        public void PostBooking([FromBody] BookingDTO dto)
         {
             _createBookingUseCase.CreateBooking(new CreateBookingRequest
                 (dto.BookingPeriodeStart, dto.BookingPeriodeSlut, dto.PersonId, dto.LokaleId));
         }
 
         // GET api/<Booking>/5
->>>>>>> Stashed changes
         [HttpGet("{id}")]
         public string GetBooking(int id)
         {
             return "value";
         }
 
-<<<<<<< Updated upstream
-        [HttpPost]
-        public void PostBooking([FromBody] string value)
-        {
-        }
-
-=======
         // PUT api/<Booking>/5
->>>>>>> Stashed changes
         [HttpPut("{id}")]
         public void PutBooking(int id, [FromBody] string value)
         {
