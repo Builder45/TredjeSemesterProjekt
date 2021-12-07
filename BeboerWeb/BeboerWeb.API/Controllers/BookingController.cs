@@ -9,13 +9,13 @@ namespace BeboerWeb.API.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-        //private readonly ICreateBookingUseCase _createBookingUseCase;
+        private readonly ICreateBookingUseCase _createBookingUseCase;
         private readonly IGetBookingUseCase _getBookingUseCase;
         //private readonly IUpdateBookingUseCase _updateBookingUseCase;
 
-        public BookingController(IGetBookingUseCase getBookingUseCase)//, ICreateBookingUseCase createBookingUseCase, IUpdateBookingUseCase updateBookingUseCase)
+        public BookingController(IGetBookingUseCase getBookingUseCase, ICreateBookingUseCase createBookingUseCase)//, IUpdateBookingUseCase updateBookingUseCase)
         {
-            //_createBookingUseCase = createBookingUseCase;
+            _createBookingUseCase = createBookingUseCase;
             _getBookingUseCase = getBookingUseCase;
             //_updateBookingUseCase = updateBookingUseCase;
         }
@@ -42,17 +42,33 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
+<<<<<<< Updated upstream
+=======
+        // POST api/<Booking>
+        [HttpPost]
+        public void Post([FromBody] BookingDTO dto)
+        {
+            _createBookingUseCase.CreateBooking(new CreateBookingRequest
+                (dto.BookingPeriodeStart, dto.BookingPeriodeSlut, dto.PersonId, dto.LokaleId));
+        }
+
+        // GET api/<Booking>/5
+>>>>>>> Stashed changes
         [HttpGet("{id}")]
         public string GetBooking(int id)
         {
             return "value";
         }
 
+<<<<<<< Updated upstream
         [HttpPost]
         public void PostBooking([FromBody] string value)
         {
         }
 
+=======
+        // PUT api/<Booking>/5
+>>>>>>> Stashed changes
         [HttpPut("{id}")]
         public void PutBooking(int id, [FromBody] string value)
         {
