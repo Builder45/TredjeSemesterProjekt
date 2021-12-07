@@ -3,8 +3,6 @@ using BeboerWeb.Application.Requests.Booking;
 using BeboerWeb.Application.UseCases.BookingUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace BeboerWeb.API.Controllers
 {
     [Route("api/[controller]")]
@@ -22,15 +20,14 @@ namespace BeboerWeb.API.Controllers
             //_updateBookingUseCase = updateBookingUseCase;
         }
 
-        // GET: api/<Booking>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetBookinger()
         {
             return new string[] { "value1", "value2" };
         }
 
-        [HttpGet("{lokaleId}/{searchDate}")]
-        public IEnumerable<BookingDTO> GetAllBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate)
+        [HttpGet("ByLokale/{lokaleId}/{searchDate}")]
+        public IEnumerable<BookingDTO> GetBookingerByLokale(Guid lokaleId, DateTime searchDate)
         {
             var model = _getBookingUseCase.GetAllBookingerByLokaleBySearchDate(new GetBookingRequest
                 {LokaleId = lokaleId, SearchDate = searchDate});
@@ -45,28 +42,24 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
-        // GET api/<Booking>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string GetBooking(int id)
         {
             return "value";
         }
 
-        // POST api/<Booking>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void PostBooking([FromBody] string value)
         {
         }
 
-        // PUT api/<Booking>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void PutBooking(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<Booking>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteBooking(int id)
         {
         }
     }

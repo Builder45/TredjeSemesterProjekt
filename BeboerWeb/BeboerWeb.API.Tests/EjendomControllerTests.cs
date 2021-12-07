@@ -35,7 +35,7 @@ namespace BeboerWeb.API.Tests
             _getEjendomMock.Setup(uc => uc.GetEjendomme()).Returns(GetTestEjendomme());
             var testEjendomme = GetTestEjendomme();
 
-            var result = _controller.Get() as List<EjendomDTO>;
+            var result = _controller.GetEjendomme() as List<EjendomDTO>;
             Assert.AreEqual(testEjendomme.Count, result.Count);
         }
 

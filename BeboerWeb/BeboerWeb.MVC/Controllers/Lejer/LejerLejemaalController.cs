@@ -26,7 +26,7 @@ namespace BeboerWeb.MVC.Controllers.Lejer
         {
             //var user = _userManager.GetUserIdAsync(HttpContext.User.);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var dtos = await _lejemaalService.GetLejerLejemaal(Guid.Parse(userId));
+            var dtos = await _lejemaalService.GetLejemaalsByBrugerAsync(Guid.Parse(userId));
             
             var model = new List<LejemaalLejerViewModel>();
             foreach (var dto in dtos)

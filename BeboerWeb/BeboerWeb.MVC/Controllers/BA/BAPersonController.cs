@@ -34,7 +34,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         public async Task<ActionResult> Index()
         {
             var model = new List<BrugerViewModel>();
-            var personList = await _personService.GetPersonsAsync();
+            var personList = await _personService.GetPersonerAsync();
             var brugerList = await _userDb.Users.ToListAsync();
             foreach (var person in personList)
             {
@@ -61,7 +61,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         //[Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var personModel = await _personService.GetPersonByPersonIdAsync(id);
+            var personModel = await _personService.GetPersonAsync(id);
             var model = new BrugerViewModel();
             model.AddDataFromDTO(personModel);
 
@@ -123,7 +123,7 @@ namespace BeboerWeb.MVC.Controllers.BA
                 else
                 {
                     await _userManager.RemoveClaimAsync(bruger, new Claim("IsVV", "Yes"));
-                    await _vicevaertService.UnlinkVicevaertAsync(new VicevaertDTO { BrugerId = model.BrugerId });
+                    await _vicevaertService.UnlinkVicevaertAsync(model.BrugerId);
                 }
             }
 

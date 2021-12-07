@@ -30,7 +30,7 @@ namespace BeboerWeb.MVC.Controllers.BA
 
         public async Task<ActionResult> IndexByLejemaal(Guid id)
         {
-            var lejemaal = await _lejemaalService.GetLejemaalByLejemaalIdAsync(id);
+            var lejemaal = await _lejemaalService.GetLejemaalAsync(id);
             ViewBag.LejemaalInfo = $"{lejemaal.Adresse} ({lejemaal.Etage})";
 
             var dtos = await _lejerService.GetLejereByLejemaalAsync(id);
@@ -53,7 +53,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         public async Task<ActionResult> Create(Guid id)
         {
             var model = new LejerBrugerViewModel();
-            var dtos = await _personService.GetPersonsAsync();
+            var dtos = await _personService.GetPersonerAsync();
             var brugerModels = new List<BrugerViewModel>();
             
 
@@ -86,7 +86,7 @@ namespace BeboerWeb.MVC.Controllers.BA
                     LejemaalId = model.Lejer.LejemaalId,
                     PersonIds = model.Lejer.PersonIds
                 };
-                await _lejerService.CreateLejer(lejer);
+                await _lejerService.CreateLejerAsync(lejer);
 
                 //var indexModel = new List<LejerViewModel>();
                 //indexModel.Add(model);
@@ -105,7 +105,7 @@ namespace BeboerWeb.MVC.Controllers.BA
             model.Lejer = new LejerViewModel();
             model.Lejer.AddDataFromDto(lejerDTO);
 
-            var dtos = await _personService.GetPersonsAsync();
+            var dtos = await _personService.GetPersonerAsync();
             var brugerModels = new List<BrugerViewModel>();
 
             foreach (var dto in dtos)

@@ -54,7 +54,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         //[Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var model = await _ejendomService.GetEjendomByIdAsync(id);
+            var model = await _ejendomService.GetEjendomAsync(id);
 
             return View("Views/Dashboard/BA/Ejendom/Edit.cshtml", model);
         }

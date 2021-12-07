@@ -12,7 +12,7 @@ namespace BeboerWeb.API.Contract
         Task<List<EjendomDTO>> GetEjendommeAsync();
         Task<List<EjendomDTO>> GetEjendommeWithLokalerAsync();
 
-        Task <EjendomDTO> GetEjendomByIdAsync(Guid id);
+        Task <EjendomDTO> GetEjendomAsync(Guid id);
 
         Task CreateEjendomAsync(EjendomDTO ejendom);
 

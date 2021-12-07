@@ -2,12 +2,9 @@
 using BeboerWeb.Application.Requests.Lejemaal;
 using BeboerWeb.Application.Requests.Lejer;
 using BeboerWeb.Application.UseCases.LejemaalUC.Interfaces;
-using BeboerWeb.Application.UseCases.LejerUC;
 using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using BeboerWeb.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BeboerWeb.API.Controllers
 {
@@ -28,12 +25,10 @@ namespace BeboerWeb.API.Controllers
 
         }
 
-
-        // GET: api/<LejemaalController>
-        [HttpGet("Ejendom/{ejendomId}")]
-        public IEnumerable<LejemaalDTO> GetAllByEjendom(Guid ejendomId)
+        [HttpGet("ByEjendom/{ejendomId}")]
+        public IEnumerable<LejemaalDTO> GetLejemaalsByEjendom(Guid ejendomId)
         {
-            var model = _getLejemaalUseCase.GetLejemaalsInEjendom(new GetLejemaalRequest{EjendomId = ejendomId});
+            var model = _getLejemaalUseCase.GetLejemaalsInEjendom(new GetLejemaalRequest{ EjendomId = ejendomId });
             var dto = new List<LejemaalDTO>();
             model.ForEach(a => dto.Add(new LejemaalDTO
             {
@@ -50,7 +45,7 @@ namespace BeboerWeb.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<LejemaalDTO> GetAll()
+        public IEnumerable<LejemaalDTO> GetLejemaals()
         {
             var model = _getLejemaalUseCase.GetLejemaals();
             var dto = new List<LejemaalDTO>();
@@ -68,71 +63,76 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
-        // GET api/<LejemaalController>/5
         [HttpGet("{id}")]
-        public LejemaalDTO Get(Guid id)
+        public LejemaalDTO GetLejemaal(Guid id)
         {
-            var model = _getLejemaalUseCase.GetLejemaal(new GetLejemaalRequest
-                {LejemaalId = id });
+            var model = _getLejemaalUseCase.GetLejemaal(new GetLejemaalRequest{ LejemaalId = id });
             var dto = new LejemaalDTO
             {
-                Id = model.Id, Adresse = model.Adresse, Etage = model.Etage, Husleje = model.Husleje, Areal = model.Areal, Koekken = model.Koekken, Badevaerelse = model.Badevaerelse, EjendomId = model.Ejendom.Id
+                Id = model.Id, 
+                Adresse = model.Adresse, 
+                Etage = model.Etage, 
+                Husleje = model.Husleje, 
+                Areal = model.Areal, 
+                Koekken = model.Koekken, 
+                Badevaerelse = model.Badevaerelse, 
+                EjendomId = model.Ejendom.Id
             };
             return dto;
         }
 
-        [HttpGet("Lejer/{id}")]
-        public IEnumerable<LejemaalDTO> GetLejerLejemaal(Guid id)
+        [HttpGet("ByBruger/{brugerId}")]
+        public IEnumerable<LejemaalDTO> GetLejemaalsByBruger(Guid brugerId)
         {
-            var lejere = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest { BrugerId = id });
+            var lejere = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest { BrugerId = brugerId });
             var models = new List<Lejemaal>();
-
-            var lejerInOrderByLejeperiode = lejere.OrderByDescending(l => l.LejeperiodeStart);
-
-            foreach (var item in lejerInOrderByLejeperiode)
+            var lejereInOrderByLejeperiode = lejere.OrderByDescending(l => l.LejeperiodeStart);
+            foreach (var item in lejereInOrderByLejeperiode)
             {
-                models.Add(_getLejemaalUseCase.GetLejemaalWithLejere(new GetLejemaalRequest { LejemaalId = item.Lejemaal.Id , BrugerId = id}));
+                models.Add(_getLejemaalUseCase.GetLejemaalWithLejere(new GetLejemaalRequest { LejemaalId = item.Lejemaal.Id , BrugerId = brugerId}));
             }
-            var dtos = new List<LejemaalDTO>();
 
+            var dtos = new List<LejemaalDTO>();
             foreach (var model in models)
             {
                 var dto = new LejemaalDTO
                 {
-                    Id = model.Id, Adresse = model.Adresse, Etage = model.Etage, Husleje = model.Husleje,
-                    Areal = model.Areal, Koekken = model.Koekken, Badevaerelse = model.Badevaerelse,
+                    Id = model.Id, 
+                    Adresse = model.Adresse, 
+                    Etage = model.Etage, 
+                    Husleje = model.Husleje,
+                    Areal = model.Areal, 
+                    Koekken = model.Koekken, 
+                    Badevaerelse = model.Badevaerelse,
                     EjendomId = model.Ejendom.Id
                 };
 
                 var lejerDtos = new List<LejerDTO>();
                 model.Lejere.ForEach(e=>lejerDtos.Add(new LejerDTO
-                    {
+                {
                     Id =e.Id,
                     LejeperiodeStart = e.LejeperiodeStart,
                     LejeperiodeSlut = e.LejeperiodeSlut,
                     LejemaalId = e.Lejemaal.Id
-                    }));
+                }));
                 dto.Lejere = lejerDtos;
                 dtos.Add(dto);
             }
             return dtos;
         }
-
-        // POST api/<LejemaalController>
+        
         [HttpPost]
-        public void Post([FromBody] LejemaalDTO dto)
+        public void PostLejemaal([FromBody] LejemaalDTO dto)
         {
             _createLejemaalUseCase.CreateLejemaal(new CreateLejemaalRequest
-                (dto.Adresse,dto.Etage,dto.Husleje,dto.Areal,dto.Koekken,dto.Badevaerelse,dto.EjendomId));
+                (dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
         }
 
-        // PUT api/<LejemaalController>
         [HttpPut]
-        public void Put([FromBody] LejemaalDTO dto)
+        public void PutLejemaal([FromBody] LejemaalDTO dto)
         {
-            _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest(dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
+            _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest
+                (dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
         }
-
-        
     }
 }

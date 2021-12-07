@@ -3,8 +3,6 @@ using BeboerWeb.Application.Requests.Lokale;
 using BeboerWeb.Application.UseCases.LokaleUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace BeboerWeb.API.Controllers
 {
     [Route("api/[controller]")]
@@ -21,13 +19,10 @@ namespace BeboerWeb.API.Controllers
             _createLokaleUseCase = createLokaleUseCase;
             _getLokaleUseCase = getLokaleUseCase;
             _updateLokaleUseCase = updateLokaleUseCase;
-
         }
 
-
-        // GET: api/<LokaleController>
-        [HttpGet("Ejendom/{ejendomId}")]
-        public IEnumerable<LokaleDTO> GetAllByEjendom(Guid ejendomId)
+        [HttpGet("ByEjendom/{ejendomId}")]
+        public IEnumerable<LokaleDTO> GetLokalerByEjendom(Guid ejendomId)
         {
             var model = _getLokaleUseCase.GetLokalerInEjendom(new GetLokaleRequest {EjendomId = ejendomId});
             var dto = new List<LokaleDTO>();
@@ -47,7 +42,7 @@ namespace BeboerWeb.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<LokaleDTO> GetAll()
+        public IEnumerable<LokaleDTO> GetLokaler()
         {
             var model = _getLokaleUseCase.GetLokaler();
             var dto = new List<LokaleDTO>();
@@ -66,9 +61,8 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
-        // GET api/<LokaleController>/5
         [HttpGet("{id}")]
-        public LokaleDTO Get(Guid id)
+        public LokaleDTO GetLokale(Guid id)
         {
             var model = _getLokaleUseCase.GetLokale(new GetLokaleRequest {LokaleId = id});
             var dto = new LokaleDTO()
@@ -80,16 +74,14 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
-        // POST api/<LokaleController>
         [HttpPost]
-        public void Post([FromBody] LokaleDTO dto)
+        public void PostLokale([FromBody] LokaleDTO dto)
         {
             _createLokaleUseCase.CreateLokale(new CreateLokaleRequest(dto.Navn, dto.Adresse, dto.Etage, dto.Areal, dto.Timepris, dto.Koekken, dto.Badevaerelse,dto.EjendomId));
         }
 
-        // PUT api/<LokaleController>/
         [HttpPut]
-        public void Put([FromBody] LokaleDTO dto)
+        public void PutLokale([FromBody] LokaleDTO dto)
         {
             _updateLokaleUseCase.UpdateLokale(new UpdateLokaleRequest(dto.Id, dto.Navn, dto.Adresse, dto.Etage, dto.Areal, dto.Timepris, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
         }

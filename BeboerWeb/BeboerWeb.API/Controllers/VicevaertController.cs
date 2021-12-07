@@ -3,8 +3,6 @@ using BeboerWeb.Application.Requests.Vicevaert;
 using BeboerWeb.Application.UseCases.VicevaertUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace BeboerWeb.API.Controllers
 {
     [Route("api/[controller]")]
@@ -22,37 +20,33 @@ namespace BeboerWeb.API.Controllers
             _getVicevaertUseCase = getVicevaertUseCase;
         }
 
-        // GET: api/<VicevaertController>
-        [HttpGet("Bruger/{id}")]
-        public IEnumerable<string> GetRelevantVicevaerterByBruger(Guid id)
+        [HttpGet("ByBruger/{brugerId}")]
+        public IEnumerable<string> GetVicevaerterByBruger(Guid brugerId)
         {
-            var vicevaerter = _getVicevaertUseCase.GetRelevantVicevaerterByBruger(new GetVicevaertRequest {BrugerId = id});
+            var vicevaerter = _getVicevaertUseCase.GetRelevantVicevaerterByBruger(new GetVicevaertRequest {BrugerId = brugerId});
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<VicevaertController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string GetVicevaert(int id)
         {
             return "value";
         }
 
-        // POST api/<VicevaertController>
         [HttpPost]
-        public void Post([FromBody] VicevaertDTO dto)
+        public void PostVicevaert([FromBody] VicevaertDTO dto)
         {
             _linkVicevaertUseCase.LinkVicevaert(new LinkVicevaertRequest {BrugerId = dto.BrugerId});
         }
 
         [HttpPost("ToEjendom")]
-        public void Post([FromBody] ServiceOversigtDTO dto)
+        public void AddVicevaertToEjendom([FromBody] ServiceOversigtDTO dto)
         {
             _addVicevaertToEjendomUseCase.AddVicevaertToEjendom(new AddVicevaertToEjendomRequest {EjendomId = dto.EjendomId, PersonId = dto.PersonId});
         }
 
-        // DELETE api/<VicevaertController>/5
         [HttpDelete("{id}")]
-        public void Delete(Guid id)
+        public void DeleteVicevaert(Guid id)
         {
             _linkVicevaertUseCase.UnlinkVicevaert(new LinkVicevaertRequest { BrugerId = id });
         }

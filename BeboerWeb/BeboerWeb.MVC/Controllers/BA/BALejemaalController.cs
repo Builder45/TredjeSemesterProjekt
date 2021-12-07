@@ -29,7 +29,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         //[Route("")]
         public async Task<ActionResult> Index()
         {
-            var dtos = await _lejemaalService.GetLejemaalAsync();
+            var dtos = await _lejemaalService.GetLejemaalsAsync();
             var dtosInOrder = dtos.OrderBy(l => l.EjendomId).ThenBy(l => l.Adresse);
             var model = new List<LejemaalViewModel>();
             foreach (var dto in dtosInOrder)
@@ -65,7 +65,7 @@ namespace BeboerWeb.MVC.Controllers.BA
             if (ModelState.IsValid)
             {
                 var lejemaal = model.GetLejemaalDTO();
-                await _lejemaalService.CreateLejemaal(lejemaal);
+                await _lejemaalService.CreateLejemaalAsync(lejemaal);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -76,7 +76,7 @@ namespace BeboerWeb.MVC.Controllers.BA
         public async Task<ActionResult> Edit(Guid id)
         {
             var model = new LejemaalEjendommeViewModel();
-            var lejemaalDto = await _lejemaalService.GetLejemaalByLejemaalIdAsync(id);
+            var lejemaalDto = await _lejemaalService.GetLejemaalAsync(id);
 
             model.Lejemaal = new LejemaalViewModel();
             model.Lejemaal.AddDataFromDto(lejemaalDto);

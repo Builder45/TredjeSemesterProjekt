@@ -1,11 +1,7 @@
 ﻿using BeboerWeb.API.Contract.DTO;
-using BeboerWeb.Application.Requests.Lejemaal;
 using BeboerWeb.Application.Requests.Lejer;
-using BeboerWeb.Application.UseCases.LejemaalUC.Interfaces;
 using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BeboerWeb.API.Controllers
 {
@@ -16,6 +12,7 @@ namespace BeboerWeb.API.Controllers
         private readonly ICreateLejerUseCase _createLejerUseCase;
         private readonly IGetLejerUseCase _getLejerUseCase;
         private readonly IUpdateLejerUseCase _updateLejerUseCase;
+
         public LejerController(ICreateLejerUseCase createLejerUseCase, IGetLejerUseCase getLejerUseCase, IUpdateLejerUseCase updateLejerUseCase)
         {
             _createLejerUseCase = createLejerUseCase;
@@ -23,7 +20,6 @@ namespace BeboerWeb.API.Controllers
             _updateLejerUseCase = updateLejerUseCase;
         }
 
-        // GET api/<LejerController>/5
         [HttpGet("{id}")]
         public LejerDTO GetLejer(Guid id)
         {
@@ -45,9 +41,8 @@ namespace BeboerWeb.API.Controllers
             return dto;
         }
 
-        [HttpGet("Bruger/{brugerId}")]
-
-        public IEnumerable<LejerDTO> GetLejereByPerson(Guid brugerId)
+        [HttpGet("ByBruger/{brugerId}")]
+        public IEnumerable<LejerDTO> GetLejereByBruger(Guid brugerId)
         {
             var model = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest {BrugerId = brugerId});
             var dtos = new List<LejerDTO>();
@@ -61,10 +56,8 @@ namespace BeboerWeb.API.Controllers
             return dtos;
         }
 
-
-        // GET api/<LejerController>/5
-        [HttpGet("Lejemaal/{lejemaalId}")]
-        public IEnumerable<LejerDTO>  GetLejereByLejemaal(Guid lejemaalId)
+        [HttpGet("ByLejemaal/{lejemaalId}")]
+        public IEnumerable<LejerDTO> GetLejereByLejemaal(Guid lejemaalId)
         {
             var model = _getLejerUseCase.GetLejereByLejemaal(new GetLejerRequest {LejemaalId = lejemaalId });
             var dtos = new List<LejerDTO>();
@@ -84,11 +77,10 @@ namespace BeboerWeb.API.Controllers
                     dtos[i].LejerNavne.Add($"{person.Fornavn} {person.Efternavn.Substring(0, 1)}. ");
                 }
             }
-
             return dtos;
         }
 
-        [HttpGet("Ejendom/{ejendomId}")]
+        [HttpGet("ByEjendom/{ejendomId}")]
         public IEnumerable<LejerDTO> GetLejereByEjendom(Guid ejendomId)
         {
             var model = _getLejerUseCase.GetLejereByEjendom(new GetLejerRequest { EjendomId = ejendomId });
@@ -103,20 +95,18 @@ namespace BeboerWeb.API.Controllers
             return dtos;
         }
 
-
-        // POST api/<LejerController>
         [HttpPost]
-        public void Post([FromBody] LejerDTO dto)
+        public void PostLejer([FromBody] LejerDTO dto)
         {
             _createLejerUseCase.CreateLejer(new CreateLejerRequest
                 (dto.LejeperiodeStart, dto.LejeperiodeSlut, dto.LejemaalId, dto.PersonIds));
         }
 
-        // PUT api/<LejerController>/5
         [HttpPut]
-        public void Put([FromBody] LejerDTO dto)
+        public void PutLejer([FromBody] LejerDTO dto)
         {
-            _updateLejerUseCase.UpdateLejer(new UpdateLejerRequest(dto.Id, dto.LejeperiodeStart, dto.LejeperiodeSlut, dto.LejemaalId, dto.PersonIds));
+            _updateLejerUseCase.UpdateLejer(new UpdateLejerRequest
+                (dto.Id, dto.LejeperiodeStart, dto.LejeperiodeSlut, dto.LejemaalId, dto.PersonIds));
         }
     }
 }

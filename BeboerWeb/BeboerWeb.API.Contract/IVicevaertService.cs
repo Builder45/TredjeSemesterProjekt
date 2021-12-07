@@ -5,6 +5,6 @@ namespace BeboerWeb.API.Contract
     public interface IVicevaertService
     {
         Task LinkVicevaertAsync(VicevaertDTO dto);
-        Task UnlinkVicevaertAsync(VicevaertDTO dto);
+        Task UnlinkVicevaertAsync(Guid brugerId);
     }
 }

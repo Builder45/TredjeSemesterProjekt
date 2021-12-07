@@ -14,8 +14,5 @@ namespace BeboerWeb.MVC.Services
             public LejerServiceConfig LejerServiceConfig { get; set; }
             public LokaleServiceConfig LokaleServiceConfig { get; set; }
             public VicevaertServiceConfig VicevaertServiceConfig { get; set; }
-
         }
     }
-
-
