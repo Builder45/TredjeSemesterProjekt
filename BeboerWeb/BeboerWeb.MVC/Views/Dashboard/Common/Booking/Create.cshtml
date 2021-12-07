@@ -1,0 +1,61 @@
+﻿@model BookingOverviewViewModel
+@{
+	Layout = "_Layout.cshtml";
+    ViewData["Name"] = "Create";
+}
+
+<h1>Ny booking for ...</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Booking.Id" />
+            <div class="form-group">
+                <label asp-for="Booking.BookingPeriodeStart" class="form-label"></label>
+                <input asp-for="Booking.BookingPeriodeStart" type="date" class="form-control" value="2021-01-01"/>
+                <br/>
+                <label asp-for="Booking.BookingPeriodeSlut" class="form-label"></label>
+                <input asp-for="Booking.BookingPeriodeSlut" type="date" class="form-control" value="2021-01-01"/>
+                <br/>
+                <br/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Opret booking" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<br/>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeSlut)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var booking in Model.ExistingBookinger) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelitem => booking.BookingPeriodeStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => booking.BookingPeriodeSlut)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Booking" asp-action="Index">Tilbage til lokaleoversigten.</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

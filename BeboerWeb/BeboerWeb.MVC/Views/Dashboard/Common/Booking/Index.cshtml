@@ -27,7 +27,7 @@
                         @if (lokale.Koekken) { <img src="img/kitchen_icon.png"/> }
                     </div>
                     <div class="lokale_info lokale_booking">
-                        <a asp-action="Create" asp-route-data="@lokale.Id">
+                        <a asp-controller="Booking" asp-action="Create" asp-route-data="@lokale.Id">
                             <input type="button" value="Foretag booking" class="lokale_button btn" />
                         </a>
                     </div>

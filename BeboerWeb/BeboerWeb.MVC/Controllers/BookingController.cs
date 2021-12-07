@@ -32,16 +32,11 @@ namespace BeboerWeb.MVC.Controllers
             return View($"{viewPath}/Index.cshtml", models);
         }
 
-        // GET: BookingController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: BookingController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create(Guid id)
         {
-            return View();
+            var model = new BookingOverviewViewModel();
+            return View($"{viewPath}/Create.cshtml", model);
         }
 
         // POST: BookingController/Create
