@@ -25,18 +25,7 @@ namespace BeboerWeb.MVC.Controllers.Lejer
         //[Route("")]
         //public async Task<ActionResult> IndexByLejer()
         //{
-        //    //var user = _userManager.GetUserIdAsync(HttpContext.User.);
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var dtos = await _lejerService.GetLejerAsync(Guid.Parse(userId));
-
-        //    var model = new List<LejemaalLejerViewModel>();
-        //    foreach (var dto in dtos)
-        //    {
-        //        var lejemaal = new LejemaalLejerViewModel();
-        //        lejemaal.AddDataFromDto(dto);
-        //        model.Add(lejemaal);
-        //    }
-        //    return View($"{viewPath}/Details.cshtml", model);
+        //    return View($"{viewPath}/MedarbejderOplysninger.cshtml");
         //}
 
         // GET: LejerMedarbejderController

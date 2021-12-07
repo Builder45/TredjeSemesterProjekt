@@ -21,7 +21,5 @@ namespace BeboerWeb.API.Contract
 
         //[HttpPost]
         public Task CreatePerson(PersonDTO dto);
-
-
     }
 }
