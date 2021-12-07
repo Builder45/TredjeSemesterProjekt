@@ -1,5 +1,6 @@
 ﻿using BeboerWeb.Application.Persistence;
 using BeboerWeb.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.Persistence.Repositories
 {
@@ -15,6 +16,12 @@ namespace BeboerWeb.Persistence.Repositories
         public Vicevaert GetVicevaertByPerson(Guid personId)
         {
             return _db.Vicevaert.First(v => v.Person.Id == personId);
+        }
+
+        public List<Vicevaert> GetVicevaerterByEjendom(Guid ejendomId)
+        {
+            var ejendom = _db.Ejendom.First(e => e.Id == ejendomId);
+            return _db.Vicevaert.Include(v => v.Person).Where(v => v.Ejendomme.Contains(ejendom)).ToList();
         }
 
         public void LinkVicevaert(Vicevaert vicevaert)

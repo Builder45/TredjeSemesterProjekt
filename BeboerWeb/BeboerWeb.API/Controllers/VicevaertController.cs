@@ -13,17 +13,20 @@ namespace BeboerWeb.API.Controllers
     {
         private readonly ILinkVicevaertUseCase _linkVicevaertUseCase;
         private readonly IAddVicevaertToEjendomUseCase _addVicevaertToEjendomUseCase;
+        private readonly IGetVicevaertUseCase _getVicevaertUseCase;
 
-        public VicevaertController(ILinkVicevaertUseCase linkVicevaertUseCase, IAddVicevaertToEjendomUseCase addVicevaertToEjendomUseCase)
+        public VicevaertController(ILinkVicevaertUseCase linkVicevaertUseCase, IAddVicevaertToEjendomUseCase addVicevaertToEjendomUseCase, IGetVicevaertUseCase getVicevaertUseCase)
         {
             _linkVicevaertUseCase = linkVicevaertUseCase;
             _addVicevaertToEjendomUseCase = addVicevaertToEjendomUseCase;
+            _getVicevaertUseCase = getVicevaertUseCase;
         }
 
         // GET: api/<VicevaertController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("Bruger/{id}")]
+        public IEnumerable<string> GetRelevantVicevaerterByBruger(Guid id)
         {
+            var vicevaerter = _getVicevaertUseCase.GetRelevantVicevaerterByBruger(new GetVicevaertRequest {BrugerId = id});
             return new string[] { "value1", "value2" };
         }
 
