@@ -7,6 +7,10 @@ namespace BeboerWeb.MVC.Models
     {
         public Guid Id { get; set; }
 
+        [Required(ErrorMessage = "Du mangler at give lokalet et navn:")]
+        [Display(Prompt = "Navn (f.eks: Kælderum 2 eller Gildesal)")]
+        public string Navn { get; set; }
+
         [Required(ErrorMessage = "Du mangler at udfylde adressen:")]
         [Display(Prompt = "Adresse (f.eks: Hybenvej 12)")]
         public string Adresse { get; set; }
@@ -36,6 +40,7 @@ namespace BeboerWeb.MVC.Models
         public void AddDataFromDto(LokaleDTO dto)
         {
             Id = dto.Id;
+            Navn = dto.Navn;
             Adresse = dto.Adresse;
             Etage = dto.Etage;
             Timepris = dto.Timepris;

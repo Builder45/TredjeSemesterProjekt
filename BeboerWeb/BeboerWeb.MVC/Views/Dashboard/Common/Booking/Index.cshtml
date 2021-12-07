@@ -4,69 +4,6 @@
     Layout = "_Layout.cshtml";
 }
 
-<style>
-    .ejendom_container {
-        width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 40px;
-    }
-    .ejendom_header {
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        background: #3D5F8C;
-    }
-    .ejendom_title {
-        color: white;
-        font-size: 20px;
-        padding-left: 10px;
-    }
-    .lokale_entry {
-        width: 100%;
-        height: 50px;
-        background: white;
-        border: 1px solid #F1F1F1;
-    }
-    .lokale_entry p {
-        padding-left: 10px;
-    }
-    .lokale_info {
-        height: 50px;
-        display: table-cell;
-        padding-top: 6px;
-    }
-    .lokale_type {
-        width: 150px;
-    }
-    .lokale_adresse {
-        width: 500px;
-    }
-    .lokale_badevaerelse {
-        width: 75px;
-    }
-    .lokale_koekken {
-        width: 75px;
-    }
-    .lokale_koekken_icon {
-        height: 50px;
-        width: 50px;
-        background-image: url("img/kitchen_icon_v2.png");
-    }
-    .lokale_booking {
-        
-    }
-    .lokale_button {
-        color: #fff;
-        background-color: #3D5F8C;
-        border-color: #3D5F8C;
-        margin-left: 25px;
-    }
-    .lokale_entry:hover {
-        background: #E6F6FD;
-    }
-</style>
-
 <div class="text-center">
     <h1 class="display-4">Lokaleoversigt</h1>
 </div>
@@ -76,12 +13,12 @@
     {
         <div class="ejendom_container">
             <div class="ejendom_header">
-                <p class="ejendom_title">@ejendom.Adresse - @ejendom.Postnr @ejendom.By</p>
+                <p class="ejendom_title">@ejendom.Ejendom.Adresse - @ejendom.Ejendom.Postnr @ejendom.Ejendom.By</p>
             </div>
             @foreach (var lokale in ejendom.Lokaler)
             {
                 <div class="lokale_entry">
-                    <div class="lokale_info lokale_type"><p>LokaleType</p></div>
+                    <div class="lokale_info lokale_type"><p>@lokale.Navn</p></div>
                     <div class="lokale_info lokale_adresse"><p>@lokale.Adresse (@lokale.Etage)</p></div>
                     <div class="lokale_info lokale_badevaerelse">
                         @if (lokale.Badevaerelse) { <img src="img/toilet_icon.png"/> }
@@ -99,34 +36,3 @@
         </div>
     }
 </div>
-
-
-@*<div class="ejendom_container">
-    <div class="ejendom_header">
-        <p class="ejendom_title">Birkevejen 32 - 8700</p>
-    </div>
-    <div class="lokale_entry">
-        <div class="lokale_info lokale_type"><p>Kælderum</p></div>
-        <div class="lokale_info lokale_adresse"><p>Birkevejen 32a (kælder)</p></div>
-        <div class="lokale_info lokale_badevaerelse"><img src="img/toilet_icon.png"/></div>
-        <div class="lokale_info lokale_koekken"><img src="img/kitchen_icon.png"/></div>
-        <div class="lokale_info lokale_booking">
-            <a asp-action="Create">
-                <input type="button" value="Foretag booking" class="lokale_button btn" />
-            </a>
-        </div>
-    </div>
-    <div class="lokale_entry">
-        <div class="lokale_info lokale_type"><p>Fælleslokale</p></div>
-        <div class="lokale_info lokale_adresse"><p>Birkevejen 32b (stue)</p></div>
-        <div class="lokale_info lokale_badevaerelse"></div>
-        <div class="lokale_info lokale_koekken"></div>
-        <div class="lokale_info lokale_booking">
-            <a asp-action="Create">
-                <input type="button" value="Foretag booking" class="lokale_button btn" />
-            </a>
-        </div>
-    </div>
-    <div class="lokale_entry"></div>
-</div>
-*@

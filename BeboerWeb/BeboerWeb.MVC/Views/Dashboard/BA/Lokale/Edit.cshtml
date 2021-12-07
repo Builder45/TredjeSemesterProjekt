@@ -13,6 +13,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Lokale.Id"/>
             <div class="form-group">
+                <label asp-for="Lokale.Navn" class="control-label"></label>
+                <span asp-validation-for="Lokale.Navn" class="text-danger"></span>
+                <input asp-for="Lokale.Navn" class="form-control"/>
+                <br/>
                 <label asp-for="Lokale.Adresse" class="control-label"></label>
                 <span asp-validation-for="Lokale.Adresse" class="text-danger"></span>
                 <input asp-for="Lokale.Adresse" class="form-control"/>
