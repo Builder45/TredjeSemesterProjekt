@@ -1,14 +1,13 @@
 ﻿@using BeboerWeb.API.Contract.DTO
+@using BeboerWeb.MVC.Areas.Identity.Pages.Account
+@using BeboerWeb.MVC.Services.PersonService
 @{
     Layout = "_LejerLayout.cshtml";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Lejer</h1>
+    <h1 class="display-4">Velkommen @ViewBag.BrugerNavn</h1>
 </div>
 <div class="body">
-    
-    <h1 class="overskrift">Tilhørende lejer</h1>
     <h3 class="dashboard-text">Dette er din forside. Her kan du vælge forskellige funktioner i toppen af skærmen, som vil sende dig videre til forskellige pages, hvor du kan se dine oplysninger.</h3>
-
 </div>

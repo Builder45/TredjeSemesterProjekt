@@ -118,6 +118,7 @@ namespace BeboerWeb.MVC.Controllers
                 .Any(c => c.UserId == userId.ToString() && c.ClaimType == "IsLejer" && c.ClaimValue == "Yes");
 
             var person = await _personService.GetPersonByUserIdAsync(Guid.Parse(userId));
+            ViewBag.BrugerNavn = person.Fornavn +" "+ person.Efternavn;
             if (person.IsActiveLejer == true)
             {
                 if (userIsLejerClaim)

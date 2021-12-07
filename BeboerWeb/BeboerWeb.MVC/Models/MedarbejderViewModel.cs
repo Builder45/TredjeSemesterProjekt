@@ -6,6 +6,6 @@ namespace BeboerWeb.MVC.Models
     {
         public BrugerViewModel Bruger { get; set; }
 
-        public string stilling { get; set; }
+        public string Stilling { get; set; }
     }
 }
