@@ -1,16 +1,35 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BeboerWeb.API.Contract;
+using BeboerWeb.MVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers
 {
     public class BookingController : Controller
     {
+        private readonly IEjendomService _ejendomService;
+
         private readonly string viewPath = "Views/Dashboard/Common/Booking";
 
-        // GET: BookingController
-        public ActionResult Index()
+        public BookingController(IEjendomService ejendomService)
         {
-            return View($"{viewPath}/Index.cshtml");
+            _ejendomService = ejendomService;
+        }
+
+        // GET: BookingController
+        public async Task<ActionResult> Index()
+        {
+            var models = new List<EjendomWithLokalerViewModel>();
+            var dtos = await _ejendomService.GetEjendommeWithLokalerAsync();
+
+            foreach (var dto in dtos)
+            {
+                var model = new EjendomWithLokalerViewModel();
+                model.AddDataFromDTO(dto);
+                models.Add(model);
+            }
+
+            return View($"{viewPath}/Index.cshtml", models);
         }
 
         // GET: BookingController/Details/5

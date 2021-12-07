@@ -34,7 +34,7 @@ namespace BeboerWeb.API.Controllers
             return dtos;
         }
 
-        [HttpGet("/Lokaler")]
+        [HttpGet("Lokaler")]
         public IEnumerable<EjendomDTO> GetWithLokaler()
         {
             var models = _getEjendomUseCase.GetEjendommeWithLokaler();
