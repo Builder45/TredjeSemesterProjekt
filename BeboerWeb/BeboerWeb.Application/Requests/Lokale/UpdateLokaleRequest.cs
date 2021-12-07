@@ -9,6 +9,7 @@ namespace BeboerWeb.Application.Requests.Lokale
     public class UpdateLokaleRequest
     {
         public Guid Id { get; set; }
+        public string Navn { get; set; }
         public string Adresse { get; set; }
         public string Etage { get; set; }
         public double Areal { get; set; }
@@ -17,10 +18,11 @@ namespace BeboerWeb.Application.Requests.Lokale
         public bool Badevaerelse { get; set; }
         public Guid EjendomId { get; set; }
 
-        public UpdateLokaleRequest(Guid id, string adresse, string etage, double areal, double timepris,
+        public UpdateLokaleRequest(Guid id, string navn, string adresse, string etage, double areal, double timepris,
             bool koekken, bool badevaerelse, Guid ejendomId)
         {
             Id = id;
+            Navn = navn;
             Adresse = adresse;
             Etage = etage;
             Areal = areal;

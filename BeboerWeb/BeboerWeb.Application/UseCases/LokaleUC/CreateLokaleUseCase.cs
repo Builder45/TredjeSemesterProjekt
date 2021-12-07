@@ -24,7 +24,7 @@ namespace BeboerWeb.Application.UseCases.LokaleUC
         public void CreateLokale(CreateLokaleRequest command)
         {
             var ejendom = _ejendomRepository.GetEjendom(command.EjendomId);
-            var lokale = new Lokale(command.Adresse, command.Etage, command.Areal, command.Timepris, command.Koekken, command.Badevaerelse, ejendom);
+            var lokale = new Lokale(command.Navn, command.Adresse, command.Etage, command.Areal, command.Timepris, command.Koekken, command.Badevaerelse, ejendom);
             _lokaleRepository.CreateLokale(lokale);
         }
     }

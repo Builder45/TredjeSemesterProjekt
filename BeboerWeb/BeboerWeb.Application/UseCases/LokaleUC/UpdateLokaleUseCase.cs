@@ -19,7 +19,7 @@ public class UpdateLokaleUseCase : IUpdateLokaleUseCase
     public void UpdateLokale(UpdateLokaleRequest command)
     {
         var ejendom = _ejendomRepository.GetEjendom(command.EjendomId);
-        var lokale = new Lokale( command.Adresse, command.Etage, command.Areal, command.Timepris, command.Koekken, command.Badevaerelse, ejendom);
+        var lokale = new Lokale(command.Navn, command.Adresse, command.Etage, command.Areal, command.Timepris, command.Koekken, command.Badevaerelse, ejendom);
 
         lokale.Id = command.Id;
         _lokaleRepository.UpdateLokale(lokale);

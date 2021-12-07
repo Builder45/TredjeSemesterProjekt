@@ -34,6 +34,7 @@ namespace BeboerWeb.API.Controllers
             model.ForEach(a => dto.Add(new LokaleDTO
             {
                 Id = a.Id,
+                Navn = a.Navn,
                 Adresse = a.Adresse,
                 Etage = a.Etage,
                 Areal = a.Areal,
@@ -53,6 +54,7 @@ namespace BeboerWeb.API.Controllers
             model.ForEach(a => dto.Add(new LokaleDTO()
             {
                 Id = a.Id,
+                Navn = a.Navn,
                 Adresse = a.Adresse,
                 Etage = a.Etage,
                 Areal = a.Areal,
@@ -71,7 +73,7 @@ namespace BeboerWeb.API.Controllers
             var model = _getLokaleUseCase.GetLokale(new GetLokaleRequest {LokaleId = id});
             var dto = new LokaleDTO()
             {
-                Id = model.Id, Adresse = model.Adresse, Etage = model.Etage, Areal = model.Areal,
+                Id = model.Id, Navn = model.Navn, Adresse = model.Adresse, Etage = model.Etage, Areal = model.Areal,
                 Timepris = model.Timepris, Koekken = model.Koekken, Badevaerelse = model.Badevaerelse,
                 EjendomId = model.Ejendom.Id
             };
@@ -82,14 +84,14 @@ namespace BeboerWeb.API.Controllers
         [HttpPost]
         public void Post([FromBody] LokaleDTO dto)
         {
-            _createLokaleUseCase.CreateLokale(new CreateLokaleRequest(dto.Adresse, dto.Etage, dto.Areal, dto.Timepris, dto.Koekken, dto.Badevaerelse,dto.EjendomId));
+            _createLokaleUseCase.CreateLokale(new CreateLokaleRequest(dto.Navn, dto.Adresse, dto.Etage, dto.Areal, dto.Timepris, dto.Koekken, dto.Badevaerelse,dto.EjendomId));
         }
 
         // PUT api/<LokaleController>/
         [HttpPut]
         public void Put([FromBody] LokaleDTO dto)
         {
-            _updateLokaleUseCase.UpdateLokale(new UpdateLokaleRequest(dto.Id, dto.Adresse, dto.Etage, dto.Areal, dto.Timepris, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
+            _updateLokaleUseCase.UpdateLokale(new UpdateLokaleRequest(dto.Id, dto.Navn, dto.Adresse, dto.Etage, dto.Areal, dto.Timepris, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
         }
     }
 }

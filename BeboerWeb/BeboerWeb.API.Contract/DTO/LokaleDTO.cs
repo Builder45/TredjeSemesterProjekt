@@ -9,6 +9,7 @@ namespace BeboerWeb.API.Contract.DTO
     public class LokaleDTO
     {
         public Guid Id { get; set; }
+        public string Navn { get; set; }
         public string Adresse { get; set; }
         public string Etage { get; set; }
         public double Timepris { get; set; }
