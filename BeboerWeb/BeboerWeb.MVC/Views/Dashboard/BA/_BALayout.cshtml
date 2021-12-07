@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeboerWeb.MVC.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="Arnold">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -28,16 +28,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="BAPerson" asp-action="Index">Brugere</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Lejer" asp-action="Lejer">Lejer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ejendom" asp-action="Index">Ejendom</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Ejendom" asp-action="Index">Ejendomme</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="BALejemaal" asp-action="Index">Lejemål</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BALokale" asp-action="Index">Lokale</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="BALokale" asp-action="Index">Lokaler</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -51,12 +48,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-
-
-
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

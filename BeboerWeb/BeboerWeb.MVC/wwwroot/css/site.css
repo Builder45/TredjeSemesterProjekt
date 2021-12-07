@@ -17,23 +17,29 @@ body {
   margin-bottom: 60px;
 }
 
-.overskrift {
-    font-size: 20px;
+.display-4 {
+    font-size: 25px;
     color: #000000;
-    }
+}
 
 .dashboard-text {
     font-family: serif; 
 }
 
-.unik-logo{
-    width:  5%;
+/*CSS for NavBar*/
+/*CSS for Stillingsbetegnelsen*/
+.navbar-brand {
 
 }
+/*CSS for Linksne til de forskellige sider*/
+.container-fluid {
+    background-color: white
+}
 
-
-
-
+/*CSS for Body på siderne*/
+.Arnold {
+    background-color: white
+}
 
 /* CSS for Booking/Index */
 .ejendom_container {
