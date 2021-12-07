@@ -5,8 +5,18 @@
     Layout = "../_LejerLayout.cshtml";
 }
 <style>
+    .div_info {
+        height: 50px;
+        display: table-cell;
+        padding-top: 6px;
+    }
+    .div_kortData {
+        width: 90px;
+    }
+    .div_langData {
+        width: 175px;
+    }
     .container {
-        /*width: 80%;*/
         height: 10%;
         margin: auto;
         padding: 10px;
@@ -15,10 +25,10 @@
         
         background-color: white;    
         display: block;
-        width: 50%;
+        width: 70%;
     }
     .collapsible {
-        background-color: #777;
+        background-color: #3D5F8C;
         color: white;
         cursor: pointer;
         padding: 18px;
@@ -29,45 +39,119 @@
         font-size: 22.5px;
     }
     .active, .collapsible:hover {
-        background-color: #555;
+        background-color: #3D5F8C;
     }
     .content {
         padding: 0 18px;
-        background-color: whitesmoke;
+        background-color: #E6F6FD;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.2s ease-out;
     }
+    
+    
 </style>
 
 <h1>Detaljer om dit/dine lejemål</h1>
 <h1></h1>
+<h2>Aktive lejemål</h2>
 <div class="myDiv">
 @foreach (var item in Model)
 {
-    <button type="button" class ="collapsible">@item.Lejemaal.Adresse</button>
-    <div class="content">
-        <p>
-            Etage : @item.Lejemaal.Etage
-        </p>
-        <p>
-            Husleje : @item.Lejemaal.Husleje
-        </p>
-        <p>
-            Areal : @item.Lejemaal.Areal
-        </p>
-        @if (item.Lejemaal.Koekken == true) {<p>Køkken : Ja</p>} else{<p>Køkken : Nej</p>}
-        @if (item.Lejemaal.Badevaerelse == true){<p>Badeværelse : Ja</p>}else{<p>Badeværelse : Nej</p>}
-        
-        @foreach (var lejer in item.Lejere)
+    @foreach (var lejer in item.Lejere)
+    {
+        @if (DateTime.Now > lejer.LejeperiodeStart && DateTime.Now < lejer.LejeperiodeSlut)
         {
-            <p>Lejeperiode start : @lejer.LejeperiodeStart</p>
-        }
-    </div>
-}
-</div>
+            <button type="button" class="collapsible">@item.Lejemaal.Adresse</button>
+            <div class="content">
+                <div class="div_info div_kortData">
+                    <p>
+                        Etage:<br/>@item.Lejemaal.Etage
+                    </p></div>
+                <div class="div_info div_kortData">
+                    <p>
+                        Husleje:<br/>@item.Lejemaal.Husleje
+                    </p></div>
+                <div class="div_info div_kortData">
+                    <p>
+                        Areal:<br/>@item.Lejemaal.Areal
+                    </p></div>
+                <div class="div_info div_langData">
+                    <p>Lejeperiode start:<br/>@lejer.LejeperiodeStart.ToString("dd-MM-yyyy")</p></div>
+                <div class="div_info div_langData">
+                    <p>Lejeperiode slut:<br/>@lejer.LejeperiodeSlut.ToString("dd-MM-yyyy")</p></div>
 
-<script>
+                <div class="div_info div_kortData">
+                    @if (item.Lejemaal.Koekken)
+                    {
+                        <p>Køkken:<br/>Ja</p>
+                    }
+                    else
+                    {
+                        <p>Køkken:<br/>Nej</p>
+                    }
+                </div>
+                <div class="div_info div_kortData">
+                    @if (item.Lejemaal.Badevaerelse)
+                    {
+                        <p>Badeværelse:<br/>Ja</p>
+                    }
+                    else
+                    {
+                        <p>Badeværelse:<br/>Nej</p>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <br/>
+            <h2>Gamle lejemål</h2>
+            <button type="button" class="collapsible">@item.Lejemaal.Adresse</button>
+            <div class="content">
+                <div class="div_info div_kortData">
+                    <p>
+                        Etage:<br/>@item.Lejemaal.Etage
+                    </p></div>
+                <div class="div_info div_kortData">
+                    <p>
+                        Husleje:<br/>@item.Lejemaal.Husleje
+                    </p></div>
+                <div class="div_info div_kortData">
+                    <p>
+                        Areal:<br/>@item.Lejemaal.Areal
+                    </p></div>
+                <div class="div_info div_langData">
+                    <p>Lejeperiode start:<br/>@lejer.LejeperiodeStart.ToString("dd-MM-yyyy")</p></div>
+                <div class="div_info div_langData">
+                    <p>Lejeperiode slut:<br/>@lejer.LejeperiodeSlut.ToString("dd-MM-yyyy")</p></div>
+                <div class="div_info div_kortData">
+                    @if (item.Lejemaal.Koekken)
+                    {
+                        <p>Køkken:<br/>Ja</p>
+                    }
+                    else
+                    {
+                        <p>Køkken:<br/>Nej</p>
+                    }
+                </div>
+
+                <div class="div_info div_kortData">
+                    @if (item.Lejemaal.Badevaerelse == true)
+                    {
+                        <p>Badeværelse:<br/>Ja</p>
+                    }
+                    else
+                    {
+                        <p>Badeværelse:<br/>Nej</p>
+                    }
+                </div>
+            </div>
+        }
+    }
+}
+
+    <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
 

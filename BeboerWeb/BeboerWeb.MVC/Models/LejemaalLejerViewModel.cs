@@ -4,9 +4,16 @@ namespace BeboerWeb.MVC.Models
 {
     public class LejemaalLejerViewModel
     {
-        public LejemaalViewModel Lejemaal { get; set; }
+        //public Guid Id { get; set; }
+        //public string Adresse { get; set; }
+        //public string Etage { get; set; }
+        //public double Husleje { get; set; }
+        //public double Areal { get; set; }
+        //public bool Koekken { get; set; }
+        //public bool Badevaerelse { get; set; }
 
-        public List<LejerViewModel> Lejere { get; set; }
+        public LejemaalViewModel Lejemaal { get; set; } = new LejemaalViewModel();
+        public List<LejerViewModel> Lejere { get; set; } = new List<LejerViewModel>();
 
         //public LejemaalDTO GetLejemaalDTO()
         //{
