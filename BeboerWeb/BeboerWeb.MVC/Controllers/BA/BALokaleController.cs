@@ -1,14 +1,16 @@
 ﻿using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
+    [Authorize(Policy = "BA")]
+    [Route("Dashboard/Admin/Lokaler/{action}")]
     public class BALokaleController : Controller
     {
         private readonly ILokaleService _lokaleService;
         private readonly IEjendomService _ejendomService;
-
         private readonly string viewPath = "Views/Dashboard/BA/Lokale";
 
         public BALokaleController(ILokaleService lokaleService, IEjendomService ejendomService)

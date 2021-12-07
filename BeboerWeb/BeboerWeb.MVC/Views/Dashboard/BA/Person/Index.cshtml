@@ -7,7 +7,7 @@
 <h1>Oversigt over brugere</h1>
 <br/>
 <p>
-    <a asp-action="Create">
+    <a asp-controller="BAPerson" asp-action="Create">
         <input type="button" value="Opret ny person" class="btn btn-primary" />
     </a>
 </p>
@@ -51,9 +51,9 @@
 				@Html.DisplayFor(modelItem => item)
 			</td>*@
 			<td>
-				<a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+				<a asp-controller="BAPerson" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
 				@*<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |*@
-				<a asp-action="EditPolicies" asp-route-id="@item.BrugerId">Roller</a>
+				<a asp-controller="BAPerson" asp-action="EditPolicies" asp-route-id="@item.BrugerId">Roller</a>
 			</td>
 		</tr>
 	}

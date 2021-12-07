@@ -1,23 +1,20 @@
 ﻿using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
-using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Models;
-using BeboerWeb.MVC.Services.LejemaalService;
-using BeboerWeb.MVC.Services.PersonService;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
+    [Authorize(Policy = "BA")]
+    [Route("Dashboard/Admin/Lejere/{action}")]
     public class BALejerController : Controller
     {
         private readonly ILejerService _lejerService;
         private readonly ILejemaalService _lejemaalService;
         private readonly IPersonService _personService;
         private readonly UserManager<IdentityUser> _userManager;
-
         private readonly string viewPath = "Views/Dashboard/BA/Lejer";
 
         public BALejerController(ILejerService lejerService, IPersonService personService, UserManager<IdentityUser> userManager, ILejemaalService lejemaalService)

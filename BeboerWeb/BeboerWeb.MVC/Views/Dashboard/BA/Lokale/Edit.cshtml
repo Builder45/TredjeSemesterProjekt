@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-controller="BALokale" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Lokale.Id"/>
             <div class="form-group">
@@ -56,7 +56,7 @@
 </div>
 <br/>
 <div>
-    <a asp-action="Index">Tilbage til oversigt</a>
+    <a asp-controller="BALokale" asp-action="Index">Tilbage til oversigt</a>
 </div>
 
 @section Scripts {

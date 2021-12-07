@@ -1,14 +1,15 @@
 ﻿using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers
 {
+    [Authorize]
+    [Route("Booking/{action}")]
     public class BookingController : Controller
     {
         private readonly IEjendomService _ejendomService;
-
         private readonly string viewPath = "Views/Dashboard/Common/Booking";
 
         public BookingController(IEjendomService ejendomService)
@@ -16,30 +17,25 @@ namespace BeboerWeb.MVC.Controllers
             _ejendomService = ejendomService;
         }
 
-        // GET: BookingController
         public async Task<ActionResult> Index()
         {
             var models = new List<EjendomWithLokalerViewModel>();
             var dtos = await _ejendomService.GetEjendommeWithLokalerAsync();
-
             foreach (var dto in dtos)
             {
                 var model = new EjendomWithLokalerViewModel();
                 model.AddDataFromDTO(dto);
                 models.Add(model);
             }
-
             return View($"{viewPath}/Index.cshtml", models);
         }
 
-        // GET: BookingController/Create
         public async Task<ActionResult> Create(Guid id)
         {
             var model = new BookingOverviewViewModel();
             return View($"{viewPath}/Create.cshtml", model);
         }
 
-        // POST: BookingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -54,13 +50,11 @@ namespace BeboerWeb.MVC.Controllers
             }
         }
 
-        // GET: BookingController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: BookingController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -75,13 +69,11 @@ namespace BeboerWeb.MVC.Controllers
             }
         }
 
-        // GET: BookingController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: BookingController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

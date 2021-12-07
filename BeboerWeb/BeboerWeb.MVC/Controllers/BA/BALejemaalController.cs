@@ -12,12 +12,11 @@ using Microsoft.EntityFrameworkCore;
 namespace BeboerWeb.MVC.Controllers.BA
 {
     [Authorize(Policy = "BA")]
-    //[Route("dashboard/admin/lejemaal/")]
+    [Route("Dashboard/Admin/Lejemaal/{action}")]
     public class BALejemaalController : Controller
     {
         private readonly ILejemaalService _lejemaalService;
         private readonly IEjendomService _ejendomService;
-
         private readonly string viewPath = "Views/Dashboard/BA/Lejemaal";
 
         public BALejemaalController(ILejemaalService lejemaalService, IEjendomService ejendomService)
@@ -26,7 +25,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             _ejendomService = ejendomService;
         }
 
-        //[Route("")]
         public async Task<ActionResult> Index()
         {
             var dtos = await _lejemaalService.GetLejemaalsAsync();
@@ -41,7 +39,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Index.cshtml", model);
         }
 
-        //[Route("opret")]
         public async Task<ActionResult> Create()
         {
             var model = new LejemaalEjendommeViewModel();
@@ -72,7 +69,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Create.cshtml");
         }
 
-        //[Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
             var model = new LejemaalEjendommeViewModel();

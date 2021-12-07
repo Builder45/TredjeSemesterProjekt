@@ -1,12 +1,15 @@
 ﻿using System.Security.Claims;
 using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 
 namespace BeboerWeb.MVC.Controllers.Lejer
 {
+    [Authorize(Policy = "Lejer")]
+    [Route("Dashboard/Lejer/MineLejemaal/{action}")]
     public class LejerLejemaalController : Controller
     {
         private readonly ILejemaalService _lejemaalService;
@@ -21,7 +24,6 @@ namespace BeboerWeb.MVC.Controllers.Lejer
             _userManager = userManager;
         }
 
-        //[Route("")]
         public async Task<ActionResult> IndexByLejer()
         {
             //var user = _userManager.GetUserIdAsync(HttpContext.User.);
@@ -41,7 +43,6 @@ namespace BeboerWeb.MVC.Controllers.Lejer
             return View($"{viewPath}/Details.cshtml", model);
         }
 
-        // GET: LejerLejemaalController/Details/5
         public ActionResult Details(Guid id)
         {
             var model = new LejemaalViewModel();
@@ -49,13 +50,11 @@ namespace BeboerWeb.MVC.Controllers.Lejer
             return View($"{viewPath}/Index.cshtml", model);
         }
 
-        // GET: LejerLejemaalController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: LejerLejemaalController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -70,13 +69,11 @@ namespace BeboerWeb.MVC.Controllers.Lejer
             }
         }
 
-        // GET: LejerLejemaalController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: LejerLejemaalController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -91,13 +88,11 @@ namespace BeboerWeb.MVC.Controllers.Lejer
             }
         }
 
-        // GET: LejerLejemaalController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: LejerLejemaalController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

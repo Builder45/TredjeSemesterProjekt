@@ -6,7 +6,7 @@
 
 <h1>Oversigt over lejemål</h1>
 <br/>
-<a asp-action="Create">
+<a asp-controller="BALejemaal" asp-action="Create">
     <input type="button" value="Opret lejemål" class="btn btn-primary" />
 </a>
 <br/>
@@ -56,7 +56,7 @@
                 @Html.DisplayFor(modelitem => item.Badevaerelse)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+                <a asp-controller="BALejemaal" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
                 <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@item.Id">Se lejere</a> 
             </td>
         </tr>

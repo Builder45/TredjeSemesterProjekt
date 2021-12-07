@@ -21,10 +21,10 @@
                     <div class="lokale_info lokale_type"><p>@lokale.Navn</p></div>
                     <div class="lokale_info lokale_adresse"><p>@lokale.Adresse (@lokale.Etage)</p></div>
                     <div class="lokale_info lokale_badevaerelse">
-                        @if (lokale.Badevaerelse) { <img src="img/toilet_icon.png"/> }
+                        @if (lokale.Badevaerelse) { <img src="../img/toilet_icon.png"/> }
                     </div>
                     <div class="lokale_info lokale_koekken">
-                        @if (lokale.Koekken) { <img src="img/kitchen_icon.png"/> }
+                        @if (lokale.Koekken) { <img src="../img/kitchen_icon.png"/> }
                     </div>
                     <div class="lokale_info lokale_booking">
                         <a asp-controller="Booking" asp-action="Create" asp-route-data="@lokale.Id">

@@ -1,4 +1,4 @@
-﻿@model List<BeboerWeb.API.Contract.DTO.EjendomDTO>
+﻿@model List<EjendomViewModel>
 @{
     ViewData["Name"] = "Index";
 	Layout = "../_BALayout.cshtml";
@@ -7,7 +7,7 @@
 <h1>Oversigt over lejemål</h1>
 <br/>
 <p>
-    <a asp-action="Create">
+    <a asp-controller="BAEjendom" asp-action="Create">
         <input type="button" value="Opret ejendom" class="btn btn-primary" />
     </a>
 </p>
@@ -39,7 +39,7 @@
 				@Html.DisplayFor(modelItem => item.By)
 			</td>
 			<td>
-				<a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> 
+				<a asp-controller="BAEjendom" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> 
 			</td>
 		</tr>
 	}

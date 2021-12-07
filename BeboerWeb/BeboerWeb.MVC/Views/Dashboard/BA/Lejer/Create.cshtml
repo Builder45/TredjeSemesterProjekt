@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-controller="BALejer" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Lejer.LejemaalId" />
             <div class="form-group">
@@ -38,11 +38,11 @@
 <div>
     <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@Model.Lejer.LejemaalId">Tilbage til oversigt.</a>
 </div>
-<script>
+@*<script>
     $(document).ready(function() {
         $('.mdb-select').materialSelect();
     });
-</script>
+</script>*@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

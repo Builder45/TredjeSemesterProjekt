@@ -12,14 +12,13 @@ using Microsoft.AspNetCore.Authorization;
 namespace BeboerWeb.MVC.Controllers.BA
 {
     [Authorize(Policy = "BA")]
-    //[Route("dashboard/admin/brugere/")]
+    [Route("Dashboard/Admin/Brugere/{action}")]
     public class BAPersonController : Controller
     {
         private readonly IPersonService _personService;
         private readonly IVicevaertService _vicevaertService;
         private readonly ApplicationDbContext _userDb;
         private readonly UserManager<IdentityUser> _userManager;
-
         private readonly string viewPath = "Views/Dashboard/BA/Person";
 
         public BAPersonController(IPersonService personService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager, IVicevaertService vicevaertService)
@@ -30,7 +29,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             _userManager = userManager;
         }
 
-        //[Route("")]
         public async Task<ActionResult> Index()
         {
             var model = new List<BrugerViewModel>();
@@ -52,13 +50,11 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Index.cshtml", model);
         }
 
-        //[Route("opret")]
         public ActionResult Create()
         {
             return Redirect("~/Identity/Account/Register");
         }
 
-        //[Route("rediger")]
         public async Task<ActionResult> Edit(Guid id)
         {
             var personModel = await _personService.GetPersonAsync(id);
@@ -86,7 +82,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Edit.cshtml", bruger);
         }
 
-        //[Route("roller")]
         public async Task<ActionResult> EditPolicies(Guid id)
         {
             var model = new UserPolicyViewModel
