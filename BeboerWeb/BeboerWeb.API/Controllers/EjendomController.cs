@@ -47,6 +47,7 @@ namespace BeboerWeb.API.Controllers
                 model.Lokaler.ForEach(e => lokaleDtos.Add(new LokaleDTO
                 {
                     Id = e.Id,
+                    Navn = e.Navn,
                     Adresse = e.Adresse, 
                     Etage = e.Etage, 
                     Areal = e.Areal, 

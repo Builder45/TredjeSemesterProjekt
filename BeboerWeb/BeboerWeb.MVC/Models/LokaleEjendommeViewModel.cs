@@ -12,6 +12,7 @@ namespace BeboerWeb.MVC.Models
             return new LokaleDTO()
             {
                 Id = Lokale.Id,
+                Navn = Lokale.Navn,
                 Adresse = Lokale.Adresse,
                 Areal = Lokale.Areal,
                 Etage = Lokale.Etage,
