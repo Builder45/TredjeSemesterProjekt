@@ -57,19 +57,30 @@ namespace BeboerWeb.API.Controllers
         [HttpGet("ByPerson/{personId}")]
         public IEnumerable<BookingDTO> GetCurrentBookingerByPerson(Guid personId)
         {
-            var model = _getBookingUseCase.GetCurrentBookingerByPerson(new GetBookingRequest
+            var models = _getBookingUseCase.GetCurrentBookingerByPerson(new GetBookingRequest
                 {PersonId = personId});
-            var dto = new List<BookingDTO>();
-            
-            model.ForEach(a=>dto.Add(new BookingDTO
+            var dtos = new List<BookingDTO>();
+
+            foreach (var model in models)
             {
-                Id=a.Id,
-                BookingPeriodeStart = a.BookingPeriodeStart,
-                BookingPeriodeSlut = a.BookingPeriodeSlut,
-                LokaleId =a.Lokale.Id,
-                PersonId = a.Person.Id
-            }));
-            return dto;
+                var dto = new BookingDTO
+                {
+                    Id = model.Id,
+                    BookingPeriodeStart = model.BookingPeriodeStart,
+                    BookingPeriodeSlut = model.BookingPeriodeSlut,
+                    PersonId = model.Person.Id
+                };
+                var lokaleDTO = new LokaleDTO
+                {
+                    Id = model.Lokale.Id, Adresse = model.Lokale.Adresse, Etage = model.Lokale.Etage,
+                    Timepris = model.Lokale.Timepris, Areal = model.Lokale.Areal, Koekken = model.Lokale.Koekken,
+                    Badevaerelse = model.Lokale.Badevaerelse, Navn = model.Lokale.Navn
+                };
+                dto.Lokale = lokaleDTO;
+                dtos.Add(dto);
+            }
+
+            return dtos;
         }
 
         // POST api/<Booking>
