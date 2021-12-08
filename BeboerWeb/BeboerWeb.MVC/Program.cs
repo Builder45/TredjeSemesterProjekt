@@ -5,6 +5,7 @@ using BeboerWeb.MVC.Services.EjendomService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BeboerWeb.MVC.Services;
+using BeboerWeb.MVC.Services.BookingService;
 using BeboerWeb.MVC.Services.LejemaalService;
 using BeboerWeb.MVC.Services.LejerService;
 using BeboerWeb.MVC.Services.LokaleService;
@@ -51,6 +52,7 @@ builder.Services.Configure<ApiConfig>(
     builder.Configuration.GetSection("ApiConfig"));
 
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IEjendomService, EjendomService>();
 builder.Services.AddScoped<ILejemaalService, LejemaalService>();
 builder.Services.AddScoped<ILejerService, LejerService>();

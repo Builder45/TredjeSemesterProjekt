@@ -8,9 +8,10 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-controller="Booking" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Booking.Id" />
+            <input type="hidden" asp-for="Booking.LokaleId" />
+            <input type="hidden" asp-for="Booking.PersonId" />
             <div class="form-group">
                 <label asp-for="Booking.BookingPeriodeStart" class="form-label"></label>
                 <input asp-for="Booking.BookingPeriodeStart" type="date" class="form-control" value="2021-01-01"/>

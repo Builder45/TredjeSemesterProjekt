@@ -30,10 +30,10 @@ namespace BeboerWeb.MVC.Services.EjendomService
         public async Task<EjendomDTO> GetEjendomAsync(Guid Id) =>
             await _httpClient.GetFromJsonAsync<EjendomDTO>(_ejendomApiConfig.ServiceUrl + $"/{Id}");
 
-        public async Task CreateEjendomAsync(EjendomDTO ejendom) =>
-            await _httpClient.PostAsJsonAsync(_ejendomApiConfig.ServiceUrl, ejendom);
+        public async Task CreateEjendomAsync(EjendomDTO dto) =>
+            await _httpClient.PostAsJsonAsync(_ejendomApiConfig.ServiceUrl, dto);
 
-        public async Task UpdateEjendomAsync(EjendomDTO ejendom) =>
-            await _httpClient.PutAsJsonAsync(_ejendomApiConfig.ServiceUrl, ejendom);
+        public async Task UpdateEjendomAsync(EjendomDTO dto) =>
+            await _httpClient.PutAsJsonAsync(_ejendomApiConfig.ServiceUrl, dto);
     } 
 }

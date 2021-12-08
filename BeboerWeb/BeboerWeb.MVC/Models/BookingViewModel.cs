@@ -15,11 +15,16 @@ namespace BeboerWeb.MVC.Models
         [DataType(DataType.Date)]
         public DateTime BookingPeriodeSlut { get; set; }
 
+        public Guid LokaleId { get; set; }
+        public Guid PersonId { get; set; }
+
         public void AddDataFromDTO(BookingDTO dto)
         {
             Id = dto.Id;
             BookingPeriodeStart = dto.BookingPeriodeStart;
             BookingPeriodeSlut = dto.BookingPeriodeSlut;
+            LokaleId = dto.LokaleId;
+            PersonId = dto.PersonId;
         }
     }
 }
