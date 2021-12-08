@@ -44,7 +44,12 @@ namespace BeboerWeb.MVC.Controllers
             var model = new BookingOverviewViewModel();
             model.Booking.LokaleId = id;
             model.Booking.PersonId = person.Id;
-            var dtos = await _bookingService.GetBookingerByLokaleAndSearchDateAsync(model.Booking.LokaleId, model.SearchDate);
+
+            var currentDate = DateTime.Now;
+            model.SearchMonth = currentDate.Month;
+            model.SearchYear = currentDate.Year;
+
+            var dtos = await _bookingService.GetBookingerByLokaleAndSearchDateAsync(model.Booking.LokaleId, currentDate);
             foreach (var dto in dtos)
             {
                 var booking = new BookingViewModel();
@@ -59,27 +64,22 @@ namespace BeboerWeb.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(BookingOverviewViewModel model)
         {
-            if (ModelState.IsValid)
+            var booking = new BookingDTO()
             {
-                var booking = new BookingDTO()
-                {
-                    BookingPeriodeStart = model.Booking.BookingPeriodeStart,
-                    BookingPeriodeSlut = model.Booking.BookingPeriodeSlut,
-                    LokaleId = model.Booking.LokaleId,
-                    PersonId = model.Booking.PersonId
-                };
-                await _bookingService.CreateBookingAsync(booking);
-                return RedirectToAction("Index");
-            }
-
-            return View($"{viewPath}/Create.cshtml");
+                BookingPeriodeStart = model.Booking.BookingPeriodeStart,
+                BookingPeriodeSlut = model.Booking.BookingPeriodeSlut,
+                LokaleId = model.Booking.LokaleId,
+                PersonId = model.Booking.PersonId
+            };
+            await _bookingService.CreateBookingAsync(booking);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UpdateOverview(BookingOverviewViewModel model)
         {
-            var searchDate = new DateTime(model.SearchYear, model.SearchMonth, 1);
+            var searchDate = new DateTime(model.SearchYear, model.SearchMonth + 1, 1);
             var dtos = await _bookingService.GetBookingerByLokaleAndSearchDateAsync(model.Booking.LokaleId, searchDate);
             foreach (var dto in dtos)
             {

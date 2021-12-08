@@ -36,17 +36,32 @@
     <input type="hidden" asp-for="Booking.LokaleId"/>
     <label>Vælg måned: </label>
     <select asp-for="SearchMonth">
-        <option value="12" selected>December</option>
-        <option value="1">Januar</option>
-        <option value="2">Februar</option>
+        @for (var i = 0; i < Model.Months.Length; i++)
+        {
+            if (Model.SearchMonth == i + 1)
+            {
+                <option value="@i" selected>@Model.Months[i]</option>
+            }
+            else
+            {
+                <option value="@i">@Model.Months[i]</option>
+            }
+        }
     </select>
     <label>Vælg år: </label>
     <select asp-for="SearchYear">
-        <option value="2021" selected>2021</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
+        @for (var i = DateTime.Now.Year; i < DateTime.Now.Year + 3; i++)
+        {
+            if (Model.SearchYear == i)
+            {
+                <option value="@i" selected>@i</option>
+            }
+            else
+            {
+                <option value="@i">@i</option>
+            }
+        }
     </select>
-    @*<input type="hidden" asp-for="Booking.LokaleId"/>*@
     <input type="submit" value="Opdater" class="btn btn-primary"/>
 </form>
 <br/>
