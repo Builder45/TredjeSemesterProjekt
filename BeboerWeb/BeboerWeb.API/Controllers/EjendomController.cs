@@ -33,7 +33,6 @@ namespace BeboerWeb.API.Controllers
                 Postnr = e.Postnr, 
                 By = e.By
             }));
-
             return dtos;
         }
 

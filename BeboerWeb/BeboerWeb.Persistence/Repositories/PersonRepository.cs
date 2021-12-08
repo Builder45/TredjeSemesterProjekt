@@ -41,11 +41,16 @@ namespace BeboerWeb.Persistence.Repositories
 
         public void UpdatePerson(Person person)
         {
-            if (!personExists(person))
-                throw new ArgumentException("Person with given ID does not exist");
+            if (!PersonExists(person))
+                throw new ArgumentException("Der findes ingen person med det angivne ID");
 
             _db.Person.Update(person);
             _db.SaveChanges();
+        }
+
+        private bool PersonExists(Person person)
+        {
+            return _db.Person.Any(e => e.Id == person.Id);
         }
 
         //public bool IsActiveLejer(Guid personId)
@@ -63,24 +68,7 @@ namespace BeboerWeb.Persistence.Repositories
         //    }
         //    return activeLejer;
         //}
-
-        private bool personExists(Person person)
-        {
-            return _db.Person.Any(e => e.Id == person.Id);
-        }
-
-        
-
     }
-
-
-
-
-
-
-    
-
-
 }
 
 

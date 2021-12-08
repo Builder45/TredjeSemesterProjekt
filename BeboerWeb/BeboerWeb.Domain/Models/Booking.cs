@@ -4,8 +4,6 @@ namespace BeboerWeb.Domain.Models
 {
     public class Booking
     {
-        
-
         public Guid Id { get; set; }
         public DateTime BookingPeriodeStart { get; set; }
         public DateTime BookingPeriodeSlut { get; set; }
