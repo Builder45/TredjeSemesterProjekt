@@ -19,15 +19,20 @@ namespace BeboerWeb.Persistence.Repositories
 
         public List<Booking> GetCurrentBookingerByPerson(Guid personId)
         {
-            throw new NotImplementedException();
-        }
+            var currentDate = DateTime.Now;
+            var person = _db.Person
+                .Include(a => a.Bookinger
+                .Where(s=>s.BookingPeriodeStart >= currentDate|| s.BookingPeriodeSlut >= currentDate ))
+                .ThenInclude(a=>a.Lokale)
+                .FirstOrDefault(a => a.Id == personId);
 
-        public void CreateBooking(Booking booking)
-        {
-            _db.Add(booking);
-            _db.SaveChanges();
-        }
+            if (person == null)
+            {
+                throw new NullReferenceException("Ingen personer fundet");
+            }
 
+            return person.Bookinger;
+        }
         public List<Booking> GetBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate)
         {
             var lokale = _db.Lokale
@@ -56,5 +61,10 @@ namespace BeboerWeb.Persistence.Repositories
             return lokale.Bookinger;
         }
 
+        public void CreateBooking(Booking booking)
+        {
+            _db.Add(booking);
+            _db.SaveChanges();
+        }
     }
 }

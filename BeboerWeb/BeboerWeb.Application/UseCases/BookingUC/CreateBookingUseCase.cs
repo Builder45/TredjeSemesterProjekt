@@ -29,7 +29,7 @@ namespace BeboerWeb.Application.UseCases.BookingUC
             var booking = new Booking(command.BookingPeriodeStart, command.BookingPeriodeSlut, person, lokale);
            
             var otherBookings = _bookingRepository.GetBookingerByLokale(lokale.Id);
-            if (booking.CheckForOverlaps(otherBookings))
+            if (booking.IsOverlappingWith(otherBookings))
                 throw new Exception(
                     $"Den ønskede booking: start {command.BookingPeriodeStart.ToString("dd/MM/yyyy")}, slut {command.BookingPeriodeSlut.ToString("dd/MM/yyyy")} overlapper med en anden booking");
 

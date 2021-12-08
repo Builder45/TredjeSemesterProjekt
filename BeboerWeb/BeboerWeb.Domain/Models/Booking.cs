@@ -23,13 +23,25 @@ namespace BeboerWeb.Domain.Models
             Lokale = lokale;
         }
 
-        public bool CheckForOverlaps(List<Booking> otherBookings)
+        //public bool CheckForOverlaps(List<Booking> otherBookings)
+        //{
+        //    var check = otherBookings.Except(new[] {this}).Any(a =>
+        //        a.BookingPeriodeStart >= BookingPeriodeStart && BookingPeriodeStart <= a.BookingPeriodeSlut);
+        //    return check;
+        //}
+        public bool IsOverlappingWith(List<Booking> otherBookings)
         {
-            var check = otherBookings.Except(new[] {this}).Any(a =>
-                a.BookingPeriodeStart >= BookingPeriodeStart && BookingPeriodeStart <= a.BookingPeriodeSlut);
-            return check;
+            foreach (Booking booking in otherBookings)
+            {
+                if (BookingPeriodeStart < booking.BookingPeriodeSlut)
+                {
+                    if (BookingPeriodeSlut > booking.BookingPeriodeStart)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
-
-
     }
 }
