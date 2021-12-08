@@ -35,5 +35,9 @@ namespace BeboerWeb.MVC.Services.BookingService
             return dateTime.Year + "-" +
                    dateTime.Month.ToString().PadLeft(2, '0');
         }
+
+        public async Task DeleteBookingAsync(Guid id) =>
+            await _httpClient.DeleteAsync(_bookingApiConfig.ServiceUrl+$"/{id}");
+
     } 
 }

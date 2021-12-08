@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model BookingOverviewViewModel
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Name"] = "Create";
+}
+<h1>Sletning af bookning for ...</h1>
+<br/>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeSlut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model =>model.ExistingBookinger.First().PersonId)
+        </th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var booking in Model.ExistingBookinger)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelitem => booking.BookingPeriodeStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => booking.BookingPeriodeSlut)
+            </td>
+            <td>
+                @Html.DisplayNameFor(modelitme=>booking.PersonId)
+            </td>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Booking.Id"/>
+                <input type="hidden" asp-for="Booking.LokaleId"/>
+                <input type="hidden" asp-for="Booking.PersonId"/>
+                <div class="form-group">
+                    <input type="submit" value="Slet booking" class="btn btn-primary"/>
+                </div>
+            </form>
+        </tr>
+    }
+    </tbody>
+
+</table>
+<div>
+    <a asp-controller="Booking" asp-action="Index">Tilbage til lokaleoversigten.</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

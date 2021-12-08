@@ -93,23 +93,42 @@ namespace BeboerWeb.MVC.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            return View();
+            var brugerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var person = await _personService.GetPersonByBrugerAsync(Guid.Parse(brugerId));
+
+            var model = new BookingOverviewViewModel();
+            model.Booking.LokaleId = id;
+            model.Booking.PersonId = person.Id;
+            var dtos = await _bookingService.GetBookingerByLokaleAsync(model.Booking.LokaleId, model.SearchDate);
+            foreach (var dto in dtos)
+            {
+                var booking = new BookingViewModel();
+                booking.AddDataFromDTO(dto);
+                model.ExistingBookinger.Remove(booking);
+            }
+            return View($"{viewPath}/Delete.cshtml", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(BookingOverviewViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var booking = new BookingDTO()
+                {
+                    BookingPeriodeStart = model.Booking.BookingPeriodeStart,
+                    BookingPeriodeSlut = model.Booking.BookingPeriodeSlut,
+                    LokaleId = model.Booking.LokaleId,
+                    PersonId = model.Booking.PersonId
+                };
+                await _bookingService.DeleteBookingAsync(model.Booking.Id);
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View($"{viewPath}/Delete.cshtml");
         }
     }
 }

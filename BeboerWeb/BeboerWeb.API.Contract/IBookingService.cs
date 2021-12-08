@@ -6,5 +6,6 @@ namespace BeboerWeb.API.Contract
     {
         Task<List<BookingDTO>> GetBookingerByLokaleAsync(Guid lokaleId, DateTime searchDate);
         Task CreateBookingAsync(BookingDTO dto);
+        Task DeleteBookingAsync(Guid id);
     }
 }
