@@ -51,6 +51,7 @@ namespace BeboerWeb.MVC.Controllers
                 booking.AddDataFromDTO(dto);
                 model.ExistingBookinger.Add(booking);
             }
+
             return View($"{viewPath}/Create.cshtml", model);
         }
 
@@ -72,6 +73,21 @@ namespace BeboerWeb.MVC.Controllers
             }
 
             return View($"{viewPath}/Create.cshtml");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateOverview(BookingOverviewViewModel model)
+        {
+            var searchDate = new DateTime(model.SearchYear, model.SearchMonth, 1);
+            var dtos = await _bookingService.GetBookingerByLokaleAndSearchDateAsync(model.Booking.LokaleId, searchDate);
+            foreach (var dto in dtos)
+            {
+                var booking = new BookingViewModel();
+                booking.AddDataFromDTO(dto);
+                model.ExistingBookinger.Add(booking);
+            }
+            return View($"{viewPath}/Create.cshtml", model);
         }
 
         public ActionResult Edit(int id)
