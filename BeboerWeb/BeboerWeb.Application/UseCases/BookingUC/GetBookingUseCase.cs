@@ -20,9 +20,14 @@ namespace BeboerWeb.Application.UseCases.BookingUC
             _bookingRepository = bookingRepository;
         }
 
-        public List<Booking> GetAllBookingerByLokaleBySearchDate(GetBookingRequest command)
+        public List<Booking> GetBookingerByLokaleBySearchDate(GetBookingRequest command)
         {
-            return _bookingRepository.GetAllBookingerByLokaleBySearchDate(command.LokaleId, command.SearchDate);
+            return _bookingRepository.GetBookingerByLokaleBySearchDate(command.LokaleId, command.SearchDate);
+        }
+
+        public List<Booking> GetBookingerByLokale(GetBookingRequest command)
+        {
+            return _bookingRepository.GetBookingerByLokale(command.LokaleId);
         }
     }
 }

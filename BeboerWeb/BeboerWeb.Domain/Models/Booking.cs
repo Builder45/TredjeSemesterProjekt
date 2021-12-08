@@ -25,8 +25,8 @@ namespace BeboerWeb.Domain.Models
 
         public bool CheckForOverlaps(List<Booking> otherBookings)
         {
-            var check = true;
-
+            var check = otherBookings.Except(new[] {this}).Any(a =>
+                a.BookingPeriodeStart >= BookingPeriodeStart && BookingPeriodeStart <= a.BookingPeriodeSlut);
             return check;
         }
 

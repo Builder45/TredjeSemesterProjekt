@@ -9,9 +9,12 @@ namespace BeboerWeb.Application.Persistence
 {
     public interface IBookingRepository
     {
-        List<Booking> GetAllBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate);
+        List<Booking> GetBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate);
+
+        List<Booking> GetBookingerByLokale(Guid lokaleId);
 
         void CreateBooking(Booking booking);
+
 
     }
 }

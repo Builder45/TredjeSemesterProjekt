@@ -20,16 +20,26 @@ namespace BeboerWeb.API.Controllers
             //_updateBookingUseCase = updateBookingUseCase;
         }
 
-        [HttpGet]
-        public IEnumerable<string> GetBookinger()
+        [HttpGet("ByLokale/{lokaleId}")]
+        public IEnumerable<BookingDTO> GetBookingerByLokale(Guid lokaleId)
         {
-            return new string[] { "value1", "value2" };
+            var model = _getBookingUseCase.GetBookingerByLokale(new GetBookingRequest
+                {LokaleId = lokaleId });
+            var dto = new List<BookingDTO>();
+
+            model.ForEach(a=>dto.Add(new BookingDTO
+            {
+                Id = a.Id,
+                BookingPeriodeStart = a.BookingPeriodeStart,
+                BookingPeriodeSlut = a.BookingPeriodeSlut
+            }));
+            return dto;
         }
 
         [HttpGet("ByLokale/{lokaleId}/{searchDate}")]
-        public IEnumerable<BookingDTO> GetBookingerByLokale(Guid lokaleId, DateTime searchDate)
+        public IEnumerable<BookingDTO> GetBookingerByLokaleAndSearchDate(Guid lokaleId, DateTime searchDate)
         {
-            var model = _getBookingUseCase.GetAllBookingerByLokaleBySearchDate(new GetBookingRequest
+            var model = _getBookingUseCase.GetBookingerByLokaleBySearchDate(new GetBookingRequest
                 {LokaleId = lokaleId, SearchDate = searchDate});
             var dto = new List<BookingDTO>();
 
@@ -41,6 +51,7 @@ namespace BeboerWeb.API.Controllers
             }));
             return dto;
         }
+
 
         // POST api/<Booking>
         [HttpPost]

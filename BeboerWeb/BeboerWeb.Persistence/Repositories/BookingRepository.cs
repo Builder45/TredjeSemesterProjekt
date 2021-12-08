@@ -23,7 +23,7 @@ namespace BeboerWeb.Persistence.Repositories
             _db.SaveChanges();
         }
 
-        public List<Booking> GetAllBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate)
+        public List<Booking> GetBookingerByLokaleBySearchDate(Guid lokaleId, DateTime searchDate)
         {
             var lokale = _db.Lokale
                 .Include(a => a.Bookinger
@@ -36,5 +36,20 @@ namespace BeboerWeb.Persistence.Repositories
             }
             return lokale.Bookinger;
         }
+
+        public List<Booking> GetBookingerByLokale(Guid lokaleId)
+        {
+            var lokale = _db.Lokale
+                .Include(a => a.Bookinger)
+                .FirstOrDefault(a => a.Id == lokaleId);
+
+            if (lokale == null)
+            {
+                throw new NullReferenceException("Ingen lokaler fundet");
+            }
+
+            return lokale.Bookinger;
+        }
+
     }
 }
