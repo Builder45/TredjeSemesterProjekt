@@ -44,7 +44,7 @@ namespace BeboerWeb.MVC.Controllers
             var model = new BookingOverviewViewModel();
             model.Booking.LokaleId = id;
             model.Booking.PersonId = person.Id;
-            var dtos = await _bookingService.GetBookingerByLokaleAsync(model.Booking.LokaleId, model.SearchDate);
+            var dtos = await _bookingService.GetBookingerByLokaleAndSearchDateAsync(model.Booking.LokaleId, model.SearchDate);
             foreach (var dto in dtos)
             {
                 var booking = new BookingViewModel();
@@ -93,42 +93,34 @@ namespace BeboerWeb.MVC.Controllers
             }
         }
 
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete()
         {
             var brugerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var person = await _personService.GetPersonByBrugerAsync(Guid.Parse(brugerId));
 
             var model = new BookingOverviewViewModel();
-            model.Booking.LokaleId = id;
             model.Booking.PersonId = person.Id;
-            var dtos = await _bookingService.GetBookingerByLokaleAsync(model.Booking.LokaleId, model.SearchDate);
+            var dtos = await _bookingService.GetBookingerByBrugerAsync(model.Booking.PersonId);
             foreach (var dto in dtos)
             {
                 var booking = new BookingViewModel();
                 booking.AddDataFromDTO(dto);
-                model.ExistingBookinger.Remove(booking);
+                model.ExistingBookinger.Add(booking);
             }
-            return View($"{viewPath}/Delete.cshtml", model);
+            return View($"{viewPath}/MineBookinger.cshtml", model);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(BookingOverviewViewModel model)
+        public async Task<ActionResult> Delete(Guid id)
         {
             if (ModelState.IsValid)
             {
-                var booking = new BookingDTO()
-                {
-                    BookingPeriodeStart = model.Booking.BookingPeriodeStart,
-                    BookingPeriodeSlut = model.Booking.BookingPeriodeSlut,
-                    LokaleId = model.Booking.LokaleId,
-                    PersonId = model.Booking.PersonId
-                };
-                await _bookingService.DeleteBookingAsync(model.Booking.Id);
-                return RedirectToAction("Index");
+                await _bookingService.DeleteBookingAsync(id);
+                return RedirectToAction("Delete");
             }
 
-            return View($"{viewPath}/Delete.cshtml");
+            return View($"{viewPath}/MineBookinger.cshtml");
         }
     }
 }

@@ -86,10 +86,10 @@ namespace BeboerWeb.API.Controllers
         {
         }
 
-        [HttpDelete("{bookingId}")]
-        public void DeleteBooking(Guid bookingId)
+        [HttpDelete("{id}")]
+        public void DeleteBooking(Guid id)
         {
-            _deleteBookingUseCase.DeleteBooking(new DeleteBookingRequest{Id = bookingId});
+            _deleteBookingUseCase.DeleteBooking(new DeleteBookingRequest{Id = id});
         }
     }
 }

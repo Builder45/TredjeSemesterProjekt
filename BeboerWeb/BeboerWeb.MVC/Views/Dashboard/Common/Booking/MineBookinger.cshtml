@@ -18,9 +18,7 @@
             @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeSlut)
         </th>
         <th>
-            @Html.DisplayNameFor(model =>model.ExistingBookinger.First().PersonId)
         </th>
-        
     </tr>
     </thead>
     <tbody>
@@ -34,16 +32,8 @@
                 @Html.DisplayFor(modelitem => booking.BookingPeriodeSlut)
             </td>
             <td>
-                @Html.DisplayNameFor(modelitme=>booking.PersonId)
+                <a asp-controller="Booking" asp-action="Delete" asp-route-id="@booking.Id">Slet</a> 
             </td>
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="Booking.Id"/>
-                <input type="hidden" asp-for="Booking.LokaleId"/>
-                <input type="hidden" asp-for="Booking.PersonId"/>
-                <div class="form-group">
-                    <input type="submit" value="Slet booking" class="btn btn-primary"/>
-                </div>
-            </form>
         </tr>
     }
     </tbody>

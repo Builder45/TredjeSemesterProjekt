@@ -21,23 +21,25 @@ namespace BeboerWeb.MVC.Services.BookingService
             _httpClient.BaseAddress = new Uri(options.Value.BaseUrl);
         }
 
-        public async Task<List<BookingDTO>> GetBookingerByLokaleAsync(Guid lokaleId, DateTime searchDate)
+        public async Task<List<BookingDTO>> GetBookingerByLokaleAndSearchDateAsync(Guid lokaleId, DateTime searchDate)
         {
             var convertedSearch = ConvertDateTimeToApiDateTime(searchDate);
             return await _httpClient.GetFromJsonAsync<List<BookingDTO>>(_bookingApiConfig.ServiceUrl + $"/ByLokale/{lokaleId}/{convertedSearch}");
         }
 
+        public async Task<List<BookingDTO>> GetBookingerByBrugerAsync(Guid brugerId) => 
+            await _httpClient.GetFromJsonAsync<List<BookingDTO>>(_bookingApiConfig.ServiceUrl + $"/ByPerson/{brugerId}");
+
         public async Task CreateBookingAsync(BookingDTO dto) =>
             await _httpClient.PostAsJsonAsync(_bookingApiConfig.ServiceUrl, dto);
+        
+        public async Task DeleteBookingAsync(Guid id) =>
+            await _httpClient.DeleteAsync(_bookingApiConfig.ServiceUrl+$"/{id}");
 
         private string ConvertDateTimeToApiDateTime(DateTime dateTime)
         {
             return dateTime.Year + "-" +
                    dateTime.Month.ToString().PadLeft(2, '0');
         }
-
-        public async Task DeleteBookingAsync(Guid id) =>
-            await _httpClient.DeleteAsync(_bookingApiConfig.ServiceUrl+$"/{id}");
-
     } 
 }
