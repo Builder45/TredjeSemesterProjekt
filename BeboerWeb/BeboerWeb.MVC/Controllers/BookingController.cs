@@ -98,25 +98,25 @@ namespace BeboerWeb.MVC.Controllers
             var brugerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var person = await _personService.GetPersonByBrugerAsync(Guid.Parse(brugerId));
 
-            var model = new BookingOverviewViewModel();
+            var model = new MineBookingerViewModel();
             model.Booking.PersonId = person.Id;
             var dtos = await _bookingService.GetBookingerByBrugerAsync(model.Booking.PersonId);
             foreach (var dto in dtos)
             {
                 var booking = new BookingViewModel();
                 booking.AddDataFromDTO(dto);
-                model.ExistingBookinger.Add(booking);
+                model.Bookinger.Add(booking);
             }
             return View($"{viewPath}/MineBookinger.cshtml", model);
         }
-
-        [HttpDelete]
+        
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(MineBookingerViewModel model)
         {
             if (ModelState.IsValid)
             {
-                await _bookingService.DeleteBookingAsync(id);
+                await _bookingService.DeleteBookingAsync(model.Booking.Id);
                 return RedirectToAction("Delete");
             }
 

@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model BookingOverviewViewModel
+@model MineBookingerViewModel
 @{
     Layout = "_Layout.cshtml";
     ViewData["Name"] = "Create";
@@ -12,30 +12,46 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeStart)
+            @Html.DisplayNameFor(model => model.Bookinger.First().Lokale.Adresse)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeSlut)
+            @Html.DisplayNameFor(model => model.Bookinger.First().Lokale.Navn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bookinger.First().BookingPeriodeStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bookinger.First().BookingPeriodeSlut)
         </th>
         <th>
         </th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var booking in Model.ExistingBookinger)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelitem => booking.BookingPeriodeStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => booking.BookingPeriodeSlut)
-            </td>
-            <td>
-                <a asp-controller="Booking" asp-action="Delete" asp-route-id="@booking.Id">Slet</a> 
-            </td>
-        </tr>
-    }
+    <form asp-controller="Booking" asp-action="Delete">
+        @foreach (var booking in Model.Bookinger)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(item => booking.Lokale.Adresse)
+                </td>
+                <td>
+                    @Html.DisplayFor(item => booking.Lokale.Navn)
+                </td>
+                <td>
+                    @Html.DisplayFor(item => booking.BookingPeriodeStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(item => booking.BookingPeriodeSlut)
+                </td>
+                <td>
+                    <input type="hidden" asp-for="@booking.Id"/>
+
+                    <input type="submit" value="Slet" class="btn btn-primary"/>
+                </td>
+            </tr>
+        }
+    </form>
     </tbody>
 
 </table>

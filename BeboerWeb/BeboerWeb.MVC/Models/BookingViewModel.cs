@@ -3,7 +3,7 @@ using BeboerWeb.API.Contract.DTO;
 
 namespace BeboerWeb.MVC.Models
 {
-    public class BookingViewModel
+    public class BookingViewModel 
     {
         public Guid Id { get; set; }
 
@@ -18,6 +18,7 @@ namespace BeboerWeb.MVC.Models
         public Guid LokaleId { get; set; }
         public Guid PersonId { get; set; }
 
+        public LokaleViewModel Lokale { get; set; } = new LokaleViewModel();
         public void AddDataFromDTO(BookingDTO dto)
         {
             Id = dto.Id;
@@ -25,6 +26,11 @@ namespace BeboerWeb.MVC.Models
             BookingPeriodeSlut = dto.BookingPeriodeSlut;
             LokaleId = dto.LokaleId;
             PersonId = dto.PersonId;
+
+            if (dto.Lokale != null)
+            {
+                Lokale.AddDataFromDto(dto.Lokale);
+            }
         }
     }
 }
