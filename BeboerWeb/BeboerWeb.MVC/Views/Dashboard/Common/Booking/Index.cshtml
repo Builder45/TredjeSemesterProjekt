@@ -7,6 +7,9 @@
 <div class="text-center">
     <h1 class="display-4">Lokaleoversigt</h1>
 </div>
+<a asp-controller="Booking" asp-action="Delete">
+    <input type="button" value="Mine bookinger" class="btn btn-primary"/>
+</a>
 <br/>
 <div class="row">
     @foreach (var ejendom in Model)

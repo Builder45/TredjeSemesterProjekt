@@ -1,17 +1,17 @@
 ﻿@model BookingOverviewViewModel
 @{
-	Layout = "_Layout.cshtml";
+    Layout = "_Layout.cshtml";
     ViewData["Name"] = "Create";
 }
 
-<h1>Ny booking for ...</h1>
-<hr />
+<h2>Ny booking for ...</h2>
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-controller="Booking" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Booking.LokaleId" />
-            <input type="hidden" asp-for="Booking.PersonId" />
+            <input type="hidden" asp-for="Booking.LokaleId"/>
+            <input type="hidden" asp-for="Booking.PersonId"/>
             <div class="form-group">
                 <label asp-for="Booking.BookingPeriodeStart" class="form-label"></label>
                 <input asp-for="Booking.BookingPeriodeStart" type="date" class="form-control" value="2021-01-01"/>
@@ -19,15 +19,33 @@
                 <label asp-for="Booking.BookingPeriodeSlut" class="form-label"></label>
                 <input asp-for="Booking.BookingPeriodeSlut" type="date" class="form-control" value="2021-01-01"/>
                 <br/>
-                <br/>
             </div>
             <br/>
             <div class="form-group">
-                <input type="submit" value="Opret booking" class="btn btn-primary" />
+                <input type="submit" value="Opret booking" class="btn btn-primary"/>
             </div>
         </form>
     </div>
 </div>
+<br/>
+<br/>
+<h2>Eksisterende bookinger:</h2>
+<hr/>
+<label>Vælg måned: </label>
+<select>
+    <option value="12" selected>December</option>
+    <option value="1">Januar</option>
+    <option value="2">Februar</option>
+    @*    @foreach (var month in ViewData["month"] as string[])
+    {}*@
+</select>
+<label>Vælg år: </label>
+<select>
+    <option value="2021" selected>2021</option>
+    <option value="2022">2022</option>
+    <option value="2023">2023</option>
+</select>
+<input type="button" value="Opdater" class="btn btn-primary"/>
 <br/>
 <br/>
 <table class="table">
