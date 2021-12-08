@@ -29,5 +29,10 @@ namespace BeboerWeb.Application.UseCases.BookingUC
         {
             return _bookingRepository.GetBookingerByLokale(command.LokaleId);
         }
+
+        public List<Booking> GetCurrentBookingerByPerson(GetBookingRequest command)
+        {
+            return _bookingRepository.GetCurrentBookingerByPerson(command.PersonId);
+        }
     }
 }

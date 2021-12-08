@@ -26,7 +26,7 @@ namespace BeboerWeb.Application.UseCases.BookingUC
         {
             var person = _personRepository.GetPerson(command.PersonId);
             var lokale = _lokaleRepository.GetLokale(command.LokaleId);
-            var booking = new Booking(command.BookingPeriodeStart, command.BookingPeriodeStart, person, lokale);
+            var booking = new Booking(command.BookingPeriodeStart, command.BookingPeriodeSlut, person, lokale);
            
             var otherBookings = _bookingRepository.GetBookingerByLokale(lokale.Id);
             if (booking.CheckForOverlaps(otherBookings))

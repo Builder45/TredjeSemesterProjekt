@@ -10,9 +10,10 @@ namespace BeboerWeb.Application.UseCases.BookingUC.Interfaces
 {
     public interface IGetBookingUseCase
     {
-
         List<Booking> GetBookingerByLokaleBySearchDate(GetBookingRequest command);
 
         List<Booking> GetBookingerByLokale(GetBookingRequest command);
+
+        List<Booking> GetCurrentBookingerByPerson(GetBookingRequest command);
     }
 }

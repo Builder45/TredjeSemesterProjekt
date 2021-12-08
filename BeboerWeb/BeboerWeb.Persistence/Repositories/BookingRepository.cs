@@ -17,6 +17,11 @@ namespace BeboerWeb.Persistence.Repositories
             _db = db;
         }
 
+        public List<Booking> GetCurrentBookingerByPerson(Guid personId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateBooking(Booking booking)
         {
             _db.Add(booking);
