@@ -61,9 +61,20 @@ namespace BeboerWeb.Persistence.Repositories
             return lokale.Bookinger;
         }
 
+        public Booking GetBooking(Guid id)
+        {
+            return _db.Booking.Find(id);
+        }
+
         public void CreateBooking(Booking booking)
         {
             _db.Add(booking);
+            _db.SaveChanges();
+        }
+
+        public void DeleteBooking(Booking booking)
+        {
+            _db.Remove(booking);
             _db.SaveChanges();
         }
     }

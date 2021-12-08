@@ -54,6 +54,7 @@ builder.Services.AddScoped<IGetLokaleUseCase, GetLokaleUseCase>();
 builder.Services.AddScoped<IIsActiveLejerUseCase, IsActiveLejerUseCase>();
 builder.Services.AddScoped<IGetBookingUseCase, GetBookingUseCase>();
 builder.Services.AddScoped<ICreateBookingUseCase, CreateBookingUseCase>();
+builder.Services.AddScoped<IDeleteBookingUseCase, DeleteBookingUseCase>();
 //builder.Services.AddScoped<IUpdateBookingUseCase, UpdateBookingUseCase>();
 
 // Add services to the container

@@ -11,12 +11,14 @@ namespace BeboerWeb.API.Controllers
     {
         private readonly ICreateBookingUseCase _createBookingUseCase;
         private readonly IGetBookingUseCase _getBookingUseCase;
+        private readonly IDeleteBookingUseCase _deleteBookingUseCase;
         //private readonly IUpdateBookingUseCase _updateBookingUseCase;
 
-        public BookingController(IGetBookingUseCase getBookingUseCase, ICreateBookingUseCase createBookingUseCase)//, IUpdateBookingUseCase updateBookingUseCase)
+        public BookingController(IGetBookingUseCase getBookingUseCase, ICreateBookingUseCase createBookingUseCase, IDeleteBookingUseCase deleteBookingUseCase)//, IUpdateBookingUseCase updateBookingUseCase)
         {
             _createBookingUseCase = createBookingUseCase;
             _getBookingUseCase = getBookingUseCase;
+            _deleteBookingUseCase = deleteBookingUseCase;
             //_updateBookingUseCase = updateBookingUseCase;
         }
 
@@ -78,22 +80,16 @@ namespace BeboerWeb.API.Controllers
                 (dto.BookingPeriodeStart, dto.BookingPeriodeSlut, dto.PersonId, dto.LokaleId));
         }
 
-        // GET api/<Booking>/5
-        [HttpGet("{id}")]
-        public string GetBooking(int id)
-        {
-            return "value";
-        }
-
         // PUT api/<Booking>/5
         [HttpPut("{id}")]
         public void PutBooking(int id, [FromBody] string value)
         {
         }
 
-        [HttpDelete("{id}")]
-        public void DeleteBooking(int id)
+        [HttpDelete("{bookingId}")]
+        public void DeleteBooking(Guid bookingId)
         {
+            _deleteBookingUseCase.DeleteBooking(new DeleteBookingRequest{Id = bookingId});
         }
     }
 }

@@ -22,13 +22,6 @@ namespace BeboerWeb.Domain.Models
             Person = person;
             Lokale = lokale;
         }
-
-        //public bool CheckForOverlaps(List<Booking> otherBookings)
-        //{
-        //    var check = otherBookings.Except(new[] {this}).Any(a =>
-        //        a.BookingPeriodeStart >= BookingPeriodeStart && BookingPeriodeStart <= a.BookingPeriodeSlut);
-        //    return check;
-        //}
         public bool IsOverlappingWith(List<Booking> otherBookings)
         {
             foreach (Booking booking in otherBookings)
@@ -41,6 +34,21 @@ namespace BeboerWeb.Domain.Models
                     }
                 }
             }
+            return false;
+        }
+
+        public bool IsOldOrStarted()
+        {
+            if (BookingPeriodeSlut < DateTime.Now)
+            {
+                return true;
+            }
+
+            if (BookingPeriodeStart < DateTime.Now)
+            {
+                return true;
+            }
+
             return false;
         }
     }

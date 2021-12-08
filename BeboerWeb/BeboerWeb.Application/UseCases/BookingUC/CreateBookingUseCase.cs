@@ -32,7 +32,6 @@ namespace BeboerWeb.Application.UseCases.BookingUC
             if (booking.IsOverlappingWith(otherBookings))
                 throw new Exception(
                     $"Den ønskede booking: start {command.BookingPeriodeStart.ToString("dd/MM/yyyy")}, slut {command.BookingPeriodeSlut.ToString("dd/MM/yyyy")} overlapper med en anden booking");
-
             _bookingRepository.CreateBooking(booking);
         }
     }
