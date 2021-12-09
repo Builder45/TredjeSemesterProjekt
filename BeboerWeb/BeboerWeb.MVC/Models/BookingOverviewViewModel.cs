@@ -13,9 +13,9 @@
             "August", "September", "Oktober", "November", "December"
         };
 
-        //public int[] Years { get; } =
-        //{
-        //    DateTime.Now.Year, DateTime.Now.Year + 1, 
-        //};
+        public string GetDateString()
+        {
+            return SearchYear + "-" + SearchMonth.ToString().PadLeft(2, '0') + "-01";
+        }
     }
 }

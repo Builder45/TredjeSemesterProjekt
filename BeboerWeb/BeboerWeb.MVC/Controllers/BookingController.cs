@@ -79,7 +79,7 @@ namespace BeboerWeb.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UpdateOverview(BookingOverviewViewModel model)
         {
-            var searchDate = new DateTime(model.SearchYear, model.SearchMonth + 1, 1);
+            var searchDate = new DateTime(model.SearchYear, model.SearchMonth, 1);
             var dtos = await _bookingService.GetBookingerByLokaleAndSearchDateAsync(model.Booking.LokaleId, searchDate);
             foreach (var dto in dtos)
             {
