@@ -26,7 +26,6 @@ namespace BeboerWeb.MVC.Controllers.Lejer
 
         public async Task<ActionResult> IndexByLejer()
         {
-            //var user = _userManager.GetUserIdAsync(HttpContext.User.);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var dtos = await _lejemaalService.GetLejemaalsByBrugerAsync(Guid.Parse(userId));
             
