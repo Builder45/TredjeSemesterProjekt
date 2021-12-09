@@ -130,20 +130,8 @@ namespace BeboerWeb.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(MineBookingerViewModel model)
         {
-            
-            //if (ModelState.IsValid)
-            //{
-                await _bookingService.DeleteBookingAsync(model.Booking.Id);
-                return RedirectToAction("Delete");
-            //}
-            //if (!ModelState.IsValid)
-            //{
-            //    var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-
-            //    // Breakpoint, Log or examine the list with Exceptions.
-
-            //}
-            //return View($"{viewPath}/MineBookinger.cshtml");
+            await _bookingService.DeleteBookingAsync(model.Booking.Id);
+            return RedirectToAction("Delete");
         }
     }
 }
