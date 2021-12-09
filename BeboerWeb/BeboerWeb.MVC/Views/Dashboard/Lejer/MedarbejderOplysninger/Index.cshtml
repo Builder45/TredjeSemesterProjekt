@@ -5,3 +5,51 @@
 }
 <h1>Oversigt over medarbejdere</h1>
 <h2>Her vil der komme oplysninger om medarbejderne tilknyttet ejendommen</h2>
+
+@*<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Bruger.Fornavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Bruger.Efternavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Bruger.Email)
+        </th>		
+        <th>
+            @Html.DisplayNameFor(model => model.First().Bruger.Telefonnr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Stilling)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var medarbejder in Model) 
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelitem => medarbejder.Bruger.Fornavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => medarbejder.Bruger.Efternavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => medarbejder.Bruger.Email)
+            </td>		
+            <td>
+                @Html.DisplayFor(modelitem => medarbejder.Bruger.Telefonnr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => medarbejder.Stilling)
+            </td>
+            <td>|
+                <a asp-controller="LejerMedarbejder" asp-action="Index" asp-route-id="@medarbejder.BrugerId">Kontakt</a> 
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>*@

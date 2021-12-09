@@ -1,7 +1,10 @@
 ﻿using BeboerWeb.API.Contract;
+using BeboerWeb.MVC.Data;
+using BeboerWeb.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Controllers.Lejer
 {
@@ -11,87 +14,37 @@ namespace BeboerWeb.MVC.Controllers.Lejer
     {
         private readonly ILejerService _lejerService;
         private readonly IPersonService _personService;
+        private readonly ApplicationDbContext _userDb;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly string viewPath = "Views/Dashboard/Lejer/MedarbejderOplysninger";
 
         public LejerMedarbejderController(ILejerService lejerService, IPersonService personService,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, ApplicationDbContext userDb)
         {
             _lejerService = lejerService;
             _personService = personService;
             _userManager = userManager;
+            _userDb = userDb;
         }
 
-        public async Task<ActionResult> IndexByLejer()
+        public async Task<ActionResult> Index()
         {
-            return View($"{viewPath}/Details.cshtml");
-        }
+            //var model = new List<MedarbejderViewModel>();
+            //var personList = await _personService.GetPersonerAsync();
+            //var brugerList = await _userDb.Users.ToListAsync();
+            //foreach (var person in personList)
+            //{
+            //    var brugerModel = new MedarbejderViewModel();
+            //    brugerModel.AddDataFromDTO(person);
 
-        public ActionResult Index()
-        {
-            return View($"{viewPath}/Index.cshtml");
-        }
+            //    var bruger = brugerList.Find(bruger => bruger.Id == person.BrugerId.ToString());
+            //    if (bruger != null)
+            //    {
+            //    }
 
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            //    model.Add(brugerModel);
+            //}
+            return View($"{viewPath}/Index.cshtml"/*, model*/);
         }
     }
 }
