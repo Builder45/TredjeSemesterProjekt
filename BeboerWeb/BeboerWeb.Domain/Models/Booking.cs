@@ -15,6 +15,8 @@ namespace BeboerWeb.Domain.Models
         public Booking() { }
         public Booking(DateTime bookingPeriodeStart, DateTime bookingPeriodeSlut, Person person, Lokale lokale)
         {
+            if (bookingPeriodeSlut > bookingPeriodeStart)
+                throw new ArgumentException("Slutdatoen skal være efter startdatoen");
             BookingPeriodeStart = bookingPeriodeStart;
             BookingPeriodeSlut = bookingPeriodeSlut;
             Person = person;
@@ -35,6 +37,12 @@ namespace BeboerWeb.Domain.Models
             return false;
         }
 
+        public bool IsInThePast()
+        {
+            if (BookingPeriodeStart < DateTime.Now)
+                return true;
+            return false;
+        }
         public bool IsOldOrStarted()
         {
             if (BookingPeriodeSlut < DateTime.Now)
