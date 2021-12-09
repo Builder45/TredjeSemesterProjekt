@@ -4,10 +4,14 @@
     ViewData["Name"] = "Create";
 }
 
-<h2>Ny booking for ...</h2>
+<h2>@Model.Booking.Lokale.Navn - @Model.Booking.Lokale.Adresse (@Model.Booking.Lokale.Etage) - Booking</h2>
 <hr/>
 <div class="row">
     <div class="col-md-4">
+        <p>Oplysninger om lokalet:</p>
+        <p>Areal: @Model.Booking.Lokale.Areal m^2</p>
+        @if (Model.Booking.Lokale.Timepris > 0) { <p>Pris: @Model.Booking.Lokale.Timepris kr. per ?</p> }
+        else { <p>Gratis at booke</p> }
         <form asp-controller="Booking" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Booking.LokaleId"/>

@@ -2,6 +2,7 @@
 using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.MVC.Models;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +15,15 @@ namespace BeboerWeb.MVC.Controllers
         private readonly IEjendomService _ejendomService;
         private readonly IBookingService _bookingService;
         private readonly IPersonService _personService;
+        private readonly ILokaleService _lokaleService;
         private readonly string viewPath = "Views/Dashboard/Common/Booking";
 
-        public BookingController(IEjendomService ejendomService, IBookingService bookingService, IPersonService personService)
+        public BookingController(IEjendomService ejendomService, IBookingService bookingService, IPersonService personService, ILokaleService lokaleService)
         {
             _ejendomService = ejendomService;
             _bookingService = bookingService;
             _personService = personService;
+            _lokaleService = lokaleService;
         }
 
         public async Task<ActionResult> Index()
@@ -44,6 +47,11 @@ namespace BeboerWeb.MVC.Controllers
             var model = new BookingOverviewViewModel();
             model.Booking.LokaleId = id;
             model.Booking.PersonId = person.Id;
+
+            var lokaleDto = await _lokaleService.GetLokaleAsync(id);
+            var lokaleModel = new LokaleViewModel();
+            lokaleModel.AddDataFromDto(lokaleDto);
+            model.Booking.Lokale = lokaleModel;
 
             var currentDate = DateTime.Now;
             model.SearchMonth = currentDate.Month;
@@ -87,6 +95,12 @@ namespace BeboerWeb.MVC.Controllers
                 booking.AddDataFromDTO(dto);
                 model.ExistingBookinger.Add(booking);
             }
+
+            var lokaleDto = await _lokaleService.GetLokaleAsync(model.Booking.LokaleId);
+            var lokaleModel = new LokaleViewModel();
+            lokaleModel.AddDataFromDto(lokaleDto);
+            model.Booking.Lokale = lokaleModel;
+
             return View($"{viewPath}/Create.cshtml", model);
         }
 
