@@ -14,10 +14,10 @@
             <input type="hidden" asp-for="Booking.PersonId"/>
             <div class="form-group">
                 <label asp-for="Booking.BookingPeriodeStart" class="form-label"></label>
-                <input asp-for="Booking.BookingPeriodeStart" type="date" class="form-control" value="2021-01-01"/>
+                <input asp-for="Booking.BookingPeriodeStart" type="date" class="form-control" value="@Model.GetDateString()"/>
                 <br/>
                 <label asp-for="Booking.BookingPeriodeSlut" class="form-label"></label>
-                <input asp-for="Booking.BookingPeriodeSlut" type="date" class="form-control" value="2021-01-01"/>
+                <input asp-for="Booking.BookingPeriodeSlut" type="date" class="form-control" value="@Model.GetDateString()"/>
                 <br/>
             </div>
             <br/>
@@ -36,15 +36,15 @@
     <input type="hidden" asp-for="Booking.LokaleId"/>
     <label>Vælg måned: </label>
     <select asp-for="SearchMonth">
-        @for (var i = 0; i < Model.Months.Length; i++)
+        @for (var i = 1; i < Model.Months.Length + 1; i++)
         {
-            if (Model.SearchMonth == i + 1)
+            if (Model.SearchMonth == i)
             {
-                <option value="@i" selected>@Model.Months[i]</option>
+                <option value="@i" selected>@Model.Months[i - 1]</option>
             }
             else
             {
-                <option value="@i">@Model.Months[i]</option>
+                <option value="@i">@Model.Months[i - 1]</option>
             }
         }
     </select>
