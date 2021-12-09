@@ -96,7 +96,16 @@ namespace BeboerWeb.MVC.Controllers.BA
             if (ModelState.IsValid)
             {
                 var lejemaal = model.GetLejemaalDTO();
-                await _lejemaalService.UpdateLejemaalAsync(lejemaal);
+
+                try
+                {
+                    await _lejemaalService.UpdateLejemaalAsync(lejemaal);
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    Console.WriteLine("Test concurrency");
+                }
+
                 return RedirectToAction(nameof(Index));
             }
 
