@@ -27,6 +27,8 @@ namespace BeboerWeb.Application.UseCases.LejemaalUC
             var lejemaal = new Lejemaal(command.Adresse, command.Etage, command.Husleje, command.Areal, command.Koekken,
                 command.Badevaerelse, ejendom);
             lejemaal.Id = command.Id;
+            lejemaal.RowVersion = command.RowVersion;
+
             _lejemaalRepository.UpdateLejemaal(lejemaal);
         }
     }

@@ -18,7 +18,8 @@ namespace BeboerWeb.MVC.Models
                 Husleje = Lejemaal.Husleje,
                 Badevaerelse = Lejemaal.Badevaerelse,
                 Koekken = Lejemaal.Koekken,
-                EjendomId = Lejemaal.EjendomId
+                EjendomId = Lejemaal.EjendomId,
+                RowVersion = Lejemaal.RowVersion
             };
         }
     }

@@ -12,6 +12,7 @@
         <form asp-controller="BALejemaal" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Lejemaal.Id"/>
+            <input type="hidden" asp-for="Lejemaal.RowVersion"/>
             <div class="form-group">
                 <label asp-for="Lejemaal.Adresse" class="control-label"></label>
                 <span asp-validation-for="Lejemaal.Adresse" class="text-danger"></span>

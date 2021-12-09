@@ -9,13 +9,7 @@ namespace BeboerWeb.MVC.Models
 
         public void AddDataFromDto(LejemaalDTO dto)
         {
-            Lejemaal.Id = dto.Id;
-            Lejemaal.Adresse = dto.Adresse;
-            Lejemaal.Etage = dto.Etage;
-            Lejemaal.Husleje = dto.Husleje;
-            Lejemaal.Areal = dto.Areal;
-            Lejemaal.Koekken = dto.Koekken;
-            Lejemaal.Badevaerelse = dto.Badevaerelse;
+            Lejemaal.AddDataFromDto(dto);
             foreach (var lejerDto in dto.Lejere)
             {
                 var lejer = new LejerViewModel();

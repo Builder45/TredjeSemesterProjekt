@@ -1,4 +1,5 @@
-﻿@model List<LejemaalViewModel>
+﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
+@model List<LejemaalViewModel>
 @{
     ViewData["Name"] = "Index";
 	Layout = "../_BALayout.cshtml";
@@ -57,7 +58,8 @@
             </td>
             <td>
                 <a asp-controller="BALejemaal" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
-                <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@item.Id">Se lejere</a> 
+                <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@item.Id">Se lejere</a>
+                <input type="hidden" asp-for="@item.RowVersion"/>
             </td>
         </tr>
 	}

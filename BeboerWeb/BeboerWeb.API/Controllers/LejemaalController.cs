@@ -39,7 +39,8 @@ namespace BeboerWeb.API.Controllers
                 Areal = a.Areal,
                 Koekken = a.Koekken,
                 Badevaerelse = a.Badevaerelse,
-                EjendomId = a.Ejendom.Id
+                EjendomId = a.Ejendom.Id,
+                RowVersion = a.RowVersion
             }));
             return dto;
         }
@@ -58,7 +59,8 @@ namespace BeboerWeb.API.Controllers
                 Areal = a.Areal,
                 Koekken = a.Koekken,
                 Badevaerelse = a.Badevaerelse,
-                EjendomId = a.Ejendom.Id
+                EjendomId = a.Ejendom.Id,
+                RowVersion = a.RowVersion
             }));
             return dto;
         }
@@ -76,7 +78,8 @@ namespace BeboerWeb.API.Controllers
                 Areal = model.Areal, 
                 Koekken = model.Koekken, 
                 Badevaerelse = model.Badevaerelse, 
-                EjendomId = model.Ejendom.Id
+                EjendomId = model.Ejendom.Id,
+                RowVersion = model.RowVersion
             };
             return dto;
         }
@@ -104,7 +107,8 @@ namespace BeboerWeb.API.Controllers
                     Areal = model.Areal, 
                     Koekken = model.Koekken, 
                     Badevaerelse = model.Badevaerelse,
-                    EjendomId = model.Ejendom.Id
+                    EjendomId = model.Ejendom.Id,
+                    RowVersion = model.RowVersion
                 };
 
                 var lejerDtos = new List<LejerDTO>();
@@ -132,7 +136,7 @@ namespace BeboerWeb.API.Controllers
         public void PutLejemaal([FromBody] LejemaalDTO dto)
         {
             _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest
-                (dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId));
+                (dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId, dto.RowVersion));
         }
     }
 }

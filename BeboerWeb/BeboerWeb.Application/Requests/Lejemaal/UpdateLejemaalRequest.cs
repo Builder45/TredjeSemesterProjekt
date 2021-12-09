@@ -13,13 +13,13 @@ namespace BeboerWeb.Application.Requests.Lejemaal
         public string Etage { get; set; }
         public double Husleje { get; set; }
         public double Areal { get; set; }
-
         public bool Koekken { get; set; }
         public bool Badevaerelse { get; set; }
+        public byte[] RowVersion { get; set; }
 
         public Guid EjendomId { get; set; }
 
-        public UpdateLejemaalRequest(Guid id, string adresse, string etage, double husleje, double areal, bool koekken, bool badevaerelse, Guid ejendomId)
+        public UpdateLejemaalRequest(Guid id, string adresse, string etage, double husleje, double areal, bool koekken, bool badevaerelse, Guid ejendomId, byte[] rowVersion)
         {
             Id = id;
             Adresse = adresse;
@@ -29,6 +29,7 @@ namespace BeboerWeb.Application.Requests.Lejemaal
             Koekken = koekken;
             Badevaerelse = badevaerelse;
             EjendomId = ejendomId;
+            RowVersion = rowVersion;
         }
         
     }

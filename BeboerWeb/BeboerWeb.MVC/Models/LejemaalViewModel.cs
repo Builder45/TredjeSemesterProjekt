@@ -33,6 +33,8 @@ namespace BeboerWeb.MVC.Models
         [Display(Prompt = "Tilknyttet Ejendom")]
         public Guid EjendomId { get; set; }
 
+        public byte[] RowVersion { get; set; }
+
         public void AddDataFromDto(LejemaalDTO dto)
         {
             Id = dto.Id;
@@ -43,6 +45,7 @@ namespace BeboerWeb.MVC.Models
             Koekken = dto.Koekken;
             Badevaerelse = dto.Badevaerelse;
             EjendomId = dto.EjendomId;
+            RowVersion = dto.RowVersion;
         }
     }
 }

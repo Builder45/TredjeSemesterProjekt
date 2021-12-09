@@ -11,6 +11,7 @@ namespace BeboerWeb.Domain.Models
         public double Areal { get; set; }
         public bool Koekken { get; set; }
         public bool Badevaerelse { get; set; }
+        public byte[] RowVersion { get; set; }
 
         public Ejendom Ejendom { get; set; }
         public List<Lejer> Lejere { get; set; }
