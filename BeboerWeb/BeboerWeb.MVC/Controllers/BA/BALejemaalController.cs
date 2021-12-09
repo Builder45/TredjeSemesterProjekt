@@ -103,7 +103,12 @@ namespace BeboerWeb.MVC.Controllers.BA
                 }
                 catch (DbUpdateConcurrencyException e)
                 {
-                    Console.WriteLine("Test concurrency");
+                    var lejemaalDto = await _lejemaalService.GetLejemaalAsync(model.Lejemaal.Id);
+                    if (lejemaalDto.Adresse != model.Lejemaal.Adresse)
+                    {
+                        ModelState.AddModelError("Adresse", "Ny værdi: " + lejemaalDto.Adresse);
+                    }
+                    return View($"{viewPath}/Edit.cshtml", model);
                 }
 
                 return RedirectToAction(nameof(Index));
