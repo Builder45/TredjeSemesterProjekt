@@ -26,6 +26,12 @@ body {
     font-family: serif; 
 }
 
+.MineBookinger {
+    width: auto;
+    margin-left: 50px;
+    margin-right: auto;
+}
+
 /*CSS for NavBar*/
 /*CSS for Stillingsbetegnelsen*/
 .navbar-brand {
