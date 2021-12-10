@@ -7,14 +7,15 @@ namespace BeboerWeb.MVC.Models
         public OpslagViewModel Opslag { get; set; }
         public List<EjendomViewModel> Ejendom { get; set; } = new List<EjendomViewModel>();
 
-        public OpslagDTO GetOpslagDtoDTO()
+        public OpslagDTO GetOpslagDTO(EjendomDTO dto)
         {
             return new OpslagDTO()
             {
                 Id = Opslag.Id,
-                Date = Opslag.Date,
+                Dato = Opslag.Dato,
+                Titel = Opslag.Titel,
                 Besked = Opslag.Besked,
-                EjendomId = Opslag.EjendomId
+                EjendomIds = Opslag.EjendomIds
             };
         }
     }

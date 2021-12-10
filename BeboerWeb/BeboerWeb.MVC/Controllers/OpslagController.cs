@@ -1,16 +1,35 @@
-﻿using BeboerWeb.API.Contract;
+﻿using System.Security.Claims;
+using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers
 {
     public class OpslagController : Controller
     {
+        private readonly IEjendomService _ejendomService;
         private readonly string viewPath = "Views/Dashboard/Opslag";
-        
+
+        public OpslagController(IEjendomService ejendomService)
+        {
+            _ejendomService = ejendomService;
+        }
+
         public async Task<ActionResult> Index()
         {
+
+            var dtos = await _ejendomService.GetEjendommeAsync();
+
+            var model = new List<OpslagToEjendomViewModel>();
+            foreach (var dto in dtos)
+            {
+                var opslag = new OpslagToEjendomViewModel();
+                opslag.GetOpslagDTO(dto);
+                model.Add(opslag);
+            }
+
             return View($"{viewPath}/Index.cshtm");
         }
 

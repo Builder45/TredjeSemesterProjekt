@@ -2,6 +2,7 @@
 using BeboerWeb.MVC.Services.EjendomService;
 using BeboerWeb.MVC.Services.LejerService;
 using BeboerWeb.MVC.Services.LokaleService;
+using BeboerWeb.MVC.Services.OpslagService;
 using BeboerWeb.MVC.Services.VicevaertService;
 
 namespace BeboerWeb.MVC.Services
@@ -16,5 +17,6 @@ namespace BeboerWeb.MVC.Services
             public LejerServiceConfig LejerServiceConfig { get; set; }
             public LokaleServiceConfig LokaleServiceConfig { get; set; }
             public VicevaertServiceConfig VicevaertServiceConfig { get; set; }
+            public OpslagServiceConfig OpslagServiceConfig { get; set; }
         }
     }

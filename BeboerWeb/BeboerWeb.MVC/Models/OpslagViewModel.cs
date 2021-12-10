@@ -5,15 +5,18 @@ namespace BeboerWeb.MVC.Models
     public class OpslagViewModel
     {
         public Guid Id { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Dato { get; set; }
+        public string Titel { get; set; }
         public string Besked { get; set; }
-        public Guid EjendomId { get; set; }
+        public List<Guid> EjendomIds { get; set; }
 
         public void AddDataFromDto(OpslagDTO dto)
         {
             Id = dto.Id;
-            Date = dto.Date;
+            Dato = dto.Dato;
+            Titel = dto.Titel;
             Besked = dto.Besked;
+            EjendomIds = dto.EjendomIds;
         }
     }
 }
