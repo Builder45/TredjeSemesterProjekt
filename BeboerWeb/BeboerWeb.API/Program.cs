@@ -11,6 +11,8 @@ using BeboerWeb.Application.UseCases.LejerUC;
 using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using BeboerWeb.Application.UseCases.LokaleUC;
 using BeboerWeb.Application.UseCases.LokaleUC.Interfaces;
+using BeboerWeb.Application.UseCases.OpslagUC;
+using BeboerWeb.Application.UseCases.OpslagUC.Interfaces;
 using BeboerWeb.Application.UseCases.VicevaertUC;
 using BeboerWeb.Application.UseCases.VicevaertUC.Interfaces;
 using BeboerWeb.Persistence;
@@ -32,6 +34,7 @@ builder.Services.AddScoped<IVicevaertRepository, VicevaertRepository>();
 builder.Services.AddScoped<ILejerRepository, LejerRepository>();
 builder.Services.AddScoped<ILokaleRepository, LokaleRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IOpslagRepository, OpslagRepository>();
 
 // IOC usecases
 builder.Services.AddScoped<ICreatePersonUseCase, CreatePersonUseCase>();
@@ -55,7 +58,10 @@ builder.Services.AddScoped<IIsActiveLejerUseCase, IsActiveLejerUseCase>();
 builder.Services.AddScoped<IGetBookingUseCase, GetBookingUseCase>();
 builder.Services.AddScoped<ICreateBookingUseCase, CreateBookingUseCase>();
 builder.Services.AddScoped<IDeleteBookingUseCase, DeleteBookingUseCase>();
-//builder.Services.AddScoped<IUpdateBookingUseCase, UpdateBookingUseCase>();
+builder.Services.AddScoped<IGetOpslagUseCase, GetOpslagUseCase>();
+builder.Services.AddScoped<ICreateOpslagUseCase, CreateOpslagUseCase>();
+builder.Services.AddScoped<IUpdateOpslagUseCase, UpdateOpslagUseCase>();
+builder.Services.AddScoped<IDeleteOpslagUseCase, DeleteOpslagUseCase>();
 
 // Add services to the container
 builder.Services.AddControllers();

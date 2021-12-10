@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BeboerWeb.Application.Persistence;
 using BeboerWeb.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.Persistence.Repositories
 {
-    public class OpslagRepository
+    public class OpslagRepository : IOpslagRepository
     {
         private readonly BeboerWebContext _db;
+
         public OpslagRepository(BeboerWebContext db)
         {
             _db = db;
@@ -18,7 +15,7 @@ namespace BeboerWeb.Persistence.Repositories
 
         public List<Opslag> GetAllOpslag()
         {
-            return new List<Opslag>();
+            return _db.Opslag.ToList();
         }
 
         public Opslag GetOpslag(Guid id)
@@ -26,10 +23,12 @@ namespace BeboerWeb.Persistence.Repositories
             return _db.Opslag.Find(id);
         }
 
-        public void CreateOpslag(Opslag opslag)
+        public Guid CreateOpslag(Opslag opslag)
         {
             _db.Add(opslag);
             _db.SaveChanges();
+
+            return opslag.Id;
         }
         public void UpdateOpslag(Opslag opslag)
         {
@@ -40,6 +39,26 @@ namespace BeboerWeb.Persistence.Repositories
         public void DeleteOpslag(Opslag opslag)
         {
             _db.Remove(opslag);
+            _db.SaveChanges();
+        }
+
+        public void LinkOpslagWithEjendom(Guid opslagsId, Guid ejendomId)
+        {
+            var opslag = _db.Opslag.First(o => o.Id == opslagsId);
+            var ejendom = _db.Ejendom.First(e => e.Id == ejendomId);
+            opslag.Ejendomme.Add(ejendom);
+            _db.Update(opslag);
+            _db.SaveChanges();
+        }
+
+        public void UnlinkOpslagWithEjendomme(Guid opslagsId)
+        {
+            var opslag = _db.Opslag
+                .Include(l => l.Ejendomme)
+                .First(l => l.Id == opslagsId);
+            opslag.Ejendomme.Clear();
+
+            _db.Update(opslag);
             _db.SaveChanges();
         }
     }

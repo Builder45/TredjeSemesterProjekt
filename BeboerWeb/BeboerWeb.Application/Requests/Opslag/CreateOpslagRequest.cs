@@ -1,8 +1,7 @@
-﻿namespace BeboerWeb.API.Contract.DTO
+﻿namespace BeboerWeb.Application.Requests.Opslag
 {
-    public class OpslagDTO
+    public class CreateOpslagRequest
     {
-        public Guid Id { get; set; }
         public DateTime Dato { get; set; }
         public string Titel { get; set; }
         public string Besked { get; set; }
