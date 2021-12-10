@@ -4,6 +4,7 @@ using BeboerWeb.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeboerWeb.Persistence.Migrations
 {
     [DbContext(typeof(BeboerWebContext))]
-    partial class BeboerWebContextModelSnapshot : ModelSnapshot
+    [Migration("20211210101607_OpslagTilføjetTilDB")]
+    partial class OpslagTilføjetTilDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,8 +241,7 @@ namespace BeboerWeb.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Titel")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

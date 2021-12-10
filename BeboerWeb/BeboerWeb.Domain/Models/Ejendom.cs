@@ -12,6 +12,7 @@ namespace BeboerWeb.Domain.Models
         public List<Vicevaert> Vicevaerter { get; set; }
         public List<Lejemaal> Lejemaal { get; set; }
         public List<Lokale> Lokaler { get; set; }
+        public List<Opslag> Opslag { get; set; }
         public Afdeling Afdeling { get; set; }
 
         // Tom constructor vigtig for EF

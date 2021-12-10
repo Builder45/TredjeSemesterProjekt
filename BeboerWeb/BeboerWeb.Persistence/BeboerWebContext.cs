@@ -20,6 +20,7 @@ namespace BeboerWeb.Persistence
         public DbSet<Lokale> Lokale { get; set; }
         public DbSet<Person> Person { get; set; }
         public DbSet<Vicevaert> Vicevaert { get; set; }
+        public DbSet<Vicevaert> Opslag { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
