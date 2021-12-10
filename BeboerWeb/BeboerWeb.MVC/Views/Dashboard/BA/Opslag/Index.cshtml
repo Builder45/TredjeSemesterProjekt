@@ -1,0 +1,42 @@
+﻿@model List<OpslagViewModel>
+@{
+    ViewData["Name"] = "Index";
+    Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
+}
+
+<h1>Oversigt over Opslag</h1>
+<br/>
+<table>
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Besked)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Besked)
+            </td>
+            <td>
+                <a asp-controller="Opslag" asp-action="Index" asp-route-id="@item.Id">Detaljer</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
