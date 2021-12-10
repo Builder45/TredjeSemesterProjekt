@@ -1,5 +1,5 @@
 ﻿using BeboerWeb.Application.Persistence;
-using BeboerWeb.Application.Requests.Booking;
+using BeboerWeb.Application.Requests.Opslag;
 using BeboerWeb.Application.UseCases.OpslagUC.Interfaces;
 
 namespace BeboerWeb.Application.UseCases.OpslagUC
@@ -13,7 +13,7 @@ namespace BeboerWeb.Application.UseCases.OpslagUC
             _repository = repository;
         }
 
-        public void DeleteOpslag(DeleteBookingRequest command)
+        public void DeleteOpslag(DeleteOpslagRequest command)
         {
             var opslag = _repository.GetOpslag(command.Id);
             _repository.DeleteOpslag(opslag);
