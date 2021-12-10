@@ -1,3 +1,31 @@
+/* BeboerWeb settings */
+.bw_background {
+    background-color: white;
+}
+.bw_navbar {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.bw_navbar div {
+    padding-top: 0.15em;
+    padding-bottom: 0.15em;
+    background-color: white;
+}
+
+.bw_button {
+    background-color: #3D5F8C;
+}
+.bw_button:hover {
+    background-color: #256dcd;
+}
+.bw_button:focus {
+    background-color: #256dcd;
+}
+.bw_dropdown {
+    margin-right: 10px;
+}
+
+
 html {
   font-size: 14px;
 }
@@ -14,7 +42,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .display-4 {
@@ -37,14 +65,15 @@ body {
 .navbar-brand {
 
 }
-/*CSS for Linksne til de forskellige sider*/
-.container-fluid {
-    background-color: white
-}
 
-/*CSS for Body på siderne*/
-.Arnold {
-    background-color: white
+
+/* Input / Button spacing */
+
+.form-floating {
+    margin-bottom: 5px;
+}
+.btn-primary {
+    margin-bottom: 5px;
 }
 
 /* CSS for Booking/Index */

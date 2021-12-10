@@ -1,13 +1,7 @@
 ﻿using BeboerWeb.API.Contract;
-using BeboerWeb.API.Contract.DTO;
-using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Models;
-using BeboerWeb.MVC.Services.EjendomService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
@@ -101,7 +95,7 @@ namespace BeboerWeb.MVC.Controllers.BA
                 {
                     await _lejemaalService.UpdateLejemaalAsync(lejemaal);
                 }
-                catch (DbUpdateConcurrencyException e)
+                catch (Exception)
                 {
                     var lejemaalDto = await _lejemaalService.GetLejemaalAsync(model.Lejemaal.Id);
                     if (lejemaalDto.Adresse != model.Lejemaal.Adresse)

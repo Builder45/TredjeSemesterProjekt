@@ -1,13 +1,12 @@
-﻿using System.Security.Claims;
-using BeboerWeb.API.Contract;
-using BeboerWeb.API.Contract.DTO;
+﻿using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers
 {
+    [Authorize(Policy = "BA")]
+    [Route("Dashboard/Admin/Opslag/{action}")]
     public class BAOpslagController : Controller
     {
         private readonly IEjendomService _ejendomService;

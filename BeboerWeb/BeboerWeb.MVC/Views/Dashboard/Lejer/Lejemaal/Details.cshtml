@@ -8,7 +8,6 @@
 <h1>Detaljer om dit/dine lejemål</h1>
 <h1></h1>
 <h2>Aktive lejemål</h2>
-<div class="myDiv">
 @foreach (var item in Model)
 {
     @foreach (var lejer in item.Lejere)
@@ -104,7 +103,7 @@
     }
 }
 
-    <script>
+<script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
 

@@ -29,7 +29,7 @@
             </div>
             <br/>
             <div class="form-group">
-                <input type="submit" value="Opret" class="btn btn-primary" />
+                <input type="submit" value="Opret" class="btn btn-primary bw_button" />
             </div>
         </form>
     </div>
@@ -38,11 +38,6 @@
 <div>
     <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@Model.Lejer.LejemaalId">Tilbage til oversigt.</a>
 </div>
-@*<script>
-    $(document).ready(function() {
-        $('.mdb-select').materialSelect();
-    });
-</script>*@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

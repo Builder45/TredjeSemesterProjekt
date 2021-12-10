@@ -2,7 +2,6 @@
 using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.MVC.Models;
-using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

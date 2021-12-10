@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeboerWeb.MVC.styles.css" asp-append-version="true" />
 </head>
-<body class="Arnold">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body class="bw_background">
+    <header class="bw_header">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 bw_navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Dashboard" asp-action="Index">BeboerWeb</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -25,13 +25,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">Booking</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">Book Lokaler</a>
                         </li>
                     </ul>
                     @if (User.HasClaim("IsLejer", "Yes"))
                     {
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown bw_dropdown">
+                            <button class="btn btn-secondary dropdown-toggle bw_button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Lejer
                             </button>
                             <ul class="dropdown-menu">
@@ -44,8 +44,8 @@
                     }
                     @if (User.HasClaim("IsBA", "Yes"))
                     {
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown bw_dropdown">
+                            <button class="btn btn-secondary dropdown-toggle bw_button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Admin
                             </button>
                             <ul class="dropdown-menu">
@@ -59,8 +59,8 @@
                     }
                     @if (User.HasClaim("IsVV", "Yes"))
                     {
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown bw_dropdown">
+                            <button class="btn btn-secondary dropdown-toggle bw_button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Vicevært
                             </button>
                             <ul class="dropdown-menu">
