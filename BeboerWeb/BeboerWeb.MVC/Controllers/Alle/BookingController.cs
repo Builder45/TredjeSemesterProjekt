@@ -6,7 +6,7 @@ using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BeboerWeb.MVC.Controllers
+namespace BeboerWeb.MVC.Controllers.Alle
 {
     [Authorize]
     [Route("Booking/{action}")]
@@ -16,7 +16,7 @@ namespace BeboerWeb.MVC.Controllers
         private readonly IBookingService _bookingService;
         private readonly IPersonService _personService;
         private readonly ILokaleService _lokaleService;
-        private readonly string viewPath = "Views/Dashboard/Common/Booking";
+        private readonly string viewPath = "Views/Dashboard/Alle/Booking";
 
         public BookingController(IEjendomService ejendomService, IBookingService bookingService, IPersonService personService, ILokaleService lokaleService)
         {

@@ -1,6 +1,6 @@
 ﻿@model BookingOverviewViewModel
 @{
-    Layout = "_Layout.cshtml";
+    Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
     ViewData["Name"] = "Create";
 }
 
@@ -101,49 +101,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-
-@*
-<h2>Eksisterende bookinger:</h2>
-<hr/>
-<label>Vælg måned: </label>
-<select asp-for="SearchDate.Month">
-    <option value="12" selected>December</option>
-    <option value="1">Januar</option>
-    <option value="2">Februar</option>
-</select>
-<label>Vælg år: </label>
-<select asp-for="SearchDate.Year">
-    <option value="2021" selected>2021</option>
-    <option value="2022">2022</option>
-    <option value="2023">2023</option>
-</select>
-<a asp-controller="Booking" asp-action="Create" asp-route-id="@Model.Booking.LokaleId">
-    <input type="button" value="Opdater" class="btn btn-primary"/>
-</a>
-<br/>
-<br/>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeStart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExistingBookinger.First().BookingPeriodeSlut)
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var booking in Model.ExistingBookinger) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelitem => booking.BookingPeriodeStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => booking.BookingPeriodeSlut)
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>    *@

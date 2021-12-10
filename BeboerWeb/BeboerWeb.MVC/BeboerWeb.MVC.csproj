@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Person\**" />
+    <Content Remove="Controllers\Person\**" />
+    <EmbeddedResource Remove="Controllers\Person\**" />
+    <None Remove="Controllers\Person\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
@@ -21,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BeboerWeb.API.Contract\BeboerWeb.API.Contract.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\Person\" />
   </ItemGroup>
 
 </Project>

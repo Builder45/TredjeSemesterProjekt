@@ -63,7 +63,7 @@ namespace BeboerWeb.MVC.Controllers
                 }
             }
 
-            return View("Bruger/Index");
+            return View("Alle/Index");
         }
     }
 }
