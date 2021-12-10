@@ -1,15 +1,16 @@
 ﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
-    {
-        if (User.HasClaim("IsBA", "Yes")) Layout = "~/Views/Dashboard/BA/_BALayout.cshtml";
-        if (User.HasClaim("IsVV", "Yes")) Layout = "~/Views/Dashboard/VV/_VVLayout.cshtml";
-        if (User.HasClaim("IsLejer", "Yes")) Layout = "~/Views/Dashboard/Lejer/_LejerLayout.cshtml"; 
-        else Layout = "~/Views/Dashboard/Bruger/_BrugerLayout.cshtml";
-    }
-    else
-    {
-        Layout = "~/Views/Dashboard/Bruger/_BrugerLayout.cshtml";
-    }
+    //if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    //{
+    //    if (User.HasClaim("IsBA", "Yes")) Layout = "~/Views/Dashboard/BA/_BALayout.cshtml";
+    //    if (User.HasClaim("IsVV", "Yes")) Layout = "~/Views/Dashboard/VV/_VVLayout.cshtml";
+    //    if (User.HasClaim("IsLejer", "Yes")) Layout = "~/Views/Dashboard/Lejer/_LejerLayout.cshtml"; 
+    //    else Layout = "~/Views/Dashboard/Bruger/_BrugerLayout.cshtml";
+    //}
+    //else
+    //{
+    //    Layout = "~/Views/Dashboard/Bruger/_BrugerLayout.cshtml";
+    //}
+    Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
 <h1>Adminstrer din konto</h1>

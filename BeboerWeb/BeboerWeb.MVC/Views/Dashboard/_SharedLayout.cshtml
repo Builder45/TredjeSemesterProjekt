@@ -31,10 +31,10 @@
                     @if (User.HasClaim("IsLejer", "Yes"))
                     {
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Lejer
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-controller="LejerLejemaal" asp-action="IndexByLejer">Mine lejemål</a></li>
                                 <li><a class="dropdown-item" asp-controller="LejerDokument" asp-action="Index">Mine dokumenter</a></li>
                                 <li><a class="dropdown-item" asp-controller="LejerMedarbejder" asp-action="Index">Kontaktoplysninger</a></li>
@@ -45,14 +45,25 @@
                     @if (User.HasClaim("IsBA", "Yes"))
                     {
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Admin
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-controller="BAPerson" asp-action="Index">Brugere</a></li>
                                 <li><a class="dropdown-item" asp-controller="BAEjendom" asp-action="Index">Ejendomme</a></li>
                                 <li><a class="dropdown-item" asp-controller="BALejemaal" asp-action="Index">Lejemål</a></li>
                                 <li><a class="dropdown-item" asp-controller="BALokale" asp-action="Index">Lokaler</a></li>
+                            </ul>
+                        </div>
+                    }
+                    @if (User.HasClaim("IsVV", "Yes"))
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Vicevært
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="VVLejer" asp-action="Index">Brugere</a></li>
                             </ul>
                         </div>
                     }
