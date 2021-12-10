@@ -1,11 +1,12 @@
 ﻿using System.Text.Json;
+using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.MVC.Services.LokaleService;
 using Microsoft.Extensions.Options;
 
 namespace BeboerWeb.MVC.Services.OpslagService
 {
-    public class OpslagService
+    public class OpslagService : IOpslagService
     {
         private readonly OpslagServiceConfig _opslagApiConfig;
         private readonly IHttpClientFactory _httpClientFactory;
@@ -33,5 +34,7 @@ namespace BeboerWeb.MVC.Services.OpslagService
         public async Task UpdateOpslagAsync(OpslagDTO dto) =>
             await _httpClient.PutAsJsonAsync(_opslagApiConfig.ServiceUrl, dto);
 
+        public async Task DeleteOpslagAsync(Guid id) =>
+            await _httpClient.DeleteAsync(_opslagApiConfig.ServiceUrl + $"/{id}");
     }
 }

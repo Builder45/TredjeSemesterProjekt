@@ -12,6 +12,7 @@ namespace BeboerWeb.API.Contract
         Task<List<OpslagDTO>> GetOpslagAsync();
         Task<OpslagDTO> GetOpslagAsync(Guid id);
         Task CreateOpslagAsync(OpslagDTO dto);
+        Task UpdateOpslagAsync(OpslagDTO dto);
         Task DeleteOpslagAsync(Guid id);
     }
 }

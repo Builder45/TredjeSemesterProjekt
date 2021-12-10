@@ -9,6 +9,7 @@ using BeboerWeb.MVC.Services.BookingService;
 using BeboerWeb.MVC.Services.LejemaalService;
 using BeboerWeb.MVC.Services.LejerService;
 using BeboerWeb.MVC.Services.LokaleService;
+using BeboerWeb.MVC.Services.OpslagService;
 using BeboerWeb.MVC.Services.VicevaertService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +59,7 @@ builder.Services.AddScoped<ILejemaalService, LejemaalService>();
 builder.Services.AddScoped<ILejerService, LejerService>();
 builder.Services.AddScoped<ILokaleService, LokaleService>();
 builder.Services.AddScoped<IVicevaertService, VicevaertService>();
+builder.Services.AddScoped<IOpslagService, OpslagService>();
 
 
 var app = builder.Build();
