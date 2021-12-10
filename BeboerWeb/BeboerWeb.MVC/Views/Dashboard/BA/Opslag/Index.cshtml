@@ -6,7 +6,12 @@
 
 <h1>Oversigt over Opslag</h1>
 <br/>
-<table>
+<p>
+    <a asp-controller="BAOpslag" asp-action="Create">
+        <input type="button" value="Opret nyt opslag" class="btn btn-primary" />
+    </a>
+</p>
+<table class="table">
     <thead>
     <tr>
         <th>
@@ -31,11 +36,13 @@
                 @Html.DisplayFor(modelItem => item.Titel)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Besked)
+                <p>@item.GetBeskedPreview()</p>
             </td>
             <td>
-                <a asp-controller="Opslag" asp-action="Index" asp-route-id="@item.Id">Detaljer</a>
+                <a asp-controller="BAOpslag" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+                <a asp-controller="BAOpslag" asp-action="Delete" asp-route-id="@item.Id">Slet</a>
             </td>
+
         </tr>
     }
     </tbody>

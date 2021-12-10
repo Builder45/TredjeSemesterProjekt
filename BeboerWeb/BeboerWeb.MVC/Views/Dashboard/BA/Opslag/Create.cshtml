@@ -1,0 +1,43 @@
+﻿@model OpslagEjendommeViewModel
+@{
+    Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
+    ViewData["Name"] = "Create";
+}
+
+<h1>Opret et nyt opslag</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="BAOpslag" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Opslag.Titel" class="form-label"></label>
+                <input asp-for="Opslag.Titel" class="form-control"/>
+                <br/>
+                <label asp-for="Opslag.Besked" class="form-label"></label>
+                <textarea asp-for="Opslag.Besked" class="form-control" ></textarea>
+                <br/>
+                <label asp-for="Opslag.EjendomIds" class="form-label"></label>
+                <select multiple asp-for="Opslag.EjendomIds" class="mdb-select md-form" style="width: 100%">
+                    @foreach (var ejendom in Model.Ejendomme)
+                    {
+                        <option value="@ejendom.Id">@ejendom.Adresse (@ejendom.By @ejendom.Postnr)</option>
+                    }
+                </select>
+                <br/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Opret" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-controller="BAOpslag" asp-action="Index">Tilbage til oversigt.</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

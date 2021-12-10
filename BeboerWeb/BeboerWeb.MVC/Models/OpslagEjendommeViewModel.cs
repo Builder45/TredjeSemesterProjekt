@@ -2,12 +2,12 @@
 
 namespace BeboerWeb.MVC.Models
 {
-    public class OpslagToEjendomViewModel
+    public class OpslagEjendommeViewModel
     {
-        public OpslagViewModel Opslag { get; set; }
-        public List<EjendomViewModel> Ejendom { get; set; } = new List<EjendomViewModel>();
+        public OpslagViewModel Opslag { get; set; } = new OpslagViewModel();
+        public List<EjendomViewModel> Ejendomme { get; set; } = new List<EjendomViewModel>();
 
-        public OpslagDTO GetOpslagDTO(EjendomDTO dto)
+        public OpslagDTO GetOpslagDTO()
         {
             return new OpslagDTO()
             {

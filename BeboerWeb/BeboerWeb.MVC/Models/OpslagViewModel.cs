@@ -18,5 +18,10 @@ namespace BeboerWeb.MVC.Models
             Besked = dto.Besked;
             EjendomIds = dto.EjendomIds;
         }
+
+        public string GetBeskedPreview()
+        {
+            return Besked.Substring(0,30)+"...";
+        }
     }
 }
