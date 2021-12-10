@@ -15,12 +15,15 @@ namespace BeboerWeb.Persistence.Repositories
 
         public List<Opslag> GetAllOpslag()
         {
-            return _db.Opslag.ToList();
+            return _db.Opslag
+                .ToList();
         }
 
         public Opslag GetOpslag(Guid id)
         {
-            return _db.Opslag.Find(id);
+            return _db.Opslag
+                .Include(o => o.Ejendomme)
+                .First(o => o.Id == id);
         }
 
         public Guid CreateOpslag(Opslag opslag)

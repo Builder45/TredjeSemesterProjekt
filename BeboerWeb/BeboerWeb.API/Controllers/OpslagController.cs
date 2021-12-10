@@ -1,4 +1,7 @@
-﻿using BeboerWeb.Application.UseCases.OpslagUC.Interfaces;
+﻿using BeboerWeb.API.Contract.DTO;
+using BeboerWeb.Application.Requests.Booking;
+using BeboerWeb.Application.Requests.Opslag;
+using BeboerWeb.Application.UseCases.OpslagUC.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.API.Controllers
@@ -21,30 +24,56 @@ namespace BeboerWeb.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<OpslagDTO> GetAllOpslag()
         {
-            return new string[] { "value1", "value2" };
+            var models = _getOpslagUseCase.GetAllOpslag();
+            var dtos = new List<OpslagDTO>();
+            models.ForEach(o => dtos.Add(new OpslagDTO
+            {
+                Id = o.Id,
+                Titel = o.Titel,
+                Besked = o.Besked,
+                Dato = o.Dato
+            }));
+            return dtos;
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public OpslagDTO GetOpslag(Guid id)
         {
-            return "value";
+            var model = _getOpslagUseCase.GetOpslag(new GetOpslagRequest(id));
+            var dto = new OpslagDTO
+            {
+                Id = model.Id,
+                Titel = model.Titel,
+                Besked = model.Besked,
+                Dato = model.Dato
+            };
+
+            foreach (var ejendom in model.Ejendomme)
+            {
+                dto.EjendomIds.Add(ejendom.Id);
+            }
+
+            return dto;
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void PostOpslag([FromBody] OpslagDTO dto)
         {
+            _createOpslagUseCase.CreateOpslag(new CreateOpslagRequest(dto.Dato, dto.Titel, dto.Besked, dto.EjendomIds));
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void PutOpslag([FromBody] OpslagDTO dto)
         {
+            _updateOpslagUseCase.UpdateOpslag(new UpdateOpslagRequest(dto.Id, dto.Dato, dto.Titel, dto.Besked, dto.EjendomIds));
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteOpslag(Guid id)
         {
+            _deleteOpslagUseCase.DeleteOpslag(new DeleteOpslagRequest(id));
         }
     }
 }

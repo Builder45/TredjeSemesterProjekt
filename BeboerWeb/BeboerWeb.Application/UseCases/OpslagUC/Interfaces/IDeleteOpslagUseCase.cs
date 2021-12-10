@@ -1,8 +1,8 @@
-﻿using BeboerWeb.Application.Requests.Booking;
+﻿using BeboerWeb.Application.Requests.Opslag;
 
 namespace BeboerWeb.Application.UseCases.OpslagUC.Interfaces;
 
 public interface IDeleteOpslagUseCase
 {
-    void DeleteOpslag(DeleteBookingRequest command);
+    void DeleteOpslag(DeleteOpslagRequest command);
 }

@@ -6,7 +6,7 @@
         public DateTime Dato { get; set; }
         public string Titel { get; set; }
         public string Besked { get; set; }
-        public List<Ejendom> Ejendomme { get; set; }
+        public List<Ejendom> Ejendomme { get; set; } = new List<Ejendom>();
 
         // Entity Framework
         public Opslag() { }
