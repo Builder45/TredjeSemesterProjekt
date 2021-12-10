@@ -1,9 +1,10 @@
 ﻿using BeboerWeb.Application.Persistence;
 using BeboerWeb.Application.Requests.Booking;
+using BeboerWeb.Application.UseCases.OpslagUC.Interfaces;
 
 namespace BeboerWeb.Application.UseCases.OpslagUC
 {
-    public class DeleteOpslagUseCase
+    public class DeleteOpslagUseCase : IDeleteOpslagUseCase
     {
         private readonly IOpslagRepository _repository;
 
