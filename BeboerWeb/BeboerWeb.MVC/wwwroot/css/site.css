@@ -25,9 +25,12 @@
     margin-right: 10px;
 }
 
+.bw_button_inline {
+    width: 49% !important;
+}
 
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -70,7 +73,7 @@ body {
 /* Input / Button spacing */
 
 .form-floating {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 .btn-primary {
     margin-bottom: 5px;

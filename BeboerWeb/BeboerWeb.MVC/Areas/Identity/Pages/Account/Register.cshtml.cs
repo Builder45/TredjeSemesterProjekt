@@ -83,21 +83,21 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
             /// 
 
 
-            [Required(ErrorMessage = "Tilføj fornavn.")]
+            [Required(ErrorMessage = "Husk at skrive et fornavn")]
             [Display(Name = "Fornavn")]
             public string Fornavn { get; set; }
 
-            [Required(ErrorMessage = "Tilføj efternavn.")]
+            [Required(ErrorMessage = "Husk at skrive et efternavn")]
             [Display(Name = "Efternavn")]
             public string Efternavn { get; set; }
 
-            [Required(ErrorMessage = "Tilføj telefonnr.")]
-            [Display(Name = "Telefonnr.")]
+            [Required(ErrorMessage = "Husk at skrive et telefonnummer")]
+            [Display(Name = "Tlf. Nr.")]
             [DataType(DataType.PhoneNumber)]
-            [RegularExpression(@"^([0-9]{8})$", ErrorMessage = "Ikke et gyldigt telefonnr.")]
+            [RegularExpression(@"^([0-9]{8})$", ErrorMessage = "Du skal indtaste et gyldigt telefonnummer")]
             public int Telefonnr { get; set; }
 
-            [Required(ErrorMessage = "Tilføj email.")]
+            [Required(ErrorMessage = "Husk at skrive en email")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -106,10 +106,10 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Tilføj password.")]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Husk at skrive et kodeord")]
+            [StringLength(100, ErrorMessage = "Kodeordet skal bestå af mindst 6 tegn!", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Kodeord")]
             public string Password { get; set; }
 
             /// <summary>
@@ -117,8 +117,8 @@ namespace BeboerWeb.MVC.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "De to passwords er ikke identiske.")]
+            [Display(Name = "Bekræft kodeord")]
+            [Compare("Password", ErrorMessage = "De to kodeord er ikke identiske.")]
             public string ConfirmPassword { get; set; }
         }
 

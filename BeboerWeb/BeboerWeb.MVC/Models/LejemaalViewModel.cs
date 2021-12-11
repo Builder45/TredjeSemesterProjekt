@@ -7,20 +7,20 @@ namespace BeboerWeb.MVC.Models
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "Du mangler at udfylde adressen:")]
-        [Display(Prompt = "Adresse (f.eks: Hybenvej 12)")]
+        [Required(ErrorMessage = "Husk at udfylde adressen:")]
+        [StringLength(100)]
         public string Adresse { get; set; }
 
-        [Required(ErrorMessage = "Du mangler at angive etagen:")]
-        [Display(Prompt = "Etage (f.eks: stue / 2.tv)")]
+        [Required(ErrorMessage = "Husk at angive etagen:")]
+        [StringLength(10)]
         public string Etage { get; set; }
 
-        [Required(ErrorMessage = "Du mangler at angive lejemålets areal:")]
-        [Display(Prompt = "Areal")]
+        [Required(ErrorMessage = "Husk at angive arealet:")]
+        [Range(0, 10000, ErrorMessage = "Angiv et realistisk areal")]
         public double Areal { get; set; }
 
-        [Required(ErrorMessage = "Du mangler at angive en husleje:")]
-        [Display(Prompt = "Husleje")]
+        [Required(ErrorMessage = "Husk at angive en husleje:")]
+        [Range(0, 10000000, ErrorMessage = "Husk at angive en husleje:")]
         public double Husleje { get; set; }
 
         [Display(Name = "Køkken")]
@@ -30,7 +30,7 @@ namespace BeboerWeb.MVC.Models
         public bool Badevaerelse { get; set; }
 
         [Required]
-        [Display(Prompt = "Tilknyttet Ejendom")]
+        [Display(Name = "Tilhørende ejendom")]
         public Guid EjendomId { get; set; }
 
         public byte[] RowVersion { get; set; }

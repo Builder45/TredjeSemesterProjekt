@@ -5,39 +5,34 @@
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
-<h1>Rediger</h1>
-
-<h4>Ejendom</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col">
+        <h1>Rediger oplysninger for ejendommen</h1>
+        <hr />
         <form asp-controller="BAEjendom" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-	        <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-
-                <label asp-for="Adresse" class="control-label"></label>
-                <input asp-for="Adresse" class="form-control" />
+            <div class="form-floating">
+                <input asp-for="Adresse" class="form-control"/>
+                <label asp-for="Adresse" class="form-label"></label>
                 <span asp-validation-for="Adresse" class="text-danger"></span>
-
-                <label asp-for="Postnr" class="control-label"></label>
-                <input asp-for="Postnr" class="form-control" />
+            </div>
+            <div class="form-floating">
+                <input asp-for="Postnr" class="form-control"/>
+                <label asp-for="Postnr" class="form-label"></label>
                 <span asp-validation-for="Postnr" class="text-danger"></span>
-
-                <label asp-for="By" class="control-label"></label>
-                <input asp-for="By" class="form-control" />
+            </div>
+            <div class="form-floating">
+                <input asp-for="By" class="form-control"/>
+                <label asp-for="By" class="form-label"></label>
                 <span asp-validation-for="By" class="text-danger"></span>
             </div>
-
-	        <div class="form-group">
-                <input type="submit" value="Gem" class="btn btn-primary bw_button" />
-            </div>
+            <button type="submit" class="btn btn-lg btn-primary bw_button bw_button_inline">Gem ændringer</button>
+            <a asp-controller="BAEjendom" asp-action="Index">
+                <input type="button" value="Tilbage til oversigten" class="btn btn-lg btn-primary bw_button bw_button_inline"/>
+            </a>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-controller="BAEjendom" asp-action="Index">Tilbage til oversigt</a>
+    <div class="col"></div>
 </div>
 
 @section Scripts {

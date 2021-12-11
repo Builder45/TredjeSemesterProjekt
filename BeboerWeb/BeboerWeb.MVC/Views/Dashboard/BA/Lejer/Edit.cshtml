@@ -5,48 +5,49 @@
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
-<h1>Redigering af lejemål</h1>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col">
+        <h1>Rediger lejeroplysninger</h1>
+        <hr />
         <form asp-controller="BALejer" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Lejer.Id"/>
             <input type="hidden" asp-for="Lejer.LejemaalId"/>
-            <div class="form-group">
+            <div class="form-floating">
+                <input asp-for="Lejer.LejeperiodeStart" type="date" class="form-control" value="2021-01-01"/>
                 <label asp-for="Lejer.LejeperiodeStart" class="form-label"></label>
-                <input asp-for="Lejer.LejeperiodeStart" type="date" class="form-control"/>
-                <br/>
+                <span asp-validation-for="Lejer.LejeperiodeStart" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Lejer.LejeperiodeSlut" type="date" class="form-control" value="2021-01-01"/>
                 <label asp-for="Lejer.LejeperiodeSlut" class="form-label"></label>
-                <input asp-for="Lejer.LejeperiodeSlut" type="date" class="form-control"/>
-                <br/>
-                <label asp-for="Lejer.PersonIds" class="form-label"></label>
-                <select multiple asp-for="Lejer.PersonIds" class="mdb-select md-form" style="width: 100%">
-                    @foreach (var bruger in Model.Brugere)
+                <span asp-validation-for="Lejer.LejeperiodeSlut" class="text-danger"></span>
+            </div>
+            <label asp-for="Lejer.PersonIds" class="form-label"></label>
+            <select multiple asp-for="Lejer.PersonIds" class="form-select" style="width: 100%; height: 300px">
+                @foreach (var bruger in Model.Brugere)
+                {
+                    @if (Model.Lejer.PersonIds.Contains(bruger.Id))
                     {
-                        @if (Model.Lejer.PersonIds.Contains(bruger.Id))
-                        {
-                            <option selected value="@bruger.Id">@bruger.Email (@bruger.Fornavn @bruger.Efternavn)</option>
-                        }
-                        else
-                        {
-                            <option value="@bruger.Id">@bruger.Email (@bruger.Fornavn @bruger.Efternavn)</option>
-                        }
+                        <option selected value="@bruger.Id">@bruger.Email (@bruger.Fornavn @bruger.Efternavn)</option>
                     }
-                </select>
-                <br/>
-            </div>
-            <br/>
-            <div class="form-group">
-                <input type="submit" value="Gem" class="btn btn-primary bw_button" />
-            </div>
+                    else
+                    {
+                        <option value="@bruger.Id">@bruger.Email (@bruger.Fornavn @bruger.Efternavn)</option>
+                    }
+                }
+            </select>
+            <div class="form-floating"></div>
+            <button type="submit" class="btn btn-lg btn-primary bw_button bw_button_inline">Gem ændringer</button>
+            <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@Model.Lejer.LejemaalId">
+                <input type="button" value="Tilbage til oversigten" class="btn btn-lg btn-primary bw_button bw_button_inline"/>
+            </a>
         </form>
     </div>
+    <div class="col"></div>
 </div>
-<br/>
-<div>
-    <a asp-controller="BALejer" asp-action="IndexByLejemaal" asp-route-id="@Model.Lejer.LejemaalId">Tilbage til oversigt.</a>
-</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

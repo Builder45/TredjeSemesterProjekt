@@ -17,7 +17,7 @@ namespace BeboerWeb.MVC.Models
 
         public Guid LejemaalId { get; set; }
 
-        [Display(Name = "Tilknyt personer som lejer/medlejere")]
+        [Display(Name = "Tilknyt personer som lejer/medlejere (CTRL + klik for at vælge flere)")]
         public List<Guid> PersonIds { get; set; } = new List<Guid>();
 
         [Display(Name = "Lejer(e)")]

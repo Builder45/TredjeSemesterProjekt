@@ -4,52 +4,58 @@
     ViewData["Name"] = "Create";
 }
 
-<h1>Opret et nyt lokale</h1>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col">
+        <h1>Opret et nyt lokale</h1>
+        <hr />
         <form asp-controller="BALokale" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <span asp-validation-for="Lokale.Navn" class="text-danger"></span>
+            <div class="form-floating">
                 <input asp-for="Lokale.Navn" class="form-control"/>
-                <br/>
-                <span asp-validation-for="Lokale.Adresse" class="text-danger"></span>
+                <label asp-for="Lokale.Navn" class="form-label"></label>
+                <span asp-validation-for="Lokale.Navn" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="Lokale.Adresse" class="form-control"/>
-                <br/>
-                <span asp-validation-for="Lokale.Etage" class="text-danger"></span>
+                <label asp-for="Lokale.Adresse" class="form-label"></label>
+                <span asp-validation-for="Lokale.Adresse" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="Lokale.Etage" class="form-control"/>
-                <br/>
-                <span asp-validation-for="Lokale.Areal" class="text-danger"></span>
+                <label asp-for="Lokale.Etage" class="form-label"></label>
+                <span asp-validation-for="Lokale.Etage" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="Lokale.Areal" class="form-control"/>
-                <br/>
-                <span asp-validation-for="Lokale.Timepris" class="text-danger"></span>
+                <label asp-for="Lokale.Areal" class="form-label"></label>
+                <span asp-validation-for="Lokale.Areal" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="Lokale.Timepris" class="form-control"/>
-                <br/>
-                <input asp-for="Lokale.Koekken" class="form-check-input">
-                <label asp-for="Lokale.Koekken" class="control-label"></label>
-                <input asp-for="Lokale.Badevaerelse" class="form-check-input">
-                <label asp-for="Lokale.Badevaerelse" class="control-label"></label>
-                <br/>
-                <br/>
-                <label>Tilknyt til ejendom:</label>
+                <label asp-for="Lokale.Timepris" class="form-label"></label>
+                <span asp-validation-for="Lokale.Timepris" class="text-danger"></span>
+            </div>
+            <input asp-for="Lokale.Koekken" class="form-check-input">
+            <label asp-for="Lokale.Koekken" class="control-label"></label>
+            <input asp-for="Lokale.Badevaerelse" class="form-check-input">
+            <label asp-for="Lokale.Badevaerelse" class="control-label"></label>
+            <div class="form-floating"></div>
+            <div class="form-floating">
                 <select asp-for="Lokale.EjendomId" class="form-select">
                     @foreach (var ejendom in Model.Ejendomme)
                     {
                         <option value="@ejendom.Id">@ejendom.Adresse, @ejendom.Postnr @ejendom.By</option>
                     }
                 </select>
+                <label asp-for="Lokale.EjendomId" class="form-label"></label>
             </div>
-            <br/>
-            <div class="form-group">
-                <input type="submit" value="Opret" class="btn btn-primary bw_button" />
-            </div>
+            <button type="submit" class="btn btn-lg btn-primary bw_button bw_button_inline">Opret lokale</button>
+            <a asp-controller="BALokale" asp-action="Index">
+                <input type="button" value="Tilbage til oversigten" class="btn btn-lg btn-primary bw_button bw_button_inline"/>
+            </a>
         </form>
     </div>
-</div>
-<br/>
-<div>
-    <a asp-controller="BALokale" asp-action="Index">Tilbage til oversigt</a>
+    <div class="col"></div>
 </div>
 
 @section Scripts {
