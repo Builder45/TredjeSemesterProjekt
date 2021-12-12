@@ -1,10 +1,12 @@
-﻿using BeboerWeb.API.Contract.DTO;
+﻿using System.Data;
+using BeboerWeb.API.Contract.DTO;
 using BeboerWeb.Application.Requests.Lejemaal;
 using BeboerWeb.Application.Requests.Lejer;
 using BeboerWeb.Application.UseCases.LejemaalUC.Interfaces;
 using BeboerWeb.Application.UseCases.LejerUC.Interfaces;
 using BeboerWeb.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.API.Controllers
 {
@@ -133,10 +135,18 @@ namespace BeboerWeb.API.Controllers
         }
 
         [HttpPut]
-        public void PutLejemaal([FromBody] LejemaalDTO dto)
+        public ActionResult PutLejemaal([FromBody] LejemaalDTO dto)
         {
-            _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest
-                (dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId, dto.RowVersion));
+            try
+            {
+                _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest
+                    (dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId, dto.RowVersion));
+                return Ok();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Conflict();
+            }
         }
     }
 }

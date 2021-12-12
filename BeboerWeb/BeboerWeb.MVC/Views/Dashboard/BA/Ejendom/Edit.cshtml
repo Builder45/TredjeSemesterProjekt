@@ -11,6 +11,7 @@
         <hr />
         <form asp-controller="BAEjendom" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
             <div class="form-floating">
                 <input asp-for="Adresse" class="form-control"/>
                 <label asp-for="Adresse" class="form-label"></label>

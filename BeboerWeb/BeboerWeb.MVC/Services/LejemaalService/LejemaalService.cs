@@ -1,7 +1,9 @@
-﻿using BeboerWeb.API.Contract.DTO;
+﻿using System.Net;
+using BeboerWeb.API.Contract.DTO;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 using BeboerWeb.API.Contract;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Services.LejemaalService
 {
@@ -33,7 +35,10 @@ namespace BeboerWeb.MVC.Services.LejemaalService
         public async Task CreateLejemaalAsync(LejemaalDTO dto) =>
             await _httpClient.PostAsJsonAsync(_lejemaalApiConfig.ServiceUrl, dto);
 
-        public async Task UpdateLejemaalAsync(LejemaalDTO dto) =>
-            await _httpClient.PutAsJsonAsync(_lejemaalApiConfig.ServiceUrl, dto);
+        public async Task UpdateLejemaalAsync(LejemaalDTO dto)
+        {
+            var response = await _httpClient.PutAsJsonAsync(_lejemaalApiConfig.ServiceUrl, dto);
+            if (response.StatusCode == HttpStatusCode.Conflict) throw new DbUpdateConcurrencyException();
+        }
     }
 }

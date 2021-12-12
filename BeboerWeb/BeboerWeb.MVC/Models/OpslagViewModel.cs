@@ -1,4 +1,5 @@
-﻿using BeboerWeb.API.Contract.DTO;
+﻿using System.ComponentModel.DataAnnotations;
+using BeboerWeb.API.Contract.DTO;
 
 namespace BeboerWeb.MVC.Models
 {
@@ -6,8 +7,16 @@ namespace BeboerWeb.MVC.Models
     {
         public Guid Id { get; set; }
         public DateTime Dato { get; set; }
+
+        [Required(ErrorMessage = "Husk at give dit opslag en titel")]
+        [StringLength(100)]
         public string Titel { get; set; }
+
+        [Required(ErrorMessage = "Husk at skrive en besked til dit opslag")]
+        [StringLength(5000)]
         public string Besked { get; set; }
+
+        [Display(Name = "Ejendomme som er relevante for opslaget:")]
         public List<Guid> EjendomIds { get; set; }
 
         public void AddDataFromDto(OpslagDTO dto)
@@ -21,7 +30,7 @@ namespace BeboerWeb.MVC.Models
 
         public string GetBeskedPreview()
         {
-            return Besked.Substring(0,30)+"...";
+            return Besked.Substring(0,30) + "...";
         }
     }
 }

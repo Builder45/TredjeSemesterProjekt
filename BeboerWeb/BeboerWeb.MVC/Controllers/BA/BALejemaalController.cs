@@ -2,6 +2,7 @@
 using BeboerWeb.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeboerWeb.MVC.Controllers.BA
 {
@@ -95,20 +96,30 @@ namespace BeboerWeb.MVC.Controllers.BA
                 {
                     await _lejemaalService.UpdateLejemaalAsync(lejemaal);
                 }
-                catch (Exception)
+                catch (DbUpdateConcurrencyException)
                 {
+                    ModelState.AddModelError("ConcurrencyError", "Fejl: Lejemålet du forsøgte at ændre er for nyligt blevet redigeret af en anden");
                     var lejemaalDto = await _lejemaalService.GetLejemaalAsync(model.Lejemaal.Id);
-                    if (lejemaalDto.Adresse != model.Lejemaal.Adresse)
+
+                    model.Lejemaal = new LejemaalViewModel();
+                    model.Lejemaal.AddDataFromDto(lejemaalDto);
+
+                    model.Ejendomme = new List<EjendomViewModel>();
+                    var dtos = await _ejendomService.GetEjendommeAsync();
+                    foreach (var dto in dtos)
                     {
-                        ModelState.AddModelError("Adresse", "Ny værdi: " + lejemaalDto.Adresse);
+                        var ejendom = new EjendomViewModel();
+                        ejendom.AddDataFromDto(dto);
+                        model.Ejendomme.Add(ejendom);
                     }
+
                     return View($"{viewPath}/Edit.cshtml", model);
                 }
 
                 return RedirectToAction(nameof(Index));
             }
 
-            return View($"{viewPath}/Edit.cshtml");
+            return View($"{viewPath}/Edit.cshtml", model);
         }
     }
 }
