@@ -1,68 +1,46 @@
-﻿using System.Security.Claims;
-using BeboerWeb.API.Contract;
-using BeboerWeb.MVC.Data;
+﻿using BeboerWeb.API.Contract;
+using BeboerWeb.MVC.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly IPersonService _personService;
-        private readonly ApplicationDbContext _userDb;
+        private readonly IBrugerService _brugerService;
 
-        public DashboardController(UserManager<IdentityUser> userManager, IPersonService personService, ApplicationDbContext userDb)
+        public DashboardController(IPersonService personService, IBrugerService brugerService)
         {
-            _userManager = userManager;
             _personService = personService;
-            _userDb = userDb;
+            _brugerService = brugerService; 
         }
 
         [Authorize]
         public async Task<ActionResult> Index()
         {
-            var roleRelevantView = CheckRole();
-            return await roleRelevantView;
-        }
-        private async Task<ActionResult> CheckRole()
-        {
-            if (User.HasClaim("IsBA", "Yes"))
+            var bruger = await _brugerService.GetBrugerByBrugernavn(User.Identity.Name);
+            var brugerId = Guid.Parse(bruger.Id);
+            var person = await _personService.GetPersonByBrugerAsync(brugerId);
+
+            if (person.IsActiveLejer)
             {
-                return View("BA/Index");
-            }
-
-            var userId = _userManager.GetUserId(User);
-            var user = await _userDb.Users.FindAsync(userId);
-
-            var userIsLejerClaim = _userDb.UserClaims
-                .Any(c => c.UserId == userId.ToString() && c.ClaimType == "IsLejer" && c.ClaimValue == "Yes");
-
-            var person = await _personService.GetPersonByBrugerAsync(Guid.Parse(userId));
-            ViewBag.BrugerNavn = person.Fornavn +" "+ person.Efternavn;
-            if (person.IsActiveLejer == true)
-            {
-                if (userIsLejerClaim)
+                if (await _brugerService.BrugerHasClaim(brugerId, "IsLejer") == false)
                 {
-                    return View("Lejer/Index");
-                }
-                else
-                {
-                    var claim = new Claim("IsLejer", "Yes");
-                    await _userManager.AddClaimAsync(user, claim);
-                    return View("Lejer/Index");
+                    await _brugerService.AddClaimToBruger(brugerId, "IsLejer");
                 }
             }
-            if (person.IsActiveLejer == false)
+            else
             {
-                if (userIsLejerClaim)
+                if (await _brugerService.BrugerHasClaim(brugerId, "IsLejer"))
                 {
-                    var claim = new Claim("IsLejer", "Yes");
-                    await _userManager.RemoveClaimAsync(user, claim);
+                    await _brugerService.RemoveClaimFromBruger(brugerId, "IsLejer");
                 }
             }
 
+            if (await _brugerService.BrugerHasClaim(brugerId, "IsBA")) return View("BA/Index");
+            if (await _brugerService.BrugerHasClaim(brugerId, "IsVV")) return View("VV/Index");
+            if (person.IsActiveLejer) return View("Lejer/Index");
             return View("Alle/Index");
         }
     }

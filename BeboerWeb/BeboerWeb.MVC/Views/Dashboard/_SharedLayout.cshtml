@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BeboerWeb.MVC</title>
+    <title>@ViewData["Title"] - BeboerWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeboerWeb.MVC.styles.css" asp-append-version="true" />
@@ -41,7 +41,17 @@
                                 <li><a class="dropdown-item" asp-controller="LejerLejemaal" asp-action="IndexByLejer">Mine lejemål</a></li>
                                 <li><a class="dropdown-item" asp-controller="LejerDokument" asp-action="Index">Mine dokumenter</a></li>
                                 <li><a class="dropdown-item" asp-controller="LejerMedarbejder" asp-action="Index">Kontaktoplysninger</a></li>
-                                <li><a class="dropdown-item" asp-controller="BALokale" asp-action="Index">Lokaler</a></li>
+                            </ul>
+                        </div>
+                    }
+                    @if (User.HasClaim("IsVV", "Yes"))
+                    {
+                        <div class="dropdown bw_dropdown">
+                            <button class="btn btn-secondary dropdown-toggle bw_button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Vicevært
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="VVLejer" asp-action="Index">Brugere</a></li>
                             </ul>
                         </div>
                     }
@@ -60,18 +70,6 @@
                             </ul>
                         </div>
                     }
-                    @if (User.HasClaim("IsVV", "Yes"))
-                    {
-                        <div class="dropdown bw_dropdown">
-                            <button class="btn btn-secondary dropdown-toggle bw_button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Vicevært
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="VVLejer" asp-action="Index">Brugere</a></li>
-                            </ul>
-                        </div>
-                    }
-                    
                     <partial name="_LoginPartial" />
                 </div>
             </div>

@@ -18,6 +18,9 @@ namespace BeboerWeb.MVC.Services
         public async Task<IdentityUser> GetBruger(Guid brugerId) =>
             await _userManager.FindByIdAsync(brugerId.ToString());
 
+        public async Task<IdentityUser> GetBrugerByBrugernavn(string brugernavn) =>
+            await _userManager.FindByNameAsync(brugernavn); 
+
         public async Task<List<IdentityUser>> GetBrugere() =>
             await _userManager.Users.ToListAsync();
 

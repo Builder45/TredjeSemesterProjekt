@@ -2,7 +2,6 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-@*<ul class="navbar-nav">*@
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="dropdown bw_dropdown">
@@ -10,26 +9,12 @@
             @User.Identity?.Name!
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Tilpas Oplysninger</a></li>
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index/Email">Skift Email</a></li>
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index/Password">Skift Kodeord</a></li>
+            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Tilpas oplysninger</a></li>
+            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index/Email">Skift email</a></li>
+            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index/Password">Skift kodeord</a></li>
         </ul>
     </div>
     <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Dashboard", new { area = "" })">
         <button  type="submit" class="btn btn-secondary bw_button">Log ud</button>
     </form>
-    @*<li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Velkommen @User.Identity?.Name!</a>
-    </li>*@
 }
-@*else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrer</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Log ind</a>
-    </li>
-
-}
-</ul>*@
