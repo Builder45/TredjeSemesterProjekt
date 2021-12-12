@@ -4,13 +4,12 @@
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
-<h1>Oversigt over brugere</h1>
+<h1>Brugeroversigt</h1>
 <br/>
-<p>
-    <a asp-controller="BAPerson" asp-action="Create">
-        <input type="button" value="Opret ny person" class="btn btn-primary bw_button" />
-    </a>
-</p>
+<a asp-controller="BAPerson" asp-action="Create">
+    <input type="button" value="Opret ny bruger" class="btn btn-primary bw_button" />
+</a>
+<br/>
 <table class="table">
 	<thead>
 	<tr>
@@ -25,11 +24,8 @@
 		</th>
 		<th>
 			@Html.DisplayNameFor(model => model.First().Telefonnr)
-		</th>		
-		@*<th>
-			@Html.DisplayNameFor(model => model.First().Rolle)
-		</th>*@
-		<th></th>
+		</th>
+        <th></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -47,13 +43,9 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.Telefonnr)
 			</td>
-			@*<td>
-				@Html.DisplayFor(modelItem => item)
-			</td>*@
-			<td>
+            <td>
 				<a asp-controller="BAPerson" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
-				@*<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |*@
-				<a asp-controller="BAPerson" asp-action="EditPolicies" asp-route-id="@item.BrugerId">Roller</a>
+                <a asp-controller="BAPerson" asp-action="EditClaims" asp-route-id="@item.BrugerId">Roller</a>
 			</td>
 		</tr>
 	}

@@ -1,11 +1,10 @@
-﻿@using Microsoft.AspNetCore.Razor.Language.Extensions
-@model List<LejemaalViewModel>
+﻿@model List<LejemaalViewModel>
 @{
     ViewData["Name"] = "Index";
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
-<h1>Oversigt over lejemål</h1>
+<h1>Lejemålsoversigt</h1>
 <br/>
 <a asp-controller="BALejemaal" asp-action="Create">
     <input type="button" value="Opret lejemål" class="btn btn-primary bw_button" />

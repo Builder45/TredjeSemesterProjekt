@@ -1,11 +1,8 @@
 ﻿using BeboerWeb.API.Contract;
 using BeboerWeb.API.Contract.DTO;
 using Microsoft.AspNetCore.Mvc;
-using BeboerWeb.MVC.Data;
 using BeboerWeb.MVC.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
+using BeboerWeb.MVC.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BeboerWeb.MVC.Controllers.BA
@@ -14,35 +11,29 @@ namespace BeboerWeb.MVC.Controllers.BA
     [Route("Dashboard/Admin/Brugere/{action}")]
     public class BAPersonController : Controller
     {
+        private readonly IBrugerService _brugerService;
         private readonly IPersonService _personService;
         private readonly IVicevaertService _vicevaertService;
-        private readonly ApplicationDbContext _userDb;
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly string viewPath = "Views/Dashboard/BA/Person";
 
-        public BAPersonController(IPersonService personService, ApplicationDbContext userDb, UserManager<IdentityUser> userManager, IVicevaertService vicevaertService)
+        public BAPersonController(IBrugerService brugerService, IPersonService personService, IVicevaertService vicevaertService)
         {
-            _userDb = userDb;
+            _brugerService = brugerService;
             _personService = personService;
             _vicevaertService = vicevaertService;
-            _userManager = userManager;
         }
 
         public async Task<ActionResult> Index()
         {
             var model = new List<BrugerViewModel>();
-            var personList = await _personService.GetPersonerAsync();
-            var brugerList = await _userDb.Users.ToListAsync();
-            foreach (var person in personList)
+            var personer = await _personService.GetPersonerAsync();
+            var brugere = await _brugerService.GetBrugere();
+            foreach (var person in personer)
             {
                 var brugerModel = new BrugerViewModel();
                 brugerModel.AddDataFromDTO(person);
-
-                var bruger = brugerList.Find(bruger => bruger.Id == person.BrugerId.ToString());
-                if (bruger != null)
-                {
-                    brugerModel.Email = bruger.Email;
-                }
+                var bruger = brugere.Find(b => b.Id == person.BrugerId.ToString());
+                if (bruger != null) brugerModel.Email = bruger.Email;
 
                 model.Add(brugerModel);
             }
@@ -60,11 +51,8 @@ namespace BeboerWeb.MVC.Controllers.BA
             var model = new BrugerViewModel();
             model.AddDataFromDTO(personModel);
 
-            var bruger = await _userDb.Users.FindAsync(model.BrugerId.ToString());
-            if (bruger != null)
-            {
-                model.Email = bruger.Email;
-            }
+            var bruger = await _brugerService.GetBruger(model.BrugerId);
+            model.Email = bruger.Email;
 
             return View($"{viewPath}/Edit.cshtml", model);
         }
@@ -81,44 +69,45 @@ namespace BeboerWeb.MVC.Controllers.BA
             return View($"{viewPath}/Edit.cshtml", bruger);
         }
 
-        public async Task<ActionResult> EditPolicies(Guid id)
+        public async Task<ActionResult> EditClaims(Guid id)
         {
             var model = new UserPolicyViewModel
             {
                 BrugerId = id
             };
 
-            var user = await _userDb.Users.FindAsync(id.ToString());
-            if (user != null) model.Email = user.Email;
+            var bruger = await _brugerService.GetBruger(id); 
+            model.Email = bruger.Email;
+            model.IsVV = await _brugerService.BrugerHasClaim(id, "IsVV");
+            model.IsBA = await _brugerService.BrugerHasClaim(id, "IsBA");
 
-            var userIsVV = _userDb.UserClaims
-                .Any(c => c.UserId == id.ToString() && c.ClaimType == "IsVV" && c.ClaimValue == "Yes");
-            if (userIsVV)
-            {
-                model.WasVV = true;
-                model.IsVV = true;
-            }
-
-            return View($"{viewPath}/EditPolicies.cshtml", model);
+            return View($"{viewPath}/EditClaims.cshtml", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditPolicies(UserPolicyViewModel model)
+        public async Task<ActionResult> EditClaims(UserPolicyViewModel model)
         {
-            if (model.IsVV != model.WasVV)
+            if (model.IsVV)
             {
-                var bruger = await _userManager.FindByIdAsync(model.BrugerId.ToString());
-                if (model.IsVV)
-                {
-                    await _userManager.AddClaimAsync(bruger, new Claim("IsVV", "Yes"));
-                    await _vicevaertService.LinkVicevaertAsync(new VicevaertDTO {BrugerId = model.BrugerId});
-                }
-                else
-                {
-                    await _userManager.RemoveClaimAsync(bruger, new Claim("IsVV", "Yes"));
-                    await _vicevaertService.UnlinkVicevaertAsync(model.BrugerId);
-                }
+                await _brugerService.AddClaimToBruger(model.BrugerId, "IsVV");
+                await _vicevaertService.LinkVicevaertAsync(new VicevaertDTO { BrugerId = model.BrugerId });
+            }
+            else
+            {
+                await _brugerService.RemoveClaimFromBruger(model.BrugerId, "IsVV");
+                await _vicevaertService.UnlinkVicevaertAsync(model.BrugerId);
+            }
+
+            if (model.IsBA)
+            {
+                await _brugerService.AddClaimToBruger(model.BrugerId, "IsBA");
+                //await _boligadminService....
+            }
+            else
+            {
+                await _brugerService.RemoveClaimFromBruger(model.BrugerId, "IsBA");
+                //await _boligadminService....
             }
 
             return RedirectToAction(nameof(Index));

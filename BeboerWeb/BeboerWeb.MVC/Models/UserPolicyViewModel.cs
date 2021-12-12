@@ -2,9 +2,9 @@
 {
     public class UserPolicyViewModel
     {
-        public string Email { get; set; }
         public Guid BrugerId { get; set; }
-        public bool WasVV { get; set; } = false;
+        public string Email { get; set; }
         public bool IsVV { get; set; } = false;
+        public bool IsBA { get; set; } = false;
     }
 }

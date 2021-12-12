@@ -4,13 +4,12 @@
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
-<h1>Oversigt over Opslag</h1>
+<h1>Opslagsoversigt</h1>
 <br/>
-<p>
-    <a asp-controller="BAOpslag" asp-action="Create">
-        <input type="button" value="Opret nyt opslag" class="btn btn-primary bw_button" />
-    </a>
-</p>
+<a asp-controller="BAOpslag" asp-action="Create">
+    <input type="button" value="Opret nyt opslag" class="btn btn-primary bw_button" />
+</a>
+<br/>
 <table class="table">
     <thead>
     <tr>

@@ -1,7 +1,7 @@
 ﻿@model UserPolicyViewModel
 
 @{
-    ViewData["Name"] = "Edit";
+    ViewData["Name"] = "Edit Claims";
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
@@ -9,15 +9,19 @@
     <div class="col">
         <h1>Rollehåndtering for @Model.Email</h1>
         <hr />
-        <form asp-controller="BAPerson" asp-action="EditPolicies">
+        <form asp-controller="BAPerson" asp-action="EditClaims">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BrugerId" />
-            <input type="hidden" asp-for="WasVV" />
             <label>Sæt kryds ved relevante roller:</label>
             <div class="form-floating"></div>
             <input asp-for="@Model.IsVV" class="form-check-input" />
             <label class="form-check-label" asp-for="@Model.IsVV">
                 Vicevært
+            </label>
+            <div class="form-floating"></div>
+            <input asp-for="@Model.IsBA" class="form-check-input" />
+            <label class="form-check-label" asp-for="@Model.IsBA">
+                Boligadministrator
             </label>
             <div class="form-floating"></div>
             <button type="submit" class="btn btn-lg btn-primary bw_button bw_button_inline">Gem ændringer</button>

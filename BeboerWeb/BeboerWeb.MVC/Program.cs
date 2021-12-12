@@ -52,6 +52,8 @@ builder.Services.AddHttpClient();
 builder.Services.Configure<ApiConfig>(
     builder.Configuration.GetSection("ApiConfig"));
 
+builder.Services.AddScoped<IBrugerService, BrugerService>();
+
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IEjendomService, EjendomService>();
@@ -60,7 +62,6 @@ builder.Services.AddScoped<ILejerService, LejerService>();
 builder.Services.AddScoped<ILokaleService, LokaleService>();
 builder.Services.AddScoped<IVicevaertService, VicevaertService>();
 builder.Services.AddScoped<IOpslagService, OpslagService>();
-
 
 var app = builder.Build();
 
