@@ -1,12 +1,12 @@
-﻿@model List<LejerViewModel>
+﻿@model LejemaalLejerViewModel
 @{
     ViewData["Name"] = "Index";
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
-<h1>Lejeroversigt for @ViewBag.LejemaalInfo</h1>
+<h1>Lejeroversigt for @Model.Lejemaal.Adresse (@Model.Lejemaal.Etage)</h1>
 <br/>
-<a asp-controller="BALejer" asp-action="Create" asp-route-id="@Model[0].LejemaalId">
+<a asp-controller="BALejer" asp-action="Create" asp-route-id="@Model.Lejemaal.Id">
     <input type="button" value="Opret lejer" class="btn btn-primary bw_button" />
 </a>
 <br/>
@@ -14,19 +14,19 @@
 	<thead>
 	<tr>
 		<th>
-			@Html.DisplayNameFor(model => model.First().LejeperiodeStart)
+			@Html.DisplayNameFor(model => model.Lejere.First().LejeperiodeStart)
 		</th>
         <th>
-            @Html.DisplayNameFor(model => model.First().LejeperiodeSlut)
+            @Html.DisplayNameFor(model => model.Lejere.First().LejeperiodeSlut)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().LejerNavne)
+            @Html.DisplayNameFor(model => model.Lejere.First().LejerNavne)
         </th>
         <th></th>
 	</tr>
 	</thead>
 	<tbody>
-	@foreach (var item in Model) {
+	@foreach (var item in Model.Lejere) {
 		<tr>
             <td>
                 @Html.DisplayFor(modelitem => item.LejeperiodeStart)

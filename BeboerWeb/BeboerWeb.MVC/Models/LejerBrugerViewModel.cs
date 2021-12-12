@@ -5,7 +5,7 @@ namespace BeboerWeb.MVC.Models
     public class LejerBrugerViewModel
     {
         public LejerViewModel Lejer { get; set; } = new LejerViewModel();
-        public List<BrugerViewModel> Brugere { get; set; }
+        public List<BrugerViewModel> Brugere { get; set; } = new List<BrugerViewModel>();
 
         public LejerDTO GetLejerDTO()
         {
