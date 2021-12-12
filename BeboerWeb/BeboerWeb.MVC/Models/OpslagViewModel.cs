@@ -30,7 +30,8 @@ namespace BeboerWeb.MVC.Models
 
         public string GetBeskedPreview()
         {
-            return Besked.Substring(0,30) + "...";
+            if (Besked.Length > 30) return Besked.Substring(0, 30) + "...";
+            return Besked;
         }
     }
 }

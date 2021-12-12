@@ -40,6 +40,26 @@ namespace BeboerWeb.Persistence.Repositories
             return _db.Ejendom.Include(e => e.Lokaler).ToList();
         }
 
+        public List<Ejendom> GetEjendommeByPerson(Guid personId)
+        {
+            var person = _db.Person
+                .Include(p => p.Lejere)
+                .ThenInclude(le => le.Lejemaal)
+                .ThenInclude(l => l.Ejendom)
+                .First(p => p.Id == personId);
+
+            var ejendomme = new List<Ejendom>();
+            foreach (var lejer in person.Lejere)
+            {
+                if (!ejendomme.Contains(lejer.Lejemaal.Ejendom))
+                {
+                    ejendomme.Add(lejer.Lejemaal.Ejendom);
+                }
+            }
+
+            return ejendomme;
+        }
+
         public void UpdateEjendom(Ejendom ejendom)
         {
             if (!ejendomExists(ejendom))

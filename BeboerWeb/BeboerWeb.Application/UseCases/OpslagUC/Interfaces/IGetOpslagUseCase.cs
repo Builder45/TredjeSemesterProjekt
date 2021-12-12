@@ -7,4 +7,5 @@ public interface IGetOpslagUseCase
 {
     Opslag GetOpslag(GetOpslagRequest command);
     List<Opslag> GetAllOpslag();
+    List<Opslag> GetOpslagByBruger(GetOpslagRequest command);
 }

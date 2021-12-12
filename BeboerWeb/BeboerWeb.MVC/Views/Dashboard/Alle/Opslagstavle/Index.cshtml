@@ -1,0 +1,42 @@
+﻿@model List<EjendomViewModel>
+@{
+    ViewData["Name"] = "Index";
+    Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
+}
+
+<h1>Opslagstavle - Information og nyheder</h1>
+<hr/>
+<table class="table">
+	<thead>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Adresse)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().Postnr)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.First().By)
+		</th>		
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Adresse)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Postnr)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.By)
+			</td>
+			<td>
+				<a asp-controller="BAEjendom" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> 
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>

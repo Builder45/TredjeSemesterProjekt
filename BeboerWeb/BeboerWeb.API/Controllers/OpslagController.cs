@@ -38,6 +38,36 @@ namespace BeboerWeb.API.Controllers
             return dtos;
         }
 
+        [HttpGet("ByBruger/{brugerId}")]
+        public IEnumerable<OpslagDTO> GetAllOpslagByBruger(Guid brugerId)
+        {
+            var models = _getOpslagUseCase.GetOpslagByBruger(new GetOpslagRequest {BrugerId = brugerId});
+            var dtos = new List<OpslagDTO>();
+            foreach (var model in models)
+            {
+                var dto = new OpslagDTO
+                {
+                    Id = model.Id,
+                    Titel = model.Titel,
+                    Besked = model.Besked,
+                    Dato = model.Dato
+                };
+                foreach (var ejendom in model.Ejendomme)
+                {
+                    var ejendomDto = new EjendomDTO
+                    {
+                        Id = ejendom.Id,
+                        Adresse = ejendom.Adresse,
+                        By = ejendom.By,
+                        Postnr = ejendom.Postnr
+                    };
+                    dto.Ejendomme.Add(ejendomDto);
+                }
+                dtos.Add(dto);
+            }
+            return dtos;
+        }
+
         [HttpGet("{id}")]
         public OpslagDTO GetOpslag(Guid id)
         {

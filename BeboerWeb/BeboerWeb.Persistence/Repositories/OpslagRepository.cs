@@ -19,6 +19,26 @@ namespace BeboerWeb.Persistence.Repositories
                 .ToList();
         }
 
+        public List<Opslag> GetOpslagByEjendomme(List<Ejendom> ejendomme)
+        {
+            var relevantOpslag = new List<Opslag>();
+            foreach (var ejendom in ejendomme)
+            {
+                var ejendomOpslag = _db.Opslag
+                    .Include(o => o.Ejendomme)
+                    .Where(o => o.Ejendomme.Contains(ejendom));
+                foreach (var opslag in ejendomOpslag)
+                {
+                    if (!relevantOpslag.Contains(opslag))
+                    {
+                        relevantOpslag.Add(opslag);
+                    }
+                }
+            }
+
+            return relevantOpslag;
+        }
+
         public Opslag GetOpslag(Guid id)
         {
             return _db.Opslag

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BeboerWeb.Domain.Models;
+﻿using BeboerWeb.Domain.Models;
 
 namespace BeboerWeb.Application.Persistence
 {
@@ -14,6 +9,7 @@ namespace BeboerWeb.Application.Persistence
         Ejendom GetEjendom(Guid id);
         List<Ejendom> GetEjendomme();
         List<Ejendom> GetEjendommeWithLokaler();
+        List<Ejendom> GetEjendommeByPerson(Guid personId);
         void UpdateEjendom(Ejendom ejendom);
 
     }
