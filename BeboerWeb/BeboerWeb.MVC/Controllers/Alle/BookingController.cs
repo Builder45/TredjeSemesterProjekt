@@ -29,11 +29,15 @@ namespace BeboerWeb.MVC.Controllers.Alle
         {
             var models = new List<EjendomWithLokalerViewModel>();
             var dtos = await _ejendomService.GetEjendommeWithLokalerAsync();
-            foreach (var dto in dtos)
+            var dtosInOrder = dtos.OrderBy(e => e.Postnr).ThenBy(e => e.Adresse);
+            foreach (var dto in dtosInOrder)
             {
-                var model = new EjendomWithLokalerViewModel();
-                model.AddDataFromDTO(dto);
-                models.Add(model);
+                if (dto.Lokaler.Count > 0)
+                {
+                    var model = new EjendomWithLokalerViewModel();
+                    model.AddDataFromDTO(dto);
+                    models.Add(model);
+                }
             }
             return View($"{viewPath}/Index.cshtml", models);
         }
@@ -103,26 +107,7 @@ namespace BeboerWeb.MVC.Controllers.Alle
             return View($"{viewPath}/Create.cshtml", model);
         }
 
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public async Task<ActionResult> Delete()
+        public async Task<ActionResult> MineBookinger()
         {
             var brugerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var person = await _personService.GetPersonByBrugerAsync(Guid.Parse(brugerId));
@@ -144,7 +129,7 @@ namespace BeboerWeb.MVC.Controllers.Alle
         public async Task<ActionResult> Delete(MineBookingerViewModel model)
         {
             await _bookingService.DeleteBookingAsync(model.Booking.Id);
-            return RedirectToAction("Delete");
+            return RedirectToAction("MineBookinger");
         }
     }
 }

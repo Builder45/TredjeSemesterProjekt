@@ -30,4 +30,8 @@
     <ProjectReference Include="..\BeboerWeb.API.Contract\BeboerWeb.API.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Dashboard\Alle\Opslagstavle\" />
+  </ItemGroup>
+
 </Project>

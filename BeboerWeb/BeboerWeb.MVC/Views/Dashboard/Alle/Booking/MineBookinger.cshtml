@@ -3,7 +3,7 @@
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
     ViewData["Name"] = "Create";
 }
-<h1>Sletning af bookning for ...</h1>
+<h1>Mine bookinger</h1>
 <br/>
 <table class="table">
     <thead>
@@ -52,9 +52,10 @@
     </tbody>
 
 </table>
-<div>
-    <a asp-controller="Booking" asp-action="Index">Tilbage til lokaleoversigten.</a>
-</div>
+<a asp-controller="Booking" asp-action="Index">
+    <input type="button" value="Gå til lokaleoversigten" class="btn btn-lg btn-primary bw_button"/>
+</a>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

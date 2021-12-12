@@ -4,32 +4,38 @@
     ViewData["Name"] = "Create";
 }
 
-<h2>@Model.Booking.Lokale.Navn - @Model.Booking.Lokale.Adresse (@Model.Booking.Lokale.Etage) - Booking</h2>
+<h2>Ny booking for @Model.Booking.Lokale.Navn på @Model.Booking.Lokale.Adresse (@Model.Booking.Lokale.Etage)</h2>
 <hr/>
 <div class="row">
-    <div class="col-md-4">
-        <p>Oplysninger om lokalet:</p>
-        <p>Areal: @Model.Booking.Lokale.Areal m^2</p>
-        @if (Model.Booking.Lokale.Timepris > 0) { <p>Pris: @Model.Booking.Lokale.Timepris kr. per ?</p> }
-        else { <p>Gratis at booke</p> }
+    <div class="bw_lokaleinfo">
+        <p>Lokalet har et areal på @Model.Booking.Lokale.Areal &#13217. </p> 
+        @if (Model.Booking.Lokale.Badevaerelse) { <p>Lokalet har toiletfaciliteter. </p>}
+        @if (Model.Booking.Lokale.Koekken) { <p>Lokalet har køkkenfaciliteter. </p>}
+        @if (Model.Booking.Lokale.Timepris > 0) { <p>Lokalet koster @Model.Booking.Lokale.Timepris kr. i timen. </p> }
+        else { <p>Lokalet er gratis at booke. </p> }
+    </div>
+    <div class="col">
         <form asp-controller="Booking" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Booking.LokaleId"/>
             <input type="hidden" asp-for="Booking.PersonId"/>
-            <div class="form-group">
-                <label asp-for="Booking.BookingPeriodeStart" class="form-label"></label>
+            <div class="form-floating">
                 <input asp-for="Booking.BookingPeriodeStart" type="date" class="form-control" value="@Model.GetDateString()"/>
-                <br/>
-                <label asp-for="Booking.BookingPeriodeSlut" class="form-label"></label>
+                <label asp-for="Booking.BookingPeriodeStart" class="form-label"></label>
+                <span asp-validation-for="Booking.BookingPeriodeStart" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="Booking.BookingPeriodeSlut" type="date" class="form-control" value="@Model.GetDateString()"/>
-                <br/>
+                <label asp-for="Booking.BookingPeriodeSlut" class="form-label"></label>
+                <span asp-validation-for="Booking.BookingPeriodeSlut" class="text-danger"></span>
             </div>
-            <br/>
-            <div class="form-group">
-                <input type="submit" value="Opret booking" class="btn btn-primary bw_button"/>
-            </div>
+            <button type="submit" class="btn btn-lg btn-primary bw_button bw_button_inline">Opret booking</button>
+            <a asp-controller="Booking" asp-action="Index">
+                <input type="button" value="Tilbage til oversigten" class="btn btn-lg btn-primary bw_button bw_button_inline"/>
+            </a>
         </form>
     </div>
+    <div class="col"></div>
 </div>
 <br/>
 <br/>
@@ -69,7 +75,6 @@
     <input type="submit" value="Opdater" class="btn btn-primary bw_button"/>
 </form>
 <br/>
-<br/>
 <table class="table">
     <thead>
     <tr>
@@ -95,9 +100,6 @@
     </tbody>
 </table>
 
-<div>
-    <a asp-controller="Booking" asp-action="Index">Tilbage til lokaleoversigten.</a>
-</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

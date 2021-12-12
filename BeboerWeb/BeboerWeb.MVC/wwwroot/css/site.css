@@ -29,6 +29,13 @@
     width: 49% !important;
 }
 
+.bw_lokaleinfo p {
+    display: inline;
+}
+.bw_lokaleinfo {
+    margin-bottom: 15px;
+}
+
 html {
     font-size: 14px;
 }
