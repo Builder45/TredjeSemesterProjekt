@@ -18,6 +18,8 @@ namespace BeboerWeb.Application.UseCases.LejemaalUC.Interfaces
 
         List<Lejemaal> GetLejemaals();
 
-        
+        List<Lejemaal> GetLejemaalByBruger(GetLejemaalRequest command);
+
+
     }
 }

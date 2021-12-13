@@ -41,7 +41,22 @@ namespace BeboerWeb.Persistence.Repositories
                 .Include(a => a.Lejere.Where(f=>f.Personer.Any(p=>p.BrugerId==brugerId)))
                 .Include(e=>e.Ejendom)
                 .First(a => a.Id == lejemaalId);
+        }
 
+        public List<Lejemaal> GetLejemaalByBruger(Guid brugerId)
+        {
+            var person = _db.Person.First(p => p.BrugerId == brugerId);
+            var lejere = _db.Lejer.Include(a => a.Lejemaal).ThenInclude(l => l.Lejere.Where(l=>l.Personer.Contains(person))).Where(p => p.Personer.Contains(person)).OrderByDescending(l=>l.LejeperiodeStart);
+
+            var lejemaal = new List<Lejemaal>();
+            foreach (var lejer in lejere)
+            {
+                if (!lejemaal.Contains(lejer.Lejemaal))
+                {
+                    lejemaal.Add(lejer.Lejemaal);
+                }
+            }
+            return lejemaal;
         }
         public void CreateLejemaal(Lejemaal lejemaal)
         {

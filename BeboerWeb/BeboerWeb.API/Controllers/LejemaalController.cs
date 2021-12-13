@@ -89,15 +89,9 @@ namespace BeboerWeb.API.Controllers
         [HttpGet("ByBruger/{brugerId}")]
         public IEnumerable<LejemaalDTO> GetLejemaalsByBruger(Guid brugerId)
         {
-            var lejere = _getLejerUseCase.GetLejereByPerson(new GetLejerRequest { BrugerId = brugerId });
-            var models = new List<Lejemaal>();
-            var lejereInOrderByLejeperiode = lejere.OrderByDescending(l => l.LejeperiodeStart);
-            foreach (var item in lejereInOrderByLejeperiode)
-            {
-                models.Add(_getLejemaalUseCase.GetLejemaalWithLejere(new GetLejemaalRequest { LejemaalId = item.Lejemaal.Id , BrugerId = brugerId}));
-            }
-
+            var models = _getLejemaalUseCase.GetLejemaalByBruger(new GetLejemaalRequest{BrugerId = brugerId});
             var dtos = new List<LejemaalDTO>();
+
             foreach (var model in models)
             {
                 var dto = new LejemaalDTO
@@ -109,7 +103,6 @@ namespace BeboerWeb.API.Controllers
                     Areal = model.Areal, 
                     Koekken = model.Koekken, 
                     Badevaerelse = model.Badevaerelse,
-                    EjendomId = model.Ejendom.Id,
                 };
 
                 var lejerDtos = new List<LejerDTO>();

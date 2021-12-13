@@ -5,6 +5,8 @@
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
+
+
 <h1>Detaljer om dit/dine lejemål</h1>
 <h1></h1>
 <h2>Aktive lejemål</h2>
@@ -55,30 +57,36 @@
                 </div>
             </div>
         }
-        else
+    }
+}
+<br/>
+<h2>Gamle lejemål</h2>
+@foreach (var item2 in Model)
+{
+    @foreach (var lejer2 in item2.Lejere)
+    {
+        if (DateTime.Now > lejer2.LejeperiodeSlut)
         {
-            <br/>
-            <h2>Gamle lejemål</h2>
-            <button type="button" class="collapsible">@item.Lejemaal.Adresse</button>
+            <button type="button" class="collapsible">@item2.Lejemaal.Adresse</button>
             <div class="content">
                 <div class="div_info div_kortData">
                     <p>
-                        Etage:<br/>@item.Lejemaal.Etage
+                        Etage:<br/>@item2.Lejemaal.Etage
                     </p></div>
                 <div class="div_info div_kortData">
                     <p>
-                        Husleje:<br/>@item.Lejemaal.Husleje
+                        Husleje:<br/>@item2.Lejemaal.Husleje
                     </p></div>
                 <div class="div_info div_kortData">
                     <p>
-                        Areal:<br/>@item.Lejemaal.Areal
+                        Areal:<br/>@item2.Lejemaal.Areal
                     </p></div>
                 <div class="div_info div_langData">
-                    <p>Lejeperiode start:<br/>@lejer.LejeperiodeStart.ToString("dd-MM-yyyy")</p></div>
+                    <p>Lejeperiode start:<br/>@lejer2.LejeperiodeStart.ToString("dd-MM-yyyy")</p></div>
                 <div class="div_info div_langData">
-                    <p>Lejeperiode slut:<br/>@lejer.LejeperiodeSlut.ToString("dd-MM-yyyy")</p></div>
+                    <p>Lejeperiode slut:<br/>@lejer2.LejeperiodeSlut.ToString("dd-MM-yyyy")</p></div>
                 <div class="div_info div_kortData">
-                    @if (item.Lejemaal.Koekken)
+                    @if (item2.Lejemaal.Koekken)
                     {
                         <p>Køkken:<br/>Ja</p>
                     }
@@ -89,7 +97,7 @@
                 </div>
 
                 <div class="div_info div_kortData">
-                    @if (item.Lejemaal.Badevaerelse == true)
+                    @if (item2.Lejemaal.Badevaerelse == true)
                     {
                         <p>Badeværelse:<br/>Ja</p>
                     }
