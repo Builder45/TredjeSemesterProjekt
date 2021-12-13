@@ -42,8 +42,11 @@ namespace BeboerWeb.Persistence.Repositories
 
         public List<Ejendom> GetEjendommeByPerson(Guid personId)
         {
+            var currentDate = DateTime.Now;
             var person = _db.Person
-                .Include(p => p.Lejere)
+                .Include(p => p.Lejere
+                    .Where(le => le.LejeperiodeStart < currentDate)
+                    .Where(le => le.LejeperiodeSlut > currentDate))
                 .ThenInclude(le => le.Lejemaal)
                 .ThenInclude(l => l.Ejendom)
                 .First(p => p.Id == personId);
