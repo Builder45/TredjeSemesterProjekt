@@ -23,9 +23,9 @@ namespace BeboerWeb.MVC.Controllers.BA
             _vicevaertService = vicevaertService;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchTerm)
         {
-            var model = new List<BrugerViewModel>();
+            var model = new BrugerSearchViewModel();
             var personer = await _personService.GetPersonerAsync();
             var brugere = await _brugerService.GetBrugere();
             foreach (var person in personer)
@@ -34,10 +34,37 @@ namespace BeboerWeb.MVC.Controllers.BA
                 brugerModel.AddDataFromDTO(person);
                 var bruger = brugere.Find(b => b.Id == person.BrugerId.ToString());
                 if (bruger != null) brugerModel.Email = bruger.Email;
-
-                model.Add(brugerModel);
+                model.Brugere.Add(brugerModel);
             }
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                model.Brugere = model.Brugere
+                    .Where(b => b.Email.Contains(searchTerm) || b.Fornavn.Contains(searchTerm))
+                    .ToList();
+            }
+
             return View($"{viewPath}/Index.cshtml", model);
+
+            //var model = new List<BrugerViewModel>();
+            //var personer = await _personService.GetPersonerAsync();
+            //var brugere = await _brugerService.GetBrugere();
+            //foreach (var person in personer)
+            //{
+            //    var brugerModel = new BrugerViewModel();
+            //    brugerModel.AddDataFromDTO(person);
+            //    var bruger = brugere.Find(b => b.Id == person.BrugerId.ToString());
+            //    if (bruger != null) brugerModel.Email = bruger.Email;
+
+            //    model.Add(brugerModel);
+            //}
+            //return View($"{viewPath}/Index.cshtml", model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> IndexSearch(BrugerSearchViewModel model)
+        {
+            return await Index(model.SearchTerm);
         }
 
         public ActionResult Create()

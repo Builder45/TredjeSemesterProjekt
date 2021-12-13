@@ -1,4 +1,4 @@
-﻿@model List<BrugerViewModel>
+﻿@model BrugerSearchViewModel
 @{
     ViewData["Name"] = "Index";
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
@@ -6,46 +6,52 @@
 
 <h1>Brugeroversigt</h1>
 <br/>
-<a asp-controller="BAPerson" asp-action="Create">
-    <input type="button" value="Opret ny bruger" class="btn btn-primary bw_button" />
-</a>
-<br/>
+<div>
+    <form asp-controller="BAPerson" asp-action="IndexSearch" style="display:inline">
+        <input asp-for="SearchTerm" class="form-control" style="width: 200px; display:inline"/>
+        <button type="submit" class="btn btn-primary bw_button">Søg</button>
+    </form>
+    <a asp-controller="BAPerson" asp-action="Create">
+        <input type="button" value="Opret ny bruger" class="btn btn-primary bw_button"/>
+    </a>
+</div>
+
 <table class="table">
 	<thead>
 	<tr>
 		<th>
-			@Html.DisplayNameFor(model => model.First().Email)
+			@Html.DisplayNameFor(model => model.Brugere.First().Email)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.First().Fornavn)
+			@Html.DisplayNameFor(model => model.Brugere.First().Fornavn)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.First().Efternavn)
+			@Html.DisplayNameFor(model => model.Brugere.First().Efternavn)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.First().Telefonnr)
+			@Html.DisplayNameFor(model => model.Brugere.First().Telefonnr)
 		</th>
         <th></th>
 	</tr>
 	</thead>
 	<tbody>
-	@foreach (var item in Model) {
+	@foreach (var bruger in Model.Brugere) {
 		<tr>
 			<td>
-				@Html.DisplayFor(modelItem => item.Email)
+				@Html.DisplayFor(modelItem => bruger.Email)
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.Fornavn)
+				@Html.DisplayFor(modelItem => bruger.Fornavn)
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.Efternavn)
+				@Html.DisplayFor(modelItem => bruger.Efternavn)
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.Telefonnr)
+				@Html.DisplayFor(modelItem => bruger.Telefonnr)
 			</td>
             <td>
-				<a asp-controller="BAPerson" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
-                <a asp-controller="BAPerson" asp-action="EditClaims" asp-route-id="@item.BrugerId">Roller</a>
+				<a asp-controller="BAPerson" asp-action="Edit" asp-route-id="@bruger.Id">Rediger</a> |
+                <a asp-controller="BAPerson" asp-action="EditClaims" asp-route-id="@bruger.BrugerId">Roller</a>
 			</td>
 		</tr>
 	}
