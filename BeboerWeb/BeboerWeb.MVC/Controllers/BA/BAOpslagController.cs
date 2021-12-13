@@ -98,28 +98,8 @@ namespace BeboerWeb.MVC.Controllers
 
         public async Task<ActionResult> Delete(Guid id)
         {
-            var model = new OpslagEjendommeViewModel();
-            var dtos = await _ejendomService.GetEjendommeAsync();
-            foreach (var dto in dtos)
-            {
-                var ejendommodel = new EjendomViewModel();
-                ejendommodel.AddDataFromDto(dto);
-                model.Ejendomme.Add(ejendommodel);
-            }
-
-            var opslagDto = await _opslagService.GetOpslagAsync(id);
-            model.Opslag.AddDataFromDto(opslagDto);
-
-            return View($"{viewPath}/Index.cshtml");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(OpslagEjendommeViewModel model)
-        {
-            await _opslagService.DeleteOpslagAsync(model.Opslag.Id);
-                return RedirectToAction("Delete");
-
+            await _opslagService.DeleteOpslagAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }
