@@ -1,0 +1,20 @@
+﻿@model OpslagViewModel
+@{
+    Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
+    ViewData["Name"] = "Details";
+}
+
+<div class="row">
+    <div class="col">
+        <h2>@Model.Titel</h2>
+        <hr />
+        <p style="font-size: 12px; margin-top: -10px"><i>@Model.Dato</i></p>
+        <div class="form-floating">
+            <p>@Model.Besked</p>
+        </div>
+        <a asp-controller="Opslagstavle" asp-action="Index">
+            <input type="button" value="Gå tilbage til oversigten" class="btn btn-lg btn-primary bw_button"/>
+        </a>
+    </div>
+    <div class="col"></div>
+</div>

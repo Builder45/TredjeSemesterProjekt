@@ -31,15 +31,27 @@ namespace BeboerWeb.MVC.Controllers.Alle
 
             foreach (var dto in dtosInOrder)
             {
-                
+                var opslag = new OpslagViewModel();
+                opslag.AddDataFromDto(dto);
+                foreach (var ejendomDto in dto.Ejendomme)
+                {
+                    var ejendom = new EjendomViewModel();
+                    ejendom.AddDataFromDto(ejendomDto);
+                    opslag.Ejendomme.Add(ejendom);
+                }
+                model.Add(opslag);
             }
 
             return View($"{viewPath}/Index.cshtml", model);
         }
 
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            return View();
+            var model = new OpslagViewModel();
+            var dto = await _opslagService.GetOpslagAsync(id);
+            model.AddDataFromDto(dto);
+
+            return View($"{viewPath}/Details.cshtml", model);
         }
     }
 }

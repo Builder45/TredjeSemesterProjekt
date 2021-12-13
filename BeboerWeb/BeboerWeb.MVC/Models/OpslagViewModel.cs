@@ -19,6 +19,9 @@ namespace BeboerWeb.MVC.Models
         [Display(Name = "Ejendomme som er relevante for opslaget:")]
         public List<Guid> EjendomIds { get; set; }
 
+        [Display(Name = "Relevante ejendomme")]
+        public List<EjendomViewModel> Ejendomme { get; set; } = new List<EjendomViewModel>();
+
         public void AddDataFromDto(OpslagDTO dto)
         {
             Id = dto.Id;

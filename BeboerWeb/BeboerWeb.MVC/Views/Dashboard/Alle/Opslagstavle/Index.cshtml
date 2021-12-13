@@ -1,4 +1,4 @@
-﻿@model List<EjendomViewModel>
+﻿@model List<OpslagViewModel>
 @{
     ViewData["Name"] = "Index";
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
@@ -10,31 +10,44 @@
 	<thead>
 	<tr>
 		<th>
-			@Html.DisplayNameFor(model => model.First().Adresse)
+			@Html.DisplayNameFor(model => model.First().Dato)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.First().Postnr)
+			@Html.DisplayNameFor(model => model.First().Ejendomme)
 		</th>
 		<th>
-			@Html.DisplayNameFor(model => model.First().By)
-		</th>		
-		<th></th>
+			@Html.DisplayNameFor(model => model.First().Titel)
+        </th>		
+        <th>
+            @Html.DisplayNameFor(model => model.First().Besked)
+        </th>
+        <th></th>
 	</tr>
 	</thead>
 	<tbody>
-	@foreach (var item in Model) {
+	@foreach (var opslag in Model) {
 		<tr>
 			<td>
-				@Html.DisplayFor(modelItem => item.Adresse)
+				@Html.DisplayFor(modelItem => opslag.Dato)
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.Postnr)
+				@if (opslag.Ejendomme.Count == 1)
+				{
+				    <p>@opslag.Ejendomme[0].Adresse (@opslag.Ejendomme[0].Postnr @opslag.Ejendomme[0].By)</p>
+				}
+				else if (opslag.Ejendomme.Count > 1)
+				{
+				    <p>Sendt til flere ejendomme</p>
+				}
 			</td>
+            <td>
+                @Html.DisplayFor(modelItem => opslag.Titel)
+            </td>
+            <td>
+				@opslag.GetBeskedPreview()
+            </td>
 			<td>
-				@Html.DisplayFor(modelItem => item.By)
-			</td>
-			<td>
-				<a asp-controller="BAEjendom" asp-action="Edit" asp-route-id="@item.Id">Rediger</a> 
+				<a asp-controller="Opslagstavle" asp-action="Details" asp-route-id="@opslag.Id">Læs hele opslaget</a> 
 			</td>
 		</tr>
 	}
