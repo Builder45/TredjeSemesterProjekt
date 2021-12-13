@@ -54,16 +54,15 @@ html {
 body {
     margin-bottom: 60px;
 }
-.velkommenTaekst {
+.bw_forside_overskrift {
     font-size: 40px;
+}
+.bw_forside_beskrivelse {
+    font-family: serif;
 }
 .display-4 {
     font-size: 25px;
     color: #000000;
-}
-
-.dashboard-text {
-    font-family: serif; 
 }
 
 .MineBookinger {

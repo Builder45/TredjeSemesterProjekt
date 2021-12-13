@@ -36,5 +36,10 @@ namespace BeboerWeb.MVC.Models
             if (Besked.Length > 30) return Besked.Substring(0, 30) + "...";
             return Besked;
         }
+
+        public string GetDatoString()
+        {
+            return $"{Dato.Day}/{Dato.Month}/{Dato.Year}";
+        }
     }
 }

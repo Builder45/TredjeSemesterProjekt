@@ -1,10 +1,57 @@
-﻿@{
+﻿@model List<OpslagViewModel>
+
+@{
     Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="velkommenTaekst">Velkommen @User.Identity.Name</h1>
-</div>
-<div>
-    <h3 class="dashboard-text">Dette er din forside. Her kan du vælge forskellige funktioner i toppen af skærmen, som vil sende dig videre til forskellige pages, hvor du kan se dine oplysninger.</h3>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-7">
+			<h3 class="bw_forside_overskrift">
+                Velkommen @User.Identity.Name
+			</h3>
+			<p>
+                Dette er din forside. Her kan du vælge forskellige funktioner i toppen af skærmen, som vil sende dig videre til forskellige pages, hvor du kan se dine oplysninger.
+			</p>
+		</div>
+		<div class="col-md-5">
+            <h3 class="bw_forside_overskrift">
+				Seneste nyheder
+			</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>
+							Dato
+						</th>
+						<th>
+							Titel
+						</th>
+						<th>
+							
+						</th>
+                    </tr>
+				</thead>
+                <tbody>
+                @for (int i = 0; i < 5; i++)
+                {
+                    @if (i < Model.Count)
+                    {
+                        <tr>
+                            <td>
+                                @Model[i].GetDatoString()
+                            </td>
+                            <td>
+                                @Model[i].Titel
+                            </td>
+                            <td>
+                                <a asp-controller="Opslagstavle" asp-action="Details" asp-route-id="@Model[i].Id">Læs mere</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+			</table>
+		</div>
+	</div>
 </div>
