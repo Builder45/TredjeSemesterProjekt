@@ -10,8 +10,8 @@
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Tilpas oplysninger</a></li>
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index/Email">Skift email</a></li>
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index/Password">Skift kodeord</a></li>
+        <li><a class="dropdown-item" asp-controller="Dashboard" asp-action="ChangeEmail">Skift email</a></li>
+            <li><a class="dropdown-item" asp-controller="Dashboard" asp-action="ChangePassword">Skift kodeord</a></li>
         </ul>
     </div>
     <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Dashboard", new { area = "" })">

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BeboerWeb.MVC.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IPersonService _personService;
@@ -15,8 +16,6 @@ namespace BeboerWeb.MVC.Controllers
             _personService = personService;
             _brugerService = brugerService; 
         }
-
-        [Authorize]
         public async Task<ActionResult> Index()
         {
             var bruger = await _brugerService.GetBrugerByBrugernavn(User.Identity.Name);
@@ -42,6 +41,16 @@ namespace BeboerWeb.MVC.Controllers
             if (await _brugerService.BrugerHasClaim(brugerId, "IsVV")) return View("VV/Index");
             if (person.IsActiveLejer) return View("Lejer/Index");
             return View("Alle/Index");
+        }
+
+
+        public ActionResult ChangeEmail()
+        {
+            return Redirect("~/Identity/Account/Manage/Email");
+        }
+        public ActionResult ChangePassword()
+        {
+            return Redirect("~/Identity/Account/Manage/ChangePassword");
         }
     }
 }

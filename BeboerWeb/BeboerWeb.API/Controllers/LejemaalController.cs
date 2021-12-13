@@ -110,7 +110,6 @@ namespace BeboerWeb.API.Controllers
                     Koekken = model.Koekken, 
                     Badevaerelse = model.Badevaerelse,
                     EjendomId = model.Ejendom.Id,
-                    RowVersion = model.RowVersion
                 };
 
                 var lejerDtos = new List<LejerDTO>();
