@@ -10,6 +10,7 @@ namespace BeboerWeb.API.Contract
     public interface IOpslagService
     {
         Task<List<OpslagDTO>> GetOpslagAsync();
+        Task<List<OpslagDTO>> GetOpslagByBrugerAsync(Guid brugerId);
         Task<OpslagDTO> GetOpslagAsync(Guid id);
         Task CreateOpslagAsync(OpslagDTO dto);
         Task UpdateOpslagAsync(OpslagDTO dto);

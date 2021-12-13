@@ -25,6 +25,9 @@ namespace BeboerWeb.MVC.Services.OpslagService
         public async Task<List<OpslagDTO>> GetOpslagAsync() =>
             await _httpClient.GetFromJsonAsync<List<OpslagDTO>>(_opslagApiConfig.ServiceUrl);
 
+        public async Task<List<OpslagDTO>> GetOpslagByBrugerAsync(Guid brugerId) =>
+            await _httpClient.GetFromJsonAsync<List<OpslagDTO>>(_opslagApiConfig.ServiceUrl + $"/ByBruger/{brugerId}");
+
         public async Task<OpslagDTO> GetOpslagAsync(Guid id) =>
             await _httpClient.GetFromJsonAsync<OpslagDTO>(_opslagApiConfig.ServiceUrl + $"/{id}");
 

@@ -1,10 +1,8 @@
-﻿using System.Security.Claims;
-using BeboerWeb.API.Contract;
+﻿using BeboerWeb.API.Contract;
 using BeboerWeb.MVC.Models;
+using BeboerWeb.MVC.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 
 namespace BeboerWeb.MVC.Controllers.Lejer
 {
@@ -13,21 +11,18 @@ namespace BeboerWeb.MVC.Controllers.Lejer
     public class LejerLejemaalController : Controller
     {
         private readonly ILejemaalService _lejemaalService;
-        private readonly IEjendomService _ejendomService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IBrugerService _brugerService;
         private readonly string viewPath = "Views/Dashboard/Lejer/Lejemaal";
-
-        public LejerLejemaalController(ILejemaalService lejemaalService, IEjendomService ejendomService, UserManager<IdentityUser> userManager)
+        public LejerLejemaalController(ILejemaalService lejemaalService, IBrugerService brugerService)
         {
             _lejemaalService = lejemaalService;
-            _ejendomService = ejendomService;
-            _userManager = userManager;
+            _brugerService = brugerService;
         }
 
         public async Task<ActionResult> IndexByLejer()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var dtos = await _lejemaalService.GetLejemaalsByBrugerAsync(Guid.Parse(userId));
+            var bruger = await _brugerService.GetBrugerByBrugernavn(User.Identity.Name);
+            var dtos = await _lejemaalService.GetLejemaalsByBrugerAsync(Guid.Parse(bruger.Id));
             
             var model = new List<LejemaalLejerViewModel>();
             foreach (var dto in dtos)
@@ -36,8 +31,6 @@ namespace BeboerWeb.MVC.Controllers.Lejer
                 lejemaal.AddDataFromDto(dto);
                 model.Add(lejemaal);
             }
-
-
 
             return View($"{viewPath}/Details.cshtml", model);
         }
