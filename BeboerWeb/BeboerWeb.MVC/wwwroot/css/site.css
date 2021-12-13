@@ -54,7 +54,9 @@ html {
 body {
     margin-bottom: 60px;
 }
-
+.velkommenTaekst {
+    font-size: 40px;
+}
 .display-4 {
     font-size: 25px;
     color: #000000;
