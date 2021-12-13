@@ -9,6 +9,6 @@ namespace BeboerWeb.Application.UseCases.PersonUC.Interfaces
 {
     public interface IIsActiveLejerUseCase
     {
-        bool IsActiveLejer(IsActiveLejerRequest command);
+        bool IsLejer(IsActiveLejerRequest command);
     }
 }

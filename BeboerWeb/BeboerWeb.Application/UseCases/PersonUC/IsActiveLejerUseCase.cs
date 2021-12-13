@@ -18,20 +18,13 @@ namespace BeboerWeb.Application.UseCases.PersonUC
             _personRepository = personRepository;
         }
 
-        public bool IsActiveLejer(IsActiveLejerRequest command)
+        public bool IsLejer(IsActiveLejerRequest command)
         {
             var person = _personRepository.GetPerson(command.Id);
 
-            var activeLejer = false;
+            bool isLejer = (person.Lejere != null);
 
-            foreach (var lejer in person.Lejere)
-            {
-                if (DateTime.Now > lejer.LejeperiodeStart && DateTime.Now < lejer.LejeperiodeSlut)
-                {
-                    activeLejer = true;
-                }
-            }
-            return activeLejer;
+            return isLejer;
         }
 
     }

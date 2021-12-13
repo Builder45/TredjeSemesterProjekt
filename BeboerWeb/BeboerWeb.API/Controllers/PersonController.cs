@@ -41,7 +41,7 @@ namespace BeboerWeb.API.Controllers
         [HttpGet("{id}")]
         public PersonDTO GetPerson(Guid id)
         {
-            var isActive = _isActiveLejerUseCase.IsActiveLejer(new IsActiveLejerRequest(id));
+            var isActive = _isActiveLejerUseCase.IsLejer(new IsActiveLejerRequest(id));
             var model = _getPersonUseCase.GetPerson(new GetPersonRequest { Id = id });
             var dto = new PersonDTO
             {
@@ -59,7 +59,7 @@ namespace BeboerWeb.API.Controllers
         public PersonDTO GetPersonByBruger(Guid brugerId)
         {
             var model = _getPersonUseCase.GetPersonByUser(new GetPersonByUserRequest { BrugerId = brugerId });
-            var isActive = _isActiveLejerUseCase.IsActiveLejer(new IsActiveLejerRequest(model.Id));
+            var isActive = _isActiveLejerUseCase.IsLejer(new IsActiveLejerRequest(model.Id));
             var dto = new PersonDTO
             {
                 Id = model.Id, 

@@ -53,7 +53,7 @@ namespace BeboerWeb.Persistence.Repositories
             return _db.Person.Any(e => e.Id == person.Id);
         }
 
-        //public bool IsActiveLejer(Guid personId)
+        //public bool IsLejer(Guid personId)
         //{
         //    var activeLejer = false;
 
