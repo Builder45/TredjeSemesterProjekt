@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using BeboerWeb.Application.UseCases.PersonUC;
 using BeboerWeb.Application.UseCases.PersonUC.Interfaces;
 using BeboerWeb.Application.Persistence;
@@ -23,7 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Database
 builder.Services.AddDbContext<BeboerWebContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")));
+    options.UseInMemoryDatabase("InMemory"));
 
 
 // IOC repositories
@@ -83,5 +84,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<BeboerWebContext>();
+    context.Database.EnsureCreated();
+}
 
 app.Run();
