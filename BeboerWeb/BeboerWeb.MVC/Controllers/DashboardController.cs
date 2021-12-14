@@ -42,7 +42,7 @@ namespace BeboerWeb.MVC.Controllers
                 }
             }
 
-            if (await _brugerService.BrugerHasClaim(brugerId, "IsBA")) return View("BA/Index");
+            if (await _brugerService.BrugerHasClaim(brugerId, "IsBA")) return await BAIndex();
             if (await _brugerService.BrugerHasClaim(brugerId, "IsVV")) return View("VV/Index");
             if (person.IsActiveLejer) return await LejerIndex();
             return View("Alle/Index");
@@ -63,6 +63,22 @@ namespace BeboerWeb.MVC.Controllers
             }
 
             return View("Lejer/Index", model);
+        }
+
+        public async Task<ActionResult> BAIndex()
+        {
+            var model = new List<OpslagViewModel>();
+            var dtos = await _opslagService.GetOpslagAsync();
+            var dtosInOrder = dtos.OrderByDescending(o => o.Dato);
+
+            foreach (var dto in dtosInOrder)
+            {
+                var opslag = new OpslagViewModel();
+                opslag.AddDataFromDto(dto);
+                model.Add(opslag);
+            }
+
+            return View("BA/Index", model);
         }
 
         public ActionResult ChangeEmail()
