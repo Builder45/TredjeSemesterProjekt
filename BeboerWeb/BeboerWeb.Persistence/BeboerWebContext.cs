@@ -24,6 +24,7 @@ namespace BeboerWeb.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             var personId1 = Guid.Parse("aaaaaaaa-1111-4182-9aff-081c3ae53433");
