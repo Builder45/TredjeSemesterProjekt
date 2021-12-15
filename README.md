@@ -1,5 +1,3 @@
-3. Semester Projekt
-
 Få kørbar version af vores program i Docker:
 
 1. Download docker-compose.yml: https://github.com/Builder45/TredjeSemesterProjekt/blob/Docker-Final/BeboerWeb/docker-compose.yml
