@@ -24,7 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.API.Contract", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.API.Tests", "BeboerWeb.API.Tests\BeboerWeb.API.Tests.csproj", "{A7471BEC-C118-40D7-AC2A-ECCF9C323405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeboerWeb.Tests", "BeboerWeb.Tests\BeboerWeb.Tests.csproj", "{61CADE41-F9F5-470A-9AF5-6A85D19CD60C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeboerWeb.Tests", "BeboerWeb.Tests\BeboerWeb.Tests.csproj", "{61CADE41-F9F5-470A-9AF5-6A85D19CD60C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9768529D-FF1D-4CAF-A8CB-FBE8E885D8A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{61CADE41-F9F5-470A-9AF5-6A85D19CD60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61CADE41-F9F5-470A-9AF5-6A85D19CD60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61CADE41-F9F5-470A-9AF5-6A85D19CD60C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9768529D-FF1D-4CAF-A8CB-FBE8E885D8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9768529D-FF1D-4CAF-A8CB-FBE8E885D8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9768529D-FF1D-4CAF-A8CB-FBE8E885D8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9768529D-FF1D-4CAF-A8CB-FBE8E885D8A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["BeboerWeb.MVC/BeboerWeb.MVC.csproj", "BeboerWeb.MVC/"]
+COPY ["BeboerWeb.API.Contract/BeboerWeb.API.Contract.csproj", "BeboerWeb.API.Contract/"]
 RUN dotnet restore "BeboerWeb.MVC/BeboerWeb.MVC.csproj"
 COPY . .
 WORKDIR "/src/BeboerWeb.MVC"

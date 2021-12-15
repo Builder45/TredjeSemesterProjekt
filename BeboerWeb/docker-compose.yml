@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  beboerweb.api:
+    image: rasmus5500/beboerwebapi:latest
+    build:
+      context: .
+      dockerfile: BeboerWeb.API/Dockerfile
+
+  beboerweb.mvc:
+    image: rasmus5500/beboerwebmvc:latest
+    build:
+      context: .
+      dockerfile: BeboerWeb.MVC/Dockerfile
+
