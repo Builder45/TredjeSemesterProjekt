@@ -15,7 +15,6 @@ using BeboerWeb.MVC.Services.VicevaertService;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("AzureConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseInMemoryDatabase("InMemory"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
