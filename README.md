@@ -1,6 +1,4 @@
-# TredjeSemesterProjekt
- 3. Semester Projekt
-
+3. Semester Projekt
 
 Få kørbar version af vores program i Docker:
 
