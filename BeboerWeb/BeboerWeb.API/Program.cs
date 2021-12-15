@@ -78,7 +78,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+//Disabled because of docker
 
 app.UseAuthorization();
 

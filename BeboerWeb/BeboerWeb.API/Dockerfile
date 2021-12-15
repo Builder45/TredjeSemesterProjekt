@@ -8,6 +8,10 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["BeboerWeb.API/BeboerWeb.API.csproj", "BeboerWeb.API/"]
+COPY ["BeboerWeb.Persistence/BeboerWeb.Persistence.csproj", "BeboerWeb.Persistence/"]
+COPY ["BeboerWeb.Domain/BeboerWeb.Domain.csproj", "BeboerWeb.Domain/"]
+COPY ["BeboerWeb.Application/BeboerWeb.Application.csproj", "BeboerWeb.Application/"]
+COPY ["BeboerWeb.API.Contract/BeboerWeb.API.Contract.csproj", "BeboerWeb.API.Contract/"]
 RUN dotnet restore "BeboerWeb.API/BeboerWeb.API.csproj"
 COPY . .
 WORKDIR "/src/BeboerWeb.API"

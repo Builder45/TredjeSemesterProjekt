@@ -77,7 +77,9 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+//Disabled because of docker
+
 app.UseStaticFiles();
 
 app.UseRouting();

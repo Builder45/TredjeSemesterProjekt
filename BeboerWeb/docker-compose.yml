@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  beboerweb.api:
+    image: ${DOCKER_REGISTRY-}beboerwebapi
+    build:
+      context: .
+      dockerfile: BeboerWeb.API/Dockerfile
+
+  beboerweb.mvc:
+    image: ${DOCKER_REGISTRY-}beboerwebmvc
+    build:
+      context: .
+      dockerfile: BeboerWeb.MVC/Dockerfile
+
