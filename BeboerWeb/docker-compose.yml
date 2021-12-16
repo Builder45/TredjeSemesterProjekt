@@ -1,14 +1,15 @@
 version: '3.4'
 
 services:
-  beboerweb.api:
-    image: rasmus5500/beboerwebapi:latest
-    build: .
-    ports: 
-      - 6001:80
-
   beboerweb.mvc:
-    image: rasmus5500/beboerwebmvc:latest
-    build: .
-    ports: 
-      - 5001:80
+    image: ${DOCKER_REGISTRY-}beboerwebmvc
+    build:
+      context: .
+      dockerfile: BeboerWeb.MVC/Dockerfile
+
+  beboerweb.api:
+    image: ${DOCKER_REGISTRY-}beboerwebapi
+    build:
+      context: .
+      dockerfile: BeboerWeb.API/Dockerfile
+

@@ -15,7 +15,7 @@ namespace BeboerWeb.Persistence.Repositories
 
         public List<Opslag> GetAllOpslag()
         {
-            return _db.Opslag
+            return _db.Opslag.Include(o => o.Ejendomme)
                 .ToList();
         }
 

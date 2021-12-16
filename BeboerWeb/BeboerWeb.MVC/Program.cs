@@ -15,12 +15,11 @@ using BeboerWeb.MVC.Services.VicevaertService;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("AzureConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseInMemoryDatabase("InMemory"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -78,8 +77,6 @@ else
 }
 
 //app.UseHttpsRedirection();
-//Disabled because of docker
-
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -91,5 +88,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Dashboard}/{action=Index}");
 app.MapRazorPages();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+    context.Database.EnsureCreated();
+}
 
 app.Run();

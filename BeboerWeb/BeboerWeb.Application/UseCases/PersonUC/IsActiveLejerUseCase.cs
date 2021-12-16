@@ -22,9 +22,9 @@ namespace BeboerWeb.Application.UseCases.PersonUC
         {
             var person = _personRepository.GetPerson(command.Id);
 
-            bool isLejer = (person.Lejere != null);
+            bool isLejer = (person.Lejere == null || person.Lejere.Count == 0);
 
-            return isLejer;
+            return !isLejer;
         }
 
     }
