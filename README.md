@@ -1,4 +1,4 @@
-**3. Semester Projektopgave - BeboerWeb hjemmeside**
+**3. Semester Projektopgave - BeboerWeb hjemmeside**\
 Teamet: Rasmus Bisgaard, Sune Holmberg og Mikkel Pedersen
 
 **Docker information:**
@@ -7,15 +7,12 @@ Teamet: Rasmus Bisgaard, Sune Holmberg og Mikkel Pedersen
 3. Skriv  *docker-compose pull && docker-compose up*  for at hente vores program ned.
 4. Hvis det kører, kan det tilgås på http://localhost:5001
 
-**Seedede logins til Docker programmet**
-badmin@beboerweb.dk
-badmin
-
-lejeren@beboerweb.dk
-lejeren
-
-
-bruger@beboerweb.dk
-bruger
-vicevt@beboerweb.dk
-vicevt
+**Seedede logins til Docker programmet**\
+badmin@beboerweb.dk\\
+badmin\
+lejeren@beboerweb.dk\
+lejeren\
+bruger@beboerweb.dk\
+bruger\
+vicevt@beboerweb.dk\
+vicevt\
