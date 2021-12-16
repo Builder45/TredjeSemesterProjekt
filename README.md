@@ -6,3 +6,16 @@ Teamet: Rasmus Bisgaard, Sune Holmberg og Mikkel Pedersen
 2. Åbn CMD og navigér til samme mappe som compose filen
 3. Skriv  *docker-compose pull && docker-compose up*  for at hente vores program ned.
 4. Hvis det kører, kan det tilgås på http://localhost:5001
+
+**Seedede logins til Docker programmet**
+badmin@beboerweb.dk
+badmin
+
+lejeren@beboerweb.dk
+lejeren
+
+
+bruger@beboerweb.dk
+bruger
+vicevt@beboerweb.dk
+vicevt
