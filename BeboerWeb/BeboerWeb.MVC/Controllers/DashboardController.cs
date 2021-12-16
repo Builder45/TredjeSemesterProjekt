@@ -48,6 +48,7 @@ namespace BeboerWeb.MVC.Controllers
             return View("Alle/Index");
         }
 
+        [Authorize(Policy = "IsLejer")]
         public async Task<ActionResult> LejerIndex()
         {
             var bruger = await _brugerService.GetBrugerByBrugernavn(User.Identity.Name);
@@ -65,6 +66,7 @@ namespace BeboerWeb.MVC.Controllers
             return View("Lejer/Index", model);
         }
 
+        [Authorize(Policy = "IsBA")]
         public async Task<ActionResult> BAIndex()
         {
             var model = new List<OpslagViewModel>();
@@ -88,6 +90,6 @@ namespace BeboerWeb.MVC.Controllers
         public ActionResult ChangePassword()
         {
             return Redirect("~/Identity/Account/Manage/ChangePassword");
-        }
+        }   
     }
 }

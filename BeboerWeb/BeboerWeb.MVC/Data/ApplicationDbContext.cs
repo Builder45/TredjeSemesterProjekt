@@ -24,6 +24,7 @@ namespace BeboerWeb.MVC.Data
                         Id = "bbbbbbbb-1111-4182-9aff-081c3ae53433",
                         UserName = "badmin@beboerweb.dk",
                         NormalizedUserName = "BADMIN@BEBOERWEB.DK",
+                        Email = "badmin@beboerweb.dk",
                         PasswordHash = hasher.HashPassword(null, "badmin")
                     },
                     new IdentityUser
@@ -31,6 +32,7 @@ namespace BeboerWeb.MVC.Data
                         Id = "bbbbbbbb-2222-4182-9aff-081c3ae53433",
                         UserName = "bruger@beboerweb.dk",
                         NormalizedUserName = "BRUGER@BEBOERWEB.DK",
+                        Email = "bruger@beboerweb.dk",
                         PasswordHash = hasher.HashPassword(null, "bruger")
                     }
                     ,
@@ -39,15 +41,17 @@ namespace BeboerWeb.MVC.Data
                         Id = "bbbbbbbb-3333-4182-9aff-081c3ae53433",
                         UserName = "lejeren@beboerweb.dk",
                         NormalizedUserName = "LEJEREN@BEBOERWEB.DK",
+                        Email = "lejeren@beboerweb.dk",
                         PasswordHash = hasher.HashPassword(null, "lejeren")
                     }
                     ,
                     new IdentityUser
                     {
                         Id = "bbbbbbbb-4444-4182-9aff-081c3ae53433",
-                        UserName = "vicevært@beboerweb.dk",
-                        NormalizedUserName = "VICEVÆRT@BEBOERWEB.DK",
-                        PasswordHash = hasher.HashPassword(null, "vicevært")
+                        UserName = "vicevt@beboerweb.dk",
+                        NormalizedUserName = "VICEVT@BEBOERWEB.DK",
+                        Email = "vicevt@beboerweb.dk",
+                        PasswordHash = hasher.HashPassword(null, "vicevt")
                     }
                 }
             );
@@ -58,7 +62,7 @@ namespace BeboerWeb.MVC.Data
                     {
                         Id = 1,
                         UserId = "bbbbbbbb-1111-4182-9aff-081c3ae53433",
-                        ClaimType = "IsBa",
+                        ClaimType = "IsBA",
                         ClaimValue = "Yes"
                     },
                     new IdentityUserClaim<string>
@@ -68,13 +72,20 @@ namespace BeboerWeb.MVC.Data
                         ClaimType = "IsVV",
                         ClaimValue = "Yes"
                     },
-                    //new IdentityUserClaim<string>
-                    //{
-                    //    Id = 3,
-                    //    UserId = "bbbbbbbb-3333-4182-9aff-081c3ae53433",
-                    //    ClaimType = "IsLejer",
-                    //    ClaimValue = "Yes"
-                    //}
+                    new IdentityUserClaim<string>
+                    {
+                        Id = 3,
+                        UserId = "bbbbbbbb-3333-4182-9aff-081c3ae53433",
+                        ClaimType = "IsLejer",
+                        ClaimValue = "Yes"
+                    },
+                    new IdentityUserClaim<string>
+                    {
+                        Id = 4,
+                        UserId = "bbbbbbbb-4444-4182-9aff-081c3ae53433",
+                        ClaimType = "IsLejer",
+                        ClaimValue = "Yes"
+                    }
                 }
                 );
         }
