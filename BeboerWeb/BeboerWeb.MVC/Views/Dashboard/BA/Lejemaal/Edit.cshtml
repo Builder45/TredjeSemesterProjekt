@@ -9,12 +9,6 @@
     <div class="col">
         <h1>Rediger oplysninger for lejemålet</h1>
         <hr />
-        @if (@ViewData.ModelState["ConcurrencyError"] != null)
-        {
-            <div class="form-floating">
-                <p style="color:#a52a2a">@ViewData.ModelState["ConcurrencyError"].Errors[0].ErrorMessage</p>
-            </div>
-        }
         <form asp-controller="BALejemaal" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Lejemaal.Id"/>

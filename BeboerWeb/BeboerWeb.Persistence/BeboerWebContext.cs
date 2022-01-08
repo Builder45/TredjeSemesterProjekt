@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace BeboerWeb.Persistence
 {
-    public class BeboerWebContext:DbContext
+    public class BeboerWebContext : DbContext
     {
         public BeboerWebContext(DbContextOptions<BeboerWebContext> options) : base(options)
         {

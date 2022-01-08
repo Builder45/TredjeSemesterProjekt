@@ -23,7 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Database
 builder.Services.AddDbContext<BeboerWebContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CloudCConnection")));
 
 
 // IOC repositories

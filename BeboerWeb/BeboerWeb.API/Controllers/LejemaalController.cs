@@ -132,7 +132,8 @@ namespace BeboerWeb.API.Controllers
             try
             {
                 _updateLejemaalUseCase.UpdateLejemaal(new UpdateLejemaalRequest
-                    (dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, dto.Koekken, dto.Badevaerelse, dto.EjendomId, dto.RowVersion));
+                    (dto.Id, dto.Adresse, dto.Etage, dto.Husleje, dto.Areal, 
+                    dto.Koekken, dto.Badevaerelse, dto.EjendomId, dto.RowVersion));
                 return Ok();
             }
             catch (DbUpdateConcurrencyException)

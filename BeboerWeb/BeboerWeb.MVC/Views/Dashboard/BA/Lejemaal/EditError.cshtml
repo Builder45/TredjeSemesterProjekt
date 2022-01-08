@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Name"] = "Edit";
+    Layout = "~/Views/Dashboard/_SharedLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <h1>Rediger oplysninger for lejemålet</h1>
+        <hr />
+        <div class="form-floating">
+                <p style="color:#a52a2a">Fejl: Lejemålet du forsøgte at ændre er for nyligt blevet redigeret af en anden</p>
+            </div>
+        <a asp-controller="BALejemaal" asp-action="Index">
+            <input type="button" value="Tilbage til oversigten" class="btn btn-lg btn-primary bw_button bw_button_inline"/>
+        </a>
+    </div>
+    <div class="col"></div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -7,7 +7,6 @@ namespace BeboerWeb.Domain.Models
         public Guid Id { get; set; }
         public DateTime BookingPeriodeStart { get; set; }
         public DateTime BookingPeriodeSlut { get; set; }
-
         public Person Person { get; set; }
         public Lokale Lokale { get; set; }
 
@@ -22,6 +21,7 @@ namespace BeboerWeb.Domain.Models
             Person = person;
             Lokale = lokale;
         }
+
         public bool IsOverlappingWith(List<Booking> otherBookings)
         {
             foreach (Booking booking in otherBookings)

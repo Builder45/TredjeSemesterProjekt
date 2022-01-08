@@ -98,22 +98,7 @@ namespace BeboerWeb.MVC.Controllers.BA
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    ModelState.AddModelError("ConcurrencyError", "Fejl: Lejemålet du forsøgte at ændre er for nyligt blevet redigeret af en anden");
-                    var lejemaalDto = await _lejemaalService.GetLejemaalAsync(model.Lejemaal.Id);
-
-                    model.Lejemaal = new LejemaalViewModel();
-                    model.Lejemaal.AddDataFromDto(lejemaalDto);
-
-                    model.Ejendomme = new List<EjendomViewModel>();
-                    var dtos = await _ejendomService.GetEjendommeAsync();
-                    foreach (var dto in dtos)
-                    {
-                        var ejendom = new EjendomViewModel();
-                        ejendom.AddDataFromDto(dto);
-                        model.Ejendomme.Add(ejendom);
-                    }
-
-                    return View($"{viewPath}/Edit.cshtml", model);
+                    return View($"{viewPath}/EditError.cshtml");
                 }
 
                 return RedirectToAction(nameof(Index));

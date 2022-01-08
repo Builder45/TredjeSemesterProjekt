@@ -69,8 +69,6 @@ namespace BeboerWeb.Persistence.Repositories
             if (!lejemaalExists(lejemaal))
                 throw new ArgumentException("Lejemaal with given ID does not exist");
             _db.Lejemaal.Update(lejemaal);
-
-
             _db.SaveChanges();
         }
         private bool lejemaalExists(Lejemaal lejemaal)
