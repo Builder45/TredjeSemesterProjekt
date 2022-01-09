@@ -45,20 +45,6 @@ namespace BeboerWeb.MVC.Controllers.BA
             }
 
             return View($"{viewPath}/Index.cshtml", model);
-
-            //var model = new List<BrugerViewModel>();
-            //var personer = await _personService.GetPersonerAsync();
-            //var brugere = await _brugerService.GetBrugere();
-            //foreach (var person in personer)
-            //{
-            //    var brugerModel = new BrugerViewModel();
-            //    brugerModel.AddDataFromDTO(person);
-            //    var bruger = brugere.Find(b => b.Id == person.BrugerId.ToString());
-            //    if (bruger != null) brugerModel.Email = bruger.Email;
-
-            //    model.Add(brugerModel);
-            //}
-            //return View($"{viewPath}/Index.cshtml", model);
         }
 
         [HttpPost]
