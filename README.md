@@ -1,10 +1,10 @@
 **3. Semester Projektopgave - BeboerWeb hjemmeside**\
-Teamet: Rasmus Bisgaard, Sune Holmberg og Mikkel Pedersen
+Teamet: Rasmus Bisgaard, Sune Holmberg og Mikkel Pedersen\
 \
-**Projektbeskrivelse:**
+**Projektbeskrivelse:**\
 Gruppeprojekt med fokus på at udvikle en webapplikation der kunne tage hånd om forskellige problemstillinger for beboere og boligadministratorer. Projektet udfoldede sig derfor i en form for BeboerWeb platform. Vi afviklede projektet som et Scrum-projekt og vi benyttede Azure DevOps som projektstyringsværktøj.
 \
-**Struktur og teknologier:**
+**Struktur og teknologier:**\
 Vi udviklede en ASP.NET MVC frontend som snakkede sammen med en RESTful API backend via HTTP requests. Vi udarbejdede 
 Front-End: HTML (CSHTML), CSS, Bootstrap
 Back-End: Microsoft SQL-database, Code-First Entity Framework, LINQ, Restful API
